@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<%= favicon_link_tag "favicon.ico" %>
+		<meta name="google-site-verification" content="-L-MNBqz17bcXZ5zcjf9GrcrzYVSfxuLuJYy7LmEl4A" />
+		<title><%= render_title %></title>
+		<%= csrf_meta_tags %>
+    <meta charset="UTF-8" />
+    <title>Sharingdais an Online Platform for Peer to Peer Sharing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <%= javascript_include_tag "application" %>
+  
+	
+    <script>
+      function get_location(value, update_field)
+			{
+        if($("#post_requirement_city_id").length > 0){
+          document.getElementById('post_requirement_city_id').value = value;
+        }
+        if($("#book_post_requirement_city_id").length > 0){
+          document.getElementById('book_post_requirement_city_id').value = value;
+        }
+			$('#myModal').modal('hide')
+        if (value !="")
+        {
+				$.cookie('city_id', value, { path: '/' })
+				value = $.cookie('city_id')
+			  document.getElementById('city_id').value = value
+          $.ajax({ url : "/application/get_locations", type: "GET", data: { id: value}, dataType: "json",
+            success: function (response) {
+              $("."+update_field+" option").remove();
+              $.each(response, function(key, value) {
+							$("."+update_field).append($("<option></option>").attr("value",value.id).text(value.location_name));
+              });
+         }
+          });
+        }
+        else{
+          $("."+update_field+" option").remove();
+          $("."+update_field).append($("<option value=''>Locality</option>"));
+        }
+			 if(document.getElementById('search_city_id') !== null){
+          document.getElementById('search_city_id').value = value}
+			}
+   
+	 $('.carousel').carousel();
+      $(function() {
+				$('.carousel input').focus(function() {
+          $('.carousel').carousel('pause');
+        }).blur(function() {
+          $('.carousel').carousel('cycle');
+        });
+				$("#mob_menu").click(function(){
+					if ($(".mob_nav").hasClass("active")){
+						$(".mob_nav").removeClass("active");
+						}
+				else{
+				$(".mob_nav").addClass("active");
+				}
+			});
+      });
+      
+    </script>
+		
+<!-- #google analytics code -->
+  	 <script>
+ 	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ 	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ 	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ 	 ga('create', 'UA-51916768-1', 'sharingdais.com');
+	 ga('send', 'pageview');
+
+	</script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="wrap">
+			<% if params[:controller] == 'admins' %>
+			<%= render :partial =>  "layouts/admin_header" %>
+			<%else%>
+			<%= render :partial =>  "layouts/header" %>
+			<%end%>
+			
+			<% if params[:controller] == 'admins' %>
+			<div class="main_page">
+	    <div class="side_menu">
+    	<ul>
+        	<li><a href="/admins" class="active">Users</a></li>
+        	<li><a href="javascript:void(0)">Post Requirements</a></li>
+        	<li><a href="javascript:void(0)">List Requirements</a></li>
+        	<li><a href="javascript:void(0)">User Orders</a></li>
+        </ul>
+    </div>
+    <div class="content">
+    	<p class="margin_none pos_rel"><%= notice %></p>
+			<p class="margin_none pos_rel"><%= alert %></p>
+			<%= yield %>
+    </div>
+    </div>
+		<%else %>
+		  <p class="notice success_mess "><%= notice %></p>
+			<p class="alert alert_mess"><%= alert %></p>
+			<%= yield %>
+		<%end%>
+		<% if params[:controller] == 'admins' %>
+			<%= render :partial =>  "layouts/admin_footer" %>
+		<%else%>
+			<%= render :partial =>  "layouts/footer" %>
+			<%end%>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<% if params[:search].blank?%>
+<script>
+$( document ).ready(function() {
+   value = $.cookie('city_id')
+			if (value)
+	        {
+          document.getElementById('city_id').value = value
+          $.ajax({ url : "/application/get_locations", type: "GET", data: { id: value}, dataType: "json",
+            success: function (response) {
+              $(".locality_id_class option").remove();
+              $.each(response, function(key, value) {
+                $(".locality_id_class").append($("<option></option>").attr("value",value.id).text(value.location_name));
+              });
+           }
+          });
+          
+           if(document.getElementById('search_city_id') !== null){
+          document.getElementById('search_city_id').value = value}
+          }
+        if(value == null){
+          $("#city_id").val(""); 
+          $(".locality_id_class option").remove();
+          $(".locality_id_class").append($("<option value=''>Locality</option>"));
+        }
+});
+</script>
+<%end%>

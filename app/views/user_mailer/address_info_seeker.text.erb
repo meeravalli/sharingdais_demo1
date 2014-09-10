@@ -1,0 +1,22 @@
+Welcome to sharingdais.com, <%= @user.name %>
+===============================================
+ 
+Your order was confirmed by <%= @provider.name %>.
+
+The Food Provider details below:
+
+Order No.: <%="##{@message.order_id}"%>
+Name : <%= @provider.name %>
+Email : <%= @provider.email %>
+Phone : <%= @provider.phone_no %>
+Address : <%= @provider.address %>
+
+For more details check your <%= @url%> Inbox
+
+To login to the site, just follow this link: <%= @login_url %>
+
+
+Have a great day!
+Thanks and Regards,
+
+Sharingdais Admin Team

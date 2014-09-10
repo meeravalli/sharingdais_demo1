@@ -1,0 +1,185 @@
+<script>
+  function check_user(phone, email, user_id, location_id, food_type_id, post_requirement_id, seeker_provider){
+<% if current_user %>
+      var seeker_status = seeker_provider;
+      var current_user_id = "<%= current_user.id %>";
+	  var email1 = email;
+	  var phone1 = phone;
+      if (current_user_id != user_id){
+        $.ajax({ url : "/messages/create", type: "POST", data: { user_id: user_id, location_id :location_id,  food_type_id :food_type_id, post_requirement_id : post_requirement_id}, dataType: "json"});
+				if(seeker_status == true){
+				var r = confirm("Your contact details will be shared. If the food seeker accepts your request.");
+				if (r == true){	
+				alert("Please find the contact details of the food seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+				}
+				else {return;}
+				}
+				else{
+				var r = confirm("Your contact details will be shared. If the food provider accepts your request.");
+				if (r == true){
+				alert("Please find the contact details of the food provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+				}
+				else {return;}
+				}
+        $("#t_"+post_requirement_id).empty();
+        $("#t_"+post_requirement_id).html("Already Negotiated");
+      }
+      else{
+        alert("You can't able to negotiate this order");
+      }
+<% else %>
+      alert("You need to sign in or sign up before continuing");
+<% end %>
+  }
+  
+</script>
+<div class="content">
+  <div class="resize">
+    <div class="display ">
+      <div class="table-responsive src_res_desktop">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>Food Photo</th>
+              <th>Locality</th>
+              <th>Food Type</th>
+              <th>Meal Type</th>
+              <th>Region Specific</th>
+              <th>Looking from a/am</th>
+              <th>Details</th>
+              <th>Budget</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @count = 1 %>
+            <% @search_results.each do |s| %>
+              <tr>
+
+                <td><%= @count %></td>
+							 <% if !s.food_image.path.nil? %>
+                <td><%= image_tag s.food_image.url(:small) %></td>
+								<%else%>
+								<td>No image</td>
+								<%end%>
+                <td><%= s.location.location_name %></td>
+                <td><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%></td>
+                <td><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %></td>
+                <td><%= s.region.nil? ? "Not Applicable" : s.region.name %></td>
+                <td><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %></td>
+				<% @user_email = s.user.email%>
+				<% @user_phone = s.user.phone_no%>
+                <td><%= s.details.blank? ? "Not Provided" : s.details%></td>
+                <td><%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%></td>
+                <% if !current_user %>
+	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate(current_user.id, s.id).nil?%>
+					<td id="t_<%= s.id %>">
+					  <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+              </tr>
+
+              <% @count = @count+1 %>
+			  
+            <% end %>
+          </tbody>
+        </table>
+        <div id="">
+            <%#= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>
+      </div>
+			<div class="srch_res_mob">
+			<% @search_results.each do |s| %>
+                            	<div class="res_data">
+                                	<div class="data_row">
+                                    	<div class="data_title">
+                                        	Food Photo
+                                        </div>
+                                        <div class="data_col">
+																				<% if !s.food_image.path.nil? %>
+                                        	<%= image_tag s.food_image.url(:small) %>
+																					<%else%>
+																					No Image
+																					<%end%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Locality
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.location.location_name %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Food Type
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Meal Type
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Region Specific
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.region.nil? ? "Not Applicable" : s.region.name %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Looking from a/am
+                                        </div>
+                                        <div class="data_col">
+											<td><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %></td>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Details
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.details.blank? ? "Not Provided" : s.details%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Budget
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Contact
+                                        </div>
+																				<div class="data_col" id="t_<%= s.id %>">
+																				<% if !current_user %>
+																					<%= link_to("Interested","javascript:void(0)", {:onclick => "check_user(#{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}), #{s.seeker_provider});" }) %>
+																				<% elsif negotiate(current_user.id, s.id).nil?%>
+																					<%= link_to("Interested","javascript:void(0)", {:onclick => "check_user(#{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}), #{s.seeker_provider});" }) %>
+																				<%else%>
+																					<%= "Already Negotiated" %>
+																				<%end%>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+		  <%end%>
+			</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="header_dsb">
+	<div class="logo_dashboard"><%= image_tag 'newlogo.jpg' %></div>
+    <div class="float_right logout">
+    	<ul>
+    	<li class="sub_menu">
+			<a href="javascript:void(0)" class="db"></a>
+			<ul>
+            	<li><%= link_to 'Change Password', edit_user_registration_path %></li>
+							<li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+			</ul>
+		</li>
+		</ul>
+	</div>
+	<div class="float_right logout"><a href="/">Back to site</a></div>
+</div>

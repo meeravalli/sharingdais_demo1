@@ -1,0 +1,2 @@
+module FoodSharingHelper
+end

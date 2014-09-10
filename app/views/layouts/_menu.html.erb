@@ -1,0 +1,35 @@
+<div class="nav">
+  <ul>
+    <li class="">
+      <a href="/food_search">Food Sharing</a>
+    </li>
+    <li class="">
+                                                                               <a href="/book_search">Book Sharing</a>
+                                                                       </li>
+    <li class="">
+      <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books of your choice? Submit your request here" %>
+    </li>
+    <li class="">
+      <%= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books? Submit your request here" %>
+    </li>
+		<% if current_user.nil? %>
+		<li class="">
+      <%= link_to 'Sign In/Up', new_user_session_path %>
+    </li>
+		<%end%>
+    <% if current_user %>
+      <li class=""><%= link_to "Profile",profile_home_path(current_user) %></li>
+      <li class=""><%= link_to 'Inbox', messages_path %> <% if session[:unread_messages] > 0 %> (<%= session[:unread_messages] %>) <% end %></li>
+			<li class="sub_menu">
+			<a href="javascript:void(0)"><%= image_tag 'user_setting_icon.png' %></a>
+			<ul>
+			<li><%= link_to 'Change Password', edit_user_registration_path %></li>
+			<li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+			<% if current_user.admin? %>
+			<li><%= link_to "Admin Dashboard", admins_path %></li>
+			<%end%>
+			</ul>
+			</li>
+    <%end%>
+  </ul>
+</div>

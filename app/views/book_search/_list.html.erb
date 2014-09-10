@@ -1,0 +1,165 @@
+<script>
+  function check_user(phone, email, user_id, location_id, book_post_requirement_id, seeker_provider){
+<% if current_user %>
+      var seeker_status = seeker_provider;
+      var current_user_id = "<%= current_user.id %>";
+	  var email1 = email;
+	  var phone1 = phone;
+      if (current_user_id != user_id){
+        $.ajax({ url : "/book_messages/create", type: "POST", data: { user_id: user_id, location_id :location_id, book_post_requirement_id : book_post_requirement_id}, dataType: "json"});
+				if(seeker_status == true){
+				var r = confirm("Your contact details will be shared. If the book seeker accepts your request.");
+				if (r == true){	
+				alert("Please find the contact details of the book seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+				}
+				else {return;}
+				}
+				else{
+				var r = confirm("Your contact details will be shared. If the book provider accepts your request.");
+				if (r == true){
+				alert("Please find the contact details of the book provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+				}
+				else {return;}
+				}
+        $("#t_"+book_post_requirement_id).empty();
+        $("#t_"+book_post_requirement_id).html("Already Negotiated");
+      }
+      else{
+        alert("You can't able to negotiate this order");
+      }
+<% else %>
+      alert("You need to sign in or sign up before continuing");
+<% end %>
+  }
+  
+</script>
+<div class="content">
+  <div class="resize">
+    <div class="display ">
+      <div class="table-responsive src_res_desktop">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>Book Photo</th>
+              <th>Book Name</th>
+              <th>Locality</th>
+              <th>Rent</th>
+              <th>Description</th>
+              <th>Date Of Posting</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @count = 1 %>
+            <% @search_results.each do |s| %>
+              <tr>
+                <td><%= @count %></td>
+								<% if !s.image.path.nil? %>
+                  <td><%= image_tag s.image.url(:small) %></td>
+                <%else%>
+                  <td>No image</td>
+                <%end%>
+                <td><%= s.name %></td>
+                <td><%= s.location.location_name %></td>
+                <td><%= s.rent%></td>
+                <td><%= s.description%></td>
+                <td><%= s.date_of_posting.strftime('%d %B %Y') if s.date_of_posting.present? %></td>
+                <% @user_email = s.user.email%>
+                <% @user_phone = s.user.phone_no%>
+                <% if !current_user %>
+	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate(current_user.id, s.id).nil?%>
+					<td id="t_<%= s.id %>">
+					  <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+              </tr>
+              <% @count = @count+1 %>
+            <% end %>
+          </tbody>
+        </table>
+        <div id="">
+            <%= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>
+      </div>
+			<div class="srch_res_mob">
+			<% @search_results.each do |s| %>
+                            	<div class="res_data">
+                                	<div class="data_row">
+                                    	<div class="data_title">
+                                        	Book Photo
+                                        </div>
+                                        <div class="data_col">
+																				<% if !s.image.path.nil? %>
+                                          <%= image_tag s.image.url(:small) %>
+                                          <%else%>
+                                          No Image
+                                          <%end%>
+                                        </div>
+                                    </div>
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Book Name
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.name %>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Locality
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.location.location_name %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Rent
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.rent%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Description
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.description%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Date Of Posting
+                                        </div>
+                                        <div class="data_col">
+                                        	<%= s.date_of_posting.strftime('%d %B %Y') if s.date_of_posting.present?  %>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="data_row">
+                                    	<div class="data_title">
+                                        	Contact
+                                        </div>
+																				<div class="data_col" id="t_<%= s.id %>">
+                                        <% if !current_user %>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate(current_user.id, s.id).nil?%>
+          <td id="t_<%= s.id %>">
+            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+		  <%end%>
+			</div>
+    </div>
+  </div>
+</div>

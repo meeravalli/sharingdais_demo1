@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  posted_to: 1
+  content: MyText
+  read: false
+  subject: MyString
+  order_status: false
+  accepted: false
+  trashed: false
+  book_post_requirement_id: 1
+  location_id: 1
+  book_order_id: 1
+
+two:
+  user_id: 1
+  posted_to: 1
+  content: MyText
+  read: false
+  subject: MyString
+  order_status: false
+  accepted: false
+  trashed: false
+  book_post_requirement_id: 1
+  location_id: 1
+  book_order_id: 1

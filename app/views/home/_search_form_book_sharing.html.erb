@@ -1,0 +1,61 @@
+<% if !params[:search].blank? %>
+  <script>
+    $(document).ready(function(){
+    city_value = <%= params[:search][:city_id] %>
+     document.getElementById('city_id').value = city_value
+    });
+
+    function validateform(){
+    city = $("#search_city_id").val();
+    if (city == ''){
+      alert("City can't be empty");
+      return false;
+    }
+  </script>
+<% end %>
+
+<div class="item">
+  <%=  image_tag "slider2.jpg", :alt => "..." %>
+  <div class="carousel-caption">
+    <div class="search-blk">
+      <p class="head">Book Sharing</p>
+        <%= form_tag(book_search_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+      <div class="check  col-xs-12 col-md-12">
+          <label for="">Reader</label>
+          <%= radio_button_tag "search[book]", "0", params[:search][:book].to_i == 0, :id => 'search_book_0', :class => "book", :data => {:book => "Book name / ISBN / Author"} %>
+
+          <label for="">Owner</label>
+          <%= radio_button_tag "search[book]", "1", params[:search][:book].to_i == 1, :id => 'search_book_1', :class => "book", :data => {:book=>"Book name / ISBN / Author"} %>
+      </div>
+      <div class="search">
+          <div class="row">
+            <div class="left col-xs-5 col-md-6">
+              <label for="" class="book-chg" >Book name / ISBN / Author</label>
+            </div>
+            <div class="left col-xs-5 col-md-6">
+             <%= text_field_tag('search[key]', params[:search][:key], :class => "form-control book-chg", :placeholder => "Book name / ISBN / Author") %>
+            </div>
+          </div>
+          <div class="cboth"></div>
+          <div class="row">
+            <div class="left col-xs-5 col-md-6">
+              <label for="">Locality</label>
+            </div>
+            <div class="left col-xs-5 col-md-6">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, id: "search_form_book_city") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>
+          </div>
+          <div class="cboth"></div>
+          <div class="row">
+            <div class="btns">
+              
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_book_sharing_button" %>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>

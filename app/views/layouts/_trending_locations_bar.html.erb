@@ -1,0 +1,160 @@
+<div id="sticky_element" class="trending-locations-bar">
+  <div class="container">
+	  <div class="footer_sticky_bar">
+      <div class="drop_div outer_inactive" style="margin-left:10px;">  
+        
+        <strong>Trending localities for 
+          <%= select_tag "service_type", options_from_collection_for_select(Service.all, "id", "service_type"), :onchange => 'display_trending_localities()' %>
+          in 
+          <%= select_tag "city_location", options_from_collection_for_select(City.all, "id", "city_name"), prompt: "Select City", :onchange => 'display_trending_localities()' %></strong>
+      </div>
+	  </div>
+  </div>
+</div>
+
+<script>
+  
+    function display_trending_localities() {
+      if ($("#service_type").val() == "1") {
+        if ($("#city_location").val() != "") {
+          $.ajax({ url : "/application/get_trending_locations", type: "GET", data: { city_id: $("#city_location").val(), service_type: $("#service_type").val() }, dataType: "json",
+            success: function (response) {
+              $(".food-pro").text("");
+              $(".food-see").text(""); 
+              $city_id = response["providers_loc"][response["providers_loc"].length-1][0];
+              if (response["providers_loc"].length == 1) {
+                $(".food-pro").append('<li style="display:block;float:left;">Top trending localities are not available</li>');   
+              }
+              else {
+                $.each(response["providers_loc"], function(key, value) {
+                  if ( value[1] != 'city_id' ) {
+                    $tagid = 'trending-location-link-' + value[0] ;
+                    $(".food-pro").append('<li style="display:block;padding-bottom:5px;float:left;"><a href="JavaScript:void(0);" style="color:black;" id=' + $tagid + ' data-location-id=' + value[0] + ' data-city-id=' + $city_id + " onclick=trending_location_search_results(this.id,'true') >" + (key + 1) + ". " + value[1] + "</a></li><br/><br/>");  
+                  } 
+                });
+              }
+              $city_id = response["seekers_loc"][response["seekers_loc"].length-1][0];
+              if (response["seekers_loc"].length == 1) {
+                $(".food-see").append('<li style="display:block;float:right;margin:0px 97px 0px 0px;">Top trending localities are not available</li>');   
+              }
+              else {
+                $.each(response["seekers_loc"], function(key, value) {
+                  if ( value[1] != 'city_id' ) {
+                    $tagid = 'trending-location-link-seeker-' + value[0] ;
+                    $(".food-see").append('<li style="display:block;padding-bottom:5px;float: left;padding-left: 30px;"><a href="JavaScript:void(0);" style="color:black;" id=' + $tagid + ' data-location-id=' + value[0] + ' data-city-id=' + $city_id + " onclick=trending_location_search_results(this.id,'false') >" + (key + 1) + ". " + value[1] + "</a></li><br/><br/>");  
+                  } 
+                });
+              }
+            }
+          });
+          $('#trending-mymodal').modal({
+            backdrop: 'static',
+            keyboard: true,
+            show: true
+          }) 
+        }
+      } else {
+        if ($("#city_location").val() != "") {
+          $.ajax({ url : "/application/get_trending_locations", type: "GET", data: { city_id: $("#city_location").val(), service_type: $("#service_type").val() }, dataType: "json",
+            success: function (response) {
+              $(".book-pro").text("");
+              $(".book-see").text(""); 
+              $city_id = response["providers_loc"][response["providers_loc"].length-1][0];
+              if (response["providers_loc"].length == 1) {
+                $(".book-pro").append('<li style="display:block;float:left;">Top trending localities are not available</li>');   
+              }
+              else {
+                $.each(response["providers_loc"], function(key, value) {
+                  if ( value[1] != 'city_id' ) {
+                    $tagid = 'trending-location-link-' + value[0] ;
+                    $(".book-pro").append('<li style="display:block;padding-bottom:5px;float:left;"><a href="JavaScript:void(0);" style="color:black;" id=' + $tagid + ' data-location-id=' + value[0] + ' data-city-id=' + $city_id + " onclick=book_trending_location_search_results(this.id,'true') >" + (key + 1) + ". " + value[1] + "</a></li><br/><br/>");  
+                  } 
+                });
+              }
+              $city_id = response["seekers_loc"][response["seekers_loc"].length-1][0];
+              if (response["seekers_loc"].length == 1) {
+                $(".book-see").append('<li style="display:block;float:right;margin:0px 97px 0px 0px;">Top trending localities are not available</li>');   
+              }
+              else {
+                $.each(response["seekers_loc"], function(key, value) {
+                  if ( value[1] != 'city_id' ) {
+                    $tagid = 'trending-location-link-seeker-' + value[0] ;
+                    $(".book-see").append('<li style="display:block;padding-bottom:5px;float: left;padding-left: 30px;"><a href="JavaScript:void(0);" style="color:black;" id=' + $tagid + ' data-location-id=' + value[0] + ' data-city-id=' + $city_id + " onclick=book_trending_location_search_results(this.id,'false') >" + (key + 1) + ". " + value[1] + "</a></li><br/><br/>");  
+                  } 
+                });
+              }
+            }
+          });
+          $('#book-trending-mymodal').modal({
+            backdrop: 'static',
+            keyboard: true,
+            show: true
+          }) 
+        }
+      }
+    }
+
+    function trending_location_search_results(tag_id,status){
+      $('#trending-mymodal').modal('hide');
+      city_id = $("#" + tag_id).attr('data-city-id');
+      loc_id = $("#" + tag_id).attr('data-location-id');
+      $("#city_id").val(city_id);
+      get_location(city_id,'locality_id_class')
+      if (status == 'true') {
+        $("#search_food_0").prop("checked", true)
+      }
+      else {
+        $("#search_food_1").prop("checked", true) 
+      }
+      $('#search_any').prop('checked', true);
+      $('#search_no_of_persons').prop('disabled', true);
+      userToSearchFor = 'Any';
+      $('#search_food_type_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      $('#search_meal_type_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      $('#search_region_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      timeout = setTimeout(
+        function() 
+        { 
+          $('.locality_id_class').val(loc_id);
+          $("#search_form_food_sharing_button").trigger( "click" );   
+        }, 1500);
+    }
+
+    function book_trending_location_search_results(tag_id,status){
+      $('#book-trending-mymodal').modal('hide');
+      city_id = $("#" + tag_id).attr('data-city-id');
+      loc_id = $("#" + tag_id).attr('data-location-id');
+      $("#city_id").val(city_id);
+      get_location(city_id,'locality_id_class')
+      if (status == 'true') {
+        $("#search_food_0").prop("checked", true)
+      }
+      else {
+        $("#search_food_1").prop("checked", true) 
+      }
+      $('#search_any').prop('checked', true);
+      $('#search_no_of_persons').prop('disabled', true);
+      userToSearchFor = 'Any';
+      $('#search_food_type_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      $('#search_meal_type_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      $('#search_region_id').find("option:contains('" + userToSearchFor +"')").each(function () {
+        $(this).attr("selected", "selected");
+      });
+      timeout = setTimeout(
+        function() 
+        { 
+          $('.locality_id_class').val(loc_id);
+          $("#search_form_book_sharing_button").trigger( "click" );   
+        }, 1500);
+    }
+</script>

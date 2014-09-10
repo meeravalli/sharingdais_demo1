@@ -1,0 +1,42 @@
+	<h3 class="heading_content">Sharingdais Users</h3>
+        <div class="display padding_five">
+        	<table class="table table-hover">
+            	<thead class="heading">
+                	<tr>
+                    	<th>Name</th>
+                    	<th>Email</th>
+                    	<th>Phone No</th>
+                    	<th></th>
+                    	<th></th>
+                    	<th></th>
+                    	<th></th>
+                	</tr>
+                 </thead>
+                 <tbody>
+								 <% @users.each do |user| %>
+                    <tr>
+                    	<td><%= user.name %></td>
+                    	<td><%= user.email %></td>
+                    	<td><%= user.phone_no %></td>
+											<% if user.confirmed_at.nil? %>
+                    	<td><%= link_to 'Activate', activate_user_admin_path(user), :class =>"upd_but" %></td>
+											<% else%>
+											<td><%= "Activated" %></td>
+											<%end%>
+											<% icon = user.status? ? 'block_icon.png' : 'unblock_icon.png'%>
+											<% title = user.status? ? 'Block the user' : 'Unblock the user' %>
+											<td><%= link_to 'Show', view_user_profile_activity_admin_path(user), :class =>"upd_but" %></td>
+                    	<td><%=  link_to (image_tag icon, :title=>title, :border => 0), {:action => :block_unblock, :id => user.id} %></td>
+                    	<td> <%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_user, :id => user.id},
+                            method: :delete, :confirm => "Do you want to delete \'" + user.name + "\' ?" %></td>
+                    </tr>
+										<%end%>
+                </tbody>
+            </table>
+				<div class="pagination">
+	  <%= will_paginate @users%>
+			</div>
+        </div>
+				
+				                  
+                          

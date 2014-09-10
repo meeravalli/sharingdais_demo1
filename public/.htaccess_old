@@ -1,0 +1,20 @@
+Options -MultiViews
+Options +SymLinksIfOwnerMatch
+PassengerResolveSymlinksInDocumentRoot on
+#Set this to whatever environment you'll be running in
+RailsEnv production
+RackBaseURI /
+PassengerEnabled On
+# PassengerAppRoot /home1/sharinl8/sharingdais_app/sharingdais
+SetEnv GEM_HOME /home1/sharinl8/ruby/gems
+
+# BEGIN WordPress
+# <IfModule mod_rewrite.c>
+# RewriteEngine On
+# RewriteBase /
+# RewriteRule ^index\.php$ - [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /index.php [L]
+# </IfModule>
+# END WordPress

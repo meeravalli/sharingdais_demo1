@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service_id: 1
+  provider_id: 1
+  city_id: 1
+  location_id: 1
+  food_type_id: 1
+  meal_type_id: 1
+  region_id: 1
+  no_of_persons: 1
+  budget: 9.99
+  details: MyText
+  user_id: 1
+  seeker_provider: false
+
+two:
+  service_id: 1
+  provider_id: 1
+  city_id: 1
+  location_id: 1
+  food_type_id: 1
+  meal_type_id: 1
+  region_id: 1
+  no_of_persons: 1
+  budget: 9.99
+  details: MyText
+  user_id: 1
+  seeker_provider: false

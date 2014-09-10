@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  provider_id: 1
+  book_post_requirement_id: 1
+  order_date: 2014-08-30
+
+two:
+  user_id: 1
+  provider_id: 1
+  book_post_requirement_id: 1
+  order_date: 2014-08-30

@@ -1,0 +1,68 @@
+<div class="content inbox-pg">
+  <div class="resize">
+    <p class="head">Unread Messages</p>
+     <div class="inbox-cnt">
+      <div class="cont-top active">
+        <% unread_messages = "(#{session[:unread_messages]})" %>
+        <ul id="tabs">
+          <li><%= link_to 'Inbox', messages_path %></li>
+          <li><%= link_to "unread<strong> #{unread_messages if session[:unread_messages] > 0 }</strong>".html_safe, unread_messages_path %></li>
+          <li><%= link_to 'Sent', sent_messages_path %></li>
+          <li><%= link_to 'Trash', trash_messages_path %></li>
+        </ul>
+        <% if !@unread_messages.blank? || !@book_unread_messages.blank? %>
+          <div id="content">
+            <div class="row " id="tab1">
+              <div class="col-xs-12">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead class="heading">
+                      <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th class="col-xs-7">Message</th>
+                        <th> Date </th>
+                        <th><a href="javascript:void(0)"><span class="fa fa-trash-o"></span></a></th>
+                      </tr>
+                    </thead>
+                    <% msg_count = 1 %>
+                      <tbody>
+                        <% @unread_messages.each do |m| %>
+                        <tr>
+                          <td><%= msg_count %></td>
+                          <td><p><%= m.subject%><p></td>
+                          <td>
+                            <p><%= m.content %>
+                              <%= link_to 'Action<span class="fa fa-arrow-circle-right"></span>'.html_safe, read_message_path(:id => m.id),:class=> "inbox-act" %>
+                            </p></td>
+                          <td><%= m.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
+                          <td><%= link_to '<span class="fa fa-trash-o"></span>'.html_safe,m, :method => :delete, :data => { :confirm => 'Are you sure to trash?' } %></td>
+                        </tr>
+                      <% msg_count = msg_count+1 %>
+                      <% end %>
+                      <% @book_unread_messages.each do |m| %>
+                        <tr>
+                          <td><%= msg_count %></td>
+                          <td><p><%= m.subject%><p></td>
+                          <td>
+                            <p><%= m.content %>
+                              <%= link_to 'Action<span class="fa fa-arrow-circle-right"></span>'.html_safe, read_book_message_path(:id => m.id),:class=> "inbox-act" %>
+                            </p></td>
+                          <td><%= m.created_at.strftime("%m/%d/%Y at %I:%M%p")%></td>
+                          <td><%= link_to '<span class="fa fa-trash-o"></span>'.html_safe,m, :method => :delete, :data => { :confirm => 'Are you sure to trash?' } %></td>
+                        </tr>
+                      <% msg_count = msg_count+1 %>
+                      <% end %>
+                      </tbody>
+                  </table>
+                </div></div>
+            </div>
+          </div>
+        <% else %>
+          No unread messages
+        <% end %>
+      </div>
+    </div>
+    <div class="cboth"></div>
+  </div>
+</div>

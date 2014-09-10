@@ -1,0 +1,14 @@
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_firstname'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_firstname made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_lastname'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_lastname made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_icq'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_icq made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_aim'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_aim made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_msn'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_msn made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_yim'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_yim made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_idmode'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_idmode made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_ip'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_ip made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_domain'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_domain made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_browser'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_browser made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_description'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_description made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_nickname'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_nickname made by upgrade_160
+[19-May-2014 14:24:16] WordPress database error Can't DROP 'user_level'; check that column/key exists for query ALTER TABLE wp_mnfj_users DROP user_level made by upgrade_160
+[19-May-2014 16:44:36 UTC] PHP Fatal error:  Call to undefined function get_plugin_data() in /home1/sharinl8/sharingdais_app/sharingdais/public/blog/wp-content/plugins/mojo-marketplace-wp-plugin/inc/user-experience-tracking.php on line 158

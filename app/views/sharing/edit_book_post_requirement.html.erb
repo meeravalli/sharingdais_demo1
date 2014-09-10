@@ -1,0 +1,101 @@
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){    
+   
+ if(document.getElementById('book_post_requirement_city_id') !==null){
+			   	value = $.cookie('city_id')
+					if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+  });
+</script>
+<p class="head light-tit">Edit Book Post as Seeker</p>
+<div class="form_inner_align" id="bookshare_form" style="display:block;">
+<%= form_for @book_post_requirement, :url => { :action => "update_book_post_requirement", :id => @book_post_requirement}, :html => {:class=>"form-horizontal"} do |f|%>
+  <% if @book_post_requirement.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @book_post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+          <%= f.hidden_field :seeker_provider, value: true %>
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Book Name </label>
+      <div class="">
+        <%= f.text_field :name, :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Author </label>
+      <div class="">
+        <%= f.text_field :author, :class=>'form-control'  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">ISBN Number</label>
+      <div class="">
+        <%= f.text_field :isbn_number, :class=>'form-control' %>
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputEmail3" class="">Date of Posting </label>
+      <div class="input-group date">
+        <%= f.text_field :date_of_posting, :class=>'form-control', :id=>"book_post_requirement_dop"%>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent</label>
+      <div class="">
+        <%= f.text_field :rent, :class=>'form-control' %>
+      </div>
+    </div>
+<div class="form-group"></div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description </label>
+      <div class="">
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20  %>
+      </div>
+    </div>
+    
+   <div class="form-group"></div>
+    <div class="form-group">
+      <div class="">
+        <%= f.submit 'Update', :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+ <script>
+      function get_edit_locations(value, update_field)
+			{
+        if (value !="")
+        {
+          $.ajax({ url : "/application/get_locations", type: "GET", data: { id: value}, dataType: "json",
+            success: function (response) {
+              $("#"+update_field+" option").remove();
+              $.each(response, function(key, value) {
+							$("#"+update_field).append($("<option></option>").attr("value",value.id).text(value.location_name));
+              });
+         }
+          });
+        }
+        else{
+          $("#"+update_field+" option").remove();
+          $("#"+update_field).append($("<option value=''>Locality</option>"));
+        }
+		}
+</script>
+
+
+

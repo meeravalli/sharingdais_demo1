@@ -1,0 +1,56 @@
+ <div class="content profile">
+  <div class="resize">
+ <div class="profile-bx ">
+ <%= form_for @user, :url => { :action => "update_profile", :id => @user } do |f| %>
+ 	<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <div class="inner-pro row">
+	  		<div class="prf_edt_pg">
+                <h3>Update your Profile</h3>
+				<div class="col-xs-12 rgt">
+          <div class="row">
+            <div class="col-xs-5 col-md-3">
+              <p>Name</p>
+            </div>
+            <div class="col-xs-7">
+              <%= f.text_field :name, :class=>"form-control login_feild", :tabindex => 1 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>Address</p>
+            </div>
+            <div class="col-xs-7"><%= f.text_area :address, :rows => 3, :cols => 25, :class=>"form-control signup_textarea",  :tabindex => 2 %></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>Phone</p>
+            </div>
+            <div class="col-xs-7"><%= f.text_field :phone_no, :class=>"form-control login_feild",  :tabindex => 3 %></div>
+          </div>
+					<div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>Profile Photo</p>
+            </div>
+            <div class="col-xs-7"><%= f.file_field :photo, :class=>"login_feild"  %><span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span></div>
+          </div>
+          </div>
+					<div class="text-center">
+					<%= f.submit "Update", :class=>"upd_but" %>
+					</div>
+		  </div>
+      </div>
+			<%end%>
+		<div class="profile_edit">
+		<%= link_to 'Show profile', profile_home_path(@user), :class => "button" %>
+		</div>
+		</div>
+
+		</div>
+		</div>

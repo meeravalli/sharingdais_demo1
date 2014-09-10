@@ -1,0 +1,257 @@
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){
+    $("#foodshare_select_id").val("1");
+    $("#bookshare_select_id ").val('2');
+    <% if params[:post] == "book" %>
+      $('#foodlist_form').hide();
+      $('#booklist_form').show();
+    <% else %>
+      $('#foodlist_form').show();
+      $('#booklist_form').hide();
+    <% end %>
+  $('.services_class').on('change', function() {
+    if( $(this).val() == '1')
+    {
+      $(".error_explanation").html("");
+      $('#booklist_form').hide();
+      $('#foodlist_form').show();
+      $("#foodshare_select_id").val("1");
+     }
+     else if( $(this).val() == '2')
+     {
+       $(".error_explanation").html("");
+       $('#booklist_form').show();
+       $('#foodlist_form').hide();
+       $("#bookshare_select_id ").val('2');
+    }
+  });
+
+    $("input:checkbox[name=any]").click(function() {
+      if ($("#any").is(":checked")) {
+        $("#post_requirement_no_of_persons").attr('disabled', true);
+        $("#post_requirement_no_of_persons").val('');
+      }
+      else {
+        $("#post_requirement_no_of_persons").attr('disabled', false);
+      }
+    });
+
+    $('#book_post_requirement_dop').datepicker({
+      dateFormat: "yy-mm-dd",
+      autoclose: true
+    });
+
+<% if !session[:any].blank? %>
+      $("#post_requirement_no_of_persons").val('');
+      $("#post_requirement_no_of_persons").attr('disabled', true);
+      $("#any").attr('checked', true);
+<% end %>
+
+ if(document.getElementById('post_requirement_city_id').id){
+			   	value = $.cookie('city_id')
+					if(value){document.getElementById('post_requirement_city_id').value = value}}
+
+  if(document.getElementById('book_post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+     });
+
+function book_form_validate()
+    {
+       if($("#book_name").val() == "")
+       {
+         alert( "Please provide book name!" );
+         return false;
+       }
+       if($("#author_name").val() == "")
+       {
+         alert( "Please provide your author name!" );
+         return false;
+       }
+       return( true );
+    }
+
+</script>
+
+<p class="head light-tit">List as Provider</p>
+<div class="form_inner_align" id='foodlist_form'>
+  <%= form_for :post_requirement, :url => list_availability_sharing_index_path, :html => {:class=>"form-horizontal"} do |f|%>
+    <% if @post_requirement.errors.any? %>
+		<div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+			</div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="">Service</label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "1"}, {:class=>'form-control services_class', :id => 'foodshare_select_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >I am <i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:provider_id, @providers, :id, :provider_type, {:include_blank => 'Select Provider'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+	 <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+			  <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Food Type<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:food_type_id, @food_types, :id, :name, {:include_blank => 'Select FoodType'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Meal Type</label>
+      <div class="">
+        <%= f.collection_select(:meal_type_id, @meal_types, :id, :name, {:include_blank => 'Select MealType'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Region specific</label>
+      <div class="">
+        <%= f.collection_select(:region_id, @regions, :id, :name, {:include_blank => 'Select Region'}, {:class=>'form-control'})%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">No. of persons</label>
+      <div class="">
+        <%= f.text_field :no_of_persons, :size => 15, :class=>'form-control' %>
+        <%= check_box_tag 'any',-1, false %> Any
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Budget range</label>
+      <div class="">
+        <%= f.text_field :budget, :class=>'form-control' %>
+      </div>
+    </div>
+    
+	  <div class="form-group" id="food_image">
+      <label for="inputEmail3" class="">Food Image</label>
+      <div class="">
+        <%= f.file_field :food_image %>
+      </div>
+			<span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details </label>
+      <div class="">
+        <%= f.text_area :details, :class=>'form-control', :rows  => 5, :cols=> 20  %>
+      </div>
+    </div>
+    
+    <div class="form-group" style ="visibility:hidden;">
+      <label for="" class="">Food Provider</label>
+      <div class="">
+        <%= f.radio_button :seeker_provider, false, :checked => true %> 
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="">
+        <%= f.submit "Submit", :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<div class="form_inner_align" id="booklist_form" style="display:none;">
+  <%= form_for BookPostRequirement.new, :url => book_list_availability_sharing_index_path, :html => {:class=>"form-horizontal "} do |f|%>
+    <% if @post_requirement.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="">Service</label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "2"}, {:class=>'form-control services_class', :id => 'bookshare_select_id'} )%>
+      </div>
+    </div>
+
+   <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Book Name<i>*</i></label>
+      <div class="">
+        <%= f.text_field :name, :size => 30, :class=>'form-control', :id=>"book_name" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Author<i>*</i></label>
+      <div class="">
+        <%= f.text_field :author, :size => 30, :class=>'form-control', :id=>"author_name" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">ISBN Number</label>
+      <div class="">
+        <%= f.text_field :isbn_number, :size => 30, :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent</label>
+      <div class="">
+        <%= f.text_field :rent, :class=>'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Date of Posting </label>
+      <div class="input-group date">
+      <%= f.text_field :date_of_posting, :class=>'form-control' , :id=>"book_post_requirement_dop"%>
+  <span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>
+</div><br/>
+      <div class="" id="book_image">
+      <label for="" class="">Book Image</label>
+      <div class="">
+        <%= f.file_field :image %>
+      </div>
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+    </div>
+ 
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description </label>
+      <div class="">
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20  %>
+      </div>
+    </div>
+    <div class="form-group"></div>
+    
+    <%= f.hidden_field :seeker_provider, value: false %>
+    <div class="form-group">
+   </div>
+    <div class="form-group">
+      <div class="">
+        <%= f.submit "Submit", :onclick => "return book_form_validate();", :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+
+
+
+

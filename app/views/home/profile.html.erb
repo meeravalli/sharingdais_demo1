@@ -1,0 +1,67 @@
+<div class="content profile">
+  <div class="resize">
+    <div class="profile-bx ">
+      <div class="inner-pro row">
+        <div class="col-xs-5 left">
+          <div class="img">
+					  <% if !@user.photo.path.nil? %>
+            <%= image_tag  @user.photo.url(:small), :class => "img-responsive" %>
+						<%else%>
+						<%= "Upload your photo" %>
+						<%end%>
+          </div>
+        </div>
+        <div class="col-xs-7 rgt">
+          <div class="row">
+            <div class="col-xs-5 col-md-3">
+              <p >
+                <span class="fa fa-circle-o"></span>Name
+              </p>
+
+            </div>
+            <div class="col-xs-7">
+              <div><%= @user.name %></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>
+                <span class="fa fa-circle-o"></span>Email Id
+              </p>
+            </div>
+            <div class="col-xs-7">
+              <div><%= @user.email %></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>
+                <span class="fa fa-circle-o"></span>Address
+              </p>
+            </div>
+            <div class="col-xs-7">
+              <div><%=@user.address%></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-5  col-md-3">
+              <p>
+                <span class="fa fa-circle-o"></span>Phone
+              </p>
+            </div>
+            <div class="col-xs-7">
+              <div><%= @user.phone_no %></div>
+            </div>
+          </div>
+        </div>
+				<div class="profile_edit">
+					<%= link_to 'Edit profile', edit_profile_home_path(@user), :class=>"button" %>
+				</div>
+      </div>
+    </div>
+
+    <%= render 'post_requirement' %>
+    <%= render 'book_post_requirement' %>
+
+  </div>
+</div>

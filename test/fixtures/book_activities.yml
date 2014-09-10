@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  contact_id: 1
+  order_id: 1
+  book_post_requirement_id: 1
+  seeked_shared: false
+
+two:
+  user_id: 1
+  contact_id: 1
+  order_id: 1
+  book_post_requirement_id: 1
+  seeked_shared: false

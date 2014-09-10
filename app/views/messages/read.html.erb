@@ -1,0 +1,55 @@
+<style>
+   .inbox_mess {
+   background: none repeat scroll 0 0 #EFEFEF;
+   border: 1px solid #CFCFCF;
+   border-radius: 4px;
+   box-shadow: 0 0 5px #C0C0C0;
+   margin: 10% auto 0;
+   padding: 15px;
+   text-align: center;
+   width: 50%;
+	 min-height:450px;
+}
+
+.content{
+margin: 0 auto;
+   padding: 10px 40px;
+   width: 80%;}
+</style>
+
+
+<div class="content">
+  <% @user = User.find(@message.user_id) %>
+	<div class="inbox_mess">
+  <%= @message.content  %>
+  <% if @message.subject == "New Order" %>
+    <p>The Order details are below</p>
+    <p>Food Type : <%= @message.food %></p>
+    <p>Location : <%= @message.location %></p>
+    <% if !@message.accepted? and @message.order_status? %>
+      <%= button_to "Agree and Share contact", agree_share_messages_path(:id => @message.id,:user_id => @message.user_id, :post_requirement_id => @message.post_requirement_id)%>
+    <%end%>
+  <% elsif @message.subject == "New order accepted" %>
+    <p>This is a confirmation that you accepted the order.</p><p> Please note the Order ID <%="##{@message.order_id}"%> as reference.</p>
+    <p>Seeker details are below:</p>
+    <p>Name : <%= @user.name %></p>
+    <p>Email : <%= @user.email %></p>
+    <p>Phone : <%= @user.phone_no %></p>
+    <p>Address : <%= @user.address %></p>
+  <% elsif @message.subject == "Your order was confirmed" %>
+    <p>You order is now confirmed by Provider. </p><p>Please note the Order ID <%="##{@message.order_id}"%> as reference for your records.</p>
+    <p>Provider details are below:</p>
+    <p>Name : <%= @user.name %></p>
+    <p>Email : <%= @user.email %></p>
+    <p>Phone : <%= @user.phone_no %></p>
+    <p>Address : <%= @user.address %></p>
+		<% elsif @message.subject == "Order Cancellation" %>
+    <p>You order is cancelled. </p><p>Please note the Order ID <%="##{@message.order_id}"%> as reference for your records.</p>
+    <p>The order cancelled by:</p>
+    <p>Name : <%= @user.name %></p>
+    <p>Email : <%= @user.email %></p>
+    <p>Phone : <%= @user.phone_no %></p>
+    <p>Address : <%= @user.address %></p>
+  <% end %>
+	</div>
+</div>

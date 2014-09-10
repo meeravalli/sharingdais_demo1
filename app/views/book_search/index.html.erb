@@ -1,0 +1,17 @@
+<%= render 'banner_carousel' %>
+<% if @search_params.nil? %>
+  <%= render 'home/content' %>
+<% elsif @search_params == 0%>
+  <p class="no_result_style"> No Results are found. Request you to post your requirement, we will try to fulfill it.</p>
+  <p class="no_result_post">
+
+  <%= link_to 'Post your requirement if you are looking for Book', post_requirement_sharing_index_path(:post => "book"), :title => "Looking for Book? Submit your request here" %>
+ 
+<%= link_to 'Post your offering if you are willing to provide Book', list_availability_sharing_index_path(:post => "book"), :title => "Interested in providing Book? Submit your request here" %>
+
+   </p>
+   
+   <br>
+<% else %>
+  <%= render 'list'%>
+<% end %>

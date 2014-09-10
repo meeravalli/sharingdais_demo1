@@ -1,0 +1,88 @@
+<%= javascript_include_tag :search %>
+
+
+<% if !params[:search].blank? %>
+  <script>
+    $(document).ready(function(){
+    city_value = <%= params[:search][:city_id] %>
+     document.getElementById('city_id').value = city_value
+    });
+  </script>
+<% end %>
+
+
+<% if !session[:bulk].blank? %>
+  <script>
+    $(document).ready(function(){
+      //reload_bulk();
+      $("#label_text").html("I'm");
+      $("#people").hide();
+      $("#search_no_of_persons").hide();
+      $("#search_any").hide();
+      $("#any").hide();
+      $("#search_meal_type_id").hide();
+      $("#search_region_id").hide();
+      $("#meal").html( "No.of.Guests" );
+      $("#region").hide();
+      $("#search_identity").show();
+      $("#search_no_of_guests").show();
+      $("#guests").show();
+      $("#search_any1").show();
+      $("#any1").show();
+    });
+  </script>
+<% end %>
+
+<script>
+  function validateform(){
+    $("#search_form_book_city").val($("#city_id").val());
+    city = $("#search_city_id").val();
+    no_of_persons = $("#search_no_of_persons").val();
+    no_of_guests = $("#search_no_of_guests").val();
+    if (city == ''){
+      alert("City can't be empty");
+      return false;
+    }
+    else if(no_of_persons !=''){
+      if (!isInteger(no_of_persons)){
+        alert("No. of people can only be number");
+      }
+      return isInteger(no_of_persons);
+    }
+    else if(no_of_guests !=''){
+      if (!isInteger(no_of_guests)){
+        alert("No. of guests field can only be number");
+      }
+      return isInteger(no_of_guests);
+    }
+
+  }
+
+  function isInteger(n) {
+    return /^[0-9]+$/.test(n);
+  }
+</script>
+
+<div class="banner">
+  <div id="slider">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <!-- <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol> -->
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <%= render 'search_form_food_sharing' %>
+        <%#= render 'search_form_car_pooling' %>
+        <%= render 'search_form_book_sharing' %>        
+      </div>
+      
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="fa fa-arrow-circle-left"></span> </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="fa fa-arrow-circle-right"></span> </a>
+    </div>
+    <div class="cboth"></div>
+  </div>
+</div>

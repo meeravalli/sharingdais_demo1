@@ -1,0 +1,22 @@
+Welcome to sharingdais.com, <%= @user.name %>
+===============================================
+ 
+You have accepted new order from <%= @seeker.name %>
+
+The Seeker details below:
+
+Order No.: <%="##{@message.book_order_id}"%>
+Name : <%= @seeker.name %>
+Email : <%= @seeker.email %>
+Phone : <%= @seeker.phone_no %>
+Address : <%= @seeker.address %>
+
+For more details check your <%= @url%> Inbox
+
+To login to the site, just follow this link: <%= @login_url %>
+
+
+Have a great day!
+Thanks and Regards,
+
+Sharingdais Admin Team

@@ -1,0 +1,270 @@
+<div class="display">
+  <h3 class="prf_title">Your Book Requirements</h3>
+  <div class="table-responsive src_res_desktop">
+    <table class="table table-hover">
+      <thead class="heading">
+        <tr>
+          <th>#</th>
+          <th>Book Photo</th>
+          <th>Book Name</th>
+          <th>Locality </th>
+          <th>Rent</th>
+          <th>Description</th>
+          <th>Date Of Posting</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% my_count = 1 %>
+        <% if @book_post_requirements.present? %>
+        <% @book_post_requirements.each do |p| %>
+          <tr>
+            <td><%= my_count %></td>
+            <% if !p.image.path.nil? %>
+              <td><%= image_tag p.image.url(:small) %></td>
+            <%else%>
+              <td>No image</td>
+            <%end%>
+            <td><%= p.name %></td>
+            <td><%= p.location.location_name%></td>
+            <td><%= p.rent %></td>
+            <td><%= p.description %></td>
+            <td><%= p.date_of_posting.strftime('%d %B %Y') if p.date_of_posting.present? %></td>
+            <% if p.seeker_provider %>
+              <td><%= link_to 'Edit', edit_book_post_requirement_sharing_path(p)%></td>
+            <%else%>
+              <td><%= link_to 'Edit', edit_book_list_availability_sharing_path(p)%></td>
+            <%end%>
+            <td><%= link_to 'Destroy', book_destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% my_count +=1 %>
+        <% end %>
+        <% else%>
+                <tr> 
+                    <td colspan="8" style="text-align:center">You don't have any book requirements </td>
+                </tr>
+                <%end%>
+      </tbody>  
+    </table>
+  </div>
+
+  <div class="srch_res_mob">
+  <% if !@book_post_requirements.empty? %>
+    <% @book_post_requirements.each do |p| %>
+      <div class="res_data">
+        <div class="data_row">
+          <div class="data_title">
+            Book Image
+          </div>
+          <div class="data_col">
+            <% if !p.image.path.nil? %>
+              <%= image_tag p.image.url(:small) %>
+            <%else%>
+             No image
+            <%end%>
+          </div>
+        </div>
+        <div class="data_row">
+          <div class="data_title">
+            Book Name
+          </div>
+          <div class="data_col">
+            <%= p.name %>
+          </div>
+        </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Locality
+                  </div>
+                  <div class="data_col">
+                    <%= p.location.location_name%>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Rent
+                  </div>
+                  <div class="data_col">
+                    <%= p.rent %>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Description
+                  </div>
+                  <div class="data_col">
+                    <%= p.description %>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Date Of Posting
+                  </div>
+                  <div class="data_col">
+                    <%= p.date_of_posting.strftime('%d %B %Y') if p.date_of_posting.present?%>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                </div>
+                  <div class="data_col">
+                  <% if p.seeker_provider %>
+                    <%= link_to 'Edit', edit_book_post_requirement_sharing_path(p)%>
+                  <%else%>
+                  <%= link_to 'Edit', edit_book_list_availability_sharing_path(p)%>
+                  <%end%>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                </div>
+                  <div class="data_col">
+                    <%= link_to 'Destroy', book_destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </div>
+              </div>
+          </div>
+  <%end%>
+  <%else%>
+             <div class="res_data">
+             <div class="data_row">
+                                        <div class="data_title">
+                                            Status
+                                        </div>
+                                        <div class="data_col">
+                                            You don't have any book requirement
+                                        </div>
+             </div>
+          </div>
+             <%end%>
+</div>
+</div>
+<div class="display ">
+    <h3 class="prf_title">Your Book Orders</h3>
+      <div class="table-responsive src_res_desktop">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>Category</th>
+              <th>Seeked / Shared </th>
+              <th> Name of the other Party </th>
+              <th> Address of Another Party </th>
+              <th>Phone of Another Party </th>
+              <th>Email of Another Party </th>
+              <th>Status </th>
+            </tr>
+            <tr></tr>
+          </thead>
+         <tbody>
+          <% count = 1 %>
+          <% if !@book_activities.empty? %>
+            <% @book_activities.each do |a| %>
+              <% @user = find_user(a.contact_id) %>
+              <tr>
+                <td><%= count %></td>
+                <td>Book Sharing</td>
+                <td><%= a.seeked_shared ? "Seeked" : "Shared"%></td>
+                <td><%= @user.name%></td>
+                <td><%= @user.address%></td>
+                <td><%= @user.phone_no%></td>
+                <td><%= @user.email%> </td>
+                <% if a.book_order.book_order_cancel.nil? %>
+                  <% book_negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+                  <td><%= link_to "Cancel", cancel_book_message_path(:user_id => a.contact_id, :book_order_id => a.book_order_id, :book_post_requirement_id => a.book_post_requirement_id, :book_negotiate_id => book_negotiate_id) %></td>
+                <% else %>
+                  <td>Cancelled</td>
+                <% end %>
+              </tr>
+          <% count +=1 %>
+            <% end %>
+            <% else%>
+            <tr> 
+            <td colspan="8" style="text-align:center">You don't have any book order </td>
+            </tr>
+            <%end%>
+          </tbody>  
+        </table>
+      </div>
+      <div class="srch_res_mob">
+      <% if !@book_activities.empty? %>
+      <% @book_activities.each do |a| %>
+      <% @user = find_user(a.contact_id) %>
+                              <div class="res_data">
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Category
+                                        </div>
+                                        <div class="data_col">
+                                          <%= find_service %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Seeked / Shared 
+                                        </div>
+                                        <div class="data_col">
+                                          <%= a.seeked_shared ? "Seeked" : "Shared"%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Name of the other party 
+                                        </div>
+                                        <div class="data_col">
+                                          <%= @user.name%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Address of Another Party 
+                                        </div>
+                                        <div class="data_col">
+                                          <%= @user.address%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Phone of Another Party  
+                                        </div>
+                                        <div class="data_col">
+                                          <%= @user.phone_no%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Email of Another Party 
+                                        </div>
+                                        <div class="data_col">
+                                          <%= @user.email%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Status 
+                                        </div>
+                                        <div class="data_col">
+                                        <% if a.book_order.book_order_cancel.nil? %>
+                  <% book_negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+                  <td><%= link_to "Cancel", cancel_book_message_path(:user_id => a.contact_id, :book_order_id => a.book_order_id, :book_post_requirement_id => a.book_post_requirement_id, :book_negotiate_id => book_negotiate_id) %></td>
+                <% else %>
+                  <td>Cancelled</td>
+                <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+       <%end%>
+       <%else%>
+       <div class="res_data">
+       <div class="data_row">
+                                      <div class="data_title">
+                                          Status
+                                        </div>
+                                        <div class="data_col">
+                                          You don't have any book order 
+                                        </div>
+       </div>
+       </div>
+       <%end%>
+      </div>
+      </div>

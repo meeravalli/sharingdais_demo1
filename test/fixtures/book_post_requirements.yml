@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service_id: 1
+  city_id: 1
+  location_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  description: MyText
+  name: MyString
+  author: MyString
+  user_id: 1
+  seeker_provider: false
+  isbn_number: MyString
+  date_of_posting: 2014-08-28
+
+two:
+  service_id: 1
+  city_id: 1
+  location_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  description: MyText
+  name: MyString
+  author: MyString
+  user_id: 1
+  seeker_provider: false
+  isbn_number: MyString
+  date_of_posting: 2014-08-28
