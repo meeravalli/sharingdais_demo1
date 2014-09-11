@@ -39,7 +39,21 @@ before_filter :ensure_admin
     redirect_to admins_path
   end
   
-  
+  def edit_user_profile
+    @user=User.where("id=?",params[:user_id])
+    if !params[:name].blank? 
+      @user.first.name=params[:name] 
+    end
+    if !params[:address].blank?
+      @user.first.address=params[:address]
+    end
+    if !params[:phone_no].blank?
+      @user.first.phone_no=params[:phone_no]
+    end
+    @user.first.save
+    flash[:notice] = "#{@user.first.name} profile updated success fully"
+  end
+
   private
 
 def ensure_admin

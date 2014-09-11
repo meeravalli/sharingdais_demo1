@@ -68,6 +68,7 @@ Sharingdasiss::Application.routes.draw do
   match "hygiene_factor" => "static_pages#hygiene_factor"
   match "benefits" => "static_pages#benefits"
 
+  post "edit_user_profile" => "admins#edit_user_profile"
  
   # The priority is based upon order of creation:
   # first created -> highest priority.
