@@ -1,6 +1,7 @@
+<style type="text/css">
+  @media screen and (min-width:1280px) {.custom_width{ width:60%; left: 20%;}.cust_btn{float: right;}}
+</style>
 <%= javascript_include_tag :search %>
-
-
 <% if !params[:search].blank? %>
   <script>
     $(document).ready(function(){
@@ -9,8 +10,6 @@
     });
   </script>
 <% end %>
-
-
 <% if !session[:bulk].blank? %>
   <script>
     $(document).ready(function(){
@@ -64,7 +63,7 @@
 
 <div class="item active">
   <%=  image_tag "slider3.jpg", :alt => "..." %>
-  <div class="carousel-caption">
+  <div class="carousel-caption custom_width">
     <div class="search-blk row">
       <p class="head">Food Sharing</p>
       <%= form_tag(food_search_path, :method=>"post") do %>
@@ -78,24 +77,24 @@
           <label for="">I want to Provide Food</label>
           <%= radio_button_tag "search[food]", "1", params[:search][:food].to_i == 1, :id => 'search_food_1', :class => "food" %>
           </div>
-          <div>
+          <!--<div>
           <label for="">Bulk Deals</label>
-          <%= radio_button_tag "search[food]", "2", params[:search][:food].to_i == 2, :id => 'search_food_2', :class => "food" %>
-          </div>
+          <%= radio_button_tag "search[food]", "2", params[:search][:food].to_i == 2, :id => 'search_food_2', :class => "food", :hidden => true %>
+          </div>-->
           <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true) %>
         </div>
         <div class="search row">
-          <div class="col-xs-12 col-md-4 padding_none text-left">
+          <!--<div class="col-xs-12 col-md-4 padding_none text-left">
             <div class="left col-xs-12">
               <label for="" id='label_text' class="food-chg"> Looking for no.of people</label>
             </div>
-            <div class="left col-xs-12">
-              <%= text_field_tag('search[no_of_persons]', params[:search][:no_of_persons], :class => "form-control food-chg") %>
-              <%= select_tag('search[identity]', options_for_select({ "caterer" => "1", "chef" => "2", "looking for chef" => "3", "looking for caterer" => "4"}, params[:search][:identity]), {:class => "form-control food-chg",:style => "display:none;"}) %>
-              <%= check_box_tag 'search[any]','any', false %><label id='any'> Any</label>
+            <div class="left col-xs-12">-->
+              <%= text_field_tag('search[no_of_persons]', params[:search][:no_of_persons], :class => "form-control food-chg", :type=>"hidden") %>
+              <%#= select_tag('search[identity]', options_for_select({ "caterer" => "1", "chef" => "2", "looking for chef" => "3", "looking for caterer" => "4"}, params[:search][:identity]), {:class => "form-control food-chg",:style => "display:none;"}) %>
+              <!--<%#= check_box_tag 'search[any]','any', false %><label id='any'> Any</label>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-2 padding_none text-left">
+          </div>-->
+          <div class="col-xs-12 col-md-4 padding_none text-left">
             <div class="left col-xs-12">
               <label for="">Locality</label>
             </div>
@@ -103,7 +102,7 @@
               <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
             </div>
           </div>
-          <div class="col-xs-12 col-md-2 padding_none text-left">
+          <div class="col-xs-12 col-md-3 padding_none text-left">
             <div class="left col-xs-12">
               <label for="" id ="food" >Food type</label>
             </div>
@@ -111,7 +110,7 @@
               <%= collection_select :search, :food_type_id,@food_types, :id, :name, {:selected => params[:search][:food_type_id]},{:class => "form-control"}%>
             </div>
           </div>
-          <div class="col-xs-12 col-md-2 padding_none text-left">
+          <div class="col-xs-12 col-md-3 padding_none text-left">
             <div class="left col-xs-12">
               <label for=""  id ="meal" class="bulk-dl">Meal type</label>
             </div>
@@ -122,12 +121,17 @@
             </div>
           </div>
           <div class="col-xs-12 col-md-2 padding_none text-left">
-            <div class="left col-xs-12">
+            <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="btns">
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_food_sharing_button" %>
+            </div>
+            <!--<div class="left col-xs-12">
               <label for="" id ="region" class="bulk-rmv">Any Specific Food type</label>
             </div>
             <div class="left col-xs-12">
-              <%= collection_select :search, :region_id,@regions, :id, :name, {:selected => params[:search][:region_id]}, {:class => "form-control"}%>
-            </div>
+              <%#= collection_select :search, :region_id,@regions, :id, :name, {:selected => params[:search][:region_id]}, {:class => "form-control"}%>
+            </div>-->
           </div>
           <div style="col-xs-12 col-md-2 padding_none text-left">
             <div class="left col-xs-12 margin_topbot">
@@ -142,9 +146,9 @@
           </div>
           <div class="cboth"></div>
           <div class="row">
-            <div class="btns">
-              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_food_sharing_button" %>
-            </div>
+            <!--<div class="btns">
+              <%#= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_food_sharing_button" %>
+            </div>-->
           </div>
         </div>
       <% end %>
