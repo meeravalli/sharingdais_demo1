@@ -51,7 +51,8 @@ before_filter :ensure_admin
       @user.first.phone_no=params[:phone_no]
     end
     @user.first.save
-    flash[:notice] = "#{@user.first.name} profile updated success fully"
+    flash[:notice] = "#{@user.first.name} profile updated successfully"
+    @user = User.find(params[:user_id])
   end
 
   private
