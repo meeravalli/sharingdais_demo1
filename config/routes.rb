@@ -69,7 +69,7 @@ Sharingdasiss::Application.routes.draw do
   match "benefits" => "static_pages#benefits"
 
   post "edit_user_profile" => "admins#edit_user_profile"
- 
+  get "exl" => "admins#exl"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

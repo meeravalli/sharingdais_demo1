@@ -5,11 +5,14 @@ before_filter :ensure_admin
 
 	def index
     @users = User.where(:admin => false).order("created_at DESC").paginate(:page => params[:page])
+	end
+
+  def exl
+    @users = User.where(:admin => false).order("created_at DESC")
     respond_to do |format|
-      format.html
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
-	end
+  end
 	
 	def block_unblock
     user = User.find(params[:id])
