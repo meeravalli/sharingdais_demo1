@@ -111,7 +111,10 @@
     </div>
     </div>
 		<%else %>
-		  <p class="notice success_mess "><%= notice %></p>
+		   <% if !notice.nil? %>
+        <p class="notice alert alert-success success_mess"><%= notice %></p>
+      <%end%>
+      
 			<p class="alert alert_mess"><%= alert %></p>
 			<%= yield %>
 		<%end%>
