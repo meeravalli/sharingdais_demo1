@@ -54,7 +54,7 @@ before_filter :ensure_admin
     if !params[:phone_no].blank?
       @user.first.phone_no=params[:phone_no]
     end
-    @user.first.save
+    @user.first.save(:validate => false)
     flash[:notice] = "#{@user.first.name} profile updated successfully"
     @user = User.find(params[:user_id])
   end
