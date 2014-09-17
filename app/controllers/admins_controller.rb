@@ -30,6 +30,8 @@ before_filter :ensure_admin
     @user = User.find(params[:id])
     @post_requirements = @user.post_requirements
     @activities = @user.activities
+    @book_post_requirements = @user.book_post_requirements
+    @book_activities = @user.book_activities
    end
 	
 	def destroy_user
