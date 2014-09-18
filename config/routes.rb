@@ -70,6 +70,13 @@ Sharingdasiss::Application.routes.draw do
 
   post "edit_user_profile" => "admins#edit_user_profile"
   get "exl" => "admins#exl"
+  get "post_requirements" => "admins#post_requirements"
+
+  post "search_food" => "book_search#search_top_five_food"
+  post "search_book" => "book_search#search_top_five_book"
+
+  get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
+  get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

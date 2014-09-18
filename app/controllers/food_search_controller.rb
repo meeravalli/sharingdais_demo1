@@ -19,4 +19,13 @@ include ActionView::Helpers::NumberHelper
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
     end
   end
+
+  def food_result
+    if params[:seeker_provider] == 'true'
+      @prm = true
+    else
+      @prm = false
+    end
+    @search_results = PostRequirement.where("location_id=? AND seeker_provider=?",params[:id],@prm)
+  end
 end

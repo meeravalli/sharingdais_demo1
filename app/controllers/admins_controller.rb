@@ -7,6 +7,10 @@ before_filter :ensure_admin
     @users = User.where(:admin => false).order("created_at DESC").paginate(:page => params[:page])
 	end
 
+  def post_requirements
+    @orders = Order.all#.order("order_date DESC").paginate(:page => params[:page])
+  end
+
   def exl
     @users = User.where(:admin => false).order("created_at DESC")
     respond_to do |format|

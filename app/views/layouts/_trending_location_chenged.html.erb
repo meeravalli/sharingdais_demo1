@@ -1,0 +1,227 @@
+<style>
+.btn-warning {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  color: #000;
+  width: 20%;
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning {
+  background-color:#EC971F;
+  border-color:#D58512;
+  color:#FFFFFF;
+}
+.bootstrap-dialog.type-primary .modal-header {
+background-color: #428bca;
+}
+.bootstrap-dialog .modal-header {
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+.modal-header {
+min-height: 16.43px;
+padding: 15px;
+border-bottom: 1px solid #e5e5e5;
+}
+.bootstrap-dialog.size-normal .bootstrap-dialog-title {
+font-size: 16px;
+}
+.bootstrap-dialog .bootstrap-dialog-title {
+color: #fff;
+display: inline-block;
+}
+</style>
+<div id="model_box" class="modal bootstrap-dialog size-normal type-primary" style="z-index: 1050; display: none;">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="bootstrap-dialog-header">
+          <div class="bootstrap-dialog-close-button" style="display: block;">
+            <button class="close cls1">×</button>
+          </div>
+          <div class="bootstrap-dialog-title">Information</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="bootstrap-dialog-body">
+          
+<strong>Trending localities for 
+          <%= select_tag "service_type", options_from_collection_for_select(Service.all, "id", "service_type"), :onchange => 'show_trending_localities()', :class => "form-control" %>
+          in 
+          <%= select_tag "city_location", options_from_collection_for_select(City.all, "id", "city_name"), prompt: "Select City", :onchange => 'show_trending_localities()', :class => "form-control" %></strong>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="bootstrap-dialog-footer">
+          <div class="bootstrap-dialog-footer-buttons">
+            <button class="btn btn-default close_model">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--######################################-->
+<div id="model_box_top_five" class="modal bootstrap-dialog size-normal type-primary" style="z-index: 1050; display: none;">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="bootstrap-dialog-header">
+          <div class="bootstrap-dialog-close-button" style="display: block;">
+            <button class="close cl2">×</button>
+          </div>
+          <div class="bootstrap-dialog-title">
+            <table>
+              <tr>
+                <td id="seeker_head"></td>
+                <td>|</td>
+                <td id="provider_head"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="bootstrap-dialog-body">
+          <table>
+            <tr>
+              <td style="width:50%">
+                <table class="table table-hover table-bordered" id="provider">
+                </table>
+              </td>
+              <td>
+                <table class="table table-hover table-bordered" id="seeker">                  
+                </table>
+              </td>
+            </tr>
+          </table>         
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="bootstrap-dialog-footer">
+          <div class="bootstrap-dialog-footer-buttons">
+            <button class="btn btn-default close_model2" >Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade in" style="display:none"></div>
+<!--######################################-->
+<script type="text/javascript">
+$("#open_model").click(function(){
+  $("#model_box").show();
+  $(".in").show();
+});
+$(".close_model").click(function(){
+  $("#model_box").hide();
+  $(".in").hide();
+  $('#seeker').empty();
+  $("#provider").empty();
+});
+$(".cls1").click(function(){
+  $("#model_box").hide();
+  $(".in").hide();
+  $('#seeker').empty();
+  $("#provider").empty();
+})
+$(".cl2").click(function(){
+  $("#model_box_top_five").hide();
+  $(".in").hide();
+  $('#seeker').empty();
+  $("#provider").empty();  
+  $("#seeker_head").empty();
+  $("#provider_head").empty();
+})
+$(".close_model2").click(function(){
+  $("#model_box_top_five").hide();
+  $(".in").hide();
+  $('#seeker').empty();
+  $("#provider").empty();  
+  $("#seeker_head").empty();
+  $("#provider_head").empty();
+})
+function show_trending_localities(){
+  if (($("#service_type").val() != "") && ($("#city_location").val() != "")){
+    if ($("#service_type").val() == "1") {
+      $.ajax({ 
+        url : "/search_food", 
+        type: "POST", 
+        data: { 
+          cityid: $("#city_location").val() 
+        }, 
+        dataType: "json",
+        success: function (data) 
+        {  
+          $("#model_box").hide(); 
+          $("#model_box_top_five").show();
+          var row1 = $("<center>Top Localities where Cooks are sharing food</center>");
+          $("#seeker_head").append(row1);
+          var row2 = $("<center>Top Localities where Foodies are looking for food</center>");
+          $("#provider_head").append(row2);
+          if (data.seeker != ""){
+            $.each(data.seeker, function( index, value ) {
+              var row = $("<tr><td><a href='/food_result/"+value.l_id+"/"+value.seeker_provider+"'>" + value.location_name +"</a></td></tr>" );
+               $("#seeker").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#seeker").append(row);
+          }
+          if (data.provider != ""){
+            $.each(data.provider, function( index, value ) {
+              var row = $("<tr><td><a href='/food_result/"+value.l_id+"/"+value.seeker_provider+"''>"+ value.location_name + "</a></td></tr>" );
+               $("#provider").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#provider").append(row);
+          }
+
+
+        }
+      });
+    }else{
+      $.ajax({ 
+        url : "/search_book", 
+        type: "POST", 
+        data: { 
+          cityid: $("#city_location").val()
+        }, 
+        dataType: "json",
+        success: function (data) 
+        {  
+          $("#model_box").hide(); 
+          $("#model_box_top_five").show();
+          var row1 = $("<center> Top Localities where Book Owners are sharing books </center>");
+          $("#seeker_head").append(row1);
+          var row2 = $("<center> Top Localities where Readers are looking for books </center>");
+          $("#provider_head").append(row2);
+          if (data.seeker != ""){
+            $.each(data.seeker, function( index, value ) {
+              var row = $("<tr><td><a href='/book_result/"+value.l_id+"/"+value.seeker_provider+"''>" + value.location_name + "</a></td></tr>" );
+               $("#seeker").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#seeker").append(row);
+          }
+          if (data.provider != ""){
+            $.each(data.provider, function( index, value ) {
+              var row = $("<tr><td><a href='/book_result/"+value.l_id+"/"+value.seeker_provider+"''>"+ value.location_name + "</a></td></tr>" );
+               $("#provider").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#provider").append(row);
+          }
+           
+        }
+      });
+    }
+  }else{
+      
+}}
+</script>

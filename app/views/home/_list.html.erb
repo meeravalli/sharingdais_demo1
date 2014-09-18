@@ -61,7 +61,7 @@
 							 <% if !s.food_image.path.nil? %>
                 <td><%= image_tag s.food_image.url(:small) %></td>
 								<%else%>
-								<td>No image</td>
+								<td><img src="/assets/no_image_available.png" style="width:150px"></td>
 								<%end%>
                 <td><%= s.location.location_name %></td>
                 <td><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%></td>
@@ -102,7 +102,7 @@
 																				<% if !s.food_image.path.nil? %>
                                         	<%= image_tag s.food_image.url(:small) %>
 																					<%else%>
-																					No Image
+																					<img src="/assets/no_image_available.png" style="width:130px">
 																					<%end%>
                                         </div>
                                     </div>

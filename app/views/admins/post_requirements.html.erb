@@ -1,0 +1,39 @@
+	<h3 class="heading_content">Sharingdais Users</h3>
+        <div class="display padding_five">
+        	<table class="table table-hover">
+            	<thead class="heading">
+                	<tr>
+                    	<th>Name</th>
+                    	<th>Email</th>
+                    	<th>Phone No</th>
+                    	<th>Requirement</th>
+                    	<th></th>
+                    	<th></th>
+                    	<th></th>
+                	</tr>
+                 </thead>
+                 <tbody>
+					<% @orders.each do |order| %>
+                        <% 
+                            user=User.where("id=?","#{order.user_id}")
+                            post_requirement=PostRequirement.where("id=?","#{order.post_requirement_id}")
+                        %> 
+                        <tr>                       
+                            <th><%= user.first.name %></th>
+                            <th><%= user.first.email %></th>
+                            <th><%= user.first.phone_no %></th>
+                            <th><%= post_requirement.first.details %></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    <% end %>			 
+                </tbody>
+            </table>
+				<div class="pagination">
+	  <%#= will_paginate @orders %>
+			</div>
+        </div>
+				
+				                  
+                          

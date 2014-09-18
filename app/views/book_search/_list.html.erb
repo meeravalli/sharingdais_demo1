@@ -58,7 +58,7 @@
 								<% if !s.image.path.nil? %>
                   <td><%= image_tag s.image.url(:small) %></td>
                 <%else%>
-                  <td>No image</td>
+                  <td><img src="/assets/no_image_available.png" style="width:150px"></td>
                 <%end%>
                 <td><%= s.name %></td>
                 <td><%= s.location.location_name %></td>
@@ -95,7 +95,7 @@
 																				<% if !s.image.path.nil? %>
                                           <%= image_tag s.image.url(:small) %>
                                           <%else%>
-                                          No Image
+                                          <img src="/assets/no_image_available.png" style="width:130px">
                                           <%end%>
                                         </div>
                                     </div>

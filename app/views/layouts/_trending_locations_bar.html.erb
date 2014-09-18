@@ -7,13 +7,14 @@
           in 
           <%#= select_tag "city_location", options_from_collection_for_select(City.all, "id", "city_name"), prompt: "Select City", :onchange => 'display_trending_localities()' %></strong>
       </div>-->
+      <button type="button" id="open_model" class="btn btn-warning">Trending Locality</button>
       &nbsp;
 	  </div>
   </div>
 </div>
-
+<%= render :partial =>  "layouts/trending_location_chenged" %>
 <script>
-  
+  /*
     function display_trending_localities() {
       if ($("#service_type").val() == "1") {
         if ($("#city_location").val() != "") {
@@ -156,5 +157,5 @@
           $('.locality_id_class').val(loc_id);
           $("#search_form_book_sharing_button").trigger( "click" );   
         }, 1500);
-    }
+    }*/
 </script>
