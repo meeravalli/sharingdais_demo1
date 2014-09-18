@@ -65,7 +65,8 @@
   <%=  image_tag "slider3.jpg", :alt => "..." %>
   <div class="carousel-caption custom_width">
     <div class="search-blk row">
-      <p class="head">Food Sharing</p>
+      <p style="height:35px" class="head">Food Sharing</p>
+      <p style="height:25px"><i><small style="color:white">Discover and Share delicious home-cooked food in your neighborhood</small></i></p>
       <%= form_tag(food_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
         <div class="check  col-xs-12 col-md-12">
