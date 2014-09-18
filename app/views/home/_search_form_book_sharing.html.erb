@@ -22,10 +22,10 @@
         <%= form_tag(book_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
       <div class="check  col-xs-12 col-md-12">
-          <label for="">Reader</label>
+          <label for="">I am a Reader</label>
           <%= radio_button_tag "search[book]", "0", params[:search][:book].to_i == 0, :id => 'search_book_0', :class => "book", :data => {:book => "Book name / ISBN / Author"} %>
 
-          <label for="">Owner</label>
+          <label for="">I am an Owner</label>
           <%= radio_button_tag "search[book]", "1", params[:search][:book].to_i == 1, :id => 'search_book_1', :class => "book", :data => {:book=>"Book name / ISBN / Author"} %>
       </div>
       <div class="search">
