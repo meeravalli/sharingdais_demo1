@@ -31,8 +31,8 @@ Sharingdasiss::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "box1015.bluehost.com",
-    port: 465,
+    address: "mail.google.com/a/sharingdais.com"
+    port: 587,
     domain: "sharingdais.com",
     authentication: "plain",
     enable_starttls_auto: true,
