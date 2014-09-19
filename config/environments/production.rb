@@ -29,17 +29,17 @@ Sharingdasiss::Application.configure do
 
 # SMTP Method for GMAIL #
 
-#~ config.action_mailer.delivery_method = :smtp
-#~ config.action_mailer.smtp_settings = {
-  #~ :address              => "smtp.gmail.com",
-  #~ :port                 => 587,
-  #~ :domain               => 'baci.lindsaar.net',
-  #~ :user_name            => '',
-  #~ :password             => '',
-  #~ :authentication       => 'plain',
-  #~ :enable_starttls_auto => true  }
-#~ config.action_mailer.perform_deliveries = true
-#~ config.action_mailer.raise_delivery_errors = true
+ config.action_mailer.delivery_method = :smtp
+ config.action_mailer.smtp_settings = {
+   :address              => "smtp.gmail.com",
+   :port                 => 587,
+   :domain               => 'baci.sharingdais.com',
+   :user_name            => 'admin@sharingdais.com',
+   :password             => 'Sharing654321@#',
+   :authentication       => 'plain',
+   :enable_starttls_auto => true  }
+ config.action_mailer.perform_deliveries = true
+ config.action_mailer.raise_delivery_errors = true
 
 # SMTP Method for GMAIL #
 
@@ -74,20 +74,20 @@ Sharingdasiss::Application.configure do
 #SMTP method for BLUEHOST #
 
 #SMTP method for BLUEHOST #
-  config.action_mailer.default :charset => "utf-8"
+  #config.action_mailer.default :charset => "utf-8"
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-  :address              => "mail.sharingdais.com",
-  :port                 => 26,
-  :enable_starttls_auto => false,
-  :authentication       => "plain",
-  :user_name            => "admin@sharingdais.com",
-  :password             => "Sharing654321@#"
-  }
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #:address              => "mail.sharingdais.com",
+  #:port                 => 26,
+  #:enable_starttls_auto => false,
+  #:authentication       => "plain",
+  #:user_name            => "admin@sharingdais.com",
+  #:password             => "Sharing654321@#"
+  #}
   
-config.action_mailer.perform_deliveries = true
-config.action_mailer.raise_delivery_errors = true
+#config.action_mailer.perform_deliveries = true
+#config.action_mailer.raise_delivery_errors = true
 
 #SMTP method for BLUEHOST #
 
