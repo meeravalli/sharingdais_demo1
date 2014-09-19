@@ -32,6 +32,10 @@
                                 	<div class="text_lable">Address<i>*</i></div>
     	                            <div class="text_feild"><%= f.text_area :address, :rows => 3, :cols => 25, :placeholder=>"Enter your Address", :class=>"form-control signup_textarea",  :tabindex => 7 %></div>
 </div>
+<div class="signup_col_full_width margin_none">
+    <div class="text_lable">By clicking Sign Up, you agree to our Terms &amp; Conditions and <a href="/legal_terms">Privacy Policy</a>.</div>
+    
+</div>
 <div class="signup_col_full_width">
                                 <div class="text_feild"><%= f.submit "Sign up", :class=>"login_button" %></div>
 																  <%end%>

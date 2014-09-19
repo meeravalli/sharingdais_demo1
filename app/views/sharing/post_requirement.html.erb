@@ -136,9 +136,9 @@ function book_form_validate()
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="">Budget range</label>
+      <label for="inputEmail3" class="">Budget range in Rs.</label>
       <div class="">
-        <%= f.text_field :budget, :class=>'form-control' %>
+        <%= f.text_field :budget, :class=>'form-control', "required"=>"required"%>
       </div>
     </div>
     <div class="form-group">
