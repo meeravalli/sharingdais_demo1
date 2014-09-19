@@ -25,21 +25,34 @@ Sharingdasiss::Application.configure do
   
   
   #mailer configuration
-  config.action_mailer.default_url_options = { host: 'sharingdais.com' }
+  config.action_mailer.default_url_options = { :host => 'sharingdais.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "sharingdais.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: 'admin@sharingdais.com',
+    password: 'Sharing654321@#'
+  }  
 
 # SMTP Method for GMAIL #
-config.action_mailer.default :charset => "utf-8"
- config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => 'baci.lindsaar.net',
-  :user_name            => 'admin@sharingdais.com',
-  :password             => 'Sharing654321@#',
-  :authentication       => 'plain',
-  :enable_starttls_auto => true  }
- config.action_mailer.perform_deliveries = true
- config.action_mailer.raise_delivery_errors = true
+#config.action_mailer.default :charset => "utf-8"
+#config.action_mailer.delivery_method = :smtp
+#config.action_mailer.smtp_settings = {
+#  :address              => "smtp.gmail.com",
+#  :port                 => 587,
+#  :domain               => 'baci.lindsaar.net',
+#  :user_name            => 'admin@sharingdais.com',
+#  :password             => 'Sharing654321@#',
+#  :authentication       => 'plain',
+#  :enable_starttls_auto => true  }
+# config.action_mailer.perform_deliveries = true
+# config.action_mailer.raise_delivery_errors = true
 
 # SMTP Method for GMAIL #
 
