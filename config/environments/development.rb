@@ -29,13 +29,14 @@ Sharingdasiss::Application.configure do
   config.active_record.mass_assignment_sanitizer = :strict
 
 config.action_mailer.smtp_settings = {
-  :address              => "mail.sharingdais.com",
-  :port                 => 26,
-  :enable_starttls_auto => false,
-  :authentication       => "plain",
-  :user_name            => "admin@sharingdais.com",
-  :password             => "Sharing654321@#"
-  }
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'baci.sharingdais.com',
+  :user_name            => 'admin@sharingdais.com',
+  :password             => 'Sharing654321@#',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  
+}
 
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = true
