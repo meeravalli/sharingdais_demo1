@@ -19,7 +19,7 @@ Sharingdasiss::Application.configure do
 
   # Print deprecation notices to the Rails logger
     config.active_support.deprecation = :log
-   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  # config.action_mailer.default_url_options = { host: 'localhost:3000' }
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
   config.assets.enabled = true
@@ -28,15 +28,21 @@ Sharingdasiss::Application.configure do
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
-config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => 'baci.sharingdais.com',
-  :user_name            => 'admin@sharingdais.com',
-  :password             => 'Sharing654321@#',
-  :authentication       => 'plain',
-  :enable_starttls_auto => true  
-}
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  # change to true to allow email to be sent during development
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"  
+  config.action_mailer.smtp_settings = {
+    address: "mail.sharingdais.com",
+    port: 587,
+    domain: "sharingdais.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: 'admin@sharingdais.com',
+    password: 'Sharing654321@#'
+  }  
 
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = true
