@@ -2,6 +2,9 @@
 @media screen and (min-width:1280px) {.custom_margin{ margin: 0% 0% 0% -6%;}}}
 </style>
 <script>
+$(document).ready(function() {
+    $("html, body").animate({ scrollTop: 450 }, 1000);
+});
   function check_user(phone, email, user_id, location_id, food_type_id, post_requirement_id, seeker_provider){
 <% if current_user %>
       var seeker_status = seeker_provider;

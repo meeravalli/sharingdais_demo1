@@ -1,4 +1,7 @@
 <script>
+$(document).ready(function() {
+    $("html, body").animate({ scrollTop: 450 }, 1000);
+});
   function check_user(phone, email, user_id, location_id, book_post_requirement_id, seeker_provider){
 <% if current_user %>
       var seeker_status = seeker_provider;
