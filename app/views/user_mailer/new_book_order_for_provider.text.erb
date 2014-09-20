@@ -3,8 +3,7 @@ Welcome to sharingdais.com, <%= @user.name %>
  
 You have received new order, the order details below:
 
-Location: <%= @message.location %>
-
+Location: <%= @location.first.location_name %>
 For more details check your <%= @url%> Inbox
 
 To login to the site, just follow this link: <%= @login_url %>
