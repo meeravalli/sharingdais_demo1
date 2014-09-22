@@ -1,0 +1,76 @@
+<h3 class="heading_content">Sharingdais User Orders</h3>
+<br>
+<div class="display padding_five">
+         <!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="float:left">
+  <li class="active"><a href="#book" role="tab" data-toggle="tab">Food Oders</a></li>
+  <li><a href="#food" role="tab" data-toggle="tab">BooK Orders</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="book">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Fone No</th>
+                        <th>Provider type</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @order_food.each do |o| %>
+					<tr>
+						<td><%= o.user.name %></td>
+						<td><%= o.user.phone_no %></td>	
+						<td><%= o.provider.provider_type %></td>
+						<td><%= o.post_requirement.details %></td>
+						<td><%= o.order_date %></td>								
+					</tr>
+					<% end %>            
+                </tbody>
+            </table>
+            <div class="pagination">
+  				<%= will_paginate @order_food %>
+        	</div>
+        </div>
+  </div>
+
+
+  <div class="tab-pane" id="food">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Phone No</th>
+                        <th></th>
+                        <th>Discription</th>
+                        <th>Date</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    
+                    <% @order_food.each do |ob| %>
+					<tr>
+						<td><%= ob.user.name %></td>
+						<td><%= ob.user.phone_no %></td>	
+						<td><%#= ob.provider.provider_type %></td>
+						<td><%#= ob.book_post_requirement_id %></td>
+						<td><%= ob.order_date %></td>								
+					</tr>
+					<% end %>    
+                   
+                    
+                </tbody>
+            </table>
+                <div class="pagination">
+      <%= will_paginate @order_book%>
+            </div>
+        </div>
+  </div>
+</div> 
+  </div>			                  

@@ -16,6 +16,11 @@ before_filter :ensure_admin
     @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
   end
 
+  def user_orders
+    @order_food=Order.where("order_date=?",Date.today).order("order_date DESC").paginate(:page => params[:page])
+    @order_book=BookOrder.where("order_date=?",Date.today).order("created_at DESC").paginate(:page => params[:page])
+  end
+
   def exl
     @users = User.where(:admin => false).order("created_at DESC")
     respond_to do |format|

@@ -112,7 +112,7 @@
         	<li><a href="/admins"<% if params[:action] == "index" %>class="active"<%end%>>Users</a></li>
         	<li><a href="/post_requirements"<% if params[:action] == "post_requirements" %>class="active"<%end%>>Post Requirements</a></li>
         	<li><a href="/list_requirements"<% if params[:action] == "list_requirements" %>class="active"<%end%>>List Requirements</a></li>
-        	<li><a href="javascript:void(0)">User Orders</a></li>
+        	<li><a href="/user_orders" <% if params[:action] == "user_orders" %>class="active"<%end%>>User Orders</a></li>
         </ul>
     </div>
     <div class="content">
@@ -142,7 +142,7 @@
 			<%end%>
       </div>
     </div>
-    <p href="#" class="back-to-top"><img src="/assets/backtop.png"></a>
+    <a href="#" class="back-to-top"><img src="/assets/backtop.png"></a>
     <script>            
       jQuery(document).ready(function() {
         var offset = 220;
