@@ -1,9 +1,9 @@
-<h3 class="heading_content">Sharingdais Post Requirements</h3><br>
+<h3 class="heading_content">Sharingdais List Requirements</h3><br>
   <div class="display padding_five">
          <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" style="float:left">
-  <li class="active"><a href="#book" role="tab" data-toggle="tab">Book Post Requirements</a></li>
-  <li><a href="#food" role="tab" data-toggle="tab">Food Post Requirements</a></li>
+  <li class="active"><a href="#book" role="tab" data-toggle="tab">Book List Requirements</a></li>
+  <li><a href="#food" role="tab" data-toggle="tab">Food List Requirements</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -25,10 +25,18 @@
                  <tbody>
                     <% @food_orders.each do |f| %>
                     <tr>
-                        <td><%= f.user.name %></td>
+                        <td>
+                            <%= f.user.name %>
+                        </td>
                         <td><%= f.location.location_name %></td>
                         <td><%= f.food_type.name %></td>
-                        <td><%= f.region.name %></a></td>
+                        <td>
+                            <% if !f.region.nil? %>
+                                <%= f.region.name %>
+                            <% else %>
+                                Not Avaliabel
+                            <% end %>
+                        </td>
                         <td><%= f.budget %></td>
                         <td><%= f.details %></td>
                         <td><%= f.created_at.strftime("%b %d, %Y") %></td>

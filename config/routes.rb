@@ -71,6 +71,7 @@ Sharingdasiss::Application.routes.draw do
   post "edit_user_profile" => "admins#edit_user_profile"
   get "exl" => "admins#exl"
   get "post_requirements" => "admins#post_requirements"
+  get "list_requirements" => "admins#list_requirements"
 
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"

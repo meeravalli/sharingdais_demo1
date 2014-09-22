@@ -8,7 +8,12 @@ before_filter :ensure_admin
 	end
 
   def post_requirements
-    @orders = Order.all#.order("order_date DESC").paginate(:page => params[:page])
+    @food_orders = PostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
+    @book_orders = BookPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
+  end
+  def list_requirements
+    @food_orders = PostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
+    @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
   end
 
   def exl

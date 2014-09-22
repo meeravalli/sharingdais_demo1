@@ -109,9 +109,9 @@
 			<div class="main_page">
 	    <div class="side_menu">
     	<ul>
-        	<li><a href="/admins" class="active">Users</a></li>
-        	<li><a href="/post_requirements">Post Requirements</a></li>
-        	<li><a href="javascript:void(0)">List Requirements</a></li>
+        	<li><a href="/admins"<% if params[:action] == "index" %>class="active"<%end%>>Users</a></li>
+        	<li><a href="/post_requirements"<% if params[:action] == "post_requirements" %>class="active"<%end%>>Post Requirements</a></li>
+        	<li><a href="/list_requirements"<% if params[:action] == "list_requirements" %>class="active"<%end%>>List Requirements</a></li>
         	<li><a href="javascript:void(0)">User Orders</a></li>
         </ul>
     </div>
@@ -142,7 +142,7 @@
 			<%end%>
       </div>
     </div>
-    <a href="#" class="back-to-top"><img src="/assets/backtop.png"></a>
+    <p href="#" class="back-to-top"><img src="/assets/backtop.png"></a>
     <script>            
       jQuery(document).ready(function() {
         var offset = 220;
