@@ -1,4 +1,4 @@
-<%= javascript_include_tag "http://code.jquery.com/jquery-1.7.1.min.js" %>
+<%= javascript_include_tag "/assets/jquery.min.js" %>
 <style type="text/css">
 	@media screen and (max-width:360px) {#feedback{display: none;}}
 </style>
@@ -62,8 +62,9 @@
 #feedback h2{
 	text-align:center;
 	color: #C3A632;
-	/*text-shadow:0.2px 0.3px 0.3px #000;*/
+	text-shadow:0.2px 0.3px 0.3px #000;
 	font-size:22px;
+	margin: 8px;
 }
 .loader{
 	position: absolute;
@@ -124,4 +125,10 @@
 			$.ajax({type: 'POST', url: '/send_feedback',data: ({'name': $("#name").val(), 'email' : $("#email").val(), 'phon' : $("#phon").val(), 'message' : $("#message").val() }),succes: function(){ $(".ajax_load").hide() } 	})
 				}
 			});
+		$("#feedback").click(function(e){
+		    e.stopPropagation();
+		});
+		$(document).click(function(){
+		    $("#feedback").animate({left:"-362px"});
+		});
 </script>
