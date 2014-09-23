@@ -85,4 +85,14 @@ class UserMailer < ActionMailer::Base
     p @message
     mail(:to => seeker.email, :subject => "Contact Information" )
   end
+
+  def feed_email(data)
+    @data = data
+    @name = @data[:name]
+    @email = @data[:email]
+    @phon = @data[:phon]
+    @message = @data[:message]
+    #mail(to: "support@sharingdais.com")
+    mail(to: "rox.shahid@gmail.com")
+  end
 end

@@ -76,6 +76,7 @@ Sharingdasiss::Application.routes.draw do
 
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
+  post "send_feedback" => "book_search#feedback"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"

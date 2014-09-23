@@ -1,0 +1,125 @@
+<%= javascript_include_tag "http://code.jquery.com/jquery-1.7.1.min.js" %>
+<style type="text/css">
+	@media screen and (max-width:360px) {#feedback{display: none;}}
+</style>
+<style type="text/css">
+#feedback{
+	position: fixed;
+	top:30%;
+	left:-362px;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+#feedback form{
+	float: left;
+	border: 1px solid #999;
+	padding: 10px;
+	border-radius:5px;
+}
+#feedback form label{
+	display: block;
+	float: left;
+	text-align:right;
+	margin-right:20px;
+	width:70px;
+	font-weight:bold;
+	color: #019AC6;
+	font-size:14px;
+}
+#feedback a{
+	background:url("/assets/feedback-buttons.png")  no-repeat center left transparent;
+	display: block;
+	width:25px;
+	height:112px;
+	float: left;
+	text-indent:-9999em;
+	position: absolute;
+	top:120px;
+	right:-25px;
+}
+#feedback a:hover{
+	background-position: center right;
+}
+#feedback form .btn{
+	float: right;
+	background:url("/assets/send.png")  no-repeat 0px 0px transparent;
+	text-indent:-9999em;
+	width:80px;
+	height:28px;
+	border:none;
+
+}
+#feedback form textarea{
+	width:250px;
+	height:140px;
+	/*border: 1px solid #019AC6;*/
+}
+#feedback form input[type="text"]{
+	width:250px;
+	height:30px;
+	/*border: 1px solid #019AC6;*/
+}
+#feedback h2{
+	text-align:center;
+	color: #019AC6;
+	/*text-shadow:0.2px 0.3px 0.3px #000;*/
+	font-size:22px;
+}
+.loader{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+</style>
+
+<div class="modal-backdrop fade in ajax_load"><div class="loader"><img style="width:100px;" src="/assets/ajax-loader.gif"></div></div>
+<div id="feedback">
+	<form>
+		<h2>We Love Emails, Do you?</h2>
+		<div class="form-group"><label>Name: </label><input class="form-control" id="name" type="text" /><br>
+			<span id="name_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Name</span>
+		</div>
+		<div class="form-group"><label>Email: </label><input class="form-control" id="email" type="text" /><br>
+			<span id="email_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Email</span>
+		</div>
+		<div class="form-group"><label>Phone: </label><input class="form-control" id="phon" type="text" /><br>
+			<span id="phon_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Phone no</span>
+		</div>
+		<div class="form-group"><label>Message: </label><textarea id="message"></textarea><br>
+			<span id="message_errore" style="color:rgb(240, 78, 78);float:right;display:none">Please Enter Message</span>
+		</div>
+		<div class="form-group"><input type="button" id="send" value="Send" class="btn"/></div>
+	</form><br>
+	<a href="#" class="pull_feedback" title="Click to leave feedback">Feedback</a>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".ajax_load").hide();		
+		jQuery(".pull_feedback").toggle(function(){
+				jQuery("#feedback").animate({left:"0px"});
+				return false;
+			},
+			function(){
+				jQuery("#feedback").animate({left:"-362px"});	
+				return false;
+			}
+		); //toggle
+	}); //document.ready
+	$("#send").click(function(){
+		if ($("#name").val() == ""){
+			$("#name_errore").show()
+		}else if($("#email").val() == ""){
+			$("#name_errore").hide()
+			$("#email_errore").show()
+		}else if($("#phon").val() == ""){
+			$("#email_errore").hide()
+			$("#phon_errore").show()
+		}else if($("#message").val() == ""){
+			$("#phon_errore").hide()
+			$("#message_errore").show()
+		}else{	
+			$(".ajax_load").show();		
+			$.ajax({type: 'POST', url: '/send_feedback',data: ({'name': $("#name").val(), 'email' : $("#email").val(), 'phon' : $("#phon").val(), 'message' : $("#message").val() }),succes: function(){ $(".ajax_load").hide() } 	})
+				}
+			});
+</script>

@@ -88,4 +88,16 @@ class BookSearchController < ApplicationController
     @search_results = BookPostRequirement.where("location_id=? and seeker_provider=?",params[:id],@prm).paginate(:page => params[:page], :per_page => 25)
   end
 
+  def feedback
+    @data = {
+      :name => params[:name], 
+      :email => params[:email],
+      :phon => params[:phon], 
+      :message => params[:message]
+    }
+    UserMailer.feed_email(@data).deliver
+    respond_to do |format|
+      format.js
+    end
+  end
 end
