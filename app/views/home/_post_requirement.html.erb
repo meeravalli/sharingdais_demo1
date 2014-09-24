@@ -1,17 +1,20 @@
 <div class="display">
-  <h3 class="prf_title">Your Food Requirements</h3>
+  <h3 class="prf_title">Your Food Sharing Details</h3>
   <div class="table-responsive src_res_desktop">
     <table class="table table-hover">
       <thead class="heading">
         <tr>
           <th>#</th>
           <th>City</th>
-          <th>Locality </th>
-          <th> Service </th>
+          <th>Locality</th>
+          <th>Post as</th>
+          <!--<th> Service </th>
           <th> I am looking for/I am </th>
-          <th>Food Type</th>
+          <th>Food Type</th>-->
           <th>Meal Type </th>
-          <th>Region Specific </th>
+          <th>Price </th>
+          <!--<th>Region Specific </th>-->
+          <th>Description</th>
           <th></th>
           <th></th>
         </tr>
@@ -24,11 +27,20 @@
           <td><%= my_count %></td>
           <td><%= p.city.city_name %></td>
           <td><%= p.location.location_name%></td>
-          <td><%= p.service.service_type%></td>
-          <td><%= p.provider.provider_type%></td>
-          <td><%= p.food_type.name%></td>
+          <td>
+            <% if p.seeker_provider == true %>
+              Provider
+            <% else %>
+              Seeker              
+            <% end %>
+          </td>
+          <!--<td><%#= p.service.service_type%></td>
+          <td><%#= p.provider.provider_type%></td>
+          <td><%#= p.food_type.name%></td>-->
           <td><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></td>
-          <td><%= p.region.nil? ? "N/A" : p.region.name%></td>
+          <td><%= p.budget%></td>
+          <!--<td><%#= p.region.nil? ? "N/A" : p.region.name%></td>-->
+          <td><%= p.details%></td>
           <% if p.seeker_provider %>
             <td><%= link_to 'Edit', edit_post_requirement_sharing_path(p)%></td>
           <%else%>
@@ -61,74 +73,69 @@
           <div class="data_title">Locality</div>
           <div class="data_col"><%= p.location.location_name%></div>
         </div>
-        <div class="data_row">
+        <!--<div class="data_row">
           <div class="data_title">Service</div>
-          <div class="data_col"><%= p.service.service_type%></div>
-</div>
-<div class="data_row">
-<div class="data_title">
-I am looking for/I am
-</div>
-<div class="data_col">
-<%= p.provider.provider_type%>
-</div>
-</div>
-<div class="data_row">
-<div class="data_title">
-Food Type	
-</div>
-<div class="data_col">
-<%= p.food_type.name%>
-</div>
-</div>
-<div class="data_row">
-<div class="data_title">
-Meal Type 
-</div>
-<div class="data_col">
-<%= p.meal_type.nil? ? "N/A" : p.meal_type.name%>
-</div>
-</div>
-<div class="data_row">
-<div class="data_title">
-Region Specific 
-</div>
-<div class="data_col">
-<%= p.region.nil? ? "N/A" : p.region.name%>
-</div>
-</div>
-<div class="data_row">
-<div class="data_title">
-</div>
-<div class="data_col">
-<% if p.seeker_provider %>
-<%= link_to 'Edit', edit_post_requirement_sharing_path(p)%>
-<%else%>
-<%= link_to 'Edit', edit_list_availability_sharing_path(p)%>
-<%end%>
-</div>
-</div>
-<div class="data_row">
-<div class="data_title">
-</div>
-<div class="data_col">
-<%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
-</div>
-</div>
-<%end%>
-<%else%>
-<div class="res_data">
-<div class="data_row">
-<div class="data_title">
-Status
-</div>
-<div class="data_col">
-You don't have any food requirement
-</div>
-</div>
-</div>
-<%end%>
+          <div class="data_col"><%#= p.service.service_type%></div>
+        </div>-->
+        <div class="data_row">
+          <div class="data_title">Post as</div>
+          <div class="data_col">
+            <% if p.seeker_provider == true %>
+              Provider
+            <% else %>
+              Seeker              
+            <% end %></div>
+        </div>
+        <!--<div class="data_row">
+          <div class="data_title">I am looking for/I am</div>
+          <div class="data_col"><%#= p.provider.provider_type%></div>
+        </div>
+        <div class="data_row">
+          <div class="data_title">Food Type</div>
+          <div class="data_col"><%#= p.food_type.name%></div>
+        </div>-->
+        <div class="data_row">
+          <div class="data_title">Meal Type </div>
+          <div class="data_col"><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></div>
+        </div>
+        <div class="data_row">
+          <div class="data_title">Price </div>
+          <div class="data_col"><%= p.budget%></div>
+        </div>
+        <!--<div class="data_row">
+          <div class="data_title">Region Specific </div>
+          <div class="data_col"><%#= p.region.nil? ? "N/A" : p.region.name%></div>
+        </div>-->
+        <div class="data_row">
+          <div class="data_title">Description </div>
+          <div class="data_col"><%= p.details%></div>
+        </div>
+        <div class="data_row">
+          <div class="data_title"></div>
+          <div class="data_col">
+            <% if p.seeker_provider %>
+              <%= link_to 'Edit', edit_post_requirement_sharing_path(p)%>
+            <%else%>
+              <%= link_to 'Edit', edit_list_availability_sharing_path(p)%>
+            <%end%>
+          </div>
+        </div>
+        <div class="data_row">
+          <div class="data_title"></div>
+          <div class="data_col">
+            <%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  <%else%>
+  <div class="res_data">
+    <div class="data_row">
+      <div class="data_title">Status</div>
+      <div class="data_col">You don't have any food requirement</div>
+    </div>
+  </div>
+  <%end%>
 </div>
 </div>
 
@@ -157,8 +164,8 @@ You don't have any food requirement
 
 
 
-
-    <div class="display">
+<!--
+<div class="display">
 		<h3 class="prf_title">Your Food Orders</h3>
       <div class="table-responsive src_res_desktop">
         <table class="table table-hover">
@@ -176,46 +183,46 @@ You don't have any food requirement
 						<tr></tr>
           </thead>
          <tbody>
-					<% count = 1 %>
-					<% if !@activities.empty? %>
-            <% @activities.each do |a| %>
-              <% @user = find_user(a.contact_id) %>
+					<%# count = 1 %>
+					<%# if !@activities.empty? %>
+            <%# @activities.each do |a| %>
+              <%# @user = find_user(a.contact_id) %>
               <tr>
-                <td><%= count %></td>
-                <td><%= find_service %></td>
-                <td><%= a.seeked_shared ? "Seeked" : "Shared"%></td>
-                <td><%= @user.name%></td>
-                <td><%= @user.address%></td>
-                <td><%= @user.phone_no%></td>
-                <td><%= @user.email%> </td>
-                <% if a.order.order_cancel.nil? %>
-                  <% negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
-                  <td><%= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %></td>
-                <% else %>
+                <td><%#= count %></td>
+                <td><%#= find_service %></td>
+                <td><%#= a.seeked_shared ? "Seeked" : "Shared"%></td>
+                <td><%#= @user.name%></td>
+                <td><%#= @user.address%></td>
+                <td><%#= @user.phone_no%></td>
+                <td><%#= @user.email%> </td>
+                <%# if a.order.order_cancel.nil? %>
+                  <%# negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+                  <td><%#= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %></td>
+                <%# else %>
                   <td>Cancelled</td>
-                <% end %>
+                <%# end %>
               </tr>
-					<% count +=1 %>
-            <% end %>
-						<% else%>
+					<%# count +=1 %>
+            <%# end %>
+						<%# else%>
 						<tr> 
 						<td colspan="8" style="text-align:center">You don't have any food order </td>
 						</tr>
-						<%end%>
+						<%#end%>
           </tbody>  
         </table>
       </div>
 		<div class="srch_res_mob">
-			<% if !@activities.empty? %>
-			<% @activities.each do |a| %>
-			<% @user = find_user(a.contact_id) %>
+			<%# if !@activities.empty? %>
+			<%# @activities.each do |a| %>
+			<%# @user = find_user(a.contact_id) %>
                             	<div class="res_data">
                                 	<div class="data_row">
                                     	<div class="data_title">
                                         	Category
                                         </div>
                                         <div class="data_col">
-                                        	<%= find_service %>
+                                        	<%#= find_service %>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -223,7 +230,7 @@ You don't have any food requirement
                                         	Seeked / Shared 
                                         </div>
                                         <div class="data_col">
-                                        	<%= a.seeked_shared ? "Seeked" : "Shared"%>
+                                        	<%#= a.seeked_shared ? "Seeked" : "Shared"%>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -231,7 +238,7 @@ You don't have any food requirement
                                         	Name of the other party 
                                         </div>
                                         <div class="data_col">
-                                        	<%= @user.name%>
+                                        	<%#= @user.name%>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -239,7 +246,7 @@ You don't have any food requirement
                                         	Address of Another Party 
                                         </div>
                                         <div class="data_col">
-                                        	<%= @user.address%>
+                                        	<%#= @user.address%>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -247,7 +254,7 @@ You don't have any food requirement
                                         	Phone of Another Party 	
                                         </div>
                                         <div class="data_col">
-                                        	<%= @user.phone_no%>
+                                        	<%#= @user.phone_no%>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -255,7 +262,7 @@ You don't have any food requirement
                                         	Email of Another Party 
                                         </div>
                                         <div class="data_col">
-                                        	<%= @user.email%>
+                                        	<%#= @user.email%>
                                         </div>
                                     </div>
                                     <div class="data_row">
@@ -263,17 +270,17 @@ You don't have any food requirement
                                         	Status 
                                         </div>
                                         <div class="data_col">
-																				<% if a.order.order_cancel.nil? %>
-                                        	<% negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
-																					<%= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %>
-																					<%else%>
+																				<%# if a.order.order_cancel.nil? %>
+                                        	<%# negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+																					<%#= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %>
+																					<%#else%>
 																					Cancelled
-																					<%end%>
+																					<%#end%>
                                         </div>
                                     </div>
                                 </div>
-	     <%end%>
-			 <%else%>
+	     <%#end%>
+			 <%#else%>
 			 <div class="res_data">
 			 <div class="data_row">
                                     	<div class="data_title">
@@ -284,6 +291,7 @@ You don't have any food requirement
                                         </div>
 			 </div>
              </div>
-			 <%end%>
+			 <%#end%>
 			</div>
 </div>
+-->

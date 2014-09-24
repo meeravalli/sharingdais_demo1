@@ -1,4 +1,7 @@
 <style type="text/css">
+	@media screen and (max-width:360px) {#feedback{display: none;}}
+</style>
+<style type="text/css">
 #feedback{
 	position: fixed;
 	top:30%;
@@ -68,6 +71,12 @@
 	left: 45%;
 	z-index: 9999;
 }
+.img_cls{
+	position: absolute;
+	right: 10px;
+	top: 11px;
+	cursor: pointer;
+}
 </style>
 
 <div class="modal-backdrop fade in ajax_load"></div>
@@ -75,6 +84,7 @@
 <div id="feedback">
 	<form>
 		<h2>We like to Listen from You!</h2>
+		<img class="img_cls" src="/assets/close.png">
 		<div class="form-group"><label>Name: </label><input class="form-control" id="name" type="text" /><br>
 			<span id="name_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Name</span>
 		</div>
@@ -89,5 +99,5 @@
 		</div>
 		<div class="form-group"><input type="button" id="send" value="Send" class="btn btn-warning"/></div>
 	</form><br>
-	<a href="#" class="pull_feedback " title="Click to leave feedback">Feedback</a>
+	<a href="javascript:void(0)" class="pull_feedback " title="Click to leave feedback">Feedback</a>
 </div>

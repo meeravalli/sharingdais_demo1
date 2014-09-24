@@ -153,9 +153,13 @@
   $(document).click(function(){
     $("#feedback").animate({left:"-362px"});
   });
+  $(".img_cls").click(function(){
+    $("#feedback").animate({left:"-362px"});
+  });
   $("#feedback").click(function(e){
     e.stopPropagation();
   });
+
   $("#send").click(function(){
     if ($("#name").val() == ""){
       $("#name_errore").show()
