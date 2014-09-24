@@ -1,7 +1,3 @@
-<%= javascript_include_tag "/assets/jquery.min.js" %>
-<style type="text/css">
-	@media screen and (max-width:360px) {#feedback{display: none;}}
-</style>
 <style type="text/css">
 #feedback{
 	position: fixed;
@@ -95,40 +91,3 @@
 	</form><br>
 	<a href="#" class="pull_feedback " title="Click to leave feedback">Feedback</a>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".ajax_load").hide();		
-		jQuery(".pull_feedback").toggle(function(){
-				jQuery("#feedback").animate({left:"0px"});
-				return false;
-			},
-			function(){
-				jQuery("#feedback").animate({left:"-362px"});	
-				return false;
-			}
-		); //toggle
-	}); //document.ready
-	$("#send").click(function(){
-		if ($("#name").val() == ""){
-			$("#name_errore").show()
-		}else if($("#email").val() == ""){
-			$("#name_errore").hide()
-			$("#email_errore").show()
-		}else if($("#phon").val() == ""){
-			$("#email_errore").hide()
-			$("#phon_errore").show()
-		}else if($("#message").val() == ""){
-			$("#phon_errore").hide()
-			$("#message_errore").show()
-		}else{	
-			$(".ajax_load").show();		
-			$.ajax({type: 'POST', url: '/send_feedback',data: ({'name': $("#name").val(), 'email' : $("#email").val(), 'phon' : $("#phon").val(), 'message' : $("#message").val() }),succes: function(){ $(".ajax_load").hide() } 	})
-				}
-			});
-		$("#feedback").click(function(e){
-		    e.stopPropagation();
-		});
-		$(document).click(function(){
-		    $("#feedback").animate({left:"-362px"});
-		});
-</script>

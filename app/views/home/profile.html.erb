@@ -53,10 +53,10 @@
               <div><%= @user.phone_no %></div>
             </div>
           </div>
+        <div class="profile_edit">
+          <%= link_to 'Edit profile', edit_profile_home_path(@user), :class=>"button" %>
         </div>
-				<div class="profile_edit">
-					<%= link_to 'Edit profile', edit_profile_home_path(@user), :class=>"button" %>
-				</div>
+        </div>
       </div>
     </div>
 

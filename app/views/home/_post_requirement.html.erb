@@ -1,148 +1,163 @@
 <div class="display">
-<h3 class="prf_title">Your Food Requirements</h3>
-	<div class="table-responsive src_res_desktop">
-	 <table class="table table-hover">
-          <thead class="heading">
-            <tr>
-              <th>#</th>
-              <th>City</th>
-              <th>Locality </th>
-              <th> Service </th>
-              <th> I am looking for/I am </th>
-              <th>Food Type</th>
-              <th>Meal Type </th>
-              <th>Region Specific </th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-         <tbody>
-            <% my_count = 1 %>
-            <% if !@post_requirements.empty? %>
-            <% @post_requirements.each do |p| %>
-						<tr>
-                <td><%= my_count %></td>
-                <td><%= p.city.city_name %></td>
-                <td><%= p.location.location_name%></td>
-                <td><%= p.service.service_type%></td>
-                <td><%= p.provider.provider_type%></td>
-                <td><%= p.food_type.name%></td>
-                <td><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></td>
-                <td><%= p.region.nil? ? "N/A" : p.region.name%></td>
-								<% if p.seeker_provider %>
-                <td><%= link_to 'Edit', edit_post_requirement_sharing_path(p)%></td>
-								<%else%>
-								<td><%= link_to 'Edit', edit_list_availability_sharing_path(p)%></td>
-								<%end%>
-								<td><%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-					  </tr>
-              <% my_count +=1 %>
-            <% end %>
-            <% else%>
-                <tr> 
-                    <td colspan="8" style="text-align:center">You don't have any food requirements </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <%end%>
-          </tbody>  
-        </table>
-	</div>
-
-    <div class="srch_res_mob">
+  <h3 class="prf_title">Your Food Requirements</h3>
+  <div class="table-responsive src_res_desktop">
+    <table class="table table-hover">
+      <thead class="heading">
+        <tr>
+          <th>#</th>
+          <th>City</th>
+          <th>Locality </th>
+          <th> Service </th>
+          <th> I am looking for/I am </th>
+          <th>Food Type</th>
+          <th>Meal Type </th>
+          <th>Region Specific </th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+    <tbody>
+    <% my_count = 1 %>
     <% if !@post_requirements.empty? %>
-	<% @post_requirements.each do |p| %>
-                            	<div class="res_data">
-                                	<div class="data_row">
-                                    	<div class="data_title">
-                                        	City
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.city.city_name %>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	Locality
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.location.location_name%>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	Service
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.service.service_type%>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	I am looking for/I am
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.provider.provider_type%>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	Food Type	
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.food_type.name%>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	Meal Type 
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.meal_type.nil? ? "N/A" : p.meal_type.name%>
-                                        </div>
-                                    </div>
-                                    <div class="data_row">
-                                    	<div class="data_title">
-                                        	Region Specific 
-                                        </div>
-                                        <div class="data_col">
-                                        	<%= p.region.nil? ? "N/A" : p.region.name%>
-                                        </div>
-                                    </div>
-																		<div class="data_row">
-                                    	<div class="data_title">
-																			</div>
-                                        <div class="data_col">
-																				<% if p.seeker_provider %>
-                                        	<%= link_to 'Edit', edit_post_requirement_sharing_path(p)%>
-																				<%else%>
-																				<%= link_to 'Edit', edit_list_availability_sharing_path(p)%>
-																				<%end%>
-                                        </div>
-                                    </div>
-																		<div class="data_row">
-                                    	<div class="data_title">
-																			</div>
-                                        <div class="data_col">
-                                        	<%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
-                                        </div>
-                                    </div>
-                                </div>
-	<%end%>
-    <%else%>
-             <div class="res_data">
-             <div class="data_row">
-                                        <div class="data_title">
-                                            Status
-                                        </div>
-                                        <div class="data_col">
-                                            You don't have any food requirement
-                                        </div>
-             </div>
-            </div>
-             <%end%>
+      <% @post_requirements.each do |p| %>
+        <tr>
+          <td><%= my_count %></td>
+          <td><%= p.city.city_name %></td>
+          <td><%= p.location.location_name%></td>
+          <td><%= p.service.service_type%></td>
+          <td><%= p.provider.provider_type%></td>
+          <td><%= p.food_type.name%></td>
+          <td><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></td>
+          <td><%= p.region.nil? ? "N/A" : p.region.name%></td>
+          <% if p.seeker_provider %>
+            <td><%= link_to 'Edit', edit_post_requirement_sharing_path(p)%></td>
+          <%else%>
+            <td><%= link_to 'Edit', edit_list_availability_sharing_path(p)%></td>
+          <%end%>
+          <td><%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% my_count +=1 %>
+      <% end %>
+    <% else%>
+      <tr> 
+        <td colspan="8" style="text-align:center">You don't have any food requirements</td>
+        <td></td>
+        <td></td>
+      </tr>
+    <%end%>
+    </tbody>  
+  </table>
+</div>
+
+<div class="srch_res_mob">
+  <% if !@post_requirements.empty? %>
+    <% @post_requirements.each do |p| %>
+      <div class="res_data">
+        <div class="data_row">
+          <div class="data_title">City</div>
+          <div class="data_col"><%= p.city.city_name %></div>
+        </div>
+        <div class="data_row">
+          <div class="data_title">Locality</div>
+          <div class="data_col"><%= p.location.location_name%></div>
+        </div>
+        <div class="data_row">
+          <div class="data_title">Service</div>
+          <div class="data_col"><%= p.service.service_type%></div>
+</div>
+<div class="data_row">
+<div class="data_title">
+I am looking for/I am
+</div>
+<div class="data_col">
+<%= p.provider.provider_type%>
 </div>
 </div>
+<div class="data_row">
+<div class="data_title">
+Food Type	
+</div>
+<div class="data_col">
+<%= p.food_type.name%>
+</div>
+</div>
+<div class="data_row">
+<div class="data_title">
+Meal Type 
+</div>
+<div class="data_col">
+<%= p.meal_type.nil? ? "N/A" : p.meal_type.name%>
+</div>
+</div>
+<div class="data_row">
+<div class="data_title">
+Region Specific 
+</div>
+<div class="data_col">
+<%= p.region.nil? ? "N/A" : p.region.name%>
+</div>
+</div>
+<div class="data_row">
+<div class="data_title">
+</div>
+<div class="data_col">
+<% if p.seeker_provider %>
+<%= link_to 'Edit', edit_post_requirement_sharing_path(p)%>
+<%else%>
+<%= link_to 'Edit', edit_list_availability_sharing_path(p)%>
+<%end%>
+</div>
+</div>
+<div class="data_row">
+<div class="data_title">
+</div>
+<div class="data_col">
+<%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+</div>
+</div>
+<%end%>
+<%else%>
+<div class="res_data">
+<div class="data_row">
+<div class="data_title">
+Status
+</div>
+<div class="data_col">
+You don't have any food requirement
+</div>
+</div>
+</div>
+<%end%>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="display">
 		<h3 class="prf_title">Your Food Orders</h3>
       <div class="table-responsive src_res_desktop">

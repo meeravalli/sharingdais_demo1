@@ -95,6 +95,7 @@
       background-color: rgba(135, 135, 135, 0.50);
     } 
   </style>
+
   </head>
   <body>
     <div class="container-fluid">
@@ -142,6 +143,37 @@
 			<%end%>
       </div>
     </div>
+    <%= render :partial => "layouts/feedback" %>
+    <script type="text/javascript">
+/* For FeedBack*/
+  $(".ajax_load").hide();
+  $(".pull_feedback").click(function(){
+    $("#feedback").animate({left:"0px"});
+  });
+  $(document).click(function(){
+    $("#feedback").animate({left:"-362px"});
+  });
+  $("#feedback").click(function(e){
+    e.stopPropagation();
+  });
+  $("#send").click(function(){
+    if ($("#name").val() == ""){
+      $("#name_errore").show()
+    }else if($("#email").val() == ""){
+      $("#name_errore").hide()
+      $("#email_errore").show()
+    }else if($("#phon").val() == ""){
+      $("#email_errore").hide()
+      $("#phon_errore").show()
+    }else if($("#message").val() == ""){
+      $("#phon_errore").hide()
+      $("#message_errore").show()
+    }else{  
+      $(".ajax_load").show();   
+      $.ajax({type: 'POST', url: '/send_feedback',data: ({'name': $("#name").val(), 'email' : $("#email").val(), 'phon' : $("#phon").val(), 'message' : $("#message").val() }),succes: function(){ $(".ajax_load").hide() }   })
+        }
+      });
+</script>
     <a href="#" class="back-to-top"><img src="/assets/backtop.png"></a>
     <script>            
       jQuery(document).ready(function() {
@@ -161,7 +193,6 @@
         })
       });
     </script>
-    <%#= render :partial => "layouts/feedback" %>
   </body>
 </html>
 
