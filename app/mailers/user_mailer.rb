@@ -92,6 +92,6 @@ class UserMailer < ActionMailer::Base
     @email = @data[:email]
     @phon = @data[:phon]
     @message = @data[:message]
-    mail(to: "support@sharingdais.com", :subject => 'Feed back')
+    mail(to: "support@sharingdais.com", :subject => 'Feedback Mail')
   end
 end
