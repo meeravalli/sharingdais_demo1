@@ -3,7 +3,7 @@ class BookMessagesController < ApplicationController
 
   def create
     location = Location.find(params[:location_id])
-    @negotiate = BookNegotiate.create(:book_post_requirement_id => params[:book_post_requirement_id], :user_id => current_user.id).valid?
+    @negotiate = BookNegotiate.create(:book_post_requirement_id => params[:book_post_requirement_id], :user_id => current_user.id, :nego_id => params[:user_id]).valid?
     if @negotiate
       message = BookMessage.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => params[:user_id], :book_post_requirement_id => params[:book_post_requirement_id], :location_id => params[:location_id], :read => false, :order_status => true, :accepted => false, :trashed => false)
       provider = User.find(params[:user_id])

@@ -1,0 +1,435 @@
+<div class="display">
+  <h3 class="prf_title">Rate Your Friends For Book</h3>
+  <div class="table-responsive src_res_desktop">
+    <table class="table table-hover">
+      <thead class="heading">
+        <tr>
+          <th>#</th>
+          <th>You are Provider / Seeker </th>
+          <th>Name</th>
+          <th>Locality</th>
+          <th>Phone No.</th>
+          <th>Email Id</th>
+          <th>Rate</th>
+          <th></th>
+        </tr>
+      </thead>
+    <tbody>
+    <%if !@negotiatn_book.blank? %>
+    <% @count = 1 %>
+    <% @negotiatn_book.each do |f| %> 
+    <% if f.user_id.to_s == current_user.id.to_s %> 
+    <%
+    @rate_b1=rate_book(f.book_post_requirement.user.id,1,f.book_post_requirement_id).count()
+    @rate_b2=rate_book(f.book_post_requirement.user.id,2,f.book_post_requirement_id).count()
+    @rate_b3=rate_book(f.book_post_requirement.user.id,3,f.book_post_requirement_id).count()
+    @rate_b4=rate_book(f.book_post_requirement.user.id,4,f.book_post_requirement_id).count()
+    @rate_b5=rate_book(f.book_post_requirement.user.id,5,f.book_post_requirement_id).count()
+    sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
+    total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
+    if sum_b == 0
+    @srcb1 = "/assets/reviews/1str.png"
+    @srcb2 = "/assets/reviews/1str.png"
+    @srcb3 = "/assets/reviews/1str.png"
+    @srcb4 = "/assets/reviews/1str.png"
+    @srcb5 = "/assets/reviews/1str.png"
+    else
+    avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
+    if avrg_b >= 1
+    @srcb1 = "/assets/reviews/2str.png"
+    else
+    @srcb1 = "/assets/reviews/1str.png"
+    end
+    if avrg_b >= 1.6
+    @srcb2 = "/assets/reviews/2str.png"
+    else
+    @srcb2 = "/assets/reviews/1str.png"
+    end
+    if avrg_b >= 2.6
+    @srcb3 = "/assets/reviews/2str.png"
+    else
+    @srcb3 = "/assets/reviews/1str.png"
+    end
+    if avrg_b >= 3.6
+    @srcb4 = "/assets/reviews/2str.png"
+    else
+    @srcb4 = "/assets/reviews/1str.png"
+    end
+    if avrg_b >= 4.6
+    @srcb5 = "/assets/reviews/2str.png"
+    else
+    @srcb5 = "/assets/reviews/1str.png"
+    end
+    end
+    %>     
+      <tr>
+        <td><%= @count %></td>
+        <td>
+          <% if f.book_post_requirement.seeker_provider == true %>
+            Provider
+          <% else %>
+            Seeker
+          <% end %>
+        </td>
+        <td><%= f.book_post_requirement.user.name %></td>
+        <td><%= f.book_post_requirement.location.location_name %></td>
+        <td><%= f.book_post_requirement.user.phone_no %></td>
+        <td><%= f.book_post_requirement.user.email %></td>
+
+        <td>
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="1" src="<%= @srcb1 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="2" src="<%= @srcb2 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="3" src="<%= @srcb3 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="4" src="<%= @srcb4 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="5" src="<%= @srcb5 %>">
+        </td>
+        <script type="text/javascript">
+        $(".rate_b<%= f.id %>").click(function () {
+          if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+            $.ajax({ type: 'POST',url: '/rate_me_book',data: ({'book_post_requirement_id':"<%= f.book_post_requirement.id %>",'user_id':"<%= f.user.id %>",'rated_id':"<%= f.book_post_requirement.user.id %>",'book_negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+            });
+          }
+        });
+        </script>
+        <td>
+          <a href="javascript:void(0)" id="delete_b<%= f.id %>">Cancel</a>
+            <script type="text/javascript">
+            $("#delete_b<%= f.id %>").click(function(event){
+              if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({ type: 'POST',url: '/destroy_book_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+              });
+              }
+            });
+            </script>
+        </td>
+      </tr>
+    <% else %>
+      <%
+      @rate_b1=rate_book(f.user.id,1,f.book_post_requirement_id).count()
+      @rate_b2=rate_book(f.user.id,2,f.book_post_requirement_id).count()
+      @rate_b3=rate_book(f.user.id,3,f.book_post_requirement_id).count()
+      @rate_b4=rate_book(f.user.id,4,f.book_post_requirement_id).count()
+      @rate_b5=rate_book(f.user.id,5,f.book_post_requirement_id).count()
+      sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
+      total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
+      if sum_b == 0
+        @srcb1 = "/assets/reviews/1str.png"
+        @srcb2 = "/assets/reviews/1str.png"
+        @srcb3 = "/assets/reviews/1str.png"
+        @srcb4 = "/assets/reviews/1str.png"
+        @srcb5 = "/assets/reviews/1str.png"
+      else
+        avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
+        if avrg_b >= 1
+        @srcb1 = "/assets/reviews/2str.png"
+        else
+        @srcb1 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 1.6
+        @srcb2 = "/assets/reviews/2str.png"
+        else
+        @srcb2 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 2.6
+        @srcb3 = "/assets/reviews/2str.png"
+        else
+        @srcb3 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 3.6
+        @srcb4 = "/assets/reviews/2str.png"
+        else
+        @srcb4 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 4.6
+        @srcb5 = "/assets/reviews/2str.png"
+        else
+        @srcb5 = "/assets/reviews/1str.png"
+        end
+      end
+      %>
+      <tr>
+        <td><%= @count %></td>
+        <td>
+          <% if f.book_post_requirement.seeker_provider == true %>
+            Provider
+          <% else %>
+            Seeker
+          <% end %>
+        </td>
+        <td><%= f.user.name %></td>
+        <td><%= f.user.address %></td>
+        <td><%= f.user.phone_no %></td>
+        <td><%= f.user.email %></td>
+        <td>
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="1" src="<%= @srcb1 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="2" src="<%= @srcb2 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="3" src="<%= @srcb3 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="4" src="<%= @srcb4 %>">
+          <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="5" src="<%= @srcb5 %>">
+        </td>
+        <script type="text/javascript">
+        $(".rate_b<%= f.id %>").click(function () {
+          if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+            $.ajax({ type: 'POST',url: '/rate_me_book',data: ({'book_post_requirement_id':"<%= f.book_post_requirement.id %>",'user_id':"<%= f.book_post_requirement.user.id %>",'rated_id':"<%= f.user.id %>",'book_negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+            });
+          }
+        });
+        </script>
+        <td>
+          <a href="javascript:void(0)" id="delete_b<%= f.id %>">Cancel</a>
+            <script type="text/javascript">
+            $("#delete_b<%= f.id %>").click(function(event){
+              if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({ type: 'POST',url: '/destroy_book_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+              });
+              }
+            });
+            </script>
+        </td>
+      </tr>
+    <% end %>
+    <% @count = @count+1 %>      
+  <% end %>
+  <%else%>
+    <tr>
+      <td colspan="9"><center>You don't have any Order</center></td>
+    </tr>
+    <% end %>
+    </tbody>  
+  </table>
+  </div>
+  <!--##################### Mobile ############################-->
+  <div class="srch_res_mob">
+    <%if !@negotiatn_book.blank? %>
+      <% @count = 1 %>
+      <% @negotiatn_book.each do |f| %> 
+        <% if f.user_id.to_s == current_user.id.to_s %> 
+          <%
+          @rate_b1=rate_book(f.book_post_requirement.user.id,1,f.book_post_requirement_id).count()
+          @rate_b2=rate_book(f.book_post_requirement.user.id,2,f.book_post_requirement_id).count()
+          @rate_b3=rate_book(f.book_post_requirement.user.id,3,f.book_post_requirement_id).count()
+          @rate_b4=rate_book(f.book_post_requirement.user.id,4,f.book_post_requirement_id).count()
+          @rate_b5=rate_book(f.book_post_requirement.user.id,5,f.book_post_requirement_id).count()
+          sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
+          total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
+          if sum_b == 0
+          @srcb1 = "/assets/reviews/1str.png"
+          @srcb2 = "/assets/reviews/1str.png"
+          @srcb3 = "/assets/reviews/1str.png"
+          @srcb4 = "/assets/reviews/1str.png"
+          @srcb5 = "/assets/reviews/1str.png"
+          else
+          avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
+          if avrg_b >= 1
+          @srcb1 = "/assets/reviews/2str.png"
+          else
+          @srcb1 = "/assets/reviews/1str.png"
+          end
+          if avrg_b >= 1.6
+          @srcb2 = "/assets/reviews/2str.png"
+          else
+          @srcb2 = "/assets/reviews/1str.png"
+          end
+          if avrg_b >= 2.6
+          @srcb3 = "/assets/reviews/2str.png"
+          else
+          @srcb3 = "/assets/reviews/1str.png"
+          end
+          if avrg_b >= 3.6
+          @srcb4 = "/assets/reviews/2str.png"
+          else
+          @srcb4 = "/assets/reviews/1str.png"
+          end
+          if avrg_b >= 4.6
+          @srcb5 = "/assets/reviews/2str.png"
+          else
+          @srcb5 = "/assets/reviews/1str.png"
+          end
+          end
+          %>     
+
+          <div class="res_data">
+            <div class="data_row">
+              <div class="data_title">You are Provider / Seeker</div>
+              <div class="data_col">
+                <% if f.book_post_requirement.seeker_provider == true %>
+                  Provider
+                <% else %>
+                  Seeker
+                <% end %>
+              </div>
+            </div>
+          <div class="data_row">
+            <div class="data_title">Name</div>
+            <div class="data_col">
+              <%= f.book_post_requirement.user.name %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Locality</div>
+            <div class="data_col">
+              <%= f.book_post_requirement.location.location_name %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Phone No.</div>
+            <div class="data_col">
+              <%= f.book_post_requirement.user.phone_no %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Email Id</div>
+            <div class="data_col">
+              <%= f.book_post_requirement.user.email %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Rate</div>
+            <div class="data_col">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="1" src="<%= @srcb1 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="2" src="<%= @srcb2 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="3" src="<%= @srcb3 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="4" src="<%= @srcb4 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="5" src="<%= @srcb5 %>">
+            </div>
+            <script type="text/javascript">
+              $(".rate_bm<%= f.id %>").click(function () {
+                if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                  $.ajax({ type: 'POST',url: '/rate_me_book',data: ({'book_post_requirement_id':"<%= f.book_post_requirement.id %>",'user_id':"<%= f.user.id %>",'rated_id':"<%= f.book_post_requirement.user.id %>",'book_negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                    });
+                }
+              });
+            </script>
+          </div>
+          <div class="data_row">
+            <div class="data_title"></div>
+            <div class="data_col">
+              <a href="javascript:void(0)" id="delete_bm<%= f.id %>">Cancel</a>
+            <script type="text/javascript">
+            $("#delete_bm<%= f.id %>").click(function(event){
+              if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({ type: 'POST',url: '/destroy_book_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+              });
+              }
+            });
+            </script>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%
+        @rate_b1=rate_book(f.user.id,1,f.book_post_requirement_id).count()
+        @rate_b2=rate_book(f.user.id,2,f.book_post_requirement_id).count()
+        @rate_b3=rate_book(f.user.id,3,f.book_post_requirement_id).count()
+        @rate_b4=rate_book(f.user.id,4,f.book_post_requirement_id).count()
+        @rate_b5=rate_book(f.user.id,5,f.book_post_requirement_id).count()
+        sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
+        total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
+        if sum_b == 0
+        @srcb1 = "/assets/reviews/1str.png"
+        @srcb2 = "/assets/reviews/1str.png"
+        @srcb3 = "/assets/reviews/1str.png"
+        @srcb4 = "/assets/reviews/1str.png"
+        @srcb5 = "/assets/reviews/1str.png"
+        else
+        avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
+        if avrg_b >= 1
+        @srcb1 = "/assets/reviews/2str.png"
+        else
+        @srcb1 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 1.6
+        @srcb2 = "/assets/reviews/2str.png"
+        else
+        @srcb2 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 2.6
+        @srcb3 = "/assets/reviews/2str.png"
+        else
+        @srcb3 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 3.6
+        @srcb4 = "/assets/reviews/2str.png"
+        else
+        @srcb4 = "/assets/reviews/1str.png"
+        end
+        if avrg_b >= 4.6
+        @srcb5 = "/assets/reviews/2str.png"
+        else
+        @srcb5 = "/assets/reviews/1str.png"
+        end
+        end
+        %>
+        <div class="res_data">
+          <div class="data_row">
+            <div class="data_title">You are Provider / Seeker</div>
+            <div class="data_col">
+              <% if f.book_post_requirement.seeker_provider == true %>
+                Provider
+              <% else %>
+                Seeker
+              <% end %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Name</div>
+            <div class="data_col"><%= f.user.name %></div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Locality</div>
+            <div class="data_col"><%= f.user.address %></div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Phone No.</div>
+            <div class="data_col"><%= f.user.phone_no %></div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Email Id</div>
+            <div class="data_col"><%= f.user.email %></div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Rate</div>
+            <div class="data_col">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="1" src="<%= @srcb1 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="2" src="<%= @srcb2 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="3" src="<%= @srcb3 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="4" src="<%= @srcb4 %>">
+              <img style="cursor:pointer;width:13px" class="rate_bm<%= f.id %>" id="5" src="<%= @srcb5 %>">
+            </div>
+            <script type="text/javascript">
+            $(".rate_bm<%= f.id %>").click(function () {
+              if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                $.ajax({ type: 'POST',url: '/rate_me_book',data: ({'book_post_requirement_id':"<%= f.book_post_requirement.id %>",'user_id':"<%= f.book_post_requirement.user.id %>",'rated_id':"<%= f.user.id %>",'book_negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                });
+              }
+            });
+            </script>
+          </div>
+          <div class="data_row">
+            <div class="data_title"></div>
+            <div class="data_col">
+              <a href="javascript:void(0)" id="delete_bm<%= f.id %>">Cancel</a>
+              <script type="text/javascript">
+              $("#delete_bm<%= f.id %>").click(function(event){
+                if (confirm('Are you sure you want to delete this?')) {
+                  $.ajax({ type: 'POST',url: '/destroy_book_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+                  });
+                }
+              });
+              </script>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% @count = @count+1 %>      
+    <% end %>
+  <%else%>
+    <div class="res_data">
+      <div class="data_row">
+        <div class="data_title">Status</div>
+        <div class="data_col">You don't have any Order</div>
+      </div>
+    </div>
+  <%end%>
+  </div>
+</div>

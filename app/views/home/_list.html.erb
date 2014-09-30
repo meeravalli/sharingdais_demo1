@@ -69,7 +69,59 @@ $(document).ready(function() {
 								<%else%>
 								<td><img src="/assets/no_image_available.png" style="width:150px"></td>
 								<%end%>
-                <td><%= s.location.location_name %></td>
+                <% 
+                  @rate_1=rate(s.user.id,1,s.id).count()
+                  @rate_2=rate(s.user.id,2,s.id).count()
+                  @rate_3=rate(s.user.id,3,s.id).count()
+                  @rate_4=rate(s.user.id,4,s.id).count()
+                  @rate_5=rate(s.user.id,5,s.id).count()
+                  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+                  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+                  if sum == 0
+                    @src1 = "/assets/reviews/1str.png"
+                    @src2 = "/assets/reviews/1str.png"
+                    @src3 = "/assets/reviews/1str.png"
+                    @src4 = "/assets/reviews/1str.png"
+                    @src5 = "/assets/reviews/1str.png"
+                  else
+                    avrg = ( sum.to_f / total_no.to_f ).round(1)
+                    if avrg >= 1
+                      @src1 = "/assets/reviews/2str.png"
+                    else
+                      @src1 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 1.6
+                      @src2 = "/assets/reviews/2str.png"
+                    else
+                      @src2 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 2.6
+                      @src3 = "/assets/reviews/2str.png"
+                    else
+                      @src3 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 3.6
+                      @src4 = "/assets/reviews/2str.png"
+                    else
+                      @src4 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 4.6
+                      @src5 = "/assets/reviews/2str.png"
+                    else
+                      @src5 = "/assets/reviews/1str.png"
+                    end
+                  end
+                %>
+                <td><%= s.location.location_name %>
+                  <% if s.seeker_provider == false %>
+                    <br>
+                    <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                    <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                    <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                    <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                    <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                  <%end%>
+                </td>
                 <td><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%></td>
                 <td><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %></td>
                 <td><%= s.region.nil? ? "Not Applicable" : s.region.name %></td>
@@ -113,11 +165,61 @@ $(document).ready(function() {
                                         </div>
                                     </div>
                                     <div class="data_row">
+ <% 
+                  @rate_1=rate(s.user.id,1,s.id).count()
+                  @rate_2=rate(s.user.id,2,s.id).count()
+                  @rate_3=rate(s.user.id,3,s.id).count()
+                  @rate_4=rate(s.user.id,4,s.id).count()
+                  @rate_5=rate(s.user.id,5,s.id).count()
+                  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+                  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+                  if sum == 0
+                    @src1 = "/assets/reviews/1str.png"
+                    @src2 = "/assets/reviews/1str.png"
+                    @src3 = "/assets/reviews/1str.png"
+                    @src4 = "/assets/reviews/1str.png"
+                    @src5 = "/assets/reviews/1str.png"
+                  else
+                    avrg = ( sum.to_f / total_no.to_f ).round(1)
+                    if avrg >= 1
+                      @src1 = "/assets/reviews/2str.png"
+                    else
+                      @src1 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 1.6
+                      @src2 = "/assets/reviews/2str.png"
+                    else
+                      @src2 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 2.6
+                      @src3 = "/assets/reviews/2str.png"
+                    else
+                      @src3 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 3.6
+                      @src4 = "/assets/reviews/2str.png"
+                    else
+                      @src4 = "/assets/reviews/1str.png"
+                    end
+                    if avrg >= 4.6
+                      @src5 = "/assets/reviews/2str.png"
+                    else
+                      @src5 = "/assets/reviews/1str.png"
+                    end
+                  end
+                %>
                                     	<div class="data_title">
                                         	Locality
                                         </div>
                                         <div class="data_col">
                                         	<%= s.location.location_name %>
+                                          <% if s.seeker_provider == true %><br>
+                  <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                  <%end%>
                                         </div>
                                     </div>
                                     <div class="data_row">

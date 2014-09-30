@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  negotiate: 
+  book_negotiate: 
+  user: 
+  rated_id: 1
+  post_requirement: 
+  book_post_requirement: 
+  rated_no: 1
+  service_type: MyString
+
+two:
+  negotiate: 
+  book_negotiate: 
+  user: 
+  rated_id: 1
+  post_requirement: 
+  book_post_requirement: 
+  rated_no: 1
+  service_type: MyString

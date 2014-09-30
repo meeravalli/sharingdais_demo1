@@ -5,12 +5,14 @@
       <thead class="heading">
         <tr>
           <th>#</th>
-          <th>Book Photo</th>
-          <th>Book Name</th>
+          <!--<th>Book Photo</th>-->
+          <th>City</th>
           <th>Locality </th>
-          <th>Rent</th>
+          <th>Post As</th>
+          <th>Book Name</th>
+          <th>Price</th>
           <th>Description</th>
-          <th>Date Of Posting</th>
+          <!--<th>Date Of Posting</th>-->
           <th></th>
           <th></th>
         </tr>
@@ -21,16 +23,24 @@
         <% @book_post_requirements.each do |p| %>
           <tr>
             <td><%= my_count %></td>
-            <% if !p.image.path.nil? %>
-              <td><%= image_tag p.image.url(:small) %></td>
-            <%else%>
+            <!--<%# if !p.image.path.nil? %>
+              <td><%#= image_tag p.image.url(:small) %></td>
+            <%#else%>
               <td>No image</td>
-            <%end%>
-            <td><%= p.name %></td>
+            <%#end%>-->
+            <td><%= p.city.city_name %></td>
             <td><%= p.location.location_name%></td>
+            <td>
+              <% if p.seeker_provider == true %>
+                Seeker 
+              <% else %>                 
+                Provider            
+              <% end %>
+            </td>
+            <td><%= p.name %></td>
             <td><%= p.rent %></td>
             <td><%= p.description %></td>
-            <td><%= p.date_of_posting.strftime('%d %B %Y') if p.date_of_posting.present? %></td>
+            <!--<td><%#= p.date_of_posting.strftime('%d %B %Y') if p.date_of_posting.present? %></td>-->
             <% if p.seeker_provider %>
               <td><%= link_to 'Edit', edit_book_post_requirement_sharing_path(p)%></td>
             <%else%>
@@ -53,24 +63,24 @@
   <% if !@book_post_requirements.empty? %>
     <% @book_post_requirements.each do |p| %>
       <div class="res_data">
-        <div class="data_row">
+        <!--<div class="data_row">
           <div class="data_title">
             Book Image
           </div>
           <div class="data_col">
-            <% if !p.image.path.nil? %>
-              <%= image_tag p.image.url(:small) %>
-            <%else%>
+            <%# if !p.image.path.nil? %>
+              <%#= image_tag p.image.url(:small) %>
+            <%#else%>
              No image
-            <%end%>
+            <%#end%>
           </div>
-        </div>
+        </div>-->
         <div class="data_row">
           <div class="data_title">
-            Book Name
+            City
           </div>
           <div class="data_col">
-            <%= p.name %>
+            <%= p.city.city_name %>
           </div>
         </div>
               <div class="data_row">
@@ -83,7 +93,27 @@
               </div>
               <div class="data_row">
                 <div class="data_title">
-                    Rent
+                    Post As
+                  </div>
+                  <div class="data_col">
+                    <% if p.seeker_provider == true %>
+                Seeker 
+              <% else %>                 
+                Provider            
+              <% end %>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Book Name
+                  </div>
+                  <div class="data_col">
+                    <%= p.name %>
+                  </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                    Price
                   </div>
                   <div class="data_col">
                     <%= p.rent %>
@@ -95,14 +125,6 @@
                   </div>
                   <div class="data_col">
                     <%= p.description %>
-                  </div>
-              </div>
-              <div class="data_row">
-                <div class="data_title">
-                    Date Of Posting
-                  </div>
-                  <div class="data_col">
-                    <%= p.date_of_posting.strftime('%d %B %Y') if p.date_of_posting.present?%>
                   </div>
               </div>
               <div class="data_row">

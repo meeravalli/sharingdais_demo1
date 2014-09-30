@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140830190215) do
+ActiveRecord::Schema.define(:version => 20140929102808) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20140830190215) do
     t.integer  "user_id"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+    t.integer  "nego_id"
   end
 
   create_table "book_order_cancels", :force => true do |t|
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20140830190215) do
     t.string   "user_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "nego_id"
   end
 
   create_table "order_cancels", :force => true do |t|
@@ -185,6 +187,25 @@ ActiveRecord::Schema.define(:version => 20140830190215) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "rates", :force => true do |t|
+    t.integer  "negotiate_id"
+    t.integer  "book_negotiate_id"
+    t.integer  "user_id"
+    t.integer  "rated_id"
+    t.integer  "post_requirement_id"
+    t.integer  "book_post_requirement_id"
+    t.integer  "rated_no"
+    t.string   "service_type"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "rates", ["book_negotiate_id"], :name => "index_rates_on_book_negotiate_id"
+  add_index "rates", ["book_post_requirement_id"], :name => "index_rates_on_book_post_requirement_id"
+  add_index "rates", ["negotiate_id"], :name => "index_rates_on_negotiate_id"
+  add_index "rates", ["post_requirement_id"], :name => "index_rates_on_post_requirement_id"
+  add_index "rates", ["user_id"], :name => "index_rates_on_user_id"
 
   create_table "regions", :force => true do |t|
     t.string   "name"

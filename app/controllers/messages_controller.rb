@@ -10,7 +10,7 @@ before_filter :authenticate_user!
   def create
     food_type = FoodType.find(params[:food_type_id]).name
     location = Location.find(params[:location_id]).location_name
-    @negotiate = Negotiate.create(:post_requirement_id => params[:post_requirement_id], :user_id => current_user.id).valid?
+    @negotiate = Negotiate.create(:post_requirement_id => params[:post_requirement_id], :user_id => current_user.id, :nego_id => params[:user_id]).valid?
     if @negotiate
       message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => params[:user_id], :post_requirement_id => params[:post_requirement_id], :food => food_type, :location => location, :read => false, :order_status => true)
       provider = User.find(params[:user_id])

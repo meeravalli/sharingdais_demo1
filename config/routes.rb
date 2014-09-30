@@ -77,9 +77,14 @@ Sharingdasiss::Application.routes.draw do
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
   post "send_feedback" => "book_search#feedback"
+  post "rate_me" => "home#rate_me"
+  post "rate_me_book" => "home#rate_me_book"
+  post "destroy_order" => "home#destroy_order"
+  post "destroy_book_order" => "home#destroy_book_order"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

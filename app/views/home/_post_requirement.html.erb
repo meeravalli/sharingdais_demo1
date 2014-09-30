@@ -7,7 +7,7 @@
           <th>#</th>
           <th>City</th>
           <th>Locality</th>
-          <th>Post as</th>
+          <th>Post As</th>
           <!--<th> Service </th>
           <th> I am looking for/I am </th>
           <th>Food Type</th>-->
@@ -29,9 +29,9 @@
           <td><%= p.location.location_name%></td>
           <td>
             <% if p.seeker_provider == true %>
-              Provider
+              Seeker
             <% else %>
-              Seeker              
+              Provider              
             <% end %>
           </td>
           <!--<td><%#= p.service.service_type%></td>
@@ -53,7 +53,6 @@
     <% else%>
       <tr> 
         <td colspan="8" style="text-align:center">You don't have any food requirements</td>
-        <td></td>
         <td></td>
       </tr>
     <%end%>
@@ -81,9 +80,9 @@
           <div class="data_title">Post as</div>
           <div class="data_col">
             <% if p.seeker_provider == true %>
-              Provider
-            <% else %>
-              Seeker              
+              Seeker 
+            <% else %>              
+              Provider             
             <% end %></div>
         </div>
         <!--<div class="data_row">
@@ -166,7 +165,7 @@
 
 <!--
 <div class="display">
-		<h3 class="prf_title">Your Food Orders</h3>
+    <h3 class="prf_title">Your Food Orders</h3>
       <div class="table-responsive src_res_desktop">
         <table class="table table-hover">
           <thead class="heading">
@@ -180,11 +179,11 @@
               <th>Email of Another Party </th>
               <th>Status </th>
             </tr>
-						<tr></tr>
+            <tr></tr>
           </thead>
          <tbody>
-					<%# count = 1 %>
-					<%# if !@activities.empty? %>
+          <%# count = 1 %>
+          <%# if !@activities.empty? %>
             <%# @activities.each do |a| %>
               <%# @user = find_user(a.contact_id) %>
               <tr>
@@ -202,96 +201,96 @@
                   <td>Cancelled</td>
                 <%# end %>
               </tr>
-					<%# count +=1 %>
+          <%# count +=1 %>
             <%# end %>
-						<%# else%>
-						<tr> 
-						<td colspan="8" style="text-align:center">You don't have any food order </td>
-						</tr>
-						<%#end%>
+            <%# else%>
+            <tr> 
+            <td colspan="8" style="text-align:center">You don't have any food order </td>
+            </tr>
+            <%#end%>
           </tbody>  
         </table>
       </div>
-		<div class="srch_res_mob">
-			<%# if !@activities.empty? %>
-			<%# @activities.each do |a| %>
-			<%# @user = find_user(a.contact_id) %>
-                            	<div class="res_data">
-                                	<div class="data_row">
-                                    	<div class="data_title">
-                                        	Category
+    <div class="srch_res_mob">
+      <%# if !@activities.empty? %>
+      <%# @activities.each do |a| %>
+      <%# @user = find_user(a.contact_id) %>
+                              <div class="res_data">
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Category
                                         </div>
                                         <div class="data_col">
-                                        	<%#= find_service %>
+                                          <%#= find_service %>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Seeked / Shared 
+                                      <div class="data_title">
+                                          Seeked / Shared 
                                         </div>
                                         <div class="data_col">
-                                        	<%#= a.seeked_shared ? "Seeked" : "Shared"%>
+                                          <%#= a.seeked_shared ? "Seeked" : "Shared"%>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Name of the other party 
+                                      <div class="data_title">
+                                          Name of the other party 
                                         </div>
                                         <div class="data_col">
-                                        	<%#= @user.name%>
+                                          <%#= @user.name%>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Address of Another Party 
+                                      <div class="data_title">
+                                          Address of Another Party 
                                         </div>
                                         <div class="data_col">
-                                        	<%#= @user.address%>
+                                          <%#= @user.address%>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Phone of Another Party 	
+                                      <div class="data_title">
+                                          Phone of Another Party  
                                         </div>
                                         <div class="data_col">
-                                        	<%#= @user.phone_no%>
+                                          <%#= @user.phone_no%>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Email of Another Party 
+                                      <div class="data_title">
+                                          Email of Another Party 
                                         </div>
                                         <div class="data_col">
-                                        	<%#= @user.email%>
+                                          <%#= @user.email%>
                                         </div>
                                     </div>
                                     <div class="data_row">
-                                    	<div class="data_title">
-                                        	Status 
+                                      <div class="data_title">
+                                          Status 
                                         </div>
                                         <div class="data_col">
-																				<%# if a.order.order_cancel.nil? %>
-                                        	<%# negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
-																					<%#= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %>
-																					<%#else%>
-																					Cancelled
-																					<%#end%>
+                                        <%# if a.order.order_cancel.nil? %>
+                                          <%# negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+                                          <%#= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %>
+                                          <%#else%>
+                                          Cancelled
+                                          <%#end%>
                                         </div>
                                     </div>
                                 </div>
-	     <%#end%>
-			 <%#else%>
-			 <div class="res_data">
-			 <div class="data_row">
-                                    	<div class="data_title">
-                                        	Status
+       <%#end%>
+       <%#else%>
+       <div class="res_data">
+       <div class="data_row">
+                                      <div class="data_title">
+                                          Status
                                         </div>
                                         <div class="data_col">
-                                        	You don't have any food order 
+                                          You don't have any food order 
                                         </div>
-			 </div>
+       </div>
              </div>
-			 <%#end%>
-			</div>
+       <%#end%>
+      </div>
 </div>
 -->

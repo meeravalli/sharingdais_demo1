@@ -25,8 +25,11 @@ before_filter :authenticate_user!, :except => [:index]
     @user = current_user
     @post_requirements = @user.post_requirements
     @book_post_requirements = @user.book_post_requirements
-    @book_activities = @user.book_activities
-    @activities = @user.activities
+    @book_activities = @user.book_activities.order( 'id DESC' )
+    @activities = @user.activities.order( 'id DESC' )
+    # Order Trace
+    @negotiatn=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
+    @negotiatn_book=BookNegotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
   end
   
   def edit_profile
@@ -43,6 +46,39 @@ before_filter :authenticate_user!, :except => [:index]
     end
   end
   
+  def rate_me    
+    @find_user=Rate.where("user_id=? AND negotiate_id=? AND service_type=?",params[:user_id],params[:negotiate_id],"Food Sharing")
+    if !@find_user.empty?     
+      render :json => {:status => "You have already rated this item"}
+    else
+      @rating=Rate.new(:post_requirement_id => params[:post_requirement_id],:negotiate_id => params[:negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Food Sharing" )
+      @rating.save!
+      render :json => {:status => "Thank you for rating"}
+    end
+    #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
+  end
+
+  def rate_me_book
+    @find_user=Rate.where("user_id=? AND book_negotiate_id=? AND service_type=?",params[:user_id],params[:book_negotiate_id],"Book Sharing")
+    if !@find_user.empty?     
+      render :json => {:status => "You have already rated this item"}
+    else
+      @rating=Rate.new(:book_post_requirement_id => params[:book_post_requirement_id],:book_negotiate_id => params[:book_negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Book Sharing" )
+      @rating.save!
+      render :json => {:status => "Thank you for rating"}
+    end
+  end
+
+  def destroy_order
+    order=Negotiate.find(params[:id])
+    order.destroy
+    render :json => {:status => "ok"}
+  end
+  def destroy_book_order
+    order=BookNegotiate.find(params[:id])
+    order.destroy
+    render :json => {:status => "ok"}
+  end
 
 
 end
