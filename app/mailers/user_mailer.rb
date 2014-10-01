@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     @user = provider
     @seeker = seeker
     @message = Message.find(message_id)
-    mail(:to => @user.email, :subject => "New Order" )
+    mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
    end
 
    def new_book_order_for_provider(provider, message_id, seeker)
@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
     @seeker = seeker
     @message = BookMessage.find(message_id)
     @location =Location.where("id=?",@message.location_id)
-    mail(:to => @user.email, :subject => "New Order" )
+    mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
    end
 
   def address_info_seeker(seeker, seeker_message_id, provider)
@@ -28,7 +28,7 @@ class UserMailer < ActionMailer::Base
     @message = Message.find(seeker_message_id)
     p '**************'
     p @message
-    mail(:to => seeker.email, :subject => "Contact Information" )
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
  end
 
  def book_address_info_seeker(seeker, seeker_message_id, provider)
@@ -39,7 +39,7 @@ class UserMailer < ActionMailer::Base
     @message = BookMessage.find(seeker_message_id)
     p '**************'
     p @message
-    mail(:to => seeker.email, :subject => "Contact Information" )
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
  end
 
   def address_info_provider(provider, provider_message_id, seeker)
@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     @message = Message.find(provider_message_id)
     p '????????????*********'
     p @message
-    mail(:to => provider.email, :subject => "Contact Information" )
+    mail(:to => provider.email, :subject => "Sharingdais.com | Contact Information" )
   end
 
   def book_address_info_provider(provider, provider_message_id, seeker)
@@ -61,7 +61,7 @@ class UserMailer < ActionMailer::Base
     @message = BookMessage.find(provider_message_id)
     p '????????????*********'
     p @message
-    mail(:to => provider.email, :subject => "Contact Information" )
+    mail(:to => provider.email, :subject => "Sharingdais.com | Contact Information" )
   end
 
   def mail_book_contact_info_provider(provider, contact_details, seeker)
@@ -72,7 +72,7 @@ class UserMailer < ActionMailer::Base
     @message = contact_details.name
     p '????????????*********'
     p @message
-    mail(:to => seeker.email, :subject => "Contact Information" )
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
   end
   
   def mail_contact_info_provider(provider, contact_details, seeker)
@@ -83,7 +83,7 @@ class UserMailer < ActionMailer::Base
     @message = contact_details.name
     p '????????????*********'
     p @message
-    mail(:to => seeker.email, :subject => "Contact Information" )
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
   end
 
   def feed_email(data)
@@ -92,7 +92,7 @@ class UserMailer < ActionMailer::Base
     @email = @data[:email]
     @phon = @data[:phon]
     @message = @data[:message]
-    mail(to: "support@sharingdais.com", :subject => 'Feedback Mail')
+    mail(to: "support@sharingdais.com", :subject => 'Sharingdais.com | Feedback Mail')
     #mail(to: "rox.shahid@gmail.com", :subject => 'Feedback Mail')
   end
 end
