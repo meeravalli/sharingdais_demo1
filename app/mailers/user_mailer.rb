@@ -2,7 +2,8 @@ class UserMailer < ActionMailer::Base
   default from: "admin@sharingdais.com"
     
   def new_order_for_provider(provider, message_id, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
@@ -11,7 +12,8 @@ class UserMailer < ActionMailer::Base
    end
 
    def new_book_order_for_provider(provider, message_id, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
@@ -21,7 +23,8 @@ class UserMailer < ActionMailer::Base
    end
 
   def address_info_seeker(seeker, seeker_message_id, provider)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = seeker
     @provider = provider
@@ -32,7 +35,8 @@ class UserMailer < ActionMailer::Base
  end
 
  def book_address_info_seeker(seeker, seeker_message_id, provider)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = seeker
     @provider = provider
@@ -43,7 +47,8 @@ class UserMailer < ActionMailer::Base
  end
 
   def address_info_provider(provider, provider_message_id, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
@@ -54,7 +59,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def book_address_info_provider(provider, provider_message_id, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
@@ -65,7 +71,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def mail_book_contact_info_provider(provider, contact_details, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
@@ -76,7 +83,8 @@ class UserMailer < ActionMailer::Base
   end
   
   def mail_contact_info_provider(provider, contact_details, seeker)
-    @url = "http://www.sharingdais.com/main/messages"
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
     @login_url = "http://sharingdais.com/users/sign_in"
     @user = provider
     @seeker = seeker
