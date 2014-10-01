@@ -19,49 +19,44 @@
     <% @count = 1 %>
     <% @negotiatn_book.each do |f| %> 
     <% if f.user_id.to_s == current_user.id.to_s %> 
-    <%
-    @rate_b1=rate_book(f.book_post_requirement.user.id,1,f.book_post_requirement_id).count()
-    @rate_b2=rate_book(f.book_post_requirement.user.id,2,f.book_post_requirement_id).count()
-    @rate_b3=rate_book(f.book_post_requirement.user.id,3,f.book_post_requirement_id).count()
-    @rate_b4=rate_book(f.book_post_requirement.user.id,4,f.book_post_requirement_id).count()
-    @rate_b5=rate_book(f.book_post_requirement.user.id,5,f.book_post_requirement_id).count()
-    sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
-    total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
-    if sum_b == 0
-    @srcb1 = "/assets/reviews/1str.png"
-    @srcb2 = "/assets/reviews/1str.png"
-    @srcb3 = "/assets/reviews/1str.png"
-    @srcb4 = "/assets/reviews/1str.png"
-    @srcb5 = "/assets/reviews/1str.png"
-    else
-    avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
-    if avrg_b >= 1
-    @srcb1 = "/assets/reviews/2str.png"
-    else
-    @srcb1 = "/assets/reviews/1str.png"
-    end
-    if avrg_b >= 1.6
-    @srcb2 = "/assets/reviews/2str.png"
-    else
-    @srcb2 = "/assets/reviews/1str.png"
-    end
-    if avrg_b >= 2.6
-    @srcb3 = "/assets/reviews/2str.png"
-    else
-    @srcb3 = "/assets/reviews/1str.png"
-    end
-    if avrg_b >= 3.6
-    @srcb4 = "/assets/reviews/2str.png"
-    else
-    @srcb4 = "/assets/reviews/1str.png"
-    end
-    if avrg_b >= 4.6
-    @srcb5 = "/assets/reviews/2str.png"
-    else
-    @srcb5 = "/assets/reviews/1str.png"
-    end
-    end
-    %>     
+    <% 
+          myid=Rate.where("user_id=? AND rated_id=? AND book_post_requirement_id=?",f.user.id, f.book_post_requirement.user.id,f.book_post_requirement.id)
+          cou=myid.count()
+          if cou == 0
+            @srcb1 = "/assets/reviews/1str.png"
+            @srcb2 = "/assets/reviews/1str.png"
+            @srcb3 = "/assets/reviews/1str.png"
+            @srcb4 = "/assets/reviews/1str.png"
+            @srcb5 = "/assets/reviews/1str.png"
+          else
+            total=myid.first.rated_no
+            if total >= 1
+              @srcb1 = "/assets/reviews/2str.png"
+            else
+              @srcb1 = "/assets/reviews/1str.png"
+            end
+            if total >= 1.6
+              @srcb2 = "/assets/reviews/2str.png"
+            else
+              @srcb2 = "/assets/reviews/1str.png"
+            end
+            if total >= 2.6
+              @srcb3 = "/assets/reviews/2str.png"
+            else
+              @srcb3 = "/assets/reviews/1str.png"
+            end
+            if total >= 3.6
+              @srcb4 = "/assets/reviews/2str.png"
+            else
+              @srcb4 = "/assets/reviews/1str.png"
+            end
+            if total >= 4.6
+              @srcb5 = "/assets/reviews/2str.png"
+            else
+              @srcb5 = "/assets/reviews/1str.png"
+            end
+          end 
+          %>     
       <tr>
         <td><%= @count %></td>
         <td>
@@ -104,56 +99,51 @@
         </td>
       </tr>
     <% else %>
-      <%
-      @rate_b1=rate_book(f.user.id,1,f.book_post_requirement_id).count()
-      @rate_b2=rate_book(f.user.id,2,f.book_post_requirement_id).count()
-      @rate_b3=rate_book(f.user.id,3,f.book_post_requirement_id).count()
-      @rate_b4=rate_book(f.user.id,4,f.book_post_requirement_id).count()
-      @rate_b5=rate_book(f.user.id,5,f.book_post_requirement_id).count()
-      sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
-      total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
-      if sum_b == 0
-        @srcb1 = "/assets/reviews/1str.png"
-        @srcb2 = "/assets/reviews/1str.png"
-        @srcb3 = "/assets/reviews/1str.png"
-        @srcb4 = "/assets/reviews/1str.png"
-        @srcb5 = "/assets/reviews/1str.png"
-      else
-        avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
-        if avrg_b >= 1
-        @srcb1 = "/assets/reviews/2str.png"
-        else
-        @srcb1 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 1.6
-        @srcb2 = "/assets/reviews/2str.png"
-        else
-        @srcb2 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 2.6
-        @srcb3 = "/assets/reviews/2str.png"
-        else
-        @srcb3 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 3.6
-        @srcb4 = "/assets/reviews/2str.png"
-        else
-        @srcb4 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 4.6
-        @srcb5 = "/assets/reviews/2str.png"
-        else
-        @srcb5 = "/assets/reviews/1str.png"
-        end
-      end
-      %>
+     <% 
+          myid=Rate.where("user_id=? AND rated_id=? AND book_post_requirement_id=?",f.book_post_requirement.user.id,f.user.id,f.book_post_requirement.id )
+          con=myid.count()
+          if con == 0
+            @srcb1 = "/assets/reviews/1str.png"
+            @srcb2 = "/assets/reviews/1str.png"
+            @srcb3 = "/assets/reviews/1str.png"
+            @srcb4 = "/assets/reviews/1str.png"
+            @srcb5 = "/assets/reviews/1str.png"
+          else
+            total=myid.first.rated_no
+            if total >= 1
+              @srcb1 = "/assets/reviews/2str.png"
+            else
+              @srcb1 = "/assets/reviews/1str.png"
+            end
+            if total >= 1.6
+              @srcb2 = "/assets/reviews/2str.png"
+            else
+              @srcb2 = "/assets/reviews/1str.png"
+            end
+            if total >= 2.6
+              @srcb3 = "/assets/reviews/2str.png"
+            else
+              @srcb3 = "/assets/reviews/1str.png"
+            end
+            if total >= 3.6
+              @srcb4 = "/assets/reviews/2str.png"
+            else
+              @srcb4 = "/assets/reviews/1str.png"
+            end
+            if total >= 4.6
+              @srcb5 = "/assets/reviews/2str.png"
+            else
+              @srcb5 = "/assets/reviews/1str.png"
+            end
+          end 
+          %>     
       <tr>
         <td><%= @count %></td>
         <td>
           <% if f.book_post_requirement.seeker_provider == true %>
-            Provider
-          <% else %>
             Seeker
+          <% else %>
+            Provider
           <% end %>
         </td>
         <td><%= f.user.name %></td>
@@ -204,49 +194,44 @@
       <% @count = 1 %>
       <% @negotiatn_book.each do |f| %> 
         <% if f.user_id.to_s == current_user.id.to_s %> 
-          <%
-          @rate_b1=rate_book(f.book_post_requirement.user.id,1,f.book_post_requirement_id).count()
-          @rate_b2=rate_book(f.book_post_requirement.user.id,2,f.book_post_requirement_id).count()
-          @rate_b3=rate_book(f.book_post_requirement.user.id,3,f.book_post_requirement_id).count()
-          @rate_b4=rate_book(f.book_post_requirement.user.id,4,f.book_post_requirement_id).count()
-          @rate_b5=rate_book(f.book_post_requirement.user.id,5,f.book_post_requirement_id).count()
-          sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
-          total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
-          if sum_b == 0
-          @srcb1 = "/assets/reviews/1str.png"
-          @srcb2 = "/assets/reviews/1str.png"
-          @srcb3 = "/assets/reviews/1str.png"
-          @srcb4 = "/assets/reviews/1str.png"
-          @srcb5 = "/assets/reviews/1str.png"
+     <% 
+          myid=Rate.where("user_id=? AND rated_id=? AND book_post_requirement_id=?",f.user.id, f.book_post_requirement.user.id,f.book_post_requirement.id)
+          con=myid.count()
+          if con == 0
+            @srcb1 = "/assets/reviews/1str.png"
+            @srcb2 = "/assets/reviews/1str.png"
+            @srcb3 = "/assets/reviews/1str.png"
+            @srcb4 = "/assets/reviews/1str.png"
+            @srcb5 = "/assets/reviews/1str.png"
           else
-          avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
-          if avrg_b >= 1
-          @srcb1 = "/assets/reviews/2str.png"
-          else
-          @srcb1 = "/assets/reviews/1str.png"
-          end
-          if avrg_b >= 1.6
-          @srcb2 = "/assets/reviews/2str.png"
-          else
-          @srcb2 = "/assets/reviews/1str.png"
-          end
-          if avrg_b >= 2.6
-          @srcb3 = "/assets/reviews/2str.png"
-          else
-          @srcb3 = "/assets/reviews/1str.png"
-          end
-          if avrg_b >= 3.6
-          @srcb4 = "/assets/reviews/2str.png"
-          else
-          @srcb4 = "/assets/reviews/1str.png"
-          end
-          if avrg_b >= 4.6
-          @srcb5 = "/assets/reviews/2str.png"
-          else
-          @srcb5 = "/assets/reviews/1str.png"
-          end
-          end
-          %>     
+            total=myid.first.rated_no
+            if total >= 1
+              @srcb1 = "/assets/reviews/2str.png"
+            else
+              @srcb1 = "/assets/reviews/1str.png"
+            end
+            if total >= 1.6
+              @srcb2 = "/assets/reviews/2str.png"
+            else
+              @srcb2 = "/assets/reviews/1str.png"
+            end
+            if total >= 2.6
+              @srcb3 = "/assets/reviews/2str.png"
+            else
+              @srcb3 = "/assets/reviews/1str.png"
+            end
+            if total >= 3.6
+              @srcb4 = "/assets/reviews/2str.png"
+            else
+              @srcb4 = "/assets/reviews/1str.png"
+            end
+            if total >= 4.6
+              @srcb5 = "/assets/reviews/2str.png"
+            else
+              @srcb5 = "/assets/reviews/1str.png"
+            end
+          end 
+          %>          
 
           <div class="res_data">
             <div class="data_row">
@@ -317,57 +302,52 @@
           </div>
         </div>
       <% else %>
-        <%
-        @rate_b1=rate_book(f.user.id,1,f.book_post_requirement_id).count()
-        @rate_b2=rate_book(f.user.id,2,f.book_post_requirement_id).count()
-        @rate_b3=rate_book(f.user.id,3,f.book_post_requirement_id).count()
-        @rate_b4=rate_book(f.user.id,4,f.book_post_requirement_id).count()
-        @rate_b5=rate_book(f.user.id,5,f.book_post_requirement_id).count()
-        sum_b = @rate_b1 +( @rate_b2 * 2 ) + (@rate_b3 * 3) + (@rate_b4 * 4) + ( @rate_b5 * 5)
-        total_no_b = @rate_b1 + @rate_b2 + @rate_b3 + @rate_b4 + @rate_b5 
-        if sum_b == 0
-        @srcb1 = "/assets/reviews/1str.png"
-        @srcb2 = "/assets/reviews/1str.png"
-        @srcb3 = "/assets/reviews/1str.png"
-        @srcb4 = "/assets/reviews/1str.png"
-        @srcb5 = "/assets/reviews/1str.png"
-        else
-        avrg_b = ( sum_b.to_f / total_no_b.to_f ).round(1)
-        if avrg_b >= 1
-        @srcb1 = "/assets/reviews/2str.png"
-        else
-        @srcb1 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 1.6
-        @srcb2 = "/assets/reviews/2str.png"
-        else
-        @srcb2 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 2.6
-        @srcb3 = "/assets/reviews/2str.png"
-        else
-        @srcb3 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 3.6
-        @srcb4 = "/assets/reviews/2str.png"
-        else
-        @srcb4 = "/assets/reviews/1str.png"
-        end
-        if avrg_b >= 4.6
-        @srcb5 = "/assets/reviews/2str.png"
-        else
-        @srcb5 = "/assets/reviews/1str.png"
-        end
-        end
-        %>
+        <% 
+          myid=Rate.where("user_id=? AND rated_id=? AND book_post_requirement_id=?",f.book_post_requirement.user.id,f.user.id,f.book_post_requirement.id )
+          con=myid.count()
+          if con == 0
+            @srcb1 = "/assets/reviews/1str.png"
+            @srcb2 = "/assets/reviews/1str.png"
+            @srcb3 = "/assets/reviews/1str.png"
+            @srcb4 = "/assets/reviews/1str.png"
+            @srcb5 = "/assets/reviews/1str.png"
+          else
+            total=myid.first.rated_no
+            if total >= 1
+              @srcb1 = "/assets/reviews/2str.png"
+            else
+              @srcb1 = "/assets/reviews/1str.png"
+            end
+            if total >= 1.6
+              @srcb2 = "/assets/reviews/2str.png"
+            else
+              @srcb2 = "/assets/reviews/1str.png"
+            end
+            if total >= 2.6
+              @srcb3 = "/assets/reviews/2str.png"
+            else
+              @srcb3 = "/assets/reviews/1str.png"
+            end
+            if total >= 3.6
+              @srcb4 = "/assets/reviews/2str.png"
+            else
+              @srcb4 = "/assets/reviews/1str.png"
+            end
+            if total >= 4.6
+              @srcb5 = "/assets/reviews/2str.png"
+            else
+              @srcb5 = "/assets/reviews/1str.png"
+            end
+          end 
+          %>     
         <div class="res_data">
           <div class="data_row">
             <div class="data_title">You are Provider / Seeker</div>
             <div class="data_col">
               <% if f.book_post_requirement.seeker_provider == true %>
-                Provider
-              <% else %>
                 Seeker
+              <% else %>
+                Provider
               <% end %>
             </div>
           </div>

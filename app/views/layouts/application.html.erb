@@ -159,16 +159,33 @@
   $("#feedback").click(function(e){
     e.stopPropagation();
   });
-
+  function IsEmail(email) {
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if(!regex.test(email.value)) {
+      return false;
+    }else{
+      return true ;
+    }
+  }
+  
   $("#send").click(function(){
+    var phone = $("#phon").val(),
+    intRegex = /[0-9 -()+]+$/;
     if ($("#name").val() == ""){
       $("#name_errore").show()
     }else if($("#email").val() == ""){
       $("#name_errore").hide()
       $("#email_errore").show()
+    }else if(IsEmail(email)==false){
+       $("#invalid_email").show()
+       $("#email_errore").hide()
     }else if($("#phon").val() == ""){
       $("#email_errore").hide()
+      $("#email_errore").hide()
       $("#phon_errore").show()
+    }else if((phone.length < 6) || (!intRegex.test(phone))){
+      $("#phon_errore_m").show()
+      $("#phon_errore").hide()
     }else if($("#message").val() == ""){
       $("#phon_errore").hide()
       $("#message_errore").show()

@@ -14,14 +14,14 @@ $(document).ready(function() {
       if (current_user_id != user_id){
         $.ajax({ url : "/messages/create", type: "POST", data: { user_id: user_id, location_id :location_id,  food_type_id :food_type_id, post_requirement_id : post_requirement_id}, dataType: "json"});
 				if(seeker_status == true){
-				var r = confirm("Your contact details will be shared. If the food seeker accepts your request.");
+				var r = confirm("Your contact details will be shared with the food seeker.");
 				if (r == true){	
 				alert("Please find the contact details of the food seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
 				}
 				else {return;}
 				}
 				else{
-				var r = confirm("Your contact details will be shared. If the food provider accepts your request.");
+				var r = confirm("Your contact details will be shared with the food provider.");
 				if (r == true){
 				alert("Please find the contact details of the food provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
 				}
@@ -213,7 +213,7 @@ $(document).ready(function() {
                                         </div>
                                         <div class="data_col">
                                         	<%= s.location.location_name %>
-                                          <% if s.seeker_provider == true %><br>
+                                          <% if s.seeker_provider == false %><br>
                   <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src3 %>">

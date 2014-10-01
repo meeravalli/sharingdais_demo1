@@ -23,8 +23,8 @@ before_filter :authenticate_user!, :except => [:index]
 
   def profile
     @user = current_user
-    @post_requirements = @user.post_requirements
-    @book_post_requirements = @user.book_post_requirements
+    @post_requirements = @user.post_requirements.order( 'id DESC' )
+    @book_post_requirements = @user.book_post_requirements.order( 'id DESC' )
     @book_activities = @user.book_activities.order( 'id DESC' )
     @activities = @user.activities.order( 'id DESC' )
     # Order Trace
