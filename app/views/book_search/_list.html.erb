@@ -58,12 +58,6 @@ $(document).ready(function() {
             <% @count = 1 %>
             <% @search_results.each do |s| %>
               <tr>
-                <td><%= @count %></td>
-								<% if !s.image.path.nil? %>
-                  <td><%= image_tag s.image.url(:small) %></td>
-                <%else%>
-                  <td><img src="/assets/no_image_available.png" style="width:150px"></td>
-                <%end%>
 <% 
   @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,1,s.id).count()
   @rate_2=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,2,s.id).count()
@@ -108,15 +102,26 @@ $(document).ready(function() {
     end
   end
 %>
-                <td><%= s.name %><br />
-                  <% if s.seeker_provider == false %>
-                  <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
-                  <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
-                  <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
-                  <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
-                  <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                <td><%= @count %></td>
+                <td>
+								  <% if !s.image.path.nil? %>
+                    <%= image_tag s.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+                  <%else%>
+                    <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
                   <%end%>
+                  <br />                  
+                  <% if s.seeker_provider == false %>
+                    <span style="left: 14%; position: relative;">
+                      <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                    </span>
+                  <%end%>
+                  
                 </td>
+                <td><%= s.name %></td>
                 <td><%= s.author %></td>
                 <td><%= s.location.location_name %></td>
                 <td><%= s.rent%></td>
@@ -143,23 +148,6 @@ $(document).ready(function() {
       </div>
 			<div class="srch_res_mob">
 			<% @search_results.each do |s| %>
-                            	<div class="res_data">
-                                	<div class="data_row">
-                                    	<div class="data_title">
-                                        	Book Photo
-                                        </div>
-                                        <div class="data_col">
-																				<% if !s.image.path.nil? %>
-                                          <%= image_tag s.image.url(:small) %>
-                                          <%else%>
-                                          <img src="/assets/no_image_available.png" style="width:130px">
-                                          <%end%>
-                                        </div>
-                                    </div>
-                                  <div class="data_row">
-                                      <div class="data_title">
-                                          Book Name
-                                        </div>
 <% 
   @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,1,s.id).count()
   @rate_2=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,2,s.id).count()
@@ -204,15 +192,35 @@ $(document).ready(function() {
     end
   end
 %>
+                            	<div class="res_data">
+                                	<div class="data_row">
+                                    	<div class="data_title">
+                                        	Book Photo
+                                        </div>
                                         <div class="data_col">
-                                          <%= s.name %><br />
+																				<% if !s.image.path.nil? %>
+                                          <%= image_tag s.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+                                          <%else%>
+                                          <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+                                          <%end%>
+                                          <br />
                                           <% if s.seeker_provider == false %>
+                                          <span style="left: 14%; position: relative;">
                   <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                </span>
                   <%end%>
+                                        </div>
+                                    </div>
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Book Name
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.name %>
                                         </div>
                                     </div>
                                     
