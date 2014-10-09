@@ -79,6 +79,29 @@ class BookSearchController < ApplicationController
     end
   end
 
+  def search_top_five_skill
+    @skill_search_seeker=SkillPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'1').group("location_id").order("count(location_id) DESC").limit(5)
+    seeker = []
+    if !@skill_search_seeker.blank?      
+      @skill_search_seeker.each do |loca|
+        location_dtls=Location.where("id=?",loca.location_id)
+        seeker << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
+      end
+    end
+    @book_search_provider=SkillPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
+    provider = []
+    if !@book_search_provider.blank?
+      @book_search_provider.each do |loca|
+        location_dtls=Location.where("id=?",loca.location_id)
+        provider << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
+      end
+    end
+    respond_to do |format|
+      msg = {:seeker => seeker, :provider =>provider }
+      format.json { render :json => msg }
+    end
+  end
+
   def book_result
     if params[:seeker_provider] == 'true'
       @prm = true

@@ -1,16 +1,19 @@
 <div class="nav">
   <ul>
     <li class="">
-      <a href="/food_search">Food Sharing</a>
+      <a href="/book_search" title="Find books, Share books and Make new friends in your neighborhood">Book Sharing</a>
     </li>
     <li class="">
-      <a href="/book_search">Book Sharing</a>
+      <a href="/food_search" title="Discover and Share delicious home-cooked food in your neighborhood">Food Sharing</a>
     </li>
     <li class="">
-      <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books of your choice? Submit your request here" %>
+      <a href="/skill_search" title="Teach and Learn skills & experiences nearby you">Skill Sharing</a>
     </li>
     <li class="">
-      <%= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books? Submit your request here" %>
+      <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
+    </li>
+    <li class="">
+      <%= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books or skills? Submit your request here" %>
     </li>
 		<% if current_user.nil? %>
 		<li class="">

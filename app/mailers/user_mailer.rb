@@ -11,6 +11,16 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
    end
 
+   def new_order_for_skill_provider(provider, message_id, seeker)
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
+    @login_url = "http://sharingdais.com/users/sign_in"
+    @user = provider
+    @seeker = seeker
+    @message = Message.find(message_id)
+    mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
+   end
+
    def new_book_order_for_provider(provider, message_id, seeker)
     #@url = "http://www.sharingdais.com/main/messages"
     @url = "http://www.sharingdais.com/main/home/profile"

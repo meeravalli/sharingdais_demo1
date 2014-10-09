@@ -20,6 +20,7 @@ class PostRequirement < ActiveRecord::Base
   belongs_to :provider
   belongs_to :region
   belongs_to :service
+  belongs_to :sub_category
 
   #Validations
   # Below mentioned fields are mandatory to post the requirement

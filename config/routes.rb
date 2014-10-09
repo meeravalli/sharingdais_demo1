@@ -1,4 +1,8 @@
 Sharingdasiss::Application.routes.draw do
+  get "skill_search/index"
+
+  get "skill_search/skill_result"
+
   devise_for :users
   devise_scope :user do
     get "/admin", :to => "devise/sessions#new"
@@ -16,6 +20,12 @@ Sharingdasiss::Application.routes.draw do
     get :edit_book_post_requirement, :on => :member
     get :edit_book_list_availability, :on => :member
     delete :book_destroy_requirement, :on => :member
+
+    post :post_skill_requirement, :on => :collection
+    post :skill_list_availability, :on => :collection
+    get :edit_skill_post_requirement, :on => :member
+    get :edit_skill_list_availability, :on => :member
+    delete :skill_destroy_requirement, :on => :member
   end
   
   resources :application do
@@ -58,6 +68,7 @@ Sharingdasiss::Application.routes.draw do
   
   match '/book_search', :to => 'book_search#index'
   match '/food_search', :to => 'food_search#index'
+  match '/skill_search', :to => 'skill_search#index'
 
   match '/home/search', :to => 'home#index'
 
@@ -76,14 +87,17 @@ Sharingdasiss::Application.routes.draw do
 
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
+  post "search_skill" => "book_search#search_top_five_skill"
   post "send_feedback" => "book_search#feedback"
   post "rate_me" => "home#rate_me"
   post "rate_me_book" => "home#rate_me_book"
+  post "rate_me_skill" => "home#rate_me_skill"
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
+  get "/skill_result/:id/:seeker_provider/" =>"skill_search#skill_result"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

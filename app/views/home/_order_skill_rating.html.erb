@@ -1,0 +1,457 @@
+<div class="display">
+  <h3 class="prf_title">Rate Your Friends For Skill</h3>
+  <div class="table-responsive src_res_desktop">
+    <table class="table table-hover">
+      <thead class="heading">
+        <tr>
+          <th>#</th>
+          <th>You are Provider / Seeker </th>
+          <th>Name</th>
+          <th>Locality</th>
+          <th>Phone No.</th>
+          <th>Email Id</th>
+          <th>Rate</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if !@negotiatn.blank? %>
+          <% @count = 1 %>
+          <% @negotiatn.each do |f| %>
+            <% if !f.skill_post_requirement_id.nil? %> 
+              <% if f.user_id.to_s == current_user.id.to_s %>  
+                <% 
+                  myid=Rate.where("user_id=? AND rated_id=? AND skill_post_requirement_id=?",f.user.id, f.skill_post_requirement.user.id,f.skill_post_requirement_id)
+                  cou=myid.count()
+                  if cou == 0
+                    @src1 = "/assets/reviews/1str.png"
+                    @src2 = "/assets/reviews/1str.png"
+                    @src3 = "/assets/reviews/1str.png"
+                    @src4 = "/assets/reviews/1str.png"
+                    @src5 = "/assets/reviews/1str.png"
+                  else
+                    total=myid.first.rated_no
+                    if total >= 1
+                      @src1 = "/assets/reviews/2str.png"
+                    else
+                      @src1 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 1.6
+                      @src2 = "/assets/reviews/2str.png"
+                    else
+                      @src2 = "/assets/reviews/1str.png"
+                    end
+                      if total >= 2.6
+                    @src3 = "/assets/reviews/2str.png"
+                      else
+                    @src3 = "/assets/reviews/1str.png"
+                      end
+                    if total >= 3.6
+                      @src4 = "/assets/reviews/2str.png"
+                    else
+                      @src4 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 4.6
+                      @src5 = "/assets/reviews/2str.png"
+                    else
+                      @src5 = "/assets/reviews/1str.png"
+                    end
+                  end 
+                %>     
+                <tr>
+                  <td><%= @count %></td>
+                  <td>
+                    <% if f.skill_post_requirement.seeker_provider == true %>
+                      Provider
+                    <% else %>
+                      Seeker
+                    <% end %>
+                  </td>
+                  <td><%= f.skill_post_requirement.user.name %></td>
+                  <td><%= f.skill_post_requirement.location.location_name %></td>
+                  <td><%= f.skill_post_requirement.user.phone_no %></td>
+                  <td><%= f.skill_post_requirement.user.email %></td>
+                  <td>
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="1" src="<%= @src1 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="2" src="<%= @src2 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="3" src="<%= @src3 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="4" src="<%= @src4 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="5" src="<%= @src5 %>">
+                  </td>
+                    <script type="text/javascript">
+                      $(".rate_<%= f.id %>").click(function () {
+                        if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                          $.ajax({ type: 'POST',url: '/rate_me_skill',data: ({'skill_post_requirement_id':"<%= f.skill_post_requirement.id %>",'user_id':"<%= f.user.id %>",'rated_id':"<%= f.skill_post_requirement.user.id %>",'negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                          });
+                        }
+                      });
+                    </script>
+                  <td>
+                    <a href="javascript:void(0)" id="delete_<%= f.id %>">Cancel</a>
+                    <script type="text/javascript">
+                      $("#delete_<%= f.id %>").click(function(event){
+                        if (confirm('Are you sure you want to delete this?')) {
+                          $.ajax({ type: 'POST',url: '/destroy_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+                          });
+                        }
+                      });
+                    </script>
+                  </td>
+                </tr>
+              <% else %>
+                <% 
+                  myid=Rate.where("user_id=? AND rated_id=? AND skill_post_requirement_id=?", f.skill_post_requirement.user.id,f.user.id,f.skill_post_requirement.id)
+
+                  cou=myid.count()
+                  if cou == 0
+                    @src1 = "/assets/reviews/1str.png"
+                    @src2 = "/assets/reviews/1str.png"
+                    @src3 = "/assets/reviews/1str.png"
+                    @src4 = "/assets/reviews/1str.png"
+                    @src5 = "/assets/reviews/1str.png"
+                  else
+                    total=myid.first.rated_no
+                    if total >= 1
+                      @src1 = "/assets/reviews/2str.png"
+                    else
+                      @src1 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 1.6
+                      @src2 = "/assets/reviews/2str.png"
+                    else
+                      @src2 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 2.6
+                      @src3 = "/assets/reviews/2str.png"
+                    else
+                      @src3 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 3.6
+                      @src4 = "/assets/reviews/2str.png"
+                    else
+                      @src4 = "/assets/reviews/1str.png"
+                    end
+                    if total >= 4.6
+                      @src5 = "/assets/reviews/2str.png"
+                    else
+                      @src5 = "/assets/reviews/1str.png"
+                    end
+                  end 
+                %>     
+                <tr>
+                  <td><%= @count %></td>
+                  <td>
+                    <% if f.skill_post_requirement.seeker_provider == true %>
+                      Seeker
+                    <% else %>
+                      Provider
+                    <% end %>
+                  </td>
+                  <td><%= f.user.name %></td>
+                  <td><%= f.user.address %></td>
+                  <td><%= f.user.phone_no %></td>
+                  <td><%= f.user.email %></td>
+                  <td>
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>_1" id="1" src="<%= @src1 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>_1" id="2" src="<%= @src2 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>_1" id="3" src="<%= @src3 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>_1" id="4" src="<%= @src4 %>">
+                    <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>_1" id="5" src="<%= @src5 %>">
+                  </td>
+                  <script type="text/javascript">
+                    $(".rate_<%= f.id %>_1").click(function () {
+                      if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                        $.ajax({ type: 'POST',url: '/rate_me_skill',data: ({'skill_post_requirement_id':"<%= f.skill_post_requirement.id %>",'user_id':"<%= f.skill_post_requirement.user.id %>",'rated_id':"<%= f.user.id %>",'negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                        });
+                      }
+                    });
+                  </script>
+                  <td>
+                    <a href="javascript:void(0)" id="delete_<%= f.id %>">Cancel</a>
+                    <script type="text/javascript">
+                      $("#delete_<%= f.id %>").click(function(event){
+                        if (confirm('Are you sure you want to delete this?')) {
+                          $.ajax({ type: 'POST',url: '/destroy_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+                          });
+                        }
+                      });
+                    </script>
+                  </td>
+                </tr>
+              <% end %>            
+            <%end%>
+            <% @count = @count+1 %>      
+          <% end %>
+        <%else%>
+          <tr>
+            <td colspan="8"><center>You don't have any Order</center></td>
+          </tr>
+        <% end %>
+      </tbody>  
+    </table>
+  </div>
+</div>
+<!--########################## Mobile ##############################-->
+<div class="srch_res_mob">
+  <%if !@negotiatn.blank? %>
+    <% @count = 1 %>
+    <% @negotiatn.each do |f| %>
+      <% if !f.skill_post_requirement_id.nil? %>
+        <% if f.user_id.to_s == current_user.id.to_s %>
+          <% 
+            myid=Rate.where("user_id=? AND rated_id=? AND skill_post_requirement_id=?",f.user.id, f.skill_post_requirement.user.id,f.skill_post_requirement_id)
+            cou=myid.count()
+            if cou == 0
+              @src1 = "/assets/reviews/1str.png"
+              @src2 = "/assets/reviews/1str.png"
+              @src3 = "/assets/reviews/1str.png"
+              @src4 = "/assets/reviews/1str.png"
+              @src5 = "/assets/reviews/1str.png"
+            else
+              total=myid.first.rated_no
+              if total >= 1
+                @src1 = "/assets/reviews/2str.png"
+              else
+                @src1 = "/assets/reviews/1str.png"
+              end
+              if total >= 1.6
+                @src2 = "/assets/reviews/2str.png"
+              else
+                @src2 = "/assets/reviews/1str.png"
+              end
+              if total >= 2.6
+                @src3 = "/assets/reviews/2str.png"
+              else
+                @src3 = "/assets/reviews/1str.png"
+              end
+              if total >= 3.6
+                @src4 = "/assets/reviews/2str.png"
+              else
+                @src4 = "/assets/reviews/1str.png"
+              end
+              if total >= 4.6
+                @src5 = "/assets/reviews/2str.png"
+              else
+                @src5 = "/assets/reviews/1str.png"
+              end
+            end 
+          %>     
+          <div class="res_data">
+            <div class="data_row">
+              <div class="data_title">
+                You are Provider / Seeker
+              </div>
+              <div class="data_col">
+                <% if f.skill_post_requirement.seeker_provider == true %>
+                  Provider
+                <% else %>
+                  Seeker
+                <% end %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_row">
+                <div class="data_title">
+                  Name
+                </div>
+                <div class="data_col">
+                  <%= f.skill_post_requirement.user.name %>
+                </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                  Locality
+                </div>
+                <div class="data_col">
+                  <%= f.skill_post_requirement.location.location_name %>
+                </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                  Phone No.
+                </div>
+                <div class="data_col">
+                  <%= f.skill_post_requirement.user.phone_no %>
+                </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                  Email Id
+                </div>
+                <div class="data_col">
+                  <%= f.skill_post_requirement.user.email %>
+                </div>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                  Rate
+                </div>
+                <div class="data_col">
+                  <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>" id="1" src="<%= @src1 %>">
+                  <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>" id="2" src="<%= @src2 %>">
+                  <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>" id="3" src="<%= @src3 %>">
+                  <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>" id="4" src="<%= @src4 %>">
+                  <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>" id="5" src="<%= @src5 %>">
+                </div>
+                <script type="text/javascript">
+                  $(".ratem_<%= f.id %>").click(function () {
+                    if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                      $.ajax({ type: 'POST',url: '/rate_me_skill',data: ({'skill_post_requirement_id':"<%= f.skill_post_requirement.id %>",'user_id':"<%= f.user.id %>",'rated_id':"<%= f.skill_post_requirement.user.id %>",'negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                      });
+                    }
+                  });
+                </script>
+              </div>
+              <div class="data_row">
+                <div class="data_title">
+                </div>
+                <div class="data_col">
+                  <a href="javascript:void(0)" id="delete_m<%= f.id %>">Cancel</a>
+                  <script type="text/javascript">
+                    $("#delete_m<%= f.id %>").click(function(event){
+                      if (confirm('Are you sure you want to delete this?')) {
+                        $.ajax({ type: 'POST',url: '/destroy_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+                        });
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <% 
+            myid=Rate.where("user_id=? AND rated_id=? AND skill_post_requirement_id=?", f.skill_post_requirement.user.id,f.user.id,f.skill_post_requirement.id)
+            
+            cou=myid.count()
+            if cou == 0
+              @src1 = "/assets/reviews/1str.png"
+              @src2 = "/assets/reviews/1str.png"
+              @src3 = "/assets/reviews/1str.png"
+              @src4 = "/assets/reviews/1str.png"
+              @src5 = "/assets/reviews/1str.png"
+            else
+              total=myid.first.rated_no
+              if total >= 1
+                @src1 = "/assets/reviews/2str.png"
+              else
+                @src1 = "/assets/reviews/1str.png"
+              end
+              if total >= 1.6
+                @src2 = "/assets/reviews/2str.png"
+              else
+                @src2 = "/assets/reviews/1str.png"
+              end
+              if total >= 2.6
+                @src3 = "/assets/reviews/2str.png"
+              else
+                @src3 = "/assets/reviews/1str.png"
+              end
+              if total >= 3.6
+                @src4 = "/assets/reviews/2str.png"
+              else
+                @src4 = "/assets/reviews/1str.png"
+              end
+              if total >= 4.6
+                @src5 = "/assets/reviews/2str.png"
+              else
+                @src5 = "/assets/reviews/1str.png"
+              end
+            end 
+          %>     
+          <div class="res_data">
+            <div class="data_row">
+              <div class="data_title">
+                You are Provider / Seeker
+              </div>
+              <div class="data_col">
+                <% if f.skill_post_requirement.seeker_provider == true %>
+                  Seeker
+                <% else %>
+                  Provider
+                <% end %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+                Name
+              </div>
+              <div class="data_col">
+                <%= f.user.name %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+                Locality
+              </div>
+              <div class="data_col">
+                <%= f.user.address %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+                Phone No.
+              </div>
+              <div class="data_col">
+                <%= f.user.phone_no %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+                Email Id
+              </div>
+              <div class="data_col">
+                <%= f.user.email %>
+              </div>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+                Rate
+              </div>
+              <div class="data_col">
+                <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>_1" id="1" src="<%= @src1 %>">
+                <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>_1" id="2" src="<%= @src2 %>">
+                <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>_1" id="3" src="<%= @src3 %>">
+                <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>_1" id="4" src="<%= @src4 %>">
+                <img style="cursor:pointer; width:13px" class="ratem_<%= f.id %>_1" id="5" src="<%= @src5 %>">
+              </div>
+              <script type="text/javascript">
+                $(".ratem_<%= f.id %>_1").click(function () {
+                  if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
+                    $.ajax({ type: 'POST',url: '/rate_me_skill',data: ({'skill_post_requirement_id':"<%= f.skill_post_requirement.id %>",'user_id':"<%= f.skill_post_requirement.user.id %>",'rated_id':"<%= f.user.id %>",'negotiate_id':"<%= f.id %>",'rate_no': $(this).attr("id")}),success: function (data) {alert(data.status);location.reload();}
+                    });
+                  }
+                });
+              </script>
+            </div>
+            <div class="data_row">
+              <div class="data_title">
+              </div>
+              <div class="data_col">
+                <a href="javascript:void(0)" id="delete_m<%= f.id %>">Cancel</a>
+                <script type="text/javascript">
+                  $("#delete_m<%= f.id %>").click(function(event){
+                    if (confirm('Are you sure you want to delete this?')) {
+                      $.ajax({ type: 'POST',url: '/destroy_order',data: ({'id':"<%= f.id %>"}),success: function (data) {location.reload();}
+                      });
+                    }
+                  });
+                </script>
+              </div>
+            </div></div>
+          <% end %>
+        <% @count = @count+1 %>      
+        <% end %>
+      <% end %>
+    </div>
+  <%else%>
+    <div class="res_data">
+      <div class="data_row">
+        <div class="data_title">
+        </div>
+        <div class="data_col">
+          You don't have any Order
+        </div>
+      </div>
+    </div></div>
+  <% end %>

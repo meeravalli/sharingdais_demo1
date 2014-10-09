@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service: 
+  city: 
+  location: 
+  sub_category: 
+  user: 
+  seeker_provider: false
+  latitude: 1.5
+  longitude: 1.5
+  description: MyText
+  home_service: false
+  service_in_one_line: MyText
+  charges: 1.5
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  sun: false
+
+two:
+  service: 
+  city: 
+  location: 
+  sub_category: 
+  user: 
+  seeker_provider: false
+  latitude: 1.5
+  longitude: 1.5
+  description: MyText
+  home_service: false
+  service_in_one_line: MyText
+  charges: 1.5
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  sun: false

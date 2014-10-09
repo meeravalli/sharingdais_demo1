@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140929102808) do
+ActiveRecord::Schema.define(:version => 20141009043905) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
     t.integer  "contact_id"
     t.integer  "order_id"
     t.integer  "post_requirement_id"
-    t.boolean  "seeked_shared",       :default => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.boolean  "seeked_shared",             :default => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.integer  "skill_post_requirement_id"
   end
 
   create_table "book_activities", :force => true do |t|
@@ -124,25 +125,27 @@ ActiveRecord::Schema.define(:version => 20140929102808) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "posted_to"
-    t.boolean  "read",                :default => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.boolean  "read",                      :default => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "subject"
-    t.boolean  "order_status",        :default => false
-    t.boolean  "accepted",            :default => false
-    t.boolean  "trashed",             :default => false
+    t.boolean  "order_status",              :default => false
+    t.boolean  "accepted",                  :default => false
+    t.boolean  "trashed",                   :default => false
     t.integer  "post_requirement_id"
     t.string   "food"
     t.string   "location"
     t.integer  "order_id"
+    t.integer  "skill_post_requirement_id"
   end
 
   create_table "negotiates", :force => true do |t|
     t.integer  "post_requirement_id"
     t.string   "user_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "nego_id"
+    t.integer  "skill_post_requirement_id"
   end
 
   create_table "order_cancels", :force => true do |t|
@@ -157,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20140929102808) do
     t.integer "provider_id"
     t.integer "post_requirement_id"
     t.date    "order_date"
+    t.integer "skill_post_requirement_id"
   end
 
   create_table "post_requirements", :force => true do |t|
@@ -197,8 +201,9 @@ ActiveRecord::Schema.define(:version => 20140929102808) do
     t.integer  "book_post_requirement_id"
     t.integer  "rated_no"
     t.string   "service_type"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "skill_post_requirement_id"
   end
 
   add_index "rates", ["book_negotiate_id"], :name => "index_rates_on_book_negotiate_id"
@@ -217,6 +222,46 @@ ActiveRecord::Schema.define(:version => 20140929102808) do
     t.string   "service_type"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "skill_post_requirements", :force => true do |t|
+    t.integer  "service_id"
+    t.integer  "city_id"
+    t.integer  "location_id"
+    t.integer  "sub_category_id"
+    t.integer  "user_id"
+    t.boolean  "seeker_provider"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.text     "description"
+    t.boolean  "home_service"
+    t.text     "service_in_one_line"
+    t.float    "charges"
+    t.boolean  "mon"
+    t.boolean  "tue"
+    t.boolean  "wed"
+    t.boolean  "thu"
+    t.boolean  "fri"
+    t.boolean  "sat"
+    t.boolean  "sun"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "skill_file_name"
+    t.string   "skill_content_type"
+    t.integer  "skill_file_size"
+    t.datetime "skill_updated_at"
+  end
+
+  add_index "skill_post_requirements", ["city_id"], :name => "index_skill_post_requirements_on_city_id"
+  add_index "skill_post_requirements", ["location_id"], :name => "index_skill_post_requirements_on_location_id"
+  add_index "skill_post_requirements", ["service_id"], :name => "index_skill_post_requirements_on_service_id"
+  add_index "skill_post_requirements", ["sub_category_id"], :name => "index_skill_post_requirements_on_sub_category_id"
+  add_index "skill_post_requirements", ["user_id"], :name => "index_skill_post_requirements_on_user_id"
+
+  create_table "sub_categories", :force => true do |t|
+    t.string   "sub_category_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "users", :force => true do |t|

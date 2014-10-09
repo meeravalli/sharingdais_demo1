@@ -7,7 +7,7 @@
         <h2 class="modal-title" id="myModalLabel">Select Your City</h2>
       </div>
       <div class="modal-body">
-         <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+         <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
@@ -49,6 +49,9 @@
           </li>
           <li class="">
             <a href="/book_search">Book Sharing</a>
+          </li>
+          <li class="">
+            <a href="/skill_search">Skill Sharing</a>
           </li>
           <li class="">
             <a href="/food_sharing/post_requirement"> Post as Seeker</a>

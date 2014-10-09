@@ -1,5 +1,5 @@
 <style type="text/css">
-@media screen and (min-width:1280px) {.custom_width{ width:60%; left: 20%;}.cust_btn{float: right;}}
+@media screen and (min-width:1280px) {.custom_width{ width:50%; left: 25%;}.cust_btn{float: right;}}
 </style>
 <%= javascript_include_tag :search %>
 <% if !params[:search].blank? %>
@@ -22,49 +22,91 @@
 </script>
 <div class="item active">
   <%=  image_tag "slider2.jpg", :alt => "..." %>
+
+
+
+
+
+
   <div class="carousel-caption custom_width">
     <div class="search-blk">
-      <p style="height:43px"class="head">Book Sharing</p>
+      <p style="height:43px" class="head">Book Sharing</p>
         <p style="height:25px">
           <i><small style="color:white;">Find books, Share books and Make new friends in your neighborhood</small></i></p>
 
         <%= form_tag(book_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
+
+
       <div class="check  col-xs-12 col-md-12">
-          <label for="">I am a Reader</label>
-          <%= radio_button_tag "search[book]", "0", params[:search][:book].to_i == 0, :id => 'search_book_0', :class => "book", :data => {:book => "Book name / ISBN / Author"} %>
+           <label for="">I am a Reader</label>
+           <%= radio_button_tag "search[book]", "0", params[:search][:book].to_i == 0, :id => 'search_book_0', :class => "book", :data => {:book => "Book name / ISBN / Author"} %>
 
           <label for="">I am an Owner</label>
           <%= radio_button_tag "search[book]", "1", params[:search][:book].to_i == 1, :id => 'search_book_1', :class => "book", :data => {:book=>"Book name / ISBN / Author"} %>
       </div>
+
+
+      
       <div class="search">
+          
+           <div class="cboth"></div>
           <div class="row">
-            <div class="left col-xs-5 col-md-6">
-              <label for="" class="book-chg" >Book name / ISBN / Author</label>
-            </div>
-            <div class="left col-xs-5 col-md-6">
-             <%= text_field_tag('search[key]', params[:search][:key], :class => "form-control book-chg", :placeholder => "Book name / ISBN / Author") %>
-            </div>
           </div>
-          <div class="cboth"></div>
-          <div class="row">
-            <div class="left col-xs-5 col-md-6">
+          <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12">
               <label for="">Locality</label>
             </div>
-            <div class="left col-xs-5 col-md-6">
+            <div class="left col-xs-12 ">
               <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true) %>
               <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
             </div>
+            
           </div>
-          <div class="cboth"></div>
-          <div class="row">
-            <div class="btns">
-              
+           <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label for="" class="book-chg" >Book name / ISBN / Author</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= text_field_tag('search[key]', params[:search][:key], :class => "form-control book-chg", :placeholder => "Book name / ISBN / Author") %>
+            </div>
+           </div>
+          
+             <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="left col-xs-12">
               <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_book_sharing_button" %>
             </div>
           </div>
-        </div>
-      <%end%>
+          <div class="cboth"></div>
+          <div class="row"></div>
+<div style="col-xs-12 col-md-2 padding_none text-left">
+            <div class="left col-xs-12 margin_topbot">
+             <label style="cursor:pointer;text-decoration:underline;" id="nearbylocations"> Include nearby Localities</label>    
+              <select style="background-color:#000;" name="search[kms]" id="search_kms"><option value="1">1 km</option>
+<option value="2">2 km</option>
+<option selected="selected" value="3">3 km</option>
+<option value="4">4 km</option>
+<option value="5">5 km</option></select> |
+              <input type="checkbox" value="true" style="display:none;" name="search[include_near_by_locations]" id="search_include_near_by_locations" checked="checked"><label style="cursor:pointer;" id="exclude_near_by_locations">Exclude Nearby Localities</label>
+            </div>
+          </div> 
+
+
+
+
     </div>
-  </div>
+<% end %> </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 </div>

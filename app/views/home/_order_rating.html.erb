@@ -17,7 +17,8 @@
     <tbody>
       <%if !@negotiatn.blank? %>
       <% @count = 1 %>
-      <% @negotiatn.each do |f| %> 
+      <% @negotiatn.each do |f| %>
+      <% if !f.post_requirement_id.nil? %> 
         <% if f.user_id.to_s == current_user.id.to_s %>  
         <% 
           myid=Rate.where("user_id=? AND rated_id=? AND post_requirement_id=?",f.user.id, f.post_requirement.user.id,f.post_requirement.id)
@@ -177,9 +178,9 @@
             </script>
           </td>
         </tr>
-        <% end %>
-        <% @count = @count+1 %>      
-      <% end %>
+        <% end %><%end%>
+             
+      <% end %><% @count = @count+1 %> 
       <%else%>
       <tr>
         <td colspan="8"><center>You don't have any Order</center></td>
@@ -190,10 +191,10 @@
 </div>
 <!--########################## Mobile ##############################-->
 <div class="srch_res_mob">
-
   <%if !@negotiatn.blank? %>
   <% @count = 1 %>
     <% @negotiatn.each do |f| %>
+    <% if !f.post_requirement_id.nil? %>
       <% if f.user_id.to_s == current_user.id.to_s %>
       <div class="res_data">
         <div class="data_row">
@@ -441,10 +442,10 @@
             </script>
                   </div>
               </div>
-          </div>
+          
 <% end %>
         <% @count = @count+1 %>      
-      <% end %>
+      <% end %><% end %></div>
       <%else%>
 <div class="res_data">
 <div class="data_row">

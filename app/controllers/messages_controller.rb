@@ -8,14 +8,20 @@ before_filter :authenticate_user!
   end
 
   def create
-    food_type = FoodType.find(params[:food_type_id]).name
+    if !params[:food_type_id].nil?
+      food_type = FoodType.find(params[:food_type_id]).name
+    end
     location = Location.find(params[:location_id]).location_name
-    @negotiate = Negotiate.create(:post_requirement_id => params[:post_requirement_id], :user_id => current_user.id, :nego_id => params[:user_id]).valid?
+    @negotiate = Negotiate.create(:post_requirement_id => params[:post_requirement_id],:skill_post_requirement_id => params[:skill_post_requirement_id], :user_id => current_user.id, :nego_id => params[:user_id]).valid?
     if @negotiate
-      message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => params[:user_id], :post_requirement_id => params[:post_requirement_id], :food => food_type, :location => location, :read => false, :order_status => true)
+      message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => params[:user_id], :post_requirement_id => params[:post_requirement_id], :skill_post_requirement_id => params[:skill_post_requirement_id], :food => food_type, :location => location, :read => false, :order_status => true)
       provider = User.find(params[:user_id])
       seeker = current_user
-      UserMailer.new_order_for_provider(provider,message.id, seeker).deliver
+      if !params[:post_requirement_id].blank?
+        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver
+      else
+        UserMailer.new_order_for_skill_provider(provider,message.id, seeker).deliver
+      end
       
       contact_details = User.find(params[:user_id])
       UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver

@@ -37,6 +37,23 @@ class SharingController < ApplicationController
     end
   end
 
+  def post_skill_requirement
+    @post_requirement = SkillPostRequirement.new(params[:post_skill_requirement])
+    puts "#{params[:post_skill_requirement]}===================================="
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id        
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+        redirect_to profile_home_path(current_user)
+      end
+    end
+  end
+
   def list_availability
    @post_requirement = PostRequirement.new(params[:post_requirement])
     if request.post?
@@ -72,6 +89,22 @@ class SharingController < ApplicationController
       end
     end
   end
+
+  def skill_list_availability
+    @post_requirement = SkillPostRequirement.new(params[:skill_post_requirement])
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+        redirect_to profile_home_path(current_user)
+      end
+    end
+  end
   
   def edit_post_requirement
     @post_requirement = PostRequirement.find(params[:id])
@@ -82,6 +115,12 @@ class SharingController < ApplicationController
   def edit_book_post_requirement
     @book_post_requirement = BookPostRequirement.find(params[:id])
     city = City.find(@book_post_requirement.city_id)
+    @locations = city.locations
+  end
+
+  def edit_skill_post_requirement
+    @skill_post_requirement = SkillPostRequirement.find(params[:id])
+    city = City.find(@skill_post_requirement.city_id)
     @locations = city.locations
   end
   
@@ -114,6 +153,15 @@ class SharingController < ApplicationController
         render "edit_book_post_requirement"
         end
   end
+  def update_skill_post_requirement
+    @post_requirement = SkillPostRequirement.find(params[:id])
+        if @post_requirement.update_attributes(params[:skill_post_requirement], :user_id => current_user.id)
+        flash[:notice] = 'Successfully updated'
+        redirect_to profile_home_path(current_user)
+        else
+        render "edit_skill_post_requirement"
+        end
+  end
   
   def edit_list_availability
     @post_requirement = PostRequirement.find(params[:id])
@@ -124,6 +172,11 @@ class SharingController < ApplicationController
   def edit_book_list_availability
     @book_post_requirement = BookPostRequirement.find(params[:id])
     city = City.find(@book_post_requirement.city_id)
+    @locations = city.locations
+  end
+  def edit_skill_list_availability
+    @skill_post_requirement = SkillPostRequirement.find(params[:id])
+    city = City.find(@skill_post_requirement.city_id)
     @locations = city.locations
   end
   
@@ -156,6 +209,15 @@ class SharingController < ApplicationController
         render "edit_book_list_availability"
         end
     end
+    def update_skill_list_availability
+      @skill_post_requirement = SkillPostRequirement.find(params[:id])
+        if @skill_post_requirement.update_attributes(params[:skill_post_requirement], :user_id => current_user.id)
+        flash[:notice] = 'Successfully updated'
+        redirect_to profile_home_path(current_user)
+        else
+        render "edit_book_list_availability"
+        end
+    end
 
     def destroy_requirement
       post_requirement = PostRequirement.find(params[:id])
@@ -169,6 +231,13 @@ class SharingController < ApplicationController
       book_post_requirement = BookPostRequirement.find(params[:id])
       user = User.find(book_post_requirement.user_id)
       book_post_requirement.destroy
+      flash[:notice] = "Successfully destroyed."
+      redirect_to profile_home_path(user)
+   end
+   def skill_destroy_requirement
+      skill_post_requirement = SkillPostRequirement.find(params[:id])
+      user = User.find(skill_post_requirement.user_id)
+      skill_post_requirement.destroy
       flash[:notice] = "Successfully destroyed."
       redirect_to profile_home_path(user)
    end

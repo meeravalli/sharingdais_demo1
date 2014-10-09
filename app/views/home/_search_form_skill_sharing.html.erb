@@ -1,0 +1,79 @@
+ <div class="item active">
+  <%=  image_tag "slider4.jpg", :alt => "..." %>
+
+
+  
+  <div class="carousel-caption custom_width">
+    <div class="search-blk">
+      <p class="head" style="height:43px">Skill Sharing</p>
+        <p style="height:25px">
+          <i><small style="color:white;">Teach and Learn skills & experiences nearby you</small></i></p>
+
+        <%= form_tag(skill_search_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+      <div class="check  col-xs-12 col-md-12">
+          <label for="">I Want to Learn</label>
+           <%= radio_button_tag "search[skill]", "0", params[:search][:skill].to_i == 0, :id => 'search_skill_0', :class => "skill" %>
+
+          <label for="">I Want to Teach</label>
+          <%= radio_button_tag "search[skill]", "1", params[:search][:skill].to_i == 1, :id => 'search_skill_1', :class => "skill" %>
+      </div>
+
+
+      
+      <div class="search">
+          
+           <div class="cboth"></div>
+          <div class="row">
+          </div>
+          <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>
+            
+          </div>
+           <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label class="book-chg" for="">Skill type</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= collection_select :search, :skill_type_id,SubCategory.all, :id, :sub_category_type, {:selected => params[:search][:skill_type_id]},{:class => "form-control"}%>
+            </div>
+           </div>
+          
+             <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="left col-xs-12">
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn cust_btn" %>
+            </div>
+          </div>
+          <div class="cboth"></div>
+          <div class="row"></div>
+<div style="col-xs-12 col-md-2 padding_none text-left">
+            <div class="left col-xs-12 margin_topbot">
+             <label id='nearbylocations' style="cursor:pointer;text-decoration:underline;" > Include nearby Localities</label>    
+              <%= select_tag('search[kms]', options_for_select({ "1 km" => "1", "2 km" => "2", "3 km" => "3", "4 km" => "4", "5 km" => "5"}, params[:search][:kms] || "3" ), :style => "background-color:#000;") %> |
+              <% locality_text = ( params[:search].empty? || params[:search].has_key?(:include_near_by_locations) ) ?  'Exclude Nearby Localities' : 'Exclude Nearby Localities'  %> 
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %><label id='exclude_near_by_locations' style="cursor:pointer;"><%= locality_text %></label>
+            </div>
+          </div> 
+
+
+
+
+    </div>
+    <%end%>
+  </div>
+</div>
+
+
+
+
+
+
+</div>

@@ -80,22 +80,22 @@ $(document).ready(function() {
     else
       @src1 = "/assets/reviews/1str.png"
     end
-    if avrg >= 1.6
+    if avrg >= 1.5
       @src2 = "/assets/reviews/2str.png"
     else
       @src2 = "/assets/reviews/1str.png"
     end
-    if avrg >= 2.6
+    if avrg >= 2.5
       @src3 = "/assets/reviews/2str.png"
     else
       @src3 = "/assets/reviews/1str.png"
     end
-    if avrg >= 3.6
+    if avrg >= 3.5
       @src4 = "/assets/reviews/2str.png"
     else
       @src4 = "/assets/reviews/1str.png"
     end
-    if avrg >= 4.6
+    if avrg >= 4.5
       @src5 = "/assets/reviews/2str.png"
     else
       @src5 = "/assets/reviews/1str.png"
@@ -111,7 +111,7 @@ $(document).ready(function() {
                   <%end%>
                   <br />                  
                   <% if s.seeker_provider == false %>
-                    <span style="left: 14%; position: relative;">
+                    <span style="left: 18%; position: relative;">
                       <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
@@ -205,7 +205,7 @@ $(document).ready(function() {
                                           <%end%>
                                           <br />
                                           <% if s.seeker_provider == false %>
-                                          <span style="left: 14%; position: relative;">
+                                          <span style="left: 18%; position: relative;">
                   <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src3 %>">

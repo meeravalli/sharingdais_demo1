@@ -1,0 +1,15 @@
+<%= render 'banner_carousel' %>
+<% if @search_results.blank? %>
+	<p class="no_result_style"> No Results are found. Request you to post your requirement, we will try to fulfill it.</p>
+  <p class="no_result_post">
+
+  <%= link_to 'Post your requirement if you are looking for skill', post_requirement_sharing_index_path, :title => "Looking for home cooked skill? Submit your request here" %>
+ 
+<%= link_to 'Post your offering if you are willing to provide skill', list_availability_sharing_index_path, :title => "Interested in serving skill to people? Submit your request here" %>
+
+   </p>
+   
+   <br>
+<% else %>
+	<%= render 'list'%>
+<% end %>

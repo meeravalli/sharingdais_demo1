@@ -1,0 +1,132 @@
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){
+    if(document.getElementById('book_post_requirement_city_id') !== null){
+			   	value = $.cookie('city_id')
+					if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+  });
+
+</script>
+
+<p class="head light-tit">Edit Skill List as Provider</p>
+<div class="form_inner_align">
+  <%= form_for @skill_post_requirement, :url => { :action => "update_skill_list_availability", :id => @skill_post_requirement}, :html => {:class=>"form-horizontal"} do |f|%>
+    <% if @skill_post_requirement.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @skill_post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+   <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Sub-Category <i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:sub_category_id, SubCategory.all, :id, :sub_category_type, {:include_blank => 'Select Sub_Category'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Service in one-line (30 Char.)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :service_in_one_line, :maxlength=>"30", :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Charges (in Rs)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :charges, :class=>'form-control quantity',"required"=>"required" %>
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="" class="">Home Service</label>
+      <div class="">
+        <label class="btn btn-default">
+        <%= f.radio_button :home_service, "1" %> Yes
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button :home_service, "0" %> No
+      </label> 
+      </div><br/>
+      <label for="inputEmail3" class="">Skill Image</label>
+      <div class="">
+        <%= f.file_field :skill %>
+      </div>
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Availability</label>
+      <div class="input-group date">
+        <label class="btn btn-primary">
+        <%= f.check_box :mon %> Mon
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :tue %> Tue
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :wed %> Wed
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :thu %> Thu
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :fri %> Fri
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sat %> Sat
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sun %> Sun
+      </label>
+      </div>
+    </div>
+   
+  
+    <div class="form-group">
+      <label for="" class="">Details of Service<i>*</i> </label>
+      <div class="">
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Maximum Character Limit 150",'required'=>'required'  %>
+      </div>
+    </div>
+    
+    <%= f.hidden_field :seeker_provider, value: false %>
+    <div class="form-group">
+   </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= f.submit "Update", :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+ <script>
+      function get_edit_locations(value, update_field)
+			{
+        if (value !="")
+        {
+          $.ajax({ url : "/application/get_locations", type: "GET", data: { id: value}, dataType: "json",
+            success: function (response) {
+              $("#"+update_field+" option").remove();
+              $.each(response, function(key, value) {
+							$("#"+update_field).append($("<option></option>").attr("value",value.id).text(value.location_name));
+              });
+         }
+          });
+        }
+        else{
+          $("#"+update_field+" option").remove();
+          $("#"+update_field).append($("<option value=''>Locality</option>"));
+        }
+		}
+</script>
+
+
+
