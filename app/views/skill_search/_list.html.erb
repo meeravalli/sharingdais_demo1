@@ -89,7 +89,7 @@ $(document).ready(function() {
   end
 %>
               <tr>
-                <td><%= @count %> | <%= s.user.id %></td>
+                <td><%= @count %></td>
                 <td>
 								  <% if !s.skill.path.nil? %>
                     <%= image_tag s.skill.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
@@ -97,11 +97,11 @@ $(document).ready(function() {
                     <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
                   <%end%>          
                 </td>
-                <td>
+                <td  class="col-xs-2">
                   <b><%= s.location.location_name %></b>
                   <br /> <br />                 
                   <% if s.seeker_provider == false %>
-                    <span style="left: 18%; position: relative;">
+                    <span style="left: 0%; position: relative;">
                       <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
@@ -117,11 +117,7 @@ $(document).ready(function() {
                   <br /> <br /> 
                   <b>Description:</b> <%= s.description %>
                   <br /> <br />
-                  <b>Home-Service:</b> <% if s.home_service == false %>No <% else %> Yes <%end%>
-                </td>
-                <td>
-                  <div style="top: 40px;position: relative;">
-                    <b>Availability:</b>
+                  <b>Availability:</b>
                     <% if s.mon == true %>Mon,<% end %>
                     <% if s.tue == true %>Tue,<% end %>
                     <% if s.wed == true %>Wed,<% end %>
@@ -129,6 +125,10 @@ $(document).ready(function() {
                     <% if s.fri == true %>Fri,<% end %>
                     <% if s.sat == true %>Sat,<% end %>
                     <% if s.sun == true %>Sun<% end %>
+                </td>
+                <td>
+                  <div style="top: 40px;position: relative;">                    
+                    <b>Home-Service:</b> <% if s.home_service == false %>No <% else %> Yes <%end%>
                   </div>
                 </td>
                 <% @user_email = s.user.email%>
