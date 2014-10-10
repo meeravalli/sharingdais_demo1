@@ -45,19 +45,20 @@
 			<span id="mob_menu" class="fa fa-align-justify nav_icon">
 				<ul class="mob_nav">
           <li class="">
-            <a href="/food_search">Food Sharing</a>
-          </li>
-          <li class="">
             <a href="/book_search">Book Sharing</a>
           </li>
+          <li class="">
+            <a href="/food_search">Food Sharing</a>
+          </li>
+          
           <li class="">
             <a href="/skill_search">Skill Sharing</a>
           </li>
           <li class="">
-            <a href="/food_sharing/post_requirement"> Post as Seeker</a>
+            <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
           </li>
           <li class="">
-            <a href="/food_sharing/list_availability">List as Provider</a>
+            <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
           </li>
 					<% if current_user.nil? %>
 						<li class="">
@@ -68,9 +69,9 @@
 						<li class="">
               <%= link_to "Profile",profile_home_path(current_user) %>
             </li>
-						<li class="">
-              <%= link_to 'Inbox', messages_path %> <% if session[:unread_messages] > 0 %> (<%= session[:unread_messages] %>) <% end %>
-            </li>
+						<!--<li class="">
+              <%#= link_to 'Inbox', messages_path %> <%# if session[:unread_messages] > 0 %> (<%#= session[:unread_messages] %>) <%# end %>
+            </li>-->
 						<li class="">
               <%= link_to 'Change Password', edit_user_registration_path %>
             </li>
