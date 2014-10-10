@@ -1,3 +1,6 @@
+<style type="text/css">
+  @media screen and (max-width:768px) {#sticky_element{display: none;}}
+</style>
 <script>
 $(document).ready(function() {
     $("html, body").animate({ scrollTop: 450 }, 1000);
@@ -126,7 +129,7 @@ $(document).ready(function() {
                     <% if s.sat == true %>Sat,<% end %>
                     <% if s.sun == true %>Sun<% end %>
                 </td>
-                <td>
+                <td class="col-xs-2">
                   <div style="top: 40px;position: relative;">                    
                     <b>Home-Service:</b> <% if s.home_service == false %>No <% else %> Yes <%end%>
                   </div>
@@ -152,4 +155,135 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
+
+  <div class="srch_res_mob">
+  <% @count = 1 %>
+  <% @search_results.each do |s| %>                            
+  <% 
+    @rate_1=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,1,s.id).count()
+    @rate_2=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,2,s.id).count()
+    @rate_3=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,3,s.id).count()
+    @rate_4=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,4,s.id).count()
+    @rate_5=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,5,s.id).count()
+
+    sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+    total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+    if sum == 0
+      @src1 = "/assets/reviews/1str.png"
+      @src2 = "/assets/reviews/1str.png"
+      @src3 = "/assets/reviews/1str.png"
+      @src4 = "/assets/reviews/1str.png"
+      @src5 = "/assets/reviews/1str.png"
+    else
+      avrg = ( sum.to_f / total_no.to_f ).round(1)
+      if avrg >= 1
+        @src1 = "/assets/reviews/2str.png"
+      else
+        @src1 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 1.5
+        @src2 = "/assets/reviews/2str.png"
+      else
+        @src2 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 2.5
+        @src3 = "/assets/reviews/2str.png"
+      else
+        @src3 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 3.5
+        @src4 = "/assets/reviews/2str.png"
+      else
+        @src4 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 4.5
+        @src5 = "/assets/reviews/2str.png"
+      else
+        @src5 = "/assets/reviews/1str.png"
+      end
+    end
+  %>                           
+                              
+                             
+                              
+                             
+    <div class="res_data">
+      <div class="data_row">
+        <div class="data_title">Skill Photo</div>
+        <div class="data_col">
+          <% if !s.skill.path.nil? %>
+            <%= image_tag s.skill.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+          <%else%>
+            <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+          <%end%>          
+        </div>
+      </div>
+      <div class="data_row">
+        <div class="data_title">Locality</div>
+        <div class="data_col">
+          <b><%= s.location.location_name %></b>
+          <br /> <br />                 
+          <% if s.seeker_provider == false %>
+            <span style="left: 0%; position: relative;">
+              <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+            </span>
+          <%end%>
+          <br /> <br />       
+          <b>Charges:</b> <%= s.charges%>
+        </div>
+      </div>
+      <div class="data_row">
+        <div class="data_title">Description</div>
+        <div class="data_col">
+          <%= s.service_in_one_line %>
+          <br /> <br /> 
+          <b>Description:</b> <%= s.description %>
+          <br /> <br />
+          <b>Availability:</b>
+          <% if s.mon == true %>Mon,<% end %>
+          <% if s.tue == true %>Tue,<% end %>
+          <% if s.wed == true %>Wed,<% end %>
+          <% if s.thu == true %>Thu,<% end %>
+          <% if s.fri == true %>Fri,<% end %>
+          <% if s.sat == true %>Sat,<% end %>
+          <% if s.sun == true %>Sun<% end %>
+        </div>
+      </div>
+      <div class="data_row">
+        <div class="data_title">Home-Service:</div>
+        <div class="data_col">           
+          <% if s.home_service == false %>No <% else %> Yes <%end%>
+        </div>
+      </div>
+      <div class="data_row">
+        <div class="data_title"></div>
+        <div class="data_col">
+          <% @user_email = s.user.email%>
+          <% @user_phone = s.user.phone_no%>
+          <% if !current_user %>
+            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+          <% elsif negotiate(current_user.id, s.id).nil?%>
+            <span id="t_<%= s.id %>">
+              <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+            </span>
+          <% else %>
+            Already Negotiated
+          <% end %>
+          <% @count = @count+1 %>
+        </div>
+      </div>
+    </div>
+    <%end%>
+
+
+
+
+  </div>
+
+
+
 </div>
