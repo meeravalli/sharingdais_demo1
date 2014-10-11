@@ -6,26 +6,28 @@ $(document).ready(function() {
 <% if current_user %>
       var seeker_status = seeker_provider;
       var current_user_id = "<%= current_user.id %>";
-	  var email1 = email;
-	  var phone1 = phone;
+    var email1 = email;
+    var phone1 = phone;
       if (current_user_id != user_id){
         $.ajax({ url : "/messages/create", type: "POST", data: { user_id: user_id, location_id :location_id, skill_post_requirement_id : skill_post_requirement_id}, dataType: "json"});
-				if(seeker_status == true){
-				var r = confirm("Your contact details will be shared with the skill seeker .");
-				if (r == true){	
-				alert("Please find the contact details of the skill seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
-				}
-				else {return;}
-				}
-				else{
-				var r = confirm("Your contact details will be shared with the skill provider.");
-				if (r == true){
-				alert("Please find the contact details of the skill provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
-				}
-				else {return;}
-				}
+        if(seeker_status == true){
+        var r = confirm("Your contact details will be shared with the food seeker.");
+        if (r == true){ 
+        alert("Please find the contact details of the food seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
+        else{
+        var r = confirm("Your contact details will be shared with the food provider.");
+        if (r == true){
+        alert("Please find the contact details of the food provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
         $("#t_"+skill_post_requirement_id).empty();
         $("#t_"+skill_post_requirement_id).html("Already Negotiated");
+        $("#t_"+skill_post_requirement_id+"_m").empty();
+        $("#t_"+skill_post_requirement_id+"_m").html("Already Negotiated");
       }
       else{
         alert("You can't able to negotiate this order");
@@ -91,14 +93,14 @@ $(document).ready(function() {
               <tr>
                 <td><%= @count %></td>
                 <td>
-								  <% if !s.skill.path.nil? %>
+                  <% if !s.skill.path.nil? %>
                     <%= image_tag s.skill.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
                   <%else%>
                     <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
                   <%end%>          
                 </td>
                 <td  class="col-xs-2">
-                  <b><%= s.location.location_name %></b>
+                  <b><%= s.location.location_name %> | <%= s.id %></b>
                   <br /> <br />                 
                   <% if s.seeker_provider == false %>
                     <span style="left: 0%; position: relative;">
@@ -134,10 +136,12 @@ $(document).ready(function() {
                 <% @user_email = s.user.email%>
                 <% @user_phone = s.user.phone_no%>
                 <% if !current_user %>
-	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
-                <% elsif negotiate(current_user.id, s.id).nil?%>
-					<td id="t_<%= s.id %>">
-					  <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_skill(current_user.id, s.id).nil?%>
+
+                  <td id="t_<%= s.id %>">
+                    <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+                  </td>
                 <% else %>
                   <td>Already Negotiated</td>
                 <% end %>
@@ -153,7 +157,8 @@ $(document).ready(function() {
     </div>
   </div>
 
-  <div class="srch_res_mob">
+
+<div class="srch_res_mob">
   <% @count = 1 %>
   <% @search_results.each do |s| %>                            
   <% 
@@ -261,15 +266,18 @@ $(document).ready(function() {
         <div class="data_col">
           <% @user_email = s.user.email%>
           <% @user_phone = s.user.phone_no%>
+          
           <% if !current_user %>
-            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
-          <% elsif negotiate(current_user.id, s.id).nil?%>
-            <span id="t_<%= s.id %>">
-              <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
-            </span>
-          <% else %>
-            Already Negotiated
-          <% end %>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_skill(current_user.id, s.id).nil?%>
+
+                  <td id="t_<%= s.id %>_m">
+                    <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+                  </td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+
           <% @count = @count+1 %>
         </div>
       </div>
@@ -280,6 +288,8 @@ $(document).ready(function() {
 
 
   </div>
+
+
 
 
 
