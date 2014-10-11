@@ -63,4 +63,90 @@
     <%end%>
     </tbody>  
   </table>
-</div></div>
+</div>
+<!--####################### Mobile ##############################-->
+
+<div class="srch_res_mob">
+
+<% my_count = 1 %>
+    <% if !@skill_post_requirements.empty? %>
+<% @skill_post_requirements.each do |p| %>
+          <div class="res_data">
+            <div class="data_row">
+              <div class="data_title">City</div>
+              <div class="data_col">
+                  <%= p.city.city_name %>
+              </div>
+            </div>
+          <div class="data_row">
+            <div class="data_title">Locality</div>
+            <div class="data_col">
+              <%= p.location.location_name%>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Post As</div>
+            <div class="data_col">
+              <% if p.seeker_provider == true %>
+              Seeker
+            <% else %>
+              Provider              
+            <% end %>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Skill</div>
+            <div class="data_col">
+              <%= p.sub_category.sub_category_type%>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Price</div>
+            <div class="data_col">
+              <%= p.charges%>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title">Description</div>
+            <div class="data_col">
+              <%= p.description%>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title"> </div>
+            <div class="data_col">
+              <% if p.seeker_provider %>
+            
+              <%= link_to 'Edit', edit_skill_post_requirement_sharing_path(p)%>
+            
+          <%else%>
+            
+              <%= link_to 'Edit', edit_skill_list_availability_sharing_path(p)%>              
+            
+          <%end%>
+            </div>
+          </div>
+          <div class="data_row">
+            <div class="data_title"></div>
+            <div class="data_col">
+              <%= link_to 'Destroy', skill_destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+        <% my_count +=1 %>
+        <%end%>
+<% else %>
+<div class="res_data">
+<div class="data_row">
+              <div class="data_title">Status</div>
+              <div class="data_col">
+                  You don't have any Order
+              </div>
+            </div>
+</div>
+<% end %>
+
+
+  </div>
+<!--##################### End Mobile ############################-->
+</div>
