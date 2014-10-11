@@ -131,7 +131,7 @@ $(document).ready(function() {
                 <% @user_phone = s.user.phone_no%>
                 <% if !current_user %>
 	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
-                <% elsif negotiate(current_user.id, s.id).nil?%>
+                <% elsif negotiate_book(current_user.id, s.id).nil?%>
 					<td id="t_<%= s.id %>">
 					  <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
                 <% else %>
@@ -205,7 +205,7 @@ $(document).ready(function() {
                                           <%end%>
                                           <br />
                                           <% if s.seeker_provider == false %>
-                                          <span style="left: 18%; position: relative;">
+                                          <span style="left: 15%; position: relative;">
                   <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
@@ -273,7 +273,7 @@ $(document).ready(function() {
 																				<div class="data_col" id="t_<%= s.id %>">
                                         <% if !current_user %>
                     <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
-                <% elsif negotiate(current_user.id, s.id).nil?%>
+                <% elsif negotiate_book(current_user.id, s.id).nil?%>
           <td id="t_<%= s.id %>">
             <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
                 <% else %>
