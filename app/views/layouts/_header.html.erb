@@ -38,7 +38,7 @@
           </a>
         </div>
         </div>
-		<div class="left city_select padding_five margin_city">
+		<div class="left city_select padding_five margin_city col-sm-3">
                    <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control", :onchange => "get_location(this.value,'locality_id_class')"} %>
 		</div>
 		  <div class="nav-mob">

@@ -3,13 +3,17 @@
     <div class="profile-bx ">
       <div class="inner-pro row">
         <div class="col-xs-5 left">
+
           <div class="img">
 					  <% if !@user.photo.path.nil? %>
-            <%= image_tag  @user.photo.url(:small), :class => "img-responsive" %>
+            <%= image_tag  @user.photo.url(:small), :class => "img-responsive", :style=>"width:100%; height:100%;" %>
 						<%else%>
 						<%= "Upload your photo" %>
 						<%end%>
           </div>
+        </div>
+        <div class="profile_edit">
+          <%= link_to 'Edit profile', edit_profile_home_path(@user), :class=>"button" %>
         </div>
         <div class="col-xs-7 rgt">
           <div class="row">
@@ -53,9 +57,7 @@
               <div><%= @user.phone_no %></div>
             </div>
           </div>
-        <div class="profile_edit">
-          <%= link_to 'Edit profile', edit_profile_home_path(@user), :class=>"button" %>
-        </div>
+        
         </div>
       </div>
     </div>
