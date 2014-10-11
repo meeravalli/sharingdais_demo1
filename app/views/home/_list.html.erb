@@ -208,7 +208,7 @@ $(document).ready(function() {
 																					<img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
 																					<%end%>
                                           <% if s.seeker_provider == false %><br>
-                                          <span style="left: 18%; position: relative;">
+                                          <span style="left: 11%; position: relative;">
                   <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                   <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
@@ -280,12 +280,13 @@ $(document).ready(function() {
                                         </div>
 																				<div class="data_col" id="t_<%= s.id %>">
 																				<% if !current_user %>
-																					<%= link_to("Interested","javascript:void(0)", {:onclick => "check_user(#{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}), #{s.seeker_provider});" }) %>
-																				<% elsif negotiate(current_user.id, s.id).nil?%>
-																					<%= link_to("Interested","javascript:void(0)", {:onclick => "check_user(#{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}), #{s.seeker_provider});" }) %>
-																				<%else%>
-																					<%= "Already Negotiated" %>
-																				<%end%>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate(current_user.id, s.id).nil?%>
+          <td id="t_<%= s.id %>">
+            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
                                         </div>
                                     </div>
                                 </div>
