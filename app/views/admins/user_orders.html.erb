@@ -15,32 +15,22 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>User Name</th>
-                        <th>Phone No</th>
-                        <th>Email</th>
-                        <th>Provider type</th>
-                        <th>Details</th>
-                        <th>Date</th>
+                        <th>Date / Time</th>
+                        <th>Name of the connected person</th>
+                        <th>Name of the person</th>
+                        <th>Details</th>                        
                     </tr>
                  </thead>
                  <tbody>
                     <% @order_food.each do |o| %>
 					           <tr>
-                      <td><%= o.post_requirement.user.name %></td>
-                      <td><%= o.post_requirement.user.phone_no %></td>
-                      <td><%= o.post_requirement.user.email %></td>
-                      <td><%= o.post_requirement.provider.provider_type %></td>
-                      <td>
-                        <% if !o.post_requirement.details.nil? %>
-                          <%= o.post_requirement.details %>
-                        <%else%>
-                          not available
-                        <%end%>
-                      </td>
                       <td>
                         <%= o.created_at.strftime("%d %b. %Y") %> : 
                         <%= o.created_at.strftime("%H:%M") %>
                       </td>
+                      <td><%= o.post_requirement.user.name %></td>
+                      <td><%= o.user.name %>                      </td>
+                      <td><%= o.post_requirement.details %></td>
                      </tr>
 					          <% end %>            
                 </tbody>
@@ -58,31 +48,27 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>User Name</th>
-                        <th>Phone No</th>
-                        <th>Email</th>
-                        <th>Provider type</th>
+                        <th>Date / Time</th>
+                        <th>Name of the connected person</th>
+                        <th>Name of the person</th>
                         <th>Details</th>
-                        <th>Date</th>
                     </tr>
                  </thead>
                  <tbody>
                     <% @order_book.each do |o| %>
                      <tr>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                        </td>
                       <td><%= o.book_post_requirement.user.name %></td>
-                      <td><%= o.book_post_requirement.user.phone_no %></td>
-                      <td><%= o.book_post_requirement.user.email %></td>
-                      <td><%= o.book_post_requirement.service.service_type %></td>
+                      <td><%= o.user.name %></td>
                       <td>
                         <% if !o.book_post_requirement.description.nil? %>
                           <%= o.book_post_requirement.description %>
                         <%else%>
                           not available
                         <%end%>
-                      </td>
-                      <td>
-                        <%= o.created_at.strftime("%d %b. %Y") %> : 
-                        <%= o.created_at.strftime("%H:%M") %>
                       </td>
                      </tr>
                     <% end %>            
@@ -100,31 +86,27 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>User Name</th>
-                        <th>Phone No</th>
-                        <th>Email</th>
-                        <th>Provider type</th>
+                        <th>Date / Time</th>
+                        <th>Name of the connected person</th>
+                        <th>Name of the person</th>
                         <th>Details</th>
-                        <th>Date</th>
                     </tr>
                  </thead>
                  <tbody>
                     <% @order_skill.each do |o| %>
                      <tr>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
                       <td><%= o.skill_post_requirement.user.name %></td>
-                      <td><%= o.skill_post_requirement.user.phone_no %></td>
-                      <td><%= o.skill_post_requirement.user.email %></td>
-                      <td><%= o.skill_post_requirement.service.service_type %></td>
+                      <td><%= o.user.email %></td>
                       <td>
                         <% if !o.skill_post_requirement.description.nil? %>
                           <%= o.skill_post_requirement.description %>
                         <%else%>
                           not available
                         <%end%>
-                      </td>
-                      <td>
-                        <%= o.created_at.strftime("%d %b. %Y") %> : 
-                        <%= o.created_at.strftime("%H:%M") %>
                       </td>
                      </tr>
                     <% end %>            
