@@ -6,6 +6,7 @@ class BookPostRequirement < ActiveRecord::Base
     has_many :book_activities, :dependent => :destroy
     has_many :book_negotiates, :dependent => :destroy
     belongs_to :user
+    belongs_to :service
     belongs_to :city
     belongs_to :location
     	

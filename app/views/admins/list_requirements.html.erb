@@ -4,6 +4,7 @@
 <ul class="nav nav-tabs" role="tablist" style="float:left">
   <li class="active"><a href="#book" role="tab" data-toggle="tab">Food List Requirements</a></li>
   <li><a href="#food" role="tab" data-toggle="tab">Book List Requirements</a></li>
+  <li><a href="#skill" role="tab" data-toggle="tab">skill List Requirements</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -91,6 +92,46 @@
             </table>
                 <div class="pagination">
       <%= will_paginate @book_orders%>
+            </div>
+        </div>
+  </div>
+
+  <div class="tab-pane" id="skill">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Skill</th>
+                        <th>Region</th>
+                        <th>Rent</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @skill_orders.each do |b| %>
+                    <tr>
+                        <td>
+                            <% if !b.user.nil? %>
+                                <%= b.user.name %>
+                            <% else %>
+                                Account Deleted
+                            <% end %>
+                        </td>
+                        <td><%= b.sub_category.sub_category_type %></td>
+                        <td><%= b.location.location_name %></a></td>
+                        <td><%= b.charges %></td>
+                        <td><%= b.description %></td>
+                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+                    </tr>
+                    <% end %>
+                   
+                    
+                </tbody>
+            </table>
+                <div class="pagination">
+      <%= will_paginate @skill_orders%>
             </div>
         </div>
   </div>

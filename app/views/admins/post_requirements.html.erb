@@ -1,93 +1,134 @@
 <h3 class="heading_content">Sharingdais Post Requirements</h3><br>
-  <div class="display padding_five">
-         <!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist" style="float:left">
-  <li class="active"><a href="#book" role="tab" data-toggle="tab">Food Post Requirements</a></li>
-  <li><a href="#food" role="tab" data-toggle="tab">Book Post Requirements</a></li>
-</ul>
+<div class="display padding_five">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style="float:left">
+    <li class="active">
+      <a href="#book" role="tab" data-toggle="tab">Food Post Requirements</a>
+    </li>
+    <li>
+      <a href="#food" role="tab" data-toggle="tab">Book Post Requirements</a>
+    </li>
+    <li>
+      <a href="#skill" role="tab" data-toggle="tab">Skill Post Requirements</a>
+    </li>
+  </ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="book">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th>User Name</th>
-                        <th>Locality</th>
-                        <th>Food type</th>
-                        <th>Region</th>
-                        <th>Budget</th>
-                        <th>Details</th>
-                        <th>Date</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @food_orders.each do |f| %>
-                    <tr>
-                        <td><%= f.user.name %></td>
-                        <td><%= f.location.location_name %></td>
-                        <td><%= f.food_type.name %></td>
-                        <td><%= f.region.name %></a></td>
-                        <td><%= f.budget %></td>
-                        <td><%= f.details %></td>
-                        <td><%= f.created_at.strftime("%b %d, %Y") %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @food_orders %>
-            </div>
+<!-- Tab panes food -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="book">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th>User Name</th>
+                <th>Locality</th>
+                <th>Food type</th>
+                <th>Region</th>
+                <th>Budget</th>
+                <th>Details</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @food_orders.each do |f| %>
+              <tr>
+                <td><%= f.user.name %></td>
+                <td><%= f.location.location_name %></td>
+                <td><%= f.food_type.name %></td>
+                <td><%= f.region.name %></a></td>
+                <td><%= f.budget %></td>
+                <td><%= f.details %></td>
+                <td><%= f.created_at.strftime("%b %d, %Y") %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+           <%= will_paginate @food_orders %>
+          </div>
         </div>
-  </div>
-
-
-  <div class="tab-pane" id="food">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th>User Name</th>
-                        <th>Book Name</th>
-                        <th>Author</th>
-                        <th>Region</th>
-                        <th>Rent</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @book_orders.each do |b| %>
-                    <tr>
-                        <td>
-                            <% if !b.user.nil? %>
-                                <%= b.user.name %>
-                            <% else %>
-                                Account Deleted
-                            <% end %>
-                        </td>
-                        <td><%= b.name %></td>
-                        <td><%= b.author %></td>
-                        <td><%= b.location.location_name %></a></td>
-                        <td><%= b.rent %></td>
-                        <td><%= b.description %></td>
-                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @book_orders%>
-            </div>
+      </div>
+<!-- Tab panes book -->
+      <div class="tab-pane" id="food">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th>User Name</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Region</th>
+                <th>Rent</th>
+                <th>Description</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @book_orders.each do |b| %>
+              <tr>
+                <td>
+                  <% if !b.user.nil? %>
+                    <%= b.user.name %>
+                  <% else %>
+                    Account Deleted
+                  <% end %>
+                </td>
+                <td><%= b.name %></td>
+                <td><%= b.author %></td>
+                <td><%= b.location.location_name %></a></td>
+                <td><%= b.rent %></td>
+                <td><%= b.description %></td>
+                <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <%= will_paginate @book_orders%>
+          </div>
         </div>
-  </div>
-</div> 
-  </div>
-                
-                                  
-                          
+      </div>
+     
+<!-- Tab panes skill -->
+    <div class="tab-pane" id="skill">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th>User Name</th>
+                <th>Skill</th>
+                <th>Region</th>
+                <th>Rent</th>
+                <th>Description</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @skill_orders.each do |b| %>
+              <tr>
+                <td>
+                  <% if !b.user.nil? %>
+                    <%= b.user.name %>
+                  <% else %>
+                    Account Deleted
+                  <% end %>
+                </td>
+                <td><%= b.sub_category.sub_category_type %></td>
+                <td><%= b.location.location_name %></a></td>
+                <td><%= b.charges %></td>
+                <td><%= b.description %></td>
+                <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <%= will_paginate @skill_orders%>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div> 
+</div>
+
+

@@ -10,15 +10,20 @@ before_filter :ensure_admin
   def post_requirements
     @food_orders = PostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
+    @skill_orders = SkillPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
   end
   def list_requirements
     @food_orders = PostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
+    @skill_orders = SkillPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
   end
 
   def user_orders
-    @order_food=Order.where("order_date=?",Date.today).order("order_date DESC").paginate(:page => params[:page])
-    @order_book=BookOrder.where("order_date=?",Date.today).order("created_at DESC").paginate(:page => params[:page])
+    #@order_food=Order.where("skill_post_requirement_id IS ?",nil).order("order_date DESC").paginate(:page => params[:page])
+    @order_food=Negotiate.where("post_requirement_id IS NOT NULL AND skill_post_requirement_id IS NULL").order("created_at DESC").paginate(:page => params[:page])
+    #@order_book=BookOrder.where("order_date=?",Date.today).order("created_at DESC").paginate(:page => params[:page])
+    @order_book=BookNegotiate.where("book_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
+    @order_skill=Negotiate.where("post_requirement_id IS NULL AND skill_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
   end
 
   def exl

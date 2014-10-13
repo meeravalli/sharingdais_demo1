@@ -3,19 +3,21 @@
 <div class="display padding_five">
          <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" style="float:left">
-  <li class="active"><a href="#book" role="tab" data-toggle="tab">Food Oders</a></li>
-  <li><a href="#food" role="tab" data-toggle="tab">BooK Orders</a></li>
+  <li class="active"><a href="#food" role="tab" data-toggle="tab">Food Oders</a></li>
+  <li><a href="#book" role="tab" data-toggle="tab">BooK Orders</a></li>
+  <li><a href="#skill" role="tab" data-toggle="tab">Skill Orders</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="book">
+  <div class="tab-pane active" id="food">
     <div class="display padding_five">
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
                         <th>User Name</th>
-                        <th>Fone No</th>
+                        <th>Phone No</th>
+                        <th>Email</th>
                         <th>Provider type</th>
                         <th>Details</th>
                         <th>Date</th>
@@ -23,14 +25,24 @@
                  </thead>
                  <tbody>
                     <% @order_food.each do |o| %>
-					<tr>
-						<td><%= o.user.name %></td>
-						<td><%= o.user.phone_no %></td>	
-						<td><%= o.provider.provider_type %></td>
-						<td><%= o.post_requirement.details %></td>
-						<td><%= o.order_date %></td>								
-					</tr>
-					<% end %>            
+					           <tr>
+                      <td><%= o.post_requirement.user.name %></td>
+                      <td><%= o.post_requirement.user.phone_no %></td>
+                      <td><%= o.post_requirement.user.email %></td>
+                      <td><%= o.post_requirement.provider.provider_type %></td>
+                      <td>
+                        <% if !o.post_requirement.details.nil? %>
+                          <%= o.post_requirement.details %>
+                        <%else%>
+                          not available
+                        <%end%>
+                      </td>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
+                     </tr>
+					          <% end %>            
                 </tbody>
             </table>
             <div class="pagination">
@@ -40,37 +52,90 @@
   </div>
 
 
-  <div class="tab-pane" id="food">
+
+<div class="tab-pane" id="book">
     <div class="display padding_five">
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
                         <th>User Name</th>
                         <th>Phone No</th>
-                        <th></th>
-                        <th>Discription</th>
+                        <th>Email</th>
+                        <th>Provider type</th>
+                        <th>Details</th>
                         <th>Date</th>
                     </tr>
                  </thead>
                  <tbody>
-                    
-                    <% @order_food.each do |ob| %>
-					<tr>
-						<td><%= ob.user.name %></td>
-						<td><%= ob.user.phone_no %></td>	
-						<td><%#= ob.provider.provider_type %></td>
-						<td><%#= ob.book_post_requirement_id %></td>
-						<td><%= ob.order_date %></td>								
-					</tr>
-					<% end %>    
-                   
-                    
+                    <% @order_book.each do |o| %>
+                     <tr>
+                      <td><%= o.book_post_requirement.user.name %></td>
+                      <td><%= o.book_post_requirement.user.phone_no %></td>
+                      <td><%= o.book_post_requirement.user.email %></td>
+                      <td><%= o.book_post_requirement.service.service_type %></td>
+                      <td>
+                        <% if !o.book_post_requirement.description.nil? %>
+                          <%= o.book_post_requirement.description %>
+                        <%else%>
+                          not available
+                        <%end%>
+                      </td>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
+                     </tr>
+                    <% end %>            
                 </tbody>
             </table>
-                <div class="pagination">
-      <%= will_paginate @order_book%>
-            </div>
+            <div class="pagination">
+          <%= will_paginate @order_food %>
+          </div>
         </div>
   </div>
+
+
+<div class="tab-pane" id="skill">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th>User Name</th>
+                        <th>Phone No</th>
+                        <th>Email</th>
+                        <th>Provider type</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @order_skill.each do |o| %>
+                     <tr>
+                      <td><%= o.skill_post_requirement.user.name %></td>
+                      <td><%= o.skill_post_requirement.user.phone_no %></td>
+                      <td><%= o.skill_post_requirement.user.email %></td>
+                      <td><%= o.skill_post_requirement.service.service_type %></td>
+                      <td>
+                        <% if !o.skill_post_requirement.description.nil? %>
+                          <%= o.skill_post_requirement.description %>
+                        <%else%>
+                          not available
+                        <%end%>
+                      </td>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
+                     </tr>
+                    <% end %>            
+                </tbody>
+            </table>
+            <div class="pagination">
+          <%= will_paginate @order_food %>
+          </div>
+        </div>
+  </div>
+
+ 
 </div> 
   </div>			                  
