@@ -15,10 +15,10 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>Date / Time</th>
-                        <th>Name of the connected person</th>
-                        <th>Name of the person</th>
-                        <th>Details</th>                        
+                        <th style="width:25%">Date / Time</th>
+                        <th style="width:25%">Name of the connected person</th>
+                        <th style="width:25%">Name of the person</th>
+                        <th style="width:25%">Details</th>                        
                     </tr>
                  </thead>
                  <tbody>
@@ -48,10 +48,10 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>Date / Time</th>
-                        <th>Name of the connected person</th>
-                        <th>Name of the person</th>
-                        <th>Details</th>
+                        <th style="width:25%">Date / Time</th>
+                        <th style="width:25%">Name of the connected person</th>
+                        <th style="width:25%">Name of the person</th>
+                        <th style="width:25%">Details</th>
                     </tr>
                  </thead>
                  <tbody>
@@ -86,10 +86,10 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th>Date / Time</th>
-                        <th>Name of the connected person</th>
-                        <th>Name of the person</th>
-                        <th>Details</th>
+                        <th style="width:25%">Date / Time</th>
+                        <th style="width:25%">Name of the connected person</th>
+                        <th style="width:25%">Name of the person</th>
+                        <th style="width:25%">Details</th>
                     </tr>
                  </thead>
                  <tbody>
@@ -100,7 +100,7 @@
                         <%= o.created_at.strftime("%H:%M") %>
                       </td>
                       <td><%= o.skill_post_requirement.user.name %></td>
-                      <td><%= o.user.email %></td>
+                      <td><%= o.user.name %></td>
                       <td>
                         <% if !o.skill_post_requirement.description.nil? %>
                           <%= o.skill_post_requirement.description %>
