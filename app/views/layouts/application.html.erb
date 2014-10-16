@@ -103,6 +103,50 @@
 
   </head>
   <body>
+<!-- Phone No Nil Popup -->
+<% if current_user %>
+<%if current_user.phone_no.nil? %>
+<div class="modal fade in hide_m" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel"><center>Please Enter your Mobile No.</center></h2>
+      </div>
+      <div class="modal-body">
+         <input autofocus="autofocus" class="form-control phone_no" placeholder="Enter your 10 digite Mobile No." size="30" ><br>
+         <input class="form-control address" placeholder="Please Enter Your Address" size="30" >
+      </div> 
+      <div class="modal-footer">
+        <div class="bootstrap-dialog-footer">
+          <div class="bootstrap-dialog-footer-buttons">
+            <button class="btn btn-default" id="save_no">Save</button>
+          </div>
+        </div>
+      </div>     
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade in hide_m"></div>
+<script type="text/javascript">
+
+  $("#save_no").click(function (){
+    var phone = $(".phone_no").val(),
+    intRegex = /[0-9 -()+]+$/;
+    if((phone.length < 10) || (!intRegex.test(phone))){
+      alert("Please Enter Correct Phone No.")
+    }else{
+      if ($(".address").val()){
+        $.ajax({ type: 'POST',url: '/save_phone',data: ({'phone_no': $(".phone_no").val(),'address': $(".address").val()}),success: function (data) { $(".hide_m").hide()}
+        }); 
+      }else{
+        alert("Please Enter Address.")
+      }     
+    }
+  });
+</script>
+<%end%>
+<%end%>
+<!------- End Popup ------>
     <div class="container-fluid">
       <div class="wrap">
 			<% if params[:controller] == 'admins' %>

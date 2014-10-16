@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141009043905) do
+ActiveRecord::Schema.define(:version => 20141016063144) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -296,6 +296,8 @@ ActiveRecord::Schema.define(:version => 20141009043905) do
     t.datetime "photo_updated_at"
     t.boolean  "admin",                  :default => false
     t.boolean  "status",                 :default => true
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

@@ -93,5 +93,14 @@ before_filter :authenticate_user!, :except => [:index]
     render :json => {:status => "ok"}
   end
 
+  def save_phone
+    if current_user.phone_no.nil?
+      current_user.phone_no=params[:phone_no]
+      current_user.address=params[:address]
+      current_user.save!(:validate => false)
+      puts "==========#{params[:phone_no]}==========#{params[:address]}"
+    end
+    render :json => {:status => "ok"}
+  end
 
 end

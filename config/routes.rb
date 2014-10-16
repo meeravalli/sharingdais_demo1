@@ -1,11 +1,9 @@
 Sharingdasiss::Application.routes.draw do
-  get "skill_search/index"
-
-  get "skill_search/skill_result"
-
   devise_for :users
   devise_scope :user do
     get "/admin", :to => "devise/sessions#new"
+    match 'auth/:provider/callback', to: 'devise/omniauth_callbacks#create'
+    
   end
 
   resources :sharing, :only =>[:index] do    
@@ -94,10 +92,15 @@ Sharingdasiss::Application.routes.draw do
   post "rate_me_skill" => "home#rate_me_skill"
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
+  post "save_phone" => "home#save_phone"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
   get "/skill_result/:id/:seeker_provider/" =>"skill_search#skill_result"
+  get "offer" => "book_search#offer"
+
+  get "skill_search/index"
+  get "skill_search/skill_result"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -40,3 +40,6 @@ end
 def self.down
   remove_attachment :skill_post_requirements, :skill
 end
+
+# Social media login ===================================================================
+rails g migration AddProviderToUsers provider:string uid:string

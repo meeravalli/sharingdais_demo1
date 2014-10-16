@@ -5,11 +5,15 @@
         <div class="col-xs-5 left">
 
           <div class="img">
-					  <% if !@user.photo.path.nil? %>
-            <%= image_tag  @user.photo.url(:small), :class => "img-responsive", :style=>"width:100%; height:100%;" %>
-						<%else%>
-						<%= "Upload your photo" %>
-						<%end%>
+            <% if !@user.provider.nil? %>
+              <img src="<%= @user.photo_file_name %>" class="responsive" style="width:100%; height:100%;">
+            <% else %>
+  					  <% if !@user.photo.path.nil? %>
+                <%= image_tag  @user.photo.url(:small), :class => "img-responsive", :style=>"width:100%; height:100%;" %>
+  						<%else%>
+  						  <%= "Upload your photo" %>
+  						<%end%>
+            <%end%>
           </div>
         </div>
         <div class="profile_edit">
