@@ -80,6 +80,116 @@
 	top: 11px;
 	cursor: pointer;
 }
+@font-face {
+    font-family: 'socicon';
+    src: url('/assets/socicon-webfont.eot');
+    src: url('/assets/socicon-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/socicon-webfont.woff') format('woff'),
+         url('/assets/socicon-webfont.ttf') format('truetype'),
+         url('/assets/socicon-webfont.svg#sociconregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.socialsider { width:70px; display:block; -webkit-transition: all 0.5s ease;-moz-transition: all 0.5s ease;-ms-transition: all 0.5s ease;-o-transition: all 0.5s ease;transition: all 0.5s ease;  }
+.socialsider ul { list-style-type:none; margin:0; padding:0; }
+.socialsider li { margin:0; padding:0; }
+.socialsider a { overflow:hidden; height:41px;display:block; text-decoration:none; -webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-ms-transition: all 0.3s ease;-o-transition: all 0.3s ease;transition: all 0.3s ease; position:relative;}
+.socialsider a::after { display:block; font-family:'socicon'; text-decoration:none; font-size:20px; padding:10px; position:absolute;left:0;top:0;-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-ms-transition: all 0.3s ease;-o-transition: all 0.3s ease;transition: all 0.3s ease; }
+
+.socialsider_fixed { position:fixed; }
+.socialsider_absolute { position:absolute; }
+
+/* Effects */
+.socialsider_radius a::after { border-radius:5px; }
+.socialsider_shadow a::after { -webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);box-shadow: 0 0 2px 2px rgba(0,0,0,0.2); }
+.socialsider_opacity a::after { opacity:0.4; }
+.socialsider_opacity a:hover::after { opacity:1; }
+.socialsider_spacer a { height:42px; margin-bottom:1px; }
+
+
+/* Positions */
+.socialsider_left_top { left:-30px; top:75px; z-index: 99;}
+.socialsider_left_top.socialsider_hidden { left:-45px; }
+.socialsider_left_top.socialsider_hidden:hover { left:-25px; }
+.socialsider_left_top a{ left:0px;}
+.socialsider_left_top a::after {padding-left:40px; }
+.socialsider_left_top a:hover { left:10px; }
+
+.socialsider_left_middle { left:-30px; top:40%; }
+.socialsider_left_middle.socialsider_hidden { left:-45px;}
+.socialsider_left_middle.socialsider_hidden:hover { left:-25px; }
+.socialsider_left_middle a { left:0px;}
+.socialsider_left_middle a::after { padding-left:40px; }
+.socialsider_left_middle a:hover { left:10px; }
+
+.socialsider_left_bottom { left:-30px; bottom:50px; }
+.socialsider_left_bottom.socialsider_hidden { left:-45px; }
+.socialsider_left_bottom.socialsider_hidden:hover { left:-25px; }
+.socialsider_left_bottom a { left:0px;}
+.socialsider_left_bottom a::after { padding-left:40px; }
+.socialsider_left_bottom a:hover { left:10px; }
+
+.socialsider_right_top { right:-30px; top:75px; z-index: 99 }
+.socialsider_right_top.socialsider_hidden { right:-45px; }
+.socialsider_right_top.socialsider_hidden:hover { right:-25px; }
+.socialsider_right_top a { right:0px;}
+.socialsider_right_top a::after { padding-right:40px; }
+.socialsider_right_top a:hover { right:10px; }
+
+.socialsider_right_middle { right:-30px; top:40%; }
+.socialsider_right_middle.socialsider_hidden { right:-45px; }
+.socialsider_right_middle.socialsider_hidden:hover { right:-25px; }
+.socialsider_right_middle a { right:0px;}
+.socialsider_right_middle a::after { padding-right:40px; }
+.socialsider_right_middle a:hover { right:10px; }
+
+.socialsider_right_bottom { right:-30px; bottom:50px; }
+.socialsider_right_bottom.socialsider_hidden { right:-45px;}
+.socialsider_right_bottom.socialsider_hidden:hover { right:-25px; }
+.socialsider_right_bottom a { right:0px;}
+.socialsider_right_bottom a::after { padding-right:40px; }
+.socialsider_right_bottom a:hover { right:10px; }
+
+
+
+/* Socicon letters */
+.socialsider a[data-socialsider='twitter']::after { content:"a";}
+.socialsider a[data-socialsider='facebook']::after { content:"b";}
+.socialsider a[data-socialsider='google']::after { content:"c";}
+.socialsider a[data-socialsider='linkedin']::after { content:"j";}
+
+/* Colors */
+
+/* Dark background, white font */
+.socialsider.socialsider_bgdark_white a::after { background:#333; color:#FFF;}
+.socialsider.socialsider_bgdark_white.socialsider_colorize a[data-socialsider='twitter']:hover::after { background:#4da7de;}
+.socialsider.socialsider_bgdark_white.socialsider_colorize a[data-socialsider='facebook']:hover::after { background:#3e5b98;}
+.socialsider.socialsider_bgdark_white.socialsider_colorize a[data-socialsider='google']:hover::after { background:#d93e2d;}
+.socialsider.socialsider_bgdark_white.socialsider_colorize a[data-socialsider='linkedin']:hover::after { background:#3371b7;}
+
+/* White background, dark font */
+.socialsider.socialsider_bgwhite_dark a::after { background:#FFF; color:#333;}
+.socialsider.socialsider_bgwhite_dark.socialsider_colorize a[data-socialsider='twitter']:hover::after { color:#4da7de;}
+.socialsider.socialsider_bgwhite_dark.socialsider_colorize a[data-socialsider='facebook']:hover::after { color:#3e5b98;}
+.socialsider.socialsider_bgwhite_dark.socialsider_colorize a[data-socialsider='google']:hover::after { color:#d93e2d;}
+.socialsider.socialsider_bgwhite_dark.socialsider_colorize a[data-socialsider='linkedin']:hover::after { color:#3371b7;}
+
+/* Color background, white font */
+.socialsider.socialsider_bgcolor_white a::after { color:#FFF;}
+.socialsider.socialsider_bgcolor_white a[data-socialsider='twitter']::after { background:#4da7de;}
+.socialsider.socialsider_bgcolor_white a[data-socialsider='facebook']::after { background:#3e5b98;}
+.socialsider.socialsider_bgcolor_white a[data-socialsider='google']::after { background:#d93e2d;}
+
+.socialsider.socialsider_bgcolor_white a[data-socialsider='linkedin']::after { background:#3371b7;}
+
+/* White background, color font */
+.socialsider.socialsider_bgwhite_color a::after { background:#FFF;}
+.socialsider.socialsider_bgwhite_color a[data-socialsider='twitter']::after { color:#4da7de;}
+.socialsider.socialsider_bgwhite_color a[data-socialsider='facebook']::after { color:#3e5b98;}
+.socialsider.socialsider_bgwhite_color a[data-socialsider='google']::after { color:#d93e2d;}
+
+.socialsider.socialsider_bgwhite_color a[data-socialsider='linkedin']::after { color:#3371b7;}
 </style>
 
 <div class="modal-backdrop fade in ajax_load"></div>
@@ -106,3 +216,49 @@
 	</form><br>
 	<a href="javascript:void(0)" class="pull_feedback " title="Click to leave feedback">Feedback</a>
 </div>
+<!------------------------------------------------------>
+<div class="socialsider socialsider_right_top socialsider_fixed socialsider_bgdark_white socialsider_colorize socialsider_radius socialsider_spacer socialsider_opacity">
+			<ul>
+				<li>
+					<a onclick="facebook('https://www.facebook.com/dialog/feed?app_id=1472848959663464')" data-socialsider="facebook" href="javascript:void(0)" title="Facebook"></a>
+				</li>
+				<li>
+					<a onclick="twitter('https://twitter.com/share')" data-socialsider="twitter" href="javascript:void(0)" title="Twitter"></a>
+				</li>
+				<li>
+					<a onclick="google('https://plus.google.com/share')" data-socialsider="google" href="javascript:void(0)" title="Google"></a>
+				</li>
+			</ul>
+		</div>
+		<input type="hidden" name="commentlink" id="commentlink" value="Online Platform for Peer to Peer Sharing" />
+		<input type="hidden" name="sayfb" id="sayfb" value="Sharingdais.com is an Online Platform for Peer to Peer Sharing. Now, you can Teach or Learn skills/experiences via Skill Sharing, Give or Take books via Book Sharing and Find or Share home-cooked meal via Food Sharing, in your locality. No new buying! Save money and Make money." />
+		<input type="hidden" name="urllink" id="urllink" value="http://www.sharingdais.com/" />
+
+		<input type="hidden" name="saytw" id="saytw" value="Sharingdais.com is an Online Platform for Peer to Peer Sharing." />
+<script>
+  function facebook(url){
+  var text=$("#commentlink").val();
+  var say=$("#sayfb").val();
+  var url1=$("#urllink").val();
+  //var img_url=$("#image_fb").val(); 
+  var img_url= 'http://sharingdais.com/main/assets/slider4-b4a8f7498084f1df80b7d836c2bcf1bf.jpg'
+  var arg='&link='+url1+'&name='+say+'&picture='+img_url+'&caption='+text+'&description='+url1+'&redirect_uri=http://www.sharingdais.com/close_window';
+ url=url+arg;
+ window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=900');return false;
+}
+function twitter(url){
+    var text=$("#commentlink").val(); 
+    var say=$("#saytw").val();
+    //var url1=$("#urllink").val(); 
+    var url1='http://sharingdais.com'
+    var arg="?url="+url1+'&via='+say+'&text='+text;
+    url=url+arg;
+    window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+}
+function google(url){
+	var url1='http://sharingdais.com'
+	var arg="?url="+url1;
+    url=url+arg;
+	window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+}
+</script>

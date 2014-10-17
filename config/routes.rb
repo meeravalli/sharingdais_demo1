@@ -101,7 +101,8 @@ Sharingdasiss::Application.routes.draw do
 
   get "skill_search/index"
   get "skill_search/skill_result"
-
+  
+  get "close_window" => "book_search#close_window"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

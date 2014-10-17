@@ -123,4 +123,6 @@ class BookSearchController < ApplicationController
       format.js
     end
   end
+  def close_window
+  end
 end
