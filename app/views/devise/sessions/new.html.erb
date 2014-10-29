@@ -43,6 +43,9 @@ color: #ffffff;
 background-color: #ca3523;
 border-color: #92291d;
 }
+.alert {
+	top: 0px;
+}
 </style>
 <div class="login_page">
 <!--<div class="login_img"><%#= image_tag 'newlogo.jpg',  :alt=>""%></div>-->
@@ -51,18 +54,20 @@ border-color: #92291d;
 	            	        <!--Login Content-->
 							<div class="login_content">
                         	<h2 class="login_heading">Log in</h2>
-													<div class="signup_link">Don't have an account? <%= link_to "Sign up", new_user_registration_path %></div>
-                            <div class="login_form">
-
-
-<a href="/auth/facebook" class="btns btn-facebook">
+								<div style="z-index: 16;" class="signup_link">Don't have an account? <%#= link_to "Sign up", new_user_registration_path %>
+									<a href="/users/sign_up">Sign up</a>
+								
+								<a href="/auth/facebook" class="btns btn-facebook">
 	<i style="color:#fff" class="fa fa-facebook"></i> 
 	| Connect with Facebook
 </a>
 <a href="/auth/google_oauth2" class="btns btn-google-plus">
 	<i style="color:#fff" class="fa fa-google-plus"></i> 
 	| Connect with Google Plus
-</a> <hr>
+</a> </div>
+                            <div class="login_form">
+
+
                             	
 														<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                                 <div class="text_lable">Email<i>*</i></div>
