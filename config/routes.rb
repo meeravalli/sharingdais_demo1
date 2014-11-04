@@ -93,6 +93,7 @@ Sharingdasiss::Application.routes.draw do
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
   post "save_phone" => "home#save_phone"
+  post "save_count" => "book_search#save_count"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"

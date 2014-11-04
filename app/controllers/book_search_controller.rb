@@ -125,4 +125,90 @@ class BookSearchController < ApplicationController
   end
   def close_window
   end
+
+  def save_count
+    @mycounter=Ad.all
+    if params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_1 => params[:box_1])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_1
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_1 =1
+          @sv.first.save          
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_1 = @cnt + 1
+          @sv.first.save   
+        end        
+      end
+    elsif params[:box_1].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_2 => params[:box_2])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_2
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_2 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_2 =@cnt + 1
+          @sv.first.save
+        end       
+      end
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_4].nil? && params[:box_5].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_3 => params[:box_3])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_3
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_3 =1
+          @sv.first.save        
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_3 = @cnt + 1
+          @sv.first.save 
+        end
+      end
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_5].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_4 => params[:box_4])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_4
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_4 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_4 = @cnt + 1
+          @sv.first.save
+        end
+      end
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_5 => params[:box_5])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_5
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_5 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_5 = @cnt + 1
+          @sv.first.save
+        end
+      end
+    end
+    render :json => {:status => "ok"}
+  end
 end

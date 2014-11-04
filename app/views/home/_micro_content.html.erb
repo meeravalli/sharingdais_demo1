@@ -129,7 +129,13 @@ popupWindow = window.open(url,winName,settings)
               <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140">
             </div>
             <p>
-              <a href="#" data-toggle="modal" data-target="#model1"> Guide to Digital Marketing</a>
+              <a href="#" class="bix_1" data-toggle="modal" data-target="#model1"> Guide to Digital Marketing</a>
+<script type="text/javascript">
+  $(".bix_1").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_1':"1"}),success: function (data) {}
+    });
+  });
+</script>
             </p>
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
@@ -139,7 +145,13 @@ popupWindow = window.open(url,winName,settings)
               <img class="top" src="/assets/micro-site/cakemain.jpg" width="180" height="140">
             </div>
             <p>
-              <a href="#" data-toggle="modal" data-target="#model2">Chocolate Cake in 20 min</a>
+              <a href="#" class="bix_2" data-toggle="modal" data-target="#model2">Chocolate Cake in 20 min</a>
+<script type="text/javascript">
+  $(".bix_2").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_2':"1"}),success: function (data) {}
+    });
+  });
+</script>            
             </p>
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
@@ -149,8 +161,14 @@ popupWindow = window.open(url,winName,settings)
               <img class="top" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
             </div>
             <p>
-              <a href="#" data-toggle="modal" data-target="#model3">Home Cooked Food</a>
+              <a href="#" class="bix_3" data-toggle="modal" data-target="#model3">Home Cooked Food</a>
             </p>
+<script type="text/javascript">
+  $(".bix_3").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_3':"1"}),success: function (data) {}
+    });
+  });
+</script>
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
           <td>
@@ -159,7 +177,13 @@ popupWindow = window.open(url,winName,settings)
               <img class="top" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" width="180" height="140">
             </div>
             <p>
-              <a href="#" data-toggle="modal" data-target="#model4">Booming e-commerce Industry</a>
+              <a href="#" class="bix_4" data-toggle="modal" data-target="#model4">Booming e-commerce Industry</a>
+<script type="text/javascript">
+  $(".bix_4").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_4':"1"}),success: function (data) {}
+    });
+  });
+</script>
             </p>
             <p><strong>City:</strong> Bangalore</p>
           </td>
@@ -169,7 +193,13 @@ popupWindow = window.open(url,winName,settings)
               <img class="top" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
             </div>
             <p>
-              <a href="#" data-toggle="modal" data-target="#model5"> Porter's 5 Forces: Marketing Gyan</a>
+              <a href="#" class="bix_5" data-toggle="modal" data-target="#model5"> Porter's 5 Forces: Marketing Gyan</a>
+<script type="text/javascript">
+  $(".bix_5").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_5':"1"}),success: function (data) {}
+    });
+  });
+</script>
             </p>
             <p><strong>City:</strong> Gurgaon</p> 
           </td>

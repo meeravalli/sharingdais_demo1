@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141016063144) do
+ActiveRecord::Schema.define(:version => 20141104050612) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(:version => 20141016063144) do
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
     t.integer  "skill_post_requirement_id"
+  end
+
+  create_table "ads", :force => true do |t|
+    t.integer  "box_1"
+    t.integer  "box_2"
+    t.integer  "box_3"
+    t.integer  "box_4"
+    t.integer  "box_5"
+    t.integer  "box_6"
+    t.integer  "box_7"
+    t.integer  "box_8"
+    t.integer  "box_9"
+    t.integer  "box_10"
+    t.string   "ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "book_activities", :force => true do |t|

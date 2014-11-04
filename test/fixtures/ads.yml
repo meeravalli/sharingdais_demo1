@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  box_1: 1
+  box_2: 1
+  box_3: 1
+  box_4: 1
+  box_5: 1
+  box_6: 1
+  box_7: 1
+  box_8: 1
+  box_9: 1
+  box_10: 1
+  ip: MyString
+
+two:
+  box_1: 1
+  box_2: 1
+  box_3: 1
+  box_4: 1
+  box_5: 1
+  box_6: 1
+  box_7: 1
+  box_8: 1
+  box_9: 1
+  box_10: 1
+  ip: MyString
