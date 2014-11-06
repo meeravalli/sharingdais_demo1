@@ -1,4 +1,5 @@
 class SkillSearchController < ApplicationController
+  layout 'skill_search'
   def index
     #puts "======================#{params[:search][:skill_type_id]}================="
   	@search_params = nil

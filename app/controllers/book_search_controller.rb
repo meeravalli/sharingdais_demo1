@@ -1,4 +1,5 @@
 class BookSearchController < ApplicationController
+  layout 'book_search'
   def index
 	@search_params = nil
     if params[:search]

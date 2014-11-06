@@ -1,5 +1,6 @@
 class FoodSearchController < ApplicationController
 include ActionView::Helpers::NumberHelper
+layout 'food_search'
    def index
     @search_params = nil
     if params[:search]
