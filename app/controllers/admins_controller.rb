@@ -83,6 +83,10 @@ before_filter :ensure_admin
     @user = User.find(params[:user_id])
   end
 
+  def user_add_clicks
+    @counter=Ad.all
+  end
+
   private
 
 def ensure_admin

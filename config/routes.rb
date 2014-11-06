@@ -82,7 +82,8 @@ Sharingdasiss::Application.routes.draw do
   get "post_requirements" => "admins#post_requirements"
   get "list_requirements" => "admins#list_requirements"
   get "user_orders" => "admins#user_orders"
-
+  get "user_add_clicks" => "admins#user_add_clicks"
+  
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
   post "search_skill" => "book_search#search_top_five_skill"

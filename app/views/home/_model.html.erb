@@ -7,14 +7,14 @@
           <span aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
+        <h1 style="color:#999">Visits: <%= @counter.first.box_1 ? @counter.first.box_1 : 0 %></h1>
         <script type="text/javascript">
         $('.count1').click(function() {
           $('#output1').html(function(i, val) { return val*1+1 });
         });
       </script>
-      <h1><!--Visits: <%#= @counter.first.box_1 %>--></h1>
+      
       </div>
-
       <div class="modal-body" >
         <div class="desktop_dialog">               
           <table>
@@ -132,7 +132,7 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
           <span aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
-        <h1><!--Visits: <%#= @counter.first.box_2 %>--></h1>
+        <h1 style="color:#999">Visits: <%= @counter.first.box_2 ? @counter.first.box_2 : 0 %></h1>
       </div>
       <div class="modal-body" >
         <div class="desktop_dialog">               
@@ -251,7 +251,7 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
           <span aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
-        <h1><!--Visits: <%#= @counter.first.box_3 %>--></h1>
+        <h1 style="color:#999">Visits: <%= @counter.first.box_3 ? @counter.first.box_3 : 0 %></h1>
       </div>
       <div class="modal-body" >
         <div class="desktop_dialog">               
@@ -370,7 +370,7 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
           <span aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
-        <h1><!--Visits: <%#= @counter.first.box_4 %>--></h1>
+        <h1 style="color:#999">Visits: <%= @counter.first.box_4 ? @counter.first.box_4 : 0 %></h1>
       </div>
       <div class="modal-body" >
         <div class="desktop_dialog">               
@@ -489,8 +489,8 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
-        </button>
-        <h1><!--Visits: <%#= @counter.first.box_5 %>--></h1>
+        </button>  
+        <h1 style="color:#999">Visits: <%= @counter.first.box_5 ? @counter.first.box_5 : 0 %></h1>      
       </div>
       <div class="modal-body" >
         <div class="desktop_dialog">               
@@ -518,8 +518,8 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
               </td>
             </tr>
           </table><br>
-        <div id="slider5_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 700px; height: 300px; overflow: hidden;">            
+         <div id="slider5_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
+         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 700px; height: 300px; overflow: hidden;">            
             <div>
                 <img u="image" src="/assets/micro-site/marketingCloud.jpg" />
                 <div u="thumb">
@@ -560,52 +560,48 @@ The guide is kept short and crisp (5 pages) in presentation format (Free). You c
         <script>
             jssor_slider1_starter('slider5_container');
         </script>
-    </div>
+       </div>
           <div class="details">
             <p>
               <strong>Porter's 5 Forces: Marketing Gyan. </strong> 
             </p> 
-            <div class="social" align="right">            
-              
-<a onclick="facebook5('https://www.facebook.com/dialog/feed?app_id=1472848959663464')" href="javascript:void(0)" title="Facebook"><img src="/assets/micro-site/facebook.png"></a>
-        
-<a onclick="twitter5('https://twitter.com/share')" href="javascript:void(0)" title="Twitter">
-<img src="/assets/micro-site/twitter.png">
-</a>
-       
-            </div>
+            <div class="social" align="right">       
+             <a onclick="facebook5('https://www.facebook.com/dialog/feed?app_id=1472848959663464')" href="javascript:void(0)" title="Facebook">
+              <img src="/assets/micro-site/facebook.png">
+            </a>
+            <a onclick="twitter5('https://twitter.com/share')" href="javascript:void(0)" title="Twitter">
+             <img src="/assets/micro-site/twitter.png">
+           </a>
+           </div>
             <br>
             <p>
               <strong>About the author:</strong>
                Abhishek is an IT professional based out of Gurgaon. He is an MBA from MDI Gurgaon.
              </p>
-            
-
-            </div>
-          </div><br>
+          </div>
           <div class="location">
             <strong> Description:</strong>
             <br>
             <p align="justify"> The Porter's Five Forces tool is a simple but powerful tool for understanding where power lies in a business situation. This is useful, because it helps you understand both the strength of your current competitive position, and the strength of a position you're considering moving into.With a clear understanding of where power lies, you can take fair advantage of a situation of strength, improve a situation of weakness, and avoid taking wrong steps. Conventionally, the tool is used to identify whether new products, services or businesses have the potential to be profitable. However it can be very illuminating when used to understand the balance of power in other situations. 
            Please download the file from here:<a href="/assets/Marketing.pdf" target="_blank">  "Porter's five forces"</a>
-</p>
-          </div>            <br>
-          <div class="location">
+           </p>
+           </div>            <br>
+           <div class="location">
             <strong> Location:</strong> Gurgaon
-          </div>
-          <div class="avail">
+           </div>
+           <div class="avail">
             <strong>Availability:</strong> N/A
           </div>    
           <div class="price">
             <strong>Price:</strong> N/A 
           </div>
-        </div>
       </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
     </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
   </div>
+ </div>
 </div>
 <!-- ################ sheared contents ############### -->
 <input type="hidden" name="commentlink1" id="commentlink1" value="Digital Marketing also known as "Online Marketing" is marketing that makes use of electronic devices to engage with the stakeholders." />

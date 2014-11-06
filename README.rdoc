@@ -43,3 +43,6 @@ end
 
 # Social media login ===================================================================
 rails g migration AddProviderToUsers provider:string uid:string
+
+# Ad Model for home page
+rails g model ad box_1:integer box_2:integer box_3:integer box_4:integer box_5:integerbox_6:integer box_7:integer box_8:integer box_9:integer box_10:integer ip
