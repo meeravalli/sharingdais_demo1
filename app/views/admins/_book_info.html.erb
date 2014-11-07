@@ -1,0 +1,143 @@
+<div class="display">
+<h3 class="prf_title">User Book Requirements</h3>
+  <div class="inner-pro row">
+   <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>City</th>
+              <th>Locality </th>
+              <th>Post As</th>
+              <th>Book Name</th>
+              <th>Price</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+         <tbody>
+            <% my_count = 1 %>
+        <% if @book_post_requirements.present? %>
+        <% @book_post_requirements.each do |p| %>
+            <tr>
+              <td><%= my_count %></td>
+              <td><%= p.city.city_name %></td>
+              <td><%= p.location.location_name%></td>
+              <td>
+                <% if p.seeker_provider == true %>
+                  Seeker 
+                <% else %>                 
+                  Provider            
+                <% end %>
+              </td>
+            <td><%= p.name %></td>
+            <td><%= p.rent %></td>
+            <td><%= p.description %></td>
+            </tr>
+              <% my_count +=1 %>
+             <% end %>
+            <% else %>
+            <tr> 
+                    <td colspan="9" style="text-align:center">User don't have any book requirements </td>
+                </tr>
+            <%end%>
+          </tbody>  
+        </table>
+  </div>
+</div>
+
+<div class="display ">
+    <h3 class="prf_title">User Book Orders</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>You are Provider / Seeker </th>
+              <th>Name</th>
+              <th>Locality</th>
+              <th>Phone No.</th>
+              <th>Email Id</th>
+              <th>Rate</th>
+            </tr>
+            <tr></tr>
+          </thead>
+         <tbody>
+          <% my_count = 1 %>
+          <% if !@book_activities.empty? %>
+            <% @book_activities.each do |a| %>
+              <% @user = find_user(a.contact_id) %>
+              <% 
+  @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",a.user.id,1,a.id).count()
+  @rate_2=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",a.user.id,2,a.id).count()
+  @rate_3=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",a.user.id,3,a.id).count()
+  @rate_4=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",a.user.id,4,a.id).count()
+  @rate_5=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",a.user.id,5,a.id).count()
+
+  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+  if sum == 0
+    @src1 = "/assets/reviews/1str.png"
+    @src2 = "/assets/reviews/1str.png"
+    @src3 = "/assets/reviews/1str.png"
+    @src4 = "/assets/reviews/1str.png"
+    @src5 = "/assets/reviews/1str.png"
+  else
+    avrg = ( sum.to_f / total_no.to_f ).round(1)
+    if avrg >= 1
+      @src1 = "/assets/reviews/2str.png"
+    else
+      @src1 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 1.5
+      @src2 = "/assets/reviews/2str.png"
+    else
+      @src2 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 2.5
+      @src3 = "/assets/reviews/2str.png"
+    else
+      @src3 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 3.5
+      @src4 = "/assets/reviews/2str.png"
+    else
+      @src4 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 4.5
+      @src5 = "/assets/reviews/2str.png"
+    else
+      @src5 = "/assets/reviews/1str.png"
+    end
+  end
+%>
+              <tr>
+                <td><%= my_count %></td>
+        <td>
+          <% if a.book_post_requirement.seeker_provider == true %>
+            Provider
+          <% else %>
+            Seeker
+          <% end %>
+        </td>
+        <td><%= a.book_post_requirement.user.name %></td>
+        <td><%= a.book_post_requirement.location.location_name %></td>
+        <td><%= a.book_post_requirement.user.phone_no %></td>
+        <td><%= a.book_post_requirement.user.email %></td>
+        <td>
+          <img style="cursor:pointer;width: 10%;"  src="<%= @src1 %>">
+          <img style="cursor:pointer;width: 10%;"  src="<%= @src2 %>">
+          <img style="cursor:pointer;width: 10%;"  src="<%= @src3 %>">
+          <img style="cursor:pointer;width: 10%;"  src="<%= @src4 %>">
+          <img style="cursor:pointer;width: 10%;"  src="<%= @src5 %>">
+        </td>
+              </tr>
+          <% my_count +=1 %>
+            <% end %>
+            <% else%>
+            <tr> 
+            <td colspan="8" style="text-align:center">This user don't have any order </td>
+            </tr>
+            <%end%>
+          </tbody>  
+        </table>
+      </div>
+    </div>

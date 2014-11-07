@@ -49,8 +49,11 @@ before_filter :ensure_admin
     @user = User.find(params[:id])
     @post_requirements = @user.post_requirements
     @activities = @user.activities
+    @activities_food = @activities.where("post_requirement_id IS NOT NULL")
+    @activities_skill = @activities.where("skill_post_requirement_id IS NOT NULL")
     @book_post_requirements = @user.book_post_requirements
     @book_activities = @user.book_activities
+    @skill_post_requirements = @user.skill_post_requirements
    end
 	
 	def destroy_user

@@ -1,0 +1,95 @@
+<div class="display">
+<h3 class="prf_title">User Food Requirements</h3>
+  <div class="inner-pro row">
+   <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>City</th>
+              <th>Locality </th>
+              <th> Service </th>
+              <th> I am looking for/I am </th>
+              <th>Food Type</th>
+              <th>Meal Type </th>
+              <th>Region Specific </th>
+              <th>No. of persons</th>
+              <th>Budget</th>
+              <th>Details</th>
+              <th></th>
+            </tr>
+          </thead>
+         <tbody>
+            <% my_count = 1 %>
+            <% @post_requirements.each do |p| %>
+            <tr>
+                <td><%= my_count %></td>
+                <td><%= p.city.city_name %></td>
+                <td><%= p.location.location_name%></td>
+                <td><%= p.service.service_type%></td>
+                <td><%= p.provider.provider_type%></td>
+                <td><%= p.food_type.name%></td>
+                <td><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></td>
+                <td><%= p.region.nil? ? "N/A" : p.region.name%></td>
+                <% if p.no_of_persons == -1 %>
+                <td><%= "Any"%></td>
+                <%else%>
+                <td><%= p.no_of_persons.nil? ? "N/A" : p.no_of_persons %></td>
+                <%end%>
+                <td><%= p.budget.nil? ? "N/A" : p.budget%></td>
+                <td><%= p.details.nil? ? "N/A" : p.details%></td>
+                <td><%= link_to 'Destroy', destroy_requirement_sharing_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+              <% my_count +=1 %>
+            <% end %>
+          </tbody>  
+        </table>
+  </div>
+</div>
+ <div class="display ">
+    <h3 class="prf_title">User Food Orders</h3>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th>#</th>
+              <th>Category</th>
+              <th>Seeked / Shared </th>
+              <th> Name of the other Party </th>
+              <th> Address of Another Party </th>
+              <th>Phone of Another Party </th>
+              <th>Email of Another Party </th>
+              <th>Status </th>
+            </tr>
+            <tr></tr>
+          </thead>
+         <tbody>
+          <% count = 1 %>
+          <% if !@activities_food.nil? %>
+            <% @activities_food.each do |a| %>
+              <% @user = find_user(a.contact_id) %>
+              <tr>
+                <td><%= count %></td>
+                <td><%= find_service %></td>
+                <td><%= a.seeked_shared ? "Seeked" : "Shared"%></td>
+                <td><%= @user.name%></td>
+                <td><%= @user.address%></td>
+                <td><%= @user.phone_no%></td>
+                <td><%= @user.email%> </td>
+                <% if a.order.order_cancel.nil? %>
+                  <% negotiate_id = a.seeked_shared ? a.user_id : a.contact_id %>
+                  <td><%= link_to "Cancel", cancel_message_path(:user_id => a.contact_id, :order_id => a.order_id, :post_requirement_id => a.post_requirement_id, :negotiate_id => negotiate_id) %></td>
+                <% else %>
+                  <td>Cancelled</td>
+                <% end %>
+              </tr>
+          <% count +=1 %>
+            <% end %>
+            <% else%>
+            <tr> 
+            <td colspan="8" style="text-align:center">This user don't have any order </td>
+            </tr>
+            <%end%>
+          </tbody>  
+        </table>
+      </div>
+    </div>

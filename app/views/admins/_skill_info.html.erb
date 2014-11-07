@@ -1,0 +1,91 @@
+<div class="display">
+  <h3 class="prf_title">User Skill Requirements</h3>
+  <div class="inner-pro row">
+    <table class="table table-hover">
+      <thead class="heading">
+        <tr>
+          <th>#</th>
+          <th>City</th>
+          <th>Locality</th>
+          <th>Post As</th>
+          <th>Skill</th>
+          <th>Price </th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% my_count = 1 %>
+      <% if !@skill_post_requirements.empty? %>
+      <% @skill_post_requirements.each do |p| %>
+        <tr>
+          <td><%= my_count %></td>
+          <td><%= p.city.city_name %></td>
+          <td><%= p.location.location_name%></td>
+          <td>
+            <% if p.seeker_provider == true %>
+              Seeker
+            <% else %>
+              Provider              
+            <% end %>
+          </td>
+          <td><%= p.sub_category.sub_category_type%></td>
+          <td><%= p.charges%></td>
+          <td><%= p.description%></td>
+        </tr>
+        <% my_count +=1 %>
+      <% end %>
+      <%else%>
+        <tr>
+          <td colspan="8" style="text-align:center">User don't have any skill requirements</td>
+        </tr>
+      <%end%>
+      </tbody>  
+    </table>
+  </div>
+</div>
+
+<div class="display ">
+  <h3 class="prf_title">User Skill Orders</h3>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="heading">
+          <tr>
+            <th>#</th>
+            <th>You are Provider / Seeker </th>
+            <th>Name</th>
+            <th>Locality</th>
+            <th>Phone No.</th>
+            <th>Email Id</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% count = 1 %>
+        <% if !@activities_skill.nil? %>
+        <% @activities_skill.each do |a| %>
+        <% @user = find_user(a.contact_id) %>
+        <tr>
+          <td><%= count %></td>
+          <td>
+            <% if a.skill_post_requirement.seeker_provider == true %>
+              Provider
+            <% else %>
+              Seeker
+            <% end %>
+          </td>
+          <td><%= a.skill_post_requirement.user.name %></td>
+          <td><%= a.skill_post_requirement.location.location_name %></td>
+          <td><%= a.skill_post_requirement.user.phone_no %></td>
+          <td><%= a.skill_post_requirement.user.email %></td>
+        </tr>
+        <% count +=1 %>
+        <% end %>
+        <% else%>
+        <tr> 
+          <td colspan="8" style="text-align:center">This user don't have any order </td>
+        </tr>
+        <%end%>
+      </tbody>  
+    </table>
+  </div>
+</div>
