@@ -1,7 +1,9 @@
 class PostRequirement < ActiveRecord::Base
 
   geocoded_by :full_location_address
-  after_validation :geocode, if: ->(obj){ obj.latitude.blank? and obj.longitude.blank? }
+  #after_validation :geocode, if: ->(obj){ obj.latitude.blank? and obj.longitude.blank? }
+  after_validation :geocode, :if => :full_location_address_changed?
+
   # White list attribute - Mass assignment
   attr_accessible :budget, :city_id, :details, :food_type_id, :location_id, :meal_type_id, 
                   :no_of_persons, :provider_id, :region_id, :seeker_provider, :service_id, 
@@ -37,6 +39,9 @@ class PostRequirement < ActiveRecord::Base
       [self.location.location_name, self.city.city_name, "India"].compact.join(', ')  
     end
 
+    def full_location_address_changed?
+      self.location.location_name_changed? || self.city.city_name_changed? || "India"
+    end
   
   # This method is use to fetch the records from postrequirement based on user inputs
   def self.filter_conditions( options={} )
