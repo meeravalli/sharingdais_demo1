@@ -11,7 +11,7 @@ class BookSearchController < ApplicationController
 
       query = ""
       if params[:search][:book] == "0"
-        query += "seeker_provider = 1"
+        query += "seeker_provider = 0"
       else
         query += "seeker_provider = 1"
       end
