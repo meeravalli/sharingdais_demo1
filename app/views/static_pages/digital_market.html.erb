@@ -1,0 +1,318 @@
+<style>
+         .jssort11
+                {
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+                .jssort11 .i, .jssort11 .pav:hover .i
+                {
+                  position: absolute;
+                  top:3px;
+                  left:3px;
+                  WIDTH: 90%;
+                  HEIGHT: 90%;
+                  border: white 1px dashed;
+                }
+                * html .jssort11 .i
+                {
+                  WIDTH /**/: 62px;
+                  HEIGHT /**/: 32px;
+                }
+                .jssort11 .pav .i
+                {
+                  border: white 1px solid;
+                }
+                .jssort11 .t, .jssort11 .pav:hover .t
+                {
+                  position: absolute;
+                  top: 3px;
+                  left: 68px;
+                  width:129px;
+                  height: 32px;
+                  line-height:32px;
+                  text-align: center;
+                  color:#fc9835;
+                  font-size:13px;
+                  font-weight:700;
+                }
+                .jssort11 .pav .t, .jssort11 .phv .t, .jssort11 .p:hover .t
+                {
+                  color:#fff;
+                }
+                .jssort11 .c, .jssort11 .pav:hover .c
+                {
+                  position: absolute;
+                  top: 38px;
+                  left: 3px;
+                  width:197px;
+                  height: 31px;
+                  line-height:31px;
+                  color:#fff;
+                  font-size:11px;
+                  font-weight:400;
+                  overflow: hidden;
+                }
+                .jssort11 .pav .c, .jssort11 .phv .c, .jssort11 .p:hover .c
+                {
+                  color:#fc9835;
+                }
+                .jssort11 .t, .jssort11 .c
+                {
+                  transition: color 2s;
+                    -moz-transition: color 2s;
+                    -webkit-transition: color 2s;
+                    -o-transition: color 2s;
+                }
+                .jssort11 .p:hover .t, .jssort11 .phv .t, .jssort11 .pav:hover .t, .jssort11 .p:hover .c, .jssort11 .phv .c, .jssort11 .pav:hover .c
+                {
+                  transition: none;
+                    -moz-transition: none;
+                    -webkit-transition: none;
+                    -o-transition: none;
+                }
+                .jssort11 .p
+                {
+                  background:#181818;
+                }
+                .jssort11 .pav, .jssort11 .pdn
+                {
+                  background:#462300;
+                }
+                .jssort11 .p:hover, .jssort11 .phv, .jssort11 .pav:hover
+                {
+                  background:#333;
+                }       
+                
+            </style>
+<!-- ################################## jssor ############################# -->
+    
+    <script type="text/javascript" src="/assets/jssor.js"></script>
+    <script type="text/javascript" src="/assets/jssor.slider.js"></script>
+      <script type="text/javascript">
+        jssor_slider1_starter = function (containerId) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether 
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to 
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (
+                $PauseOnHover: 1,                               //[Optional] Whether to 
+                $Loop: 0,                                       //[Optional] Enable loop(1
+                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard 
+                $SlideDuration: 500,                                //[Optional] 
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum 
+                $SlideSpacing: 5,                           //[Optional] Space between 
+                $DisplayPieces: 1,                                  //[Optional] Number of 
+                $ParkingPosition: 0,                                //[Optional] The 
+                $UISearchMode: 1,                                   //[Optional] The way (
+                $PlayOrientation: 1,                                //[Optional] 
+                $DragOrientation: 3,                                //[Optional] 
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to 
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 
+                    $Loop: 2,                                       //[Optional] Enable 
+                    $AutoCenter: 3,                                 //[Optional] Auto 
+                    $Lanes: 1,                                      //[Optional] Specify 
+                    $SpacingX: 4,                                   //[Optional] 
+                    $SpacingY: 4,                                   //[Optional] Vertical 
+                    $DisplayPieces: 4,                              //[Optional] Number of 
+                    $ParkingPosition: 0,                            //[Optional] The 
+                    $Orientation: 2,                                //[Optional] 
+                    $DisableDrag: false                             //[Optional] Disable 
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$(containerId, options);
+
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    var sliderWidth = parentWidth;
+                    //keep the slider width no more than 810
+                    sliderWidth = Math.min(sliderWidth, 810);
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            }
+            //responsive code end
+        };
+    </script>
+    <!-- ##################################### jssor script end #################### -->
+  
+<% @counter=Ad.all %>
+<div class="content">
+  <div class="resize_how_diag">
+    <div class="desktop_dialog"><br><br><br>
+      <h1 style="color:#999">Visits: <%= @counter.first.box_1 ? @counter.first.box_1 : 0 %></h1>
+        <script type="text/javascript">
+        $('.count1').click(function() {
+          $('#output1').html(function(i, val) { return val*1+1 });
+        });
+      </script>     
+
+          <table>
+            <tr>
+              <td>
+                <span class="rating">
+                 <input type="radio" class="rating-input"
+                  id="rating-input-1-5" name="rating-input-1">
+                 <label for="rating-input-1-5" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-1-4" name="rating-input-1">
+                 <label for="rating-input-1-4" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-1-3" name="rating-input-1">
+                  <label for="rating-input-1-3" class="rating-star"></label>
+                   <input type="radio" class="rating-input"
+                   id="rating-input-1-2" name="rating-input-1">
+                 <label for="rating-input-1-2" class="rating-star"></label>
+                 <input type="radio" class="rating-input"
+                  id="rating-input-1-1" name="rating-input-1">
+                 <label for="rating-input-1-1" class="rating-star"></label>
+                </span>
+              </td>
+              <td>
+                <p style="float:right;">
+                 <strong>Phone No:</strong>
+                 <span> 7840088216</span>
+                </p>
+              </td>
+            </tr>
+          </table><br>
+        <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 300px; overflow: hidden;">            
+            <div>
+                <img u="image" src="/assets/micro-site/Pic1.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/Pic1.jpg" /><div class="t"></div>
+                    <div class="c"></div>
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/pic3.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/pic3.jpg" /><div class="t"></div>
+                    <div class="c"></div>
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/Pic 2.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/Pic 2.jpg" /><div class="t"></div>
+                    <div class="c"></div>
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/digital-marketing.jpeg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/digital-marketing.jpeg" /><div class="t"></div>
+                    <div class="c"></div>
+                </div>
+            </div>
+        </div>                
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 200px; height: 300px; left:800px; top:0px;">            
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 200px; height: 69px; top: 0; left: 0;">
+                    <thumbnailtemplate style=" width: 120%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>            
+        </div> 
+               
+        <a style="display: none" href="http://www.jssor.com">javascript</a>           
+            <script>
+            jssor_slider1_starter('slider1_container');
+            </script>
+      </div>
+          <div class="details">
+            <p>
+              <strong>Guide to Digital Marketing</strong> 
+            </p> 
+            <div class="social" align="right">
+              <a class="fb-share-button" data-href="http://www.sharingdais.com/digital_market" data-layout="button" ></a><br>      
+             <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" ></a>       
+            </div>
+          </div>
+          <div class="location">
+            <strong> Description:</strong>            
+            <p align="justify"> Digital Marketing also known as "Online Marketing" is marketing that makes use of electronic devices to engage with the stakeholders. In this guide, you will learn the difference between push and pull digital marketing, and various digital marketing tactics such as; Search Engine Optimization (SEO), Search Engine Marketing (SEM), Social Media Marketing (SMM) and others. I will also touch upon the Google Adwords and Web Analytics.The guide is kept short and crisp (5 pages) in presentation format (Free). You can request for presenation by sending a mail at support@sharingdais.com</p>
+          </div>
+          <div class="location">
+            <strong> Location:</strong> Indirapuram, Ghaziabad
+          </div>
+          <div class="avail">
+            <strong>Availability:</strong> Saturday and Sunday
+          </div>    
+          <div class="price">
+            <strong>Price:</strong> INR 500 for 2 hour session. 
+          </div>
+      </div>
+  </div>
+</div>  
+
+<!-- ############################### social media ############################# -->
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+<!-- ############################### social media ############################# -->
+
+<style type="text/css">
+/* Rating System css */
+.rating {
+    float:left;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > label:active {
+    position:relative;
+    top:1px;
+    left:2px;
+}
+</style>
+

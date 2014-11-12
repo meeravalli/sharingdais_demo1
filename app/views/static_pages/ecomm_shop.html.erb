@@ -1,0 +1,320 @@
+<!-- #############################jessor######################### -->
+
+<script type="text/javascript" src="/assets/jssor.js"></script>
+<script type="text/javascript" src="/assets/jssor.slider.js"></script>
+<script>
+        jssor_slider1_starter = function (containerId) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional]  
+                $AutoPlaySteps: 1,                                  //[Optional] 
+                $AutoPlayInterval: 4000,                            //[Optional] 
+                $PauseOnHover: 1,                               //[Optional] 
+                $Loop: 0,                                       //[Optional] 
+
+                $ArrowKeyNavigation: true,                    //[Optional] 
+                $SlideDuration: 500,                                //[Optional]  
+                $MinDragOffsetToSlide: 20,                          //[Optional] 
+                
+                $SlideSpacing: 5,                           
+                $DisplayPieces: 1,                                 
+                $ParkingPosition: 0,                                
+                $UISearchMode: 1,                                  
+                $PlayOrientation: 1,                                
+                $DragOrientation: 3,                                //[Optional] 
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to 
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 
+                    $Loop: 2,                                       //[Optional] Enable 
+                    $AutoCenter: 3,                                 //[Optional] Auto 
+                    $Lanes: 1,                                      //[Optional] Specify 
+                    $SpacingX: 4,                                   //[Optional] 
+                    $SpacingY: 4,                                   //[Optional] 
+                    $DisplayPieces: 4,                              //[Optional] 
+                    $ParkingPosition: 0,                            //[Optional] 
+                    $Orientation: 2,                                //[Optional] 
+                    $DisableDrag: false                             //[Optional] 
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$(containerId, options);
+
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    var sliderWidth = parentWidth;
+                    //keep the slider width no more than 810
+                    sliderWidth = Math.min(sliderWidth, 810);
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            }
+            //responsive code end
+        };
+    </script>
+    <!-- ##############################jessor####################### -->
+    <% @counter=Ad.all %>
+<div class="content">
+  <div class="resize_how_diag">
+    <div class="desktop_dialog"> <br><br><br>
+    <h1 style="color:#999">Visits: <%= @counter.first.box_4 ? @counter.first.box_4 : 0 %></h1>
+    <script type="text/javascript">
+        $('.count4').click(function() {
+          $('#output4').html(function(i, val) { return val*1+1 });
+        });
+      </script>                          
+          <table>
+            <tr>
+              <td>
+                <span class="rating">
+                 <input type="radio" class="rating-input"
+                  id="rating-input-4-5" name="rating-input-1">
+                 <label for="rating-input-4-5" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-4-4" name="rating-input-1">
+                 <label for="rating-input-4-4" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-4-3" name="rating-input-1">
+                  <label for="rating-input-4-3" class="rating-star"></label>
+                   <input type="radio" class="rating-input"
+                   id="rating-input-4-2" name="rating-input-1">
+                 <label for="rating-input-4-2" class="rating-star"></label>
+                 <input type="radio" class="rating-input"
+                  id="rating-input-4-1" name="rating-input-1">
+                 <label for="rating-input-4-1" class="rating-star"></label>
+                 </span>
+              </td>
+              <td>
+                <p style="float:right;">
+                  <strong>Phone No:</strong>
+                  <span> 8792305528</span>
+                </p>
+              </td>
+            </tr>
+          </table><br>
+        <div id="slider4_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 300px; overflow: hidden;">            
+            <div>
+                <img u="image" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" />                    
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/hightech_ecommerce.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/hightech_ecommerce.jpg" />
+
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/online-shopping.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/online-shopping.jpg" />
+
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/index.jpg" />
+                <div u="thumb">
+                    <img class="i" src="/assets/micro-site/index.jpg" />
+                    
+                </div>
+            </div>
+        </div>                
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 200px; height: 300px; left:800px; top:0px;">            
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 200px; height: 69px; top: 0; left: 0;">
+                    <thumbnailtemplate style=" width: 120%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>            
+        </div>        
+        <a style="display: none" href="http://www.jssor.com">javascript</a>       
+        <script>
+            jssor_slider1_starter('slider4_container');
+        </script>
+    </div>
+          <div class="details">
+            <p>
+               <strong>Booming e-commerce Industry</strong> 
+            </p><br><p><strong>About the writer:</strong> Rama is a working professional based out of Bengaluru. He is an alumnus of IET Lucknow and IIM Indore. </p> 
+            <div class="social" align="right">          
+               <a class="fb-share-button" data-href="http://www.sharingdais.com/ecomm_shop" data-layout="button">
+               </a><br>     
+                <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>            
+            </div>
+          </div>
+          <div class="location">
+            <strong> Description:</strong>            
+            <p align="justify">  India's e-commerce market was worth about $3.8 billion in 2009, it went up to $12.6 billion in 2013. In 2013, the e-retail market was worth US$ 2.3 billion. About 70% of India's e-commerce market is travel related. India has close to 10 million online shoppers and is growing at an estimated 30%. With the recent investments in companies like Flipkart, Snapdeal, OlaCabs,TaxiforSure, this is for sure people are eyeing on e-commerce in India. Lets understand "ecommerce- growth, opportunities and challenges" from Mr. Rama. You can download the file from the link given:<a href="/assets/e-commerce.pdf" target="_blank">  "E-Commerce Overview"</a></p>
+          </div>          
+          <div class="location">
+            <strong> Location:</strong> Bangolre
+          </div>
+          <div class="avail">
+            <strong>Availability:</strong> N/A
+          </div>    
+          <div class="price">
+            <strong>Price:</strong> N/A  
+          </div>
+    </div>
+  </div>
+</div>
+<!-- ############################### social media ############################# -->
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+
+<!-- ############################### social media ############################# -->
+
+<style type="text/css">
+/* Rating System css */
+.rating {
+    float:left;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > label:active {
+    position:relative;
+    top:1px;
+    left:2px;
+}
+</style>
+
+    <!-- Thumbnail Item Skin Begin -->
+            <style>
+                
+                .jssort11
+                {
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+                .jssort11 .i, .jssort11 .pav:hover .i
+                {
+                  position: absolute;
+                  top:3px;
+                  left:3px;
+                  WIDTH: 90%;
+                  HEIGHT: 90%;
+                  border: white 1px dashed;
+                }
+                * html .jssort11 .i
+                {
+                  WIDTH /**/: 62px;
+                  HEIGHT /**/: 32px;
+                }
+                .jssort11 .pav .i
+                {
+                  border: white 1px solid;
+                }
+                .jssort11 .t, .jssort11 .pav:hover .t
+                {
+                  position: absolute;
+                  top: 3px;
+                  left: 68px;
+                  width:129px;
+                  height: 32px;
+                  line-height:32px;
+                  text-align: center;
+                  color:#fc9835;
+                  font-size:13px;
+                  font-weight:700;
+                }
+                .jssort11 .pav .t, .jssort11 .phv .t, .jssort11 .p:hover .t
+                {
+                  color:#fff;
+                }
+                .jssort11 .c, .jssort11 .pav:hover .c
+                {
+                  position: absolute;
+                  top: 38px;
+                  left: 3px;
+                  width:197px;
+                  height: 31px;
+                  line-height:31px;
+                  color:#fff;
+                  font-size:11px;
+                  font-weight:400;
+                  overflow: hidden;
+                }
+                .jssort11 .pav .c, .jssort11 .phv .c, .jssort11 .p:hover .c
+                {
+                  color:#fc9835;
+                }
+                .jssort11 .t, .jssort11 .c
+                {
+                  transition: color 2s;
+                    -moz-transition: color 2s;
+                    -webkit-transition: color 2s;
+                    -o-transition: color 2s;
+                }
+                .jssort11 .p:hover .t, .jssort11 .phv .t, .jssort11 .pav:hover .t, .jssort11 .p:hover .c, .jssort11 .phv .c, .jssort11 .pav:hover .c
+                {
+                  transition: none;
+                    -moz-transition: none;
+                    -webkit-transition: none;
+                    -o-transition: none;
+                }
+                .jssort11 .p
+                {
+                  background:#181818;
+                }
+                .jssort11 .pav, .jssort11 .pdn
+                {
+                  background:#462300;
+                }
+                .jssort11 .p:hover, .jssort11 .phv, .jssort11 .pav:hover
+                {
+                  background:#333;
+                }
+            </style>
+

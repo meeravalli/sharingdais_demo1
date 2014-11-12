@@ -11,7 +11,16 @@ class BookPostRequirement < ActiveRecord::Base
     belongs_to :location
     	
   	geocoded_by :full_location_address
-  	after_validation :geocode, if: ->(obj){ obj.latitude.blank? and obj.longitude.blank? }
+  	#after_validation :geocode, if: ->(obj){ obj.latitude.blank? and obj.longitude.blank? }
+    after_validation :geocode, :if => :full_location_address_changed?
+    
+    def full_location_address
+      [self.location.location_name, self.city.city_name, "India"].compact.join(', ')  
+    end
+
+    def full_location_address_changed?
+      self.location.location_name_changed? || self.city.city_name_changed? || "India"
+    end
 
   	validates :name, presence: true
   	validates :author, presence: true
@@ -20,8 +29,5 @@ class BookPostRequirement < ActiveRecord::Base
    :path => ":rails_root/public/system/:attachment/:id_partition/:style/:basename.:extension",
    :url => "/system/:attachment/:id_partition/:style/:basename.:extension"
   	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-
-  def full_location_address
-  	[self.location.location_name, self.city.city_name, "India"].compact.join(', ')  
-	end
+  
 end

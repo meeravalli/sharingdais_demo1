@@ -14,19 +14,26 @@ class SkillSearchController < ApplicationController
       else
       	query += "seeker_provider = 1"
       end
-      if city.present?
-      	  query += " and city_id = #{city}"
-      end
-
-      if location.present?
-      	  query += " and location_id = #{location}"
-      end
       if params[:search][:skill_type_id] != '1'
         if key.present?
-        	  query += " and sub_category_id = #{key}"
+            query += " and sub_category_id = #{key}"
         end
       end
-      @search_results = SkillPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
+      #if city.present?
+      #	  query += " and city_id = #{city}"
+      #end
+      #if location.present?
+      #	  query += " and location_id = #{location}"
+      #end
+      if params[:search].has_key?("include_near_by_locations")
+        location = Location.where("id = ?",params[:search][:location_id]).last
+        city = City.where("id = ?",params[:search][:city_id]).last
+        search_area = [city.city_name, location.location_name, "India"]#.join(", ")
+        @search_results = SkillPostRequirement.near("#{search_area}", 10).where(query).paginate(:page => params[:page], :per_page => 25)    
+      else
+        @search_results = SkillPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
+      end 
+      #@search_results = SkillPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
   	end

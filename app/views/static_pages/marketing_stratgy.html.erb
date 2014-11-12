@@ -1,0 +1,326 @@
+<!-- #######################################3jessor################################ -->
+ <script type="text/javascript" src="/assets/jssor.js"></script>
+<script type="text/javascript" src="/assets/jssor.slider.js"></script>
+ <script>
+        jssor_slider1_starter = function (containerId) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+                $Loop: 0,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
+
+                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 5,                           //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+
+                    $Loop: 2,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
+                    $AutoCenter: 3,                                 //[Optional] Auto center thumbnail items in the thumbnail navigator container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 3
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
+                    $SpacingX: 4,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+                    $SpacingY: 4,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
+                    $DisplayPieces: 4,                              //[Optional] Number of pieces to display, default value is 1
+                    $ParkingPosition: 0,                            //[Optional] The offset position to park thumbnail
+                    $Orientation: 2,                                //[Optional] Orientation to arrange thumbnails, 1 horizental, 2 vertical, default value is 1
+                    $DisableDrag: false                             //[Optional] Disable drag or not, default value is false
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$(containerId, options);
+
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    var sliderWidth = parentWidth;
+                    //keep the slider width no more than 810
+                    sliderWidth = Math.min(sliderWidth, 810);
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            }
+            //responsive code end
+        };
+    </script>
+    <!-- #######################################3jessor################################ -->
+    <% @counter=Ad.all %>
+<div class="content">
+<div class="resize_how_diag">
+<div class="desktop_dialog"><br><br><br>
+<h1 style="color:#999">Visits: <%= @counter.first.box_5 ? @counter.first.box_5 : 0 %></h1>
+    <script type="text/javascript">
+        $('.count5').click(function() {
+          $('#output5').html(function(i, val) { return val*1+1 });
+        });
+      </script>                           
+          <table>
+            <tr>
+              <td>
+                <span class="rating">
+                 <input type="radio" class="rating-input"
+                  id="rating-input-5-5" name="rating-input-1">
+                 <label for="rating-input-5-5" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-5-4" name="rating-input-1">
+                 <label for="rating-input-5-4" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-5-3" name="rating-input-1">
+                  <label for="rating-input-5-3" class="rating-star"></label>
+                   <input type="radio" class="rating-input"
+                   id="rating-input-5-2" name="rating-input-1">
+                 <label for="rating-input-5-2" class="rating-star"></label>
+                 <input type="radio" class="rating-input"
+                  id="rating-input-5-1" name="rating-input-1">
+                 <label for="rating-input-5-1" class="rating-star"></label>
+                 </span>
+              </td>
+              <td>
+                <p style="float:right;">
+                  <strong>Phone No:</strong>
+                  <span> 7840088216</span>
+                </p>
+              </td>
+            </tr>
+          </table><br>
+        <div id="slider5_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 300px; overflow: hidden;">            
+            <div>
+                <img u="image" src="/assets/micro-site/marketingCloud.jpg" style="width:100%; height: ;"/>
+                <div u="thumb">
+                 <img class="i" src="/assets/micro-site/marketingCloud.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/marketing.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/micro-site/marketing.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/market1.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/micro-site/market1.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/micro-site/market2.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/micro-site/market2.jpg" />
+                </div>
+            </div>
+        </div>                
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 200px; height: 300px; left:800px; top:0px;">            
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 200px; height: 69px; top: 0; left: 0;">
+                    <thumbnailtemplate style=" width: 120%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>            
+        </div>        
+        <a style="display: none" href="http://www.jssor.com">javascript</a>       
+        <script>
+            jssor_slider1_starter('slider5_container');
+        </script>
+     </div>
+          <div class="details">
+            <p>
+              <strong>Porter's 5 Forces: Marketing Gyan. </strong> 
+            </p> 
+            <div class="social" align="right">          
+             <a class="fb-share-button" data-href="http://www.sharingdais.com/marketing_stratgy" data-layout="button">
+              </a><br>        
+             <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>       
+            </div>
+            <br>
+            <p>
+              <strong>About the author:</strong>
+               Abhishek is an IT professional based out of Gurgaon. He is an MBA from MDI Gurgaon.
+             </p>           
+            </div>
+           <div class="location">
+            <strong> Description:</strong>            
+            <p align="justify"> The Porter's Five Forces tool is a simple but powerful tool for understanding where power lies in a business situation. This is useful, because it helps you understand both the strength of your current competitive position, and the strength of a position you're considering moving into.With a clear understanding of where power lies, you can take fair advantage of a situation of strength, improve a situation of weakness, and avoid taking wrong steps. Conventionally, the tool is used to identify whether new products, services or businesses have the potential to be profitable. However it can be very illuminating when used to understand the balance of power in other situations. 
+           Please download the file from here:<a href="/assets/Marketing.pdf" target="_blank">  "Porter's five forces"</a>
+           </p>
+          </div>
+          <div class="location">
+            <strong> Location:</strong> Gurgaon
+          </div>
+          <div class="avail">
+            <strong>Availability:</strong> N/A
+          </div>    
+          <div class="price">
+            <strong>Price:</strong> N/A 
+          </div>
+      </div>
+ </div>
+</div> 
+
+<!-- ############################### social media ############################# -->
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- ############################### social media ############################# -->
+
+<style type="text/css">
+/* Rating System css */
+.rating {
+    float:left;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > label:active {
+    position:relative;
+    top:1px;
+    left:2px;
+}
+</style>
+
+
+    <!-- Thumbnail Item Skin Begin -->
+           <style>
+                
+                .jssort11
+                {
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+                .jssort11 .i, .jssort11 .pav:hover .i
+                {
+                  position: absolute;
+                  top:3px;
+                  left:3px;
+                  WIDTH: 90%;
+                  HEIGHT: 90%;
+                  border: white 1px dashed;
+                }
+                * html .jssort11 .i
+                {
+                  WIDTH /**/: 62px;
+                  HEIGHT /**/: 32px;
+                }
+                .jssort11 .pav .i
+                {
+                  border: white 1px solid;
+                }
+                .jssort11 .t, .jssort11 .pav:hover .t
+                {
+                  position: absolute;
+                  top: 3px;
+                  left: 68px;
+                  width:129px;
+                  height: 32px;
+                  line-height:32px;
+                  text-align: center;
+                  color:#fc9835;
+                  font-size:13px;
+                  font-weight:700;
+                }
+                .jssort11 .pav .t, .jssort11 .phv .t, .jssort11 .p:hover .t
+                {
+                  color:#fff;
+                }
+                .jssort11 .c, .jssort11 .pav:hover .c
+                {
+                  position: absolute;
+                  top: 38px;
+                  left: 3px;
+                  width:197px;
+                  height: 31px;
+                  line-height:31px;
+                  color:#fff;
+                  font-size:11px;
+                  font-weight:400;
+                  overflow: hidden;
+                }
+                .jssort11 .pav .c, .jssort11 .phv .c, .jssort11 .p:hover .c
+                {
+                  color:#fc9835;
+                }
+                .jssort11 .t, .jssort11 .c
+                {
+                  transition: color 2s;
+                    -moz-transition: color 2s;
+                    -webkit-transition: color 2s;
+                    -o-transition: color 2s;
+                }
+                .jssort11 .p:hover .t, .jssort11 .phv .t, .jssort11 .pav:hover .t, .jssort11 .p:hover .c, .jssort11 .phv .c, .jssort11 .pav:hover .c
+                {
+                  transition: none;
+                    -moz-transition: none;
+                    -webkit-transition: none;
+                    -o-transition: none;
+                }
+                .jssort11 .p
+                {
+                  background:#181818;
+                }
+                .jssort11 .pav, .jssort11 .pdn
+                {
+                  background:#462300;
+                }
+                .jssort11 .p:hover, .jssort11 .phv, .jssort11 .pav:hover
+                {
+                  background:#333;
+                }
+            </style> 
+
+ 

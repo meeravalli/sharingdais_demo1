@@ -1,7 +1,7 @@
 class BookSearchController < ApplicationController
   layout 'book_search'
   def index
-	@search_params = nil
+  @search_params = nil
     if params[:search]
       session[:city_id] = params[:search][:city_id]
       key = params[:search][:key].downcase
@@ -11,24 +11,27 @@ class BookSearchController < ApplicationController
 
       query = ""
       if params[:search][:book] == "0"
-      	query += "seeker_provider = 0"
+        query += "seeker_provider = 1"
       else
-      	query += "seeker_provider = 1"
+        query += "seeker_provider = 1"
       end
-
       if key.present?
-      	query += ' and (lower(name) LIKE "%' + key + '%" or lower(isbn_number) LIKE "%' + key + '%" or lower(author) LIKE "%' + key + '%")'
+        query += ' and (lower(name) LIKE "%' + key + '%" or lower(isbn_number) LIKE "%' + key + '%" or lower(author) LIKE "%' + key + '%")'
       end
-
-      if city.present?
-      	  query += " and city_id = #{city}"
-      end
-
-      if location.present?
-      	  query += " and location_id = #{location}"
-      end
-      @search_results = BookPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
-
+      #if city.present?
+          #query += " and city_id = #{city}"
+      #end      
+      #if location.present?
+          #query += " and location_id = #{location}"
+      #end
+      if params[:search].has_key?("include_near_by_locations")
+        location = Location.where("id = ?",params[:search][:location_id]).last
+        city = City.where("id = ?",params[:search][:city_id]).last
+        search_area = [city.city_name, location.location_name, "India"]#.join(", ")
+        @search_results = BookPostRequirement.near("#{search_area}", 10).where(query).paginate(:page => params[:page], :per_page => 25)    
+      else
+        @search_results = BookPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
+      end 
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
     end

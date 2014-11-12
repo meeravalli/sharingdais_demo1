@@ -72,16 +72,19 @@
           </div>
           <div class="cboth"></div>
           <div class="row"></div>
+
+
+          
 <div style="col-xs-12 col-md-2 padding_none text-left">
             <div class="left col-xs-12 margin_topbot m_near">
-             <label id="nearbylocations" style="cursor:pointer;text-decoration:underline;"> Include nearby Localities</label>    
-              <select id="search_kms" name="search[kms]" style="background-color:#000;"><option value="1">1 km</option>
-<option value="2">2 km</option>
-<option value="3" selected="selected">3 km</option>
-<option value="4">4 km</option>
-<option value="5">5 km</option></select> |
-              <input type="checkbox" checked="checked" id="search_include_near_by_locations" name="search[include_near_by_locations]" style="display:none;" value="true"><label id="exclude_near_by_locations" style="cursor:pointer;">Exclude Nearby Localities</label>
+              <label id='nearbylocations' style="cursor:pointer;text-decoration:underline;" > Include nearby Localities</label>    
+              <%= select_tag('search[kms]', options_for_select({ "1 km" => "1", "2 km" => "2", "3 km" => "3", "4 km" => "4", "5 km" => "5"}, params[:search][:kms] || "3" ), :style => "background-color:#000;") %> |
+              <% locality_text = ( params[:search].empty? || params[:search].has_key?(:include_near_by_locations) ) ?  'Exclude Nearby Localities' : 'Exclude Nearby Localities'  %> 
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %><label id='exclude_near_by_locations' style="cursor:pointer;"><%= locality_text %></label>
             </div>
+             <!--<div class="btns">
+              <%#= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_food_sharing_button" %>
+            </div>-->
           </div> 
 
 

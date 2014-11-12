@@ -105,6 +105,12 @@ Sharingdasiss::Application.routes.draw do
   get "skill_search/skill_result"
   
   get "close_window" => "book_search#close_window"
+
+  get "digital_market" => "static_pages#digital_market"
+  get "choc_cake" => "static_pages#choc_cake"
+  get "home_food" => "static_pages#home_food"
+  get "ecomm_shop" => "static_pages#ecomm_shop"
+  get "marketing_stratgy" => "static_pages#marketing_stratgy"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
