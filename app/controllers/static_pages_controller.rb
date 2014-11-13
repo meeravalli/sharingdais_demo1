@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 	
 	def aboutus
-	@title = "Sharingdais connecting neighbourhood"
+	  @title = "Sharingdais connecting neighbourhood"
 	end
 	
 	def ourteam
@@ -16,5 +16,23 @@ class StaticPagesController < ApplicationController
 	def benefits
 	end
 
-	
+	def digital_market
+	  render :layout => false
+	end
+
+	def choc_cake
+	  render :layout => false
+	end
+
+	def home_food
+	  render :layout => false
+	end
+
+	def ecomm_shop
+	  render :layout => false
+	end
+
+	def marketing_stratgy
+	  render :layout => false
+	end
 end
