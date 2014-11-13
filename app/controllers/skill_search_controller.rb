@@ -28,7 +28,7 @@ class SkillSearchController < ApplicationController
       if params[:search].has_key?("include_near_by_locations")
         location = Location.where("id = ?",params[:search][:location_id]).last
         city = City.where("id = ?",params[:search][:city_id]).last
-        search_area = [city.city_name, location.location_name, "India"]#.join(", ")
+        search_area = [city.city_name, location.location_name, "India"].join(", ")
         @search_results = SkillPostRequirement.near("#{search_area}", 10).where(query).paginate(:page => params[:page], :per_page => 25)    
       else
         @search_results = SkillPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
