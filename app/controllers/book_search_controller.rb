@@ -16,7 +16,13 @@ class BookSearchController < ApplicationController
         query += "seeker_provider = 1"
       end
       if key.present?
-        query += ' and (lower(name) LIKE "%' + key + '%" or lower(isbn_number) LIKE "%' + key + '%" or lower(author) LIKE "%' + key + '%")'
+        category=Category.where("category_name=?",params[:search][:key])
+        if !category.blank?
+          @ke = category.first.id.to_s  
+        else  
+          @ke = key       
+        end 
+        query += ' and (lower(name) LIKE "%' + key + '%" or lower(category_id) LIKE "%' + @ke + '%" or lower(author) LIKE "%' + key + '%")'
       end
       #if city.present?
           #query += " and city_id = #{city}"

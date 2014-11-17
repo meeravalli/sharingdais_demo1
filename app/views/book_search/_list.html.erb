@@ -114,7 +114,7 @@ $(function(){
               <th style="width:10%">Locality</th>
               <th style="width:10%">Rent</th>
               <th style="width:20%">Description</th>
-              <th style="width:10%">Date Of Posting</th>
+              <th style="width:10%">Category</th>
               <th style="width:10%">Contact</th>
             </tr>
           </thead>
@@ -190,7 +190,7 @@ $(function(){
                 <td><%= s.location.location_name %></td>
                 <td><%= s.rent%></td>
                 <td><%= s.description%></td>
-                <td><%= s.date_of_posting.strftime('%d %B %Y') if s.date_of_posting.present? %></td>
+                <td><%= s.category.category_name if s.category_id.present? %></td>
                 <% @user_email = s.user.email%>
                 <% @user_phone = s.user.phone_no%>
                 <% if !current_user %>
@@ -323,10 +323,10 @@ $(function(){
                                     </div>
                                     <div class="data_row">
                                     	<div class="data_title">
-                                        	Date Of Posting
+                                        	Category
                                         </div>
                                         <div class="data_col">
-                                        	<%= s.date_of_posting.strftime('%d %B %Y') if s.date_of_posting.present?  %>
+                                        	<%= s.category.category_name if s.category_id.present?  %>
                                         </div>
                                     </div>
                                     

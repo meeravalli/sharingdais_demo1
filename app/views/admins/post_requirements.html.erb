@@ -1,134 +1,269 @@
 <h3 class="heading_content">Sharingdais Post Requirements</h3><br>
-<div class="display padding_five">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist" style="float:left">
-    <li class="active">
-      <a href="#book" role="tab" data-toggle="tab">Food Post Requirements</a>
-    </li>
-    <li>
-      <a href="#food" role="tab" data-toggle="tab">Book Post Requirements</a>
-    </li>
-    <li>
-      <a href="#skill" role="tab" data-toggle="tab">Skill Post Requirements</a>
-    </li>
-  </ul>
+  <div class="display padding_five">
+         <!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="float:left">
+  <li class="active"><a href="#book" role="tab" data-toggle="tab">Food Post Requirements</a></li>
+  <li><a href="#food" role="tab" data-toggle="tab">Book Post Requirements</a></li>
+  <li><a href="#skill" role="tab" data-toggle="tab">skill Post Requirements</a></li>
+</ul>
 
-<!-- Tab panes food -->
-    <div class="tab-content">
-      <div class="tab-pane active" id="book">
-        <div class="display padding_five">
-          <table class="table table-hover">
-            <thead class="heading">
-              <tr>
-                <th style="width:15%">User Name</th>
-                <th style="width:15%">Locality</th>
-                <th style="width:15%">Food type</th>
-                <th style="width:15%">Region</th>
-                <th style="width:10%">Budget</th>
-                <th style="width:20%">Details</th>
-                <th style="width:10%">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @food_orders.each do |f| %>
-              <tr>
-                <td><%= f.user.name %></td>
-                <td><%= f.location.location_name %></td>
-                <td><%= f.food_type.name %></td>
-                <td><%= f.region.name %></a></td>
-                <td><%= f.budget %></td>
-                <td><%= f.details %></td>
-                <td><%= f.created_at.strftime("%b %d, %Y") %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="pagination">
-           <%= will_paginate @food_orders %>
-          </div>
-        </div>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="book">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th style="width:15%">User Name</th>
+                        <th style="width:15%">Locality</th>
+                        <th style="width:15%">Food type</th>
+                        <th style="width:15%">Region</th>
+                        <th style="width:10%">Budget</th>
+                        <th style="width:20%">Details</th>
+                        <th style="width:10%">Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @food_orders.each do |f| %>
+                    <tr>
+                        <td>
+                            <%= f.user.name %>
+                        </td>
+                        <td><%= f.location.location_name %></td>
+                        <td><%= f.food_type.name %></td>
+                        <td>
+                            <% if !f.region.nil? %>
+                                <%= f.region.name %>
+                            <% else %>
+                                Not Avaliabel
+                            <% end %>
+                        </td>
+                        <td><%= f.budget %></td>
+                        <td><%= f.details %></td>
+                        <td><%= f.created_at.strftime("%b %d, %Y") %></td>
+                        <td>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalf_<%= f.id %>_<%= f.user.id %>">Edit</button>
+<!-- Modal -->
+<div class="modal fade" id="Modalf_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= f.user.name %></h4>
       </div>
-<!-- Tab panes book -->
-      <div class="tab-pane" id="food">
-        <div class="display padding_five">
-          <table class="table table-hover">
-            <thead class="heading">
-              <tr>
-                <th style="width:15%">User Name</th>
-                <th style="width:15%">Book Name</th>
-                <th style="width:15%">Author</th>
-                <th style="width:15%">Region</th>
-                <th style="width:10%">Rent</th>
-                <th style="width:20%">Description</th>
-                <th style="width:10%">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @book_orders.each do |b| %>
-              <tr>
-                <td>
-                  <% if !b.user.nil? %>
-                    <%= b.user.name %>
-                  <% else %>
-                    Account Deleted
-                  <% end %>
-                </td>
-                <td><%= b.name %></td>
-                <td><%= b.author %></td>
-                <td><%= b.location.location_name %></a></td>
-                <td><%= b.rent %></td>
-                <td><%= b.description %></td>
-                <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="pagination">
-            <%= will_paginate @book_orders%>
-          </div>
-        </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <div class="form-group">
+      <label for="" class="" ,="" id="provider_id">Budget</label>
+      <div class="">
+        <input class="form-control" id="buddf<%= f.id %>_<%= f.user.id %>" size="30" type="text" value="<%= f.budget %>">
       </div>
-     
-<!-- Tab panes skill -->
-    <div class="tab-pane" id="skill">
-        <div class="display padding_five">
-          <table class="table table-hover">
-            <thead class="heading">
-              <tr>
-                <th style="width:15%">User Name</th>
-                <th style="width:20%">Skill</th>
-                <th style="width:15%">Region</th>
-                <th style="width:10%">Rent</th>
-                <th style="width:25%">Description</th>
-                <th style="width:15%">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @skill_orders.each do |b| %>
-              <tr>
-                <td>
-                  <% if !b.user.nil? %>
-                    <%= b.user.name %>
-                  <% else %>
-                    Account Deleted
-                  <% end %>
-                </td>
-                <td><%= b.sub_category.sub_category_type %></td>
-                <td><%= b.location.location_name %></a></td>
-                <td><%= b.charges %></td>
-                <td><%= b.description %></td>
-                <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <div class="pagination">
-            <%= will_paginate @skill_orders%>
-          </div>
-        </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details </label>
+      <div class="">
+        <textarea class="form-control" id="dtlsf<%= f.id %>_<%= f.user.id %>" cols="20" rows="5"><%= f.details %></textarea>
       </div>
+    </div><br>
+    <button type="button" id="save_f<%= f.id %>_<%= f.user.id %>" class="btn btn-primary">Save</button>
+    <script type="text/javascript">
+$("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
+  $.ajax({ type: 'POST',url: '/edit_food_post',data: ({'id':"<%= f.id %>",'budget': $("#buddf<%= f.id %>_<%= f.user.id %>").val(),'details': $("#dtlsf<%= f.id %>_<%= f.user.id %>").val()}),success: function () {}
+  });
+});
+    </script>
+<!--End Model Content-->
       </div>
-    </div> 
+    </div>
+  </div>
 </div>
+<!--End Model-->
+                        </td>
+                        <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_food_post, :id => f.id},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+
+                    </tr>
+                    <% end %>
+                   
+                    
+                </tbody>
+            </table>
+                <div class="pagination">
+      <%= will_paginate @food_orders %>
+            </div>
+        </div>
+  </div>
 
 
+  <div class="tab-pane" id="food">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th style="width:15%">User Name</th>
+                        <th style="width:15%">Book Name</th>
+                        <th style="width:15%">Author</th>
+                        <th style="width:15%">Region</th>
+                        <th style="width:10%">Rent</th>
+                        <th style="width:20%">Description</th>
+                        <th style="width:10%">Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @book_orders.each do |b| %>
+                    <tr>
+                        <td>
+                            <% if !b.user.nil? %>
+                                <%= b.user.name %>
+                            <% else %>
+                                Account Deleted
+                            <% end %>
+                        </td>
+                        <td><%= b.name %></td>
+                        <td><%= b.author %></td>
+                        <td><%= b.location.location_name %></a></td>
+                        <td><%= b.rent %></td>
+                        <td><%= b.description %></td>
+                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+<td>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalf_<%= b.id %>_<%= b.user.id %>">Edit</button>
+<!-- Modal -->
+<div class="modal fade" id="Modalf_<%= b.id %>_<%= b.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= b.user.name %></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <div class="form-group">
+      <label for="" class="" ,="" id="provider_id">Budget</label>
+      <div class="">
+        <input class="form-control" id="buddb<%= b.id %>_<%= b.user.id %>" size="30" type="text" value="<%= b.rent %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details </label>
+      <div class="">
+        <textarea class="form-control" id="dtlsb<%= b.id %>_<%= b.user.id %>" cols="20" rows="5"><%= b.description %></textarea>
+      </div>
+    </div><br>
+    <button type="button" id="save_b<%= b.id %>_<%= b.user.id %>" class="btn btn-primary">Save</button>
+    <script type="text/javascript">
+$("#save_b<%= b.id %>_<%= b.user.id %>").click(function () {
+  $.ajax({ type: 'POST',url: '/edit_book_post',data: ({'id':"<%= b.id %>",'budget': $("#buddb<%= b.id %>_<%= b.user.id %>").val(),'details': $("#dtlsb<%= b.id %>_<%= b.user.id %>").val()}),success: function () {location.reload();}
+  });
+});
+    </script>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model-->
+                        </td>
+                        <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_book_post, :id => b.id},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+                    </tr>
+                    <% end %>
+                   
+                    
+                </tbody>
+            </table>
+                <div class="pagination">
+      <%= will_paginate @book_orders%>
+            </div>
+        </div>
+  </div>
+
+  <div class="tab-pane" id="skill">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th style="width:15%">User Name</th>
+                        <th style="width:15%">Skill</th>
+                        <th style="width:15%">Region</th>
+                        <th style="width:15%">Rent</th>
+                        <th style="width:25%">Description</th>
+                        <th style="width:15%">Date</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @skill_orders.each do |b| %>
+                    <tr>
+                        <td>
+                            <% if !b.user.nil? %>
+                                <%= b.user.name %>
+                            <% else %>
+                                Account Deleted
+                            <% end %>
+                        </td>
+                        <td><%= b.sub_category.sub_category_type %></td>
+                        <td><%= b.location.location_name %></a></td>
+                        <td><%= b.charges %></td>
+                        <td><%= b.description %></td>
+                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+<td>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_<%= b.id %>_<%= b.user.id %>">Edit</button>
+<!-- Modal -->
+<div class="modal fade" id="Modals_<%= b.id %>_<%= b.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= b.user.name %></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <div class="form-group">
+      <label for="" class="" ,="" id="provider_id">Budget</label>
+      <div class="">
+        <input class="form-control" id="budds<%= b.id %>_<%= b.user.id %>" size="30" type="text" value="<%= b.charges %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details </label>
+      <div class="">
+        <textarea class="form-control" id="dtlss<%= b.id %>_<%= b.user.id %>" cols="20" rows="5"><%= b.description %></textarea>
+      </div>
+    </div><br>
+    <button type="button" id="save_s<%= b.id %>_<%= b.user.id %>" class="btn btn-primary">Save</button>
+    <script type="text/javascript">
+$("#save_s<%= b.id %>_<%= b.user.id %>").click(function () {
+  $.ajax({ type: 'POST',url: '/edit_skill_post',data: ({'id':"<%= b.id %>",'budget': $("#budds<%= b.id %>_<%= b.user.id %>").val(),'details': $("#dtlss<%= b.id %>_<%= b.user.id %>").val()}),success: function () {location.reload();}
+  });
+});
+    </script>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model-->
+                        </td>
+                        <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_skill_post, :id => b.id},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+                    </tr>
+                    <% end %>
+                   
+                    
+                </tbody>
+            </table>
+                <div class="pagination">
+      <%= will_paginate @skill_orders%>
+            </div>
+        </div>
+  </div>
+</div> 
+  </div>
+                
+                                  
+                          

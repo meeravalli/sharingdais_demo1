@@ -83,6 +83,12 @@ Sharingdasiss::Application.routes.draw do
   get "list_requirements" => "admins#list_requirements"
   get "user_orders" => "admins#user_orders"
   get "user_add_clicks" => "admins#user_add_clicks"
+  post "/edit_food_post" => "admins#edit_food_post"
+  delete "destroy_food_post" => "admins#destroy_food_post"
+  post "/edit_book_post" => "admins#edit_book_post"
+  delete "destroy_book_post" => "admins#destroy_book_post"
+  post "/edit_skill_post" => "admins#edit_skill_post"
+  delete "destroy_skill_post" => "admins#destroy_skill_post"
   
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
@@ -111,6 +117,8 @@ Sharingdasiss::Application.routes.draw do
   get "home_food" => "static_pages#home_food"
   get "ecomm_shop" => "static_pages#ecomm_shop"
   get "marketing_stratgy" => "static_pages#marketing_stratgy"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

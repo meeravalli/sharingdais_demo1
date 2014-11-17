@@ -1,5 +1,5 @@
 class BookPostRequirement < ActiveRecord::Base
-  	attr_accessible :author, :city_id, :date_of_posting, :description, :isbn_number, :latitude, :location_id, :longitude, :name, :seeker_provider, :service_id, :user_id, :image, :rent
+  	attr_accessible :author, :city_id, :date_of_posting, :description, :isbn_number, :latitude, :location_id, :longitude, :name, :seeker_provider, :service_id, :user_id, :image, :rent, :category_id
 
     has_many :book_orders, :dependent => :destroy
     has_many :book_messages, :dependent => :destroy
@@ -9,6 +9,7 @@ class BookPostRequirement < ActiveRecord::Base
     belongs_to :service
     belongs_to :city
     belongs_to :location
+    belongs_to :category
     	
   	geocoded_by :full_location_address
   	#after_validation :geocode, if: ->(obj){ obj.latitude.blank? and obj.longitude.blank? }

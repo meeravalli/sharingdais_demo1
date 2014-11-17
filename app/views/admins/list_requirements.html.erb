@@ -1,142 +1,299 @@
 <h3 class="heading_content">Sharingdais List Requirements</h3><br>
-  <div class="display padding_five">
-         <!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist" style="float:left">
-  <li class="active"><a href="#book" role="tab" data-toggle="tab">Food List Requirements</a></li>
-  <li><a href="#food" role="tab" data-toggle="tab">Book List Requirements</a></li>
-  <li><a href="#skill" role="tab" data-toggle="tab">skill List Requirements</a></li>
-</ul>
+<div class="display padding_five">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style="float:left">
+    <li class="active">
+      <a href="#book" role="tab" data-toggle="tab">Food List Requirements</a>
+    </li>
+    <li>
+      <a href="#food" role="tab" data-toggle="tab">Book List Requirements</a>
+    </li>
+    <li>
+      <a href="#skill" role="tab" data-toggle="tab">Skill List Requirements</a>
+    </li>
+  </ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="book">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th style="width:15%">User Name</th>
-                        <th style="width:15%">Locality</th>
-                        <th style="width:15%">Food type</th>
-                        <th style="width:15%">Region</th>
-                        <th style="width:10%">Budget</th>
-                        <th style="width:20%">Details</th>
-                        <th style="width:10%">Date</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @food_orders.each do |f| %>
-                    <tr>
-                        <td>
-                            <%= f.user.name %>
+<!-- Tab panes food -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="book">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th style="width:15%">User Name</th>
+                <th style="width:15%">Locality</th>
+                <th style="width:15%">Food type</th>
+                <th style="width:15%">Region</th>
+                <th style="width:10%">Budget</th>
+                <th style="width:20%">Details</th>
+                <th style="width:10%">Date</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @food_orders.each do |f| %>
+              <tr>
+                <td><%= f.user.name %></td>
+                <td><%= f.location.location_name %></td>
+                <td><%= f.food_type.name %></td>
+                <td><% if !f.region.nil? %><%= f.region.name %><%end%></a></td>
+                <td><%= f.budget %></td>
+                <td><%= f.details %></td>
+                <td><%= f.created_at.strftime("%b %d, %Y") %></td>
+                <td>                     
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalf_<%= f.id %>_<%= f.user.id %>">Edit</button>
+<!-- Modal -->
+<div class="modal fade" id="Modalf_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= f.user.name %></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+<%= form_tag('/edit_food_post', multipart: true, remote: true) do -%>
+ <input type="hidden" name="id" value="<%= f.id %>"> 
+ <div class="form-group">
+      <label for="" class="" ,="" id="provider_id">Budget</label>
+      <div class="">
+        <input class="form-control" name="budget" size="30" type="text" value="<%= f.budget %>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details </label>
+      <div class="">
+        <textarea class="form-control" name="details" cols="20" rows="5"><%= f.details %></textarea>
+      </div>
+    </div>
+    <div id="food_image" class="form-group">
+      <div class="">
+        <% if !f.food_image.path.nil? %>
+          <%= image_tag f.food_image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+        <%else%>
+        <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+        <%end%>
+      </div>
+    </div><br>
+    <div id="food_image" class="form-group">
+      <label class="" for="inputEmail3">Food Image</label>
+      <div class="">
+        <input type="file" name="post_requirement[food_image]" id="post_requirement_food_image">
+      </div>
+      <span class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span><br>
+    </div>
+  <div><%= submit_tag 'Save' %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model-->
                         </td>
-                        <td><%= f.location.location_name %></td>
-                        <td><%= f.food_type.name %></td>
-                        <td>
-                            <% if !f.region.nil? %>
-                                <%= f.region.name %>
-                            <% else %>
-                                Not Avaliabel
-                            <% end %>
-                        </td>
-                        <td><%= f.budget %></td>
-                        <td><%= f.details %></td>
-                        <td><%= f.created_at.strftime("%b %d, %Y") %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @food_orders %>
-            </div>
+                        <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_food_post, :id => f.id, :seeker_provider => 0},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+           <%= will_paginate @food_orders %>
+          </div>
         </div>
+      </div>
+<!-- Tab panes book -->
+      <div class="tab-pane" id="food">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th style="width:15%">User Name</th>
+                <th style="width:15%">Book Name</th>
+                <th style="width:15%">Author</th>
+                <th style="width:15%">Region</th>
+                <th style="width:10%">Rent</th>
+                <th style="width:20%">Description</th>
+                <th style="width:10%">Date</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @book_orders.each do |b| %>
+              <tr>
+                <td>
+                  <% if !b.user.nil? %>
+                    <%= b.user.name %>
+                  <% else %>
+                    Account Deleted
+                  <% end %>
+                </td>
+                <td><%= b.name %></td>
+                <td><%= b.author %></td>
+                <td><%= b.location.location_name %></a></td>
+                <td><%= b.rent %></td>
+                <td><%= b.description %></td>
+                <td><%= b.created_at.strftime("%b %d, %Y") %></td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalb_<%= b.id %>_<%= b.user.id %>">Edit</button>
+                </td>
+                <!--Model book-->
+<div class="modal fade" id="Modalb_<%= b.id %>_<%= b.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><% if !b.user.nil? %><%= b.user.name %><%else%>Account Deleted<%end%></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+<%= form_tag('/edit_book_post', multipart: true) do -%>
+<input type="hidden" name="id" value="<%= b.id %>"> 
+<div class="form-group">
+<label for="" class="" id="provider_id">Budget</label>
+<div class="">
+<input class="form-control" name="budget" size="30" type="text" value="<%= b.rent %>">
+</div>
+</div>
+<div class="form-group">
+<label for="inputEmail3" class="">Details </label>
+<div class="">
+<textarea class="form-control" name="details" cols="20" rows="5"><%= b.description %></textarea>
+</div>
+</div><br>
+<div id="food_image" class="form-group">
+<div class="">
+<% if !b.image.path.nil? %>
+<%= image_tag b.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+<%else%>
+<img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+<%end%>
+</div>
+</div><br>
+<div id="book_image" class="">
+      <label class="" for="">Book Image</label>
+      <div class="">
+        <input type="file" name="book_post_requirement[image]" id="book_post_requirement_image">
+      </div>
+      <span class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div><br /><br />
+
+  <div><%= submit_tag 'Save' %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
   </div>
+</div>
+<!--End Model book-->
+<td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_book_post, :id => b.id, :seeker_provider => 0},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+              </tr>
 
-
-  <div class="tab-pane" id="food">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th style="width:15%">User Name</th>
-                        <th style="width:15%">Book Name</th>
-                        <th style="width:15%">Author</th>
-                        <th style="width:15%">Region</th>
-                        <th style="width:10%">Rent</th>
-                        <th style="width:20%">Description</th>
-                        <th style="width:10%">Date</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @book_orders.each do |b| %>
-                    <tr>
-                        <td>
-                            <% if !b.user.nil? %>
-                                <%= b.user.name %>
-                            <% else %>
-                                Account Deleted
-                            <% end %>
-                        </td>
-                        <td><%= b.name %></td>
-                        <td><%= b.author %></td>
-                        <td><%= b.location.location_name %></a></td>
-                        <td><%= b.rent %></td>
-                        <td><%= b.description %></td>
-                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @book_orders%>
-            </div>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <%= will_paginate @book_orders%>
+          </div>
         </div>
+      </div>
+     
+<!-- Tab panes skill -->
+    <div class="tab-pane" id="skill">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th style="width:15%">User Name</th>
+                <th style="width:20%">Skill</th>
+                <th style="width:15%">Region</th>
+                <th style="width:10%">Rent</th>
+                <th style="width:25%">Description</th>
+                <th style="width:15%">Date</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @skill_orders.each do |k| %>
+              <tr>
+                <td>
+                  <% if !k.user.nil? %>
+                    <%= k.user.name %>
+                  <% else %>
+                    Account Deleted
+                  <% end %>
+                </td>
+                <td><%= k.sub_category.sub_category_type %></td>
+                <td><%= k.location.location_name %></a></td>
+                <td><%= k.charges %></td>
+                <td><%= k.description %></td>
+                <td><%= k.created_at.strftime("%b %d, %Y") %></td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_<%= k.id %>_<%= k.user.id %>">Edit</button>
+<!--Model book-->
+<div class="modal fade" id="Modals_<%= k.id %>_<%= k.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= k.user.name %></h4>
+      </div>
+      <div class="modal-body">
+<%= form_tag('/edit_skill_post', multipart: true, remote: true) do -%>
+<input type="hidden" name="id" value="<%= k.id %>"> 
+<div class="form-group">
+<label for="" class="" id="provider_id">Budget</label>
+<div class="">
+<input class="form-control" name="budget" size="30" type="text" value="<%= k.charges %>">
+</div>
+</div>
+<div class="form-group">
+<label for="inputEmail3" class="">Details </label>
+<div class="">
+<textarea class="form-control" name="details" cols="20" rows="5"><%= k.description %></textarea>
+</div>
+</div><br>
+<div id="food_image" class="form-group">
+<div class="">
+<% if !k.skill.path.nil? %>
+<%= image_tag k.skill.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+<%else%>
+<img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+<%end%>
+</div>
+</div><br>
+<div id="food_image" class="form-group">
+<label class="" for="inputEmail3">Skill Image</label>
+<div class="">
+<input type="file" name="skill_post_requirement[skill]" id="skill_post_requirement_skill">
+</div>
+<span class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span><br><br>
+</div>
+  <div><%= submit_tag 'Save' %></div>
+<% end -%>
+      </div>
+    </div>
   </div>
-
-  <div class="tab-pane" id="skill">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th style="width:15%">User Name</th>
-                        <th style="width:15%">Skill</th>
-                        <th style="width:15%">Region</th>
-                        <th style="width:15%">Rent</th>
-                        <th style="width:25%">Description</th>
-                        <th style="width:15%">Date</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @skill_orders.each do |b| %>
-                    <tr>
-                        <td>
-                            <% if !b.user.nil? %>
-                                <%= b.user.name %>
-                            <% else %>
-                                Account Deleted
-                            <% end %>
-                        </td>
-                        <td><%= b.sub_category.sub_category_type %></td>
-                        <td><%= b.location.location_name %></a></td>
-                        <td><%= b.charges %></td>
-                        <td><%= b.description %></td>
-                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @skill_orders%>
-            </div>
+</div>
+<!--End Model book-->
+                </td>
+                <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_skill_post, :id => k.id, :seeker_provider => 0},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <%= will_paginate @skill_orders%>
+          </div>
         </div>
-  </div>
-</div> 
-  </div>
-                
-                                  
-                          
+      </div>
+      </div>
+    </div> 
+</div>
+
+

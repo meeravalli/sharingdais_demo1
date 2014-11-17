@@ -236,11 +236,13 @@ function book_form_validate()
     </div>
 
     <div class="form-group">
-      <label for="inputEmail3" class="">Date of Posting </label>
-      <div class="input-group date">
-      <%= f.text_field :date_of_posting, :class=>'form-control' , :id=>"book_post_requirement_dop"%>
-  <span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>
-</div><br/>
+      <!--<label for="inputEmail3" class="">Date of Posting </label>-->
+      <label for="inputEmail3" class="">Category</label>
+      <div class="">
+        <%#= f.text_field :date_of_posting, :class=>'form-control' , :id=>"book_post_requirement_dop"%>
+        <%= f.collection_select(:category_id, Category.all, :id, :category_name, {:include_blank => 'Category'}, {:class=>'form-control category_id_class','required'=>'required'} )%>
+        <!--<span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>-->
+      </div><br/>
       <div class="" id="book_image">
       <label for="" class="">Book Image</label>
       <div class="">

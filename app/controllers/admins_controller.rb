@@ -86,6 +86,90 @@ before_filter :ensure_admin
     @user = User.find(params[:user_id])
   end
 
+  def edit_food_post
+    @post=PostRequirement.where("id=?",params[:id]).first  
+    if !params[:budget].blank?
+      @post.budget= params[:budget] 
+    end
+    if !params[:details].blank?
+      @post.details= params[:details]
+    end
+    if !params[:post_requirement].blank?
+      @post.attributes = params[:post_requirement] 
+    end
+    @post.save
+    #render :json => {:status => "Post Requirement updated successfully"}
+    respond_to do |format|
+      format.js #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+  def destroy_food_post
+    user = PostRequirement.find(params[:id])
+    user.destroy
+    flash[:notice] = "Post successfully deleted"
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
+    end
+  end
+  def edit_book_post
+    @post=BookPostRequirement.where("id=?",params[:id]).first
+    puts "#{params[:book_post_requirement]}==========================="
+    if !params[:budget].blank?
+      @post.rent= params[:budget] 
+    end
+    if !params[:details].blank?
+      @post.description= params[:details]
+    end
+    if !params[:book_post_requirement].blank?
+      @post.attributes = params[:book_post_requirement] 
+    end
+    @post.save
+    #render :json => {:status => "Post Requirement updated successfully"}
+    respond_to do |format|
+      format.js
+    end
+  end
+  def destroy_book_post
+    user = BookPostRequirement.find(params[:id])
+    user.destroy
+    flash[:notice] = "Post successfully deleted"
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
+    end
+  end
+
+  def edit_skill_post
+    @post=SkillPostRequirement.where("id=?",params[:id])
+    if !params[:budget].blank?
+      @post.first.charges= params[:budget] 
+    end
+    if !params[:details].blank?
+      @post.first.description= params[:details]
+    end
+    if !params[:skill_post_requirement].blank?
+      @post.first.attributes = params[:skill_post_requirement] 
+    end
+    @post.first.save
+    #render :json => {:status => "Post Requirement updated successfully"}
+    respond_to do |format|
+      format.js
+    end
+  end
+  def destroy_skill_post
+    user = SkillPostRequirement.find(params[:id])
+    user.destroy
+    flash[:notice] = "Post successfully deleted"
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
+    end
+  end
+
   def user_add_clicks
     @counter=Ad.all
   end
