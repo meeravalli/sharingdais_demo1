@@ -70,7 +70,7 @@
     <button type="button" id="save_f<%= f.id %>_<%= f.user.id %>" class="btn btn-primary">Save</button>
     <script type="text/javascript">
 $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
-  $.ajax({ type: 'POST',url: '/edit_food_post',data: ({'id':"<%= f.id %>",'budget': $("#buddf<%= f.id %>_<%= f.user.id %>").val(),'details': $("#dtlsf<%= f.id %>_<%= f.user.id %>").val()}),success: function () {}
+  $.ajax({ type: 'POST',url: '/edit_food_post',data: ({'id':"<%= f.id %>",'budget': $("#buddf<%= f.id %>_<%= f.user.id %>").val(),'details': $("#dtlsf<%= f.id %>_<%= f.user.id %>").val()}),success: function () {location.reload();}
   });
 });
     </script>
@@ -108,6 +108,7 @@ $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
                         <th style="width:15%">Region</th>
                         <th style="width:10%">Rent</th>
                         <th style="width:20%">Description</th>
+                        <th style="width:20%">Category</th>
                         <th style="width:10%">Date</th>
                         <th></th>
                         <th></th>
@@ -128,6 +129,7 @@ $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
                         <td><%= b.location.location_name %></a></td>
                         <td><%= b.rent %></td>
                         <td><%= b.description %></td>
+                        <td><%= b.category.category_name if !b.category.nil? %></td>
                         <td><%= b.created_at.strftime("%b %d, %Y") %></td>
 <td>
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalf_<%= b.id %>_<%= b.user.id %>">Edit</button>
@@ -147,6 +149,25 @@ $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
         <input class="form-control" id="buddb<%= b.id %>_<%= b.user.id %>" size="30" type="text" value="<%= b.rent %>">
       </div>
     </div>
+<div class="form-group">
+<label for="" class="" >Category</label>
+<div class="">
+<select required="required" id="category_id<%= b.id %>_<%= b.user.id %>" class="form-control category_id_class">
+<option value="">Category</option>
+<option value="1">Academic Books</option>
+<option value="2">Biography &amp; Autobiography</option>
+<option value="3">Comics</option>
+<option value="4">Crime, Thriller &amp; Mystery</option>
+<option value="5">Fiction</option>
+<option value="6">Health &amp; Fitness</option>
+<option value="7">Home &amp; Lifestyle</option>
+<option value="8">Literature</option>
+<option value="9">Motivational</option>
+<option value="10">Non-Fiction</option>
+<option value="11">Romance</option>
+<option value="12">Others</option></select>
+      </div>
+</div>
     <div class="form-group">
       <label for="inputEmail3" class="">Details </label>
       <div class="">
@@ -156,7 +177,7 @@ $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
     <button type="button" id="save_b<%= b.id %>_<%= b.user.id %>" class="btn btn-primary">Save</button>
     <script type="text/javascript">
 $("#save_b<%= b.id %>_<%= b.user.id %>").click(function () {
-  $.ajax({ type: 'POST',url: '/edit_book_post',data: ({'id':"<%= b.id %>",'budget': $("#buddb<%= b.id %>_<%= b.user.id %>").val(),'details': $("#dtlsb<%= b.id %>_<%= b.user.id %>").val()}),success: function () {location.reload();}
+  $.ajax({ type: 'POST',url: '/edit_book_post',data: ({'id':"<%= b.id %>",'category_id':$("#category_id<%= b.id %>_<%= b.user.id %>").val(),'budget': $("#buddb<%= b.id %>_<%= b.user.id %>").val(),'details': $("#dtlsb<%= b.id %>_<%= b.user.id %>").val()}),success: function () {location.reload();}
   });
 });
     </script>

@@ -97,10 +97,11 @@ before_filter :ensure_admin
     if !params[:post_requirement].blank?
       @post.attributes = params[:post_requirement] 
     end
-    @post.save
-    #render :json => {:status => "Post Requirement updated successfully"}
-    respond_to do |format|
-      format.js #{ send_data @users.to_csv(col_sep: "\t") }
+    @post.save     
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
     end
   end
   def destroy_food_post
@@ -115,20 +116,24 @@ before_filter :ensure_admin
   end
   def edit_book_post
     @post=BookPostRequirement.where("id=?",params[:id]).first
-    puts "#{params[:book_post_requirement]}==========================="
     if !params[:budget].blank?
       @post.rent= params[:budget] 
     end
     if !params[:details].blank?
       @post.description= params[:details]
     end
+    if !params[:category_id].blank?
+      @post.category_id= params[:category_id]
+    end
     if !params[:book_post_requirement].blank?
       @post.attributes = params[:book_post_requirement] 
     end
     @post.save
-    #render :json => {:status => "Post Requirement updated successfully"}
-    respond_to do |format|
-      format.js
+    #render :json => {:status => "Post Requirement updated successfully"}   
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
     end
   end
   def destroy_book_post
@@ -154,9 +159,10 @@ before_filter :ensure_admin
       @post.first.attributes = params[:skill_post_requirement] 
     end
     @post.first.save
-    #render :json => {:status => "Post Requirement updated successfully"}
-    respond_to do |format|
-      format.js
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
     end
   end
   def destroy_skill_post

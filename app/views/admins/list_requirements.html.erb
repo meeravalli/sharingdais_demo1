@@ -53,8 +53,9 @@
       </div>
       <div class="modal-body">
 <!--Model Content-->
-<%= form_tag('/edit_food_post', multipart: true, remote: true) do -%>
+<%= form_tag('/edit_food_post', multipart: true) do -%>
  <input type="hidden" name="id" value="<%= f.id %>"> 
+ <input type="hidden" name="seeker_provider" value="0">
  <div class="form-group">
       <label for="" class="" ,="" id="provider_id">Budget</label>
       <div class="">
@@ -115,6 +116,7 @@
                 <th style="width:15%">Region</th>
                 <th style="width:10%">Rent</th>
                 <th style="width:20%">Description</th>
+                <th style="width:20%">Category</th>
                 <th style="width:10%">Date</th>
                 <th></th>
                 <th></th>
@@ -135,6 +137,7 @@
                 <td><%= b.location.location_name %></a></td>
                 <td><%= b.rent %></td>
                 <td><%= b.description %></td>
+                <td><%= b.category.category_name if !b.category.nil? %></td>
                 <td><%= b.created_at.strftime("%b %d, %Y") %></td>
                 <td>
                   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalb_<%= b.id %>_<%= b.user.id %>">Edit</button>
@@ -150,12 +153,32 @@
       <div class="modal-body">
 <!--Model Content-->
 <%= form_tag('/edit_book_post', multipart: true) do -%>
-<input type="hidden" name="id" value="<%= b.id %>"> 
+<input type="hidden" name="id" value="<%= b.id %>">
+<input type="hidden" name="seeker_provider" value="0"> 
 <div class="form-group">
 <label for="" class="" id="provider_id">Budget</label>
 <div class="">
 <input class="form-control" name="budget" size="30" type="text" value="<%= b.rent %>">
 </div>
+</div>
+<div class="form-group">
+<label for="" class="" id="provider_id">Category</label>
+<div class="">
+<select required="required" name="category_id" class="form-control category_id_class">
+<option value="">Category</option>
+<option value="1">Academic Books</option>
+<option value="2">Biography &amp; Autobiography</option>
+<option value="3">Comics</option>
+<option value="4">Crime, Thriller &amp; Mystery</option>
+<option value="5">Fiction</option>
+<option value="6">Health &amp; Fitness</option>
+<option value="7">Home &amp; Lifestyle</option>
+<option value="8">Literature</option>
+<option value="9">Motivational</option>
+<option value="10">Non-Fiction</option>
+<option value="11">Romance</option>
+<option value="12">Others</option></select>
+      </div>
 </div>
 <div class="form-group">
 <label for="inputEmail3" class="">Details </label>
@@ -243,8 +266,9 @@
         <h4 class="modal-title" id="myModalLabel"><%= k.user.name %></h4>
       </div>
       <div class="modal-body">
-<%= form_tag('/edit_skill_post', multipart: true, remote: true) do -%>
+<%= form_tag('/edit_skill_post', multipart: true) do -%>
 <input type="hidden" name="id" value="<%= k.id %>"> 
+<input type="hidden" name="seeker_provider" value="0">
 <div class="form-group">
 <label for="" class="" id="provider_id">Budget</label>
 <div class="">
