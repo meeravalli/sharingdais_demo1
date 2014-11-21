@@ -32,7 +32,43 @@ before_filter :ensure_admin
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
   end
-	
+
+  def list_food_exl
+    @food_orders = PostRequirement.where("seeker_provider=?",0).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+  def post_food_exl
+    @food_orders = PostRequirement.where("seeker_provider=?",1).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+	def list_book_exl
+    @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+  def post_book_exl
+    @book_orders = BookPostRequirement.where("seeker_provider=?",1).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+  def list_skill_exl
+    @skill_orders = SkillPostRequirement.where("seeker_provider=?",0).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+  def post_skill_exl
+    @skill_orders = SkillPostRequirement.where("seeker_provider=?",1).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
 	def block_unblock
     user = User.find(params[:id])
     if user.status?

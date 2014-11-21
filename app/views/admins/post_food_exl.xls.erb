@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">User Name</Data></Cell>
+        <Cell><Data ss:Type="String">Locality</Data></Cell>
+        <Cell><Data ss:Type="String">Food type</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Budget</Data></Cell>
+        <Cell><Data ss:Type="String">Details</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+      </Row>
+     <% @food_orders.each do |f| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= f.user.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= f.location.location_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= f.food_type.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= f.region.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= f.budget %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= f.details %></Data></Cell>      
+        <Cell><Data ss:Type="String"><%= f.created_at.strftime("%b %d, %Y") %></Data></Cell>        
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

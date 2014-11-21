@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">User Name</Data></Cell>
+        <Cell><Data ss:Type="String">Skill</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Rent</Data></Cell>
+        <Cell><Data ss:Type="String">Description</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+      </Row>
+     <% @skill_orders.each do |k| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= k.user.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= k.sub_category.sub_category_type %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= k.location.location_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= k.charges %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= k.description %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= k.created_at.strftime("%b %d, %Y") %></Data></Cell>        
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
