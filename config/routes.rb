@@ -78,7 +78,15 @@ Sharingdasiss::Application.routes.draw do
   match "benefits" => "static_pages#benefits"
 
   post "edit_user_profile" => "admins#edit_user_profile"
+  
   get "exl" => "admins#exl"
+  get "post_food_exl" => "admins#post_food_exl"
+  get "post_book_exl" => "admins#post_book_exl"
+  get "post_skill_exl" => "admins#post_skill_exl"
+  get "list_food_exl" => "admins#list_food_exl"
+  get "list_book_exl" => "admins#list_book_exl"
+  get "list_skill_exl" => "admins#list_skill_exl"
+  
   get "post_requirements" => "admins#post_requirements"
   get "list_requirements" => "admins#list_requirements"
   get "user_orders" => "admins#user_orders"
