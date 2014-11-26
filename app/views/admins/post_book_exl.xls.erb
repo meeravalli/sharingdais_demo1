@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">User Name</Data></Cell>
+        <Cell><Data ss:Type="String">Book Name</Data></Cell>
+        <Cell><Data ss:Type="String">Author</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Rent</Data></Cell>
+        <Cell><Data ss:Type="String">Description</Data></Cell>
+        <Cell><Data ss:Type="String">Category</Data></Cell>
+      </Row>
+      <% @book_orders.each do |b| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= b.user.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= b.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= b.author %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= b.location.location_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= b.rent %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= b.description %></Data></Cell>      
+        <Cell><Data ss:Type="String"><%= b.category.category_name if !b.category.nil? %></Data></Cell> 
+        <Cell><Data ss:Type="String"><%= b.created_at.strftime("%b %d, %Y") %></Data></Cell>        
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

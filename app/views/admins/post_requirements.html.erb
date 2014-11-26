@@ -21,7 +21,7 @@
                         <th style="width:10%">Budget</th>
                         <th style="width:20%">Details</th>
                         <th style="width:10%">Date</th>
-                        <th></th>
+                        <th>Download: <%= link_to "Excel", post_food_exl_path(format: "xls") %></th>
                         <th></th>
                     </tr>
                  </thead>
@@ -110,7 +110,7 @@ $("#save_f<%= f.id %>_<%= f.user.id %>").click(function () {
                         <th style="width:20%">Description</th>
                         <th style="width:20%">Category</th>
                         <th style="width:10%">Date</th>
-                        <th></th>
+                        <th>Download: <%= link_to "Excel", post_book_exl_path(format: "xls") %></th>
                         <th></th>
                     </tr>
                  </thead>
@@ -213,7 +213,7 @@ $("#save_b<%= b.id %>_<%= b.user.id %>").click(function () {
                         <th style="width:15%">Rent</th>
                         <th style="width:25%">Description</th>
                         <th style="width:15%">Date</th>
-                        <th></th>
+                        <th>Download: <%= link_to "Excel", post_skill_exl_path(format: "xls") %></th>
                         <th></th>
                     </tr>
                  </thead>
