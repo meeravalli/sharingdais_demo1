@@ -1,0 +1,424 @@
+<style type="text/css">.errmsg{color: red;}</style>
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){
+    $("#foodshare_select_id").val("1");
+    $("#bookshare_select_id ").val('2');
+    $("#skillshare_select_id ").val('3');
+    <% if params[:post] == "book" %>
+      $('#foodshare_form').hide();
+      $('#skillshare_form').hide();
+      $('#bookshare_form').show();
+    <% else %>
+      $('#foodshare_form').show();
+      $('#bookshare_form').hide();
+      $('#skillshare_form').hide();
+    <% end %>
+  $('.services_class').on('change', function() {
+    if( $(this).val() == '1')
+    {
+       $(".error_explanation").html("");
+       $('#bookshare_form').hide();
+       $('#skillshare_form').hide();
+       $('#foodshare_form').show();
+       $("#foodshare_select_id").val("1");
+    }
+    else if( $(this).val() == '2')
+    {
+      $(".error_explanation").html("");
+      $('#bookshare_form').show();
+      $('#skillshare_form').hide();
+      $('#foodshare_form').hide();
+      $("#bookshare_select_id ").val('2');
+    }
+    else if( $(this).val() == '3')
+    {
+      $(".error_explanation").html("");
+      $('#bookshare_form').hide();
+      $('#skillshare_form').show();
+      $('#foodshare_form').hide();
+      $("#bookshare_select_id ").val('3');
+    }
+
+  });    
+
+   $("input:checkbox[name=any]").click(function() {
+      if ($("#any").is(":checked")) {
+        $("#post_requirement_no_of_persons").attr('disabled', true);
+        $("#post_requirement_no_of_persons").val('');
+      }
+      else {
+        $("#post_requirement_no_of_persons").attr('disabled', false);
+      }
+			
+    });
+    $('#book_post_requirement_dop').datepicker({
+      dateFormat: "yy-mm-dd",
+      autoclose: true
+    });
+
+<% if !session[:any].blank? %>
+      $("#post_requirement_no_of_persons").val('');
+      $("#post_requirement_no_of_persons").attr('disabled', true);
+      $("#any").attr('checked', true);
+<% end %>
+
+ if(document.getElementById('post_requirement_city_id').id){
+			   	value = $.cookie('city_id')
+					if(value){
+            document.getElementById('post_requirement_city_id').value = value;
+          }
+        }
+  if($("#post_requirement_city_id").id){
+    value = $.cookie('city_id')
+    if(value){
+      $(".post_requirement_city_id").value = value;
+    }
+  }
+  if(document.getElementById('post_skill_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){
+            document.getElementById('post_skill_requirement_city_id').value = value;
+          }
+        }
+  if(document.getElementById('book_post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){
+            document.getElementById('book_post_requirement_city_id').value = value;
+          }
+        }
+
+  });
+function book_form_validate()
+    {
+       if($("#book_name").val() == "")
+       {
+         alert( "Please provide book name!" );
+         return false;
+       }
+       if($("#author_name").val() == "")
+       {
+         alert( "Please provide your author name!" );
+         return false;
+       }
+       return true;
+    }
+
+</script>
+<!--<p class="head">Post as Seeker</p>-->
+<center><strong>Request for service what you want..</strong></center>
+<div class="form_inner_align" id='foodshare_form'>
+  <%= form_for :post_requirement, :url => post_requirement_sharing_index_path, :html => {:class=>"form-horizontal"} do |f|%>
+    <% if @post_requirement.errors.any? %>
+		<div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+			</div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <div class="">
+        <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+      </div>
+      <script type="text/javascript">
+        $(window).load(function(){   
+          //value = $.cookie('city_id')
+          $(".get_city").val($.cookie('city_id'))
+        });
+        </script>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Service</label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "1"}, {:class=>'form-control services_class', :id=> 'foodshare_select_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >I'm Looking for<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:provider_id, @providers, :id, :provider_type, {:include_blank => 'Select Provider'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+			  <%= f.hidden_field :city_id, :class => "post_requirement_city_id" %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_food'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Food Type<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:food_type_id, @food_types, :id, :name, {:include_blank => 'Select FoodType'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Meal Type</label>
+      <div class="">
+        <%= f.collection_select(:meal_type_id, @meal_types, :id, :name, {:include_blank => 'Select MealType'}, {:class=>'form-control'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Region specific</label>
+      <div class="">
+        <%= f.collection_select(:region_id, @regions, :id, :name, {:include_blank => 'Select Region'}, {:class=>'form-control'})%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">No. of persons</label>
+      <div class="">
+        <%= f.text_field :no_of_persons, :size => 15, :class=>'form-control' %>
+        <%= check_box_tag 'any',-1, false %> Any
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Budget range in Rs<i>*</i></label>
+      <div class="">
+        <%= f.text_field :budget, :class=>'form-control quantity', "required"=>"required"%><span class="errmsg">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details (150 char.) </label>
+      <div class="">
+        <%= f.text_area :details, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others."  %>
+      </div>
+    </div>
+    <div class="form-group" style ="visibility:hidden;">
+      <label for="" class="">Food Seeker</label>
+      <div class="">
+        <%= f.radio_button :seeker_provider, true, :checked => true %> 
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="">
+        <% if current_user.nil? %>
+          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
+        <%else%>
+          <%= f.submit 'Post Requirement', :class=>"btn btn-default"%>
+        <%end%>        
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<div class="form_inner_align" id="bookshare_form" style="display:block;">
+  <%= form_for BookPostRequirement.new, :url => post_book_requirement_sharing_index_path, :html => {:class=>"form-horizontal"} do |f|%>
+    <% if @post_requirement.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <div class="">
+        <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+        <script type="text/javascript">
+        $(window).load(function(){   
+          //value = $.cookie('city_id')
+          $(".get_city").val($.cookie('city_id'))
+        });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.hidden_field :seeker_provider, value: true %>
+      <label for="" class="">Service</label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "2"}, {:class=>'form-control services_class', :id => 'bookshare_select_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id, :class => "book_post_requirement_city_id" %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Book Name<i>*</i></label>
+      <div class="">
+        <%= f.text_field :name, :class=>'form-control', :id=>"book_name" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Author<i>*</i></label>
+      <div class="">
+        <%= f.text_field :author, :class=>'form-control', :id=>"author_name" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">ISBN Number</label>
+      <div class="">
+        <%= f.text_field :isbn_number, :class=>'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent<i>*</i></label>
+      <div class="">
+        <%= f.text_field :rent, :class=>'form-control quantity',"required"=>"required" %><span class="errmsg">
+      </div>
+    </div>
+    <div class="form-group">
+      <!--<label for="inputEmail3" class="">Date of Posting </label>-->
+      <label for="inputEmail3" class="">Category<i>*</i></label>
+      <div class="">
+        <%#= f.text_field :date_of_posting, :class=>'form-control', :id=>"book_post_requirement_dop"%>
+        <%= f.collection_select(:category_id, Category.all, :id, :category_name, {:include_blank => 'Category'}, {:class=>'form-control category_id_class','required'=>'required'} )%>
+        <!--<span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>-->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description (150 char.) </label>
+      <div class="">
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others."  %>
+      </div>
+    </div>
+    <div class="form-group"></div>
+    <div class="form-group">
+      <div class="">
+        <% if current_user.nil? %>
+          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
+        <%else%>
+          <%= f.submit 'Post Requirement', :onclick => "return book_form_validate();", :class=>"btn btn-default"%>
+        <% end %>
+      </div>
+    </div>
+  <%end%>
+</div>
+<!--#################### Skill Sharing ###########################-->
+<div class="form_inner_align" id="skillshare_form" style="display:block;">
+  <%= form_for :post_skill_requirement, :url => post_skill_requirement_sharing_index_path, :html => {:class=>"form-horizontal"} do |f|%>
+  <% if @post_requirement.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <div class="">
+        <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+        <script type="text/javascript">
+        $(window).load(function(){   
+          //value = $.cookie('city_id')
+          $(".get_city").val($.cookie('city_id'))
+        });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Service</label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "3"}, {:class=>'form-control services_class', :id=> 'skillshare_select_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="sub_category_id" >Sub-Category <i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:sub_category_id, SubCategory.all, :id, :sub_category_type, {:include_blank => 'Select Sub_Category'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id, :class => "post_skill_requirement" %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Service in one-line (30 Char.)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :service_in_one_line, :maxlength=>"30", :class=>'form-control' %>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputEmail3" class="">Charges (in Rs)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :charges, :class=>'form-control quantity',"required"=>"required" %><span class="errmsg">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class=""> <b>Availability</b></label>
+      <div class="">
+      <label class="btn btn-primary">
+        <%= f.check_box :mon %> Mon
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :tue %> Tue
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :wed %> Wed
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :thu %> Thu
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :fri %> Fri
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sat %> Sat
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sun %> Sun
+      </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class=""> <b>Home Service</b></label>
+      <div class="">
+       <label class="btn btn-default">
+        <%= f.radio_button :home_service, "1" %> Yes
+      </label>
+      <label class="btn btn-default">
+        <%= f.radio_button :home_service, "0" %> No
+      </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details of Service (150 char.)<i>*</i></label>
+      <div class="">
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others.",'required'=>'required'  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class=""></label>
+      <div class="">
+        
+      </div>
+    </div>
+    <%= f.hidden_field :seeker_provider, value: true %>
+    <div class="form-group">
+      <div class="">
+        <% if current_user.nil? %>
+          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
+        <%else%>
+          <%= f.submit "Submit", :class=>"btn btn-default"%>
+        <% end %>
+      </div>
+    </div>
+    <%end%>
+</div>
+<!--################## End Skill Sharing #########################-->
+<script type="text/javascript">
+$(document).ready(function () {
+  //called when key is pressed in textbox
+  $(".quantity").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $(".errmsg").html("Numbers Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+});
+</script>

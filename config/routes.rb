@@ -127,8 +127,11 @@ Sharingdasiss::Application.routes.draw do
   get "home_food" => "static_pages#home_food"
   get "ecomm_shop" => "static_pages#ecomm_shop"
   get "marketing_stratgy" => "static_pages#marketing_stratgy"
-
-
+  
+  get "safety_guide_book" => "static_pages#safety_guide_book"
+  get "safety_guide_skill" => "static_pages#safety_guide_skill"
+  get "saftey_guide_food" => "static_pages#saftey_guide_food"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
