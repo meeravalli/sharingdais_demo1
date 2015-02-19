@@ -221,6 +221,43 @@ function show_trending_localities(){
            
         }
       });
+      }else if($("#service_type").val() == "4"){
+      $.ajax({ 
+        url : "/search_rider", 
+        type: "POST", 
+        data: { 
+          cityid: $("#city_location").val()
+        }, 
+        dataType: "json",
+        success: function (data) 
+        {  
+          $("#model_box").hide(); 
+          $("#model_box_top_five").show();
+          var row1 = $("<center> Top Localities where Ride Owners are sharing ride </center>");
+          $("#seeker_head").append(row1);
+          var row2 = $("<center> Top Localities where Riders are looking for rides </center>");
+          $("#provider_head").append(row2);
+          if (data.seeker != ""){
+            $.each(data.seeker, function( index, value ) {
+              var row = $("<tr><td><a href='/rider_result/"+value.l_id+"/"+value.seeker_provider+"''>" + value.location_name + "</a></td></tr>" );
+               $("#seeker").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#seeker").append(row);
+          }
+          if (data.provider != ""){
+            $.each(data.provider, function( index, value ) {
+              var row = $("<tr><td><a href='/rider_result/"+value.l_id+"/"+value.seeker_provider+"''>"+ value.location_name + "</a></td></tr>" );
+               $("#provider").append(row);
+            });
+          }else{
+            var row = $("<tr><td><p style='color:red'>Top trending localities are not available</p></td></tr>" );
+               $("#provider").append(row);
+          }
+           
+        }
+      });
     }else{
       $.ajax({ 
         url : "/search_skill", 

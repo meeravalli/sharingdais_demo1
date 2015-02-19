@@ -4,6 +4,6 @@ class Order < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   belongs_to :user
   belongs_to :post_requirement
-  belongs_to :skill_post_requirement
+  belongs_to :skill_post_requirement 
   belongs_to :provider
 end

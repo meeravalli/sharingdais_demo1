@@ -11,11 +11,14 @@ before_filter :ensure_admin
     @food_orders = PostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
     @skill_orders = SkillPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
+    #@ride_orders = RiderPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
   end
   def list_requirements
     @food_orders = PostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
     @skill_orders = SkillPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
+    #@ride_orders = RiderPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
+
   end
 
   def user_orders
@@ -24,6 +27,7 @@ before_filter :ensure_admin
     #@order_book=BookOrder.where("order_date=?",Date.today).order("created_at DESC").paginate(:page => params[:page])
     @order_book=BookNegotiate.where("book_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
     @order_skill=Negotiate.where("post_requirement_id IS NULL AND skill_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
+   # @order_ride=Negotiate.where("post_requirement_id IS NULL AND Rider_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
   end
 
   def exl
@@ -69,6 +73,21 @@ before_filter :ensure_admin
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
   end
+=begin
+  def list_ride_exl
+    @ride_orders = RiderPostRequirement.where("seeker_provider=?",0).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+
+  def post_ride_exl
+    @ride_orders = RiderPostRequirement.where("seeker_provider=?",1).order("created_at DESC")
+    respond_to do |format|
+      format.xls #{ send_data @users.to_csv(col_sep: "\t") }
+    end
+  end
+=end
 	def block_unblock
     user = User.find(params[:id])
     if user.status?
@@ -87,9 +106,11 @@ before_filter :ensure_admin
     @activities = @user.activities
     @activities_food = @activities.where("post_requirement_id IS NOT NULL")
     @activities_skill = @activities.where("skill_post_requirement_id IS NOT NULL")
+   # @activities_ride = @activities.where("rider_post_requirement_id IS NOT NULL")
     @book_post_requirements = @user.book_post_requirements
     @book_activities = @user.book_activities
     @skill_post_requirements = @user.skill_post_requirements
+   # @rider_post_requirements = @user.rider_post_requirements
    end
 	
 	def destroy_user
@@ -211,7 +232,36 @@ before_filter :ensure_admin
       redirect_to post_requirements_path
     end
   end
-
+=begin
+  def edit_ride_post
+    @post=RiderPostRequirement.where("id=?",params[:id])
+    if !params[:budget].blank?
+      @post.first.charges= params[:budget] 
+    end
+    if !params[:details].blank?
+      @post.first.description= params[:details]
+    end
+    if !params[:rider_post_requirement].blank?
+      @post.first.attributes = params[:rider_post_requirement] 
+    end
+    @post.first.save
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
+    end
+  end
+  def destroy_ride_post
+    user = RiderPostRequirement.find(params[:id])
+    user.destroy
+    flash[:notice] = "Post successfully deleted"
+    if params[:seeker_provider] = '0'
+      redirect_to list_requirements_path
+    else
+      redirect_to post_requirements_path
+    end
+  end
+=end
   def user_add_clicks
     @counter=Ad.all
   end

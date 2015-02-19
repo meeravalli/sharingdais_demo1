@@ -61,8 +61,8 @@
   }
 </script>
 
-<div class="item active">
-  <%=  image_tag "slider3.jpg", :alt => "..." %>
+<!--<div class="item active">-->
+  <%#=  image_tag "slider3.jpg", :alt => "..." %>
 
 
 
@@ -74,15 +74,15 @@
     <div class="search-blk">
       <p class="head" style="height:43px">Food Sharing</p>
       <p style="height:25px">
-        <i><small style="color:white;">Discover and Share delicious home-cooked food in your neighborhood</small></i>
+        <small style="color:white;">Discover and Share delicious home-cooked food in your neighborhood</small>
       </p>
       <%= form_tag(food_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
       <div class="check  col-xs-12 col-md-12">
-          <label for=""><span class="m_tag">I am </span>Looking for Food</label>
+          <label for="" style="font-family:'Helvetica',Sans-serif;"><span class="m_tag">I am </span>Looking for Food</label>
           <%= radio_button_tag "search[food]", "0", params[:search][:food].to_i == 0, :id => 'search_food_0', :class => "food" %>
 
-          <label for=""><span class="m_tag">I want to </span>Provide Food</label>
+          <label for="" style="font-family:'Helvetica',Sans-serif;"><span class="m_tag">I want to </span>Provide Food</label>
           <%= radio_button_tag "search[food]", "1", params[:search][:food].to_i == 1, :id => 'search_food_1', :class => "food" %>
           <!--<div>
           <label for="">Bulk Deals</label>
@@ -119,7 +119,7 @@
           </div>
            <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12 ">
-              <label class="book-chg" for="">Food type</label>
+              <label class="book-chg" for="" style="font-family:'Helvetica',Sans-serif;">Food type</label>
             </div>
             <div class="left col-xs-12 ">
              <%= collection_select :search, :food_type_id,@food_types, :id, :name, {:selected => params[:search][:food_type_id]},{:class => "form-control"}%>
@@ -181,4 +181,4 @@
 
 
 
-</div>
+<!--</div>-->

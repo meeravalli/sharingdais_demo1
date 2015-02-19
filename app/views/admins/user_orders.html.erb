@@ -6,6 +6,7 @@
   <li class="active"><a href="#food" role="tab" data-toggle="tab">Food Oders</a></li>
   <li><a href="#book" role="tab" data-toggle="tab">BooK Orders</a></li>
   <li><a href="#skill" role="tab" data-toggle="tab">Skill Orders</a></li>
+  <!--<li><a href="#ride" role="tab" data-toggle="tab">Ride Orders</a></li>-->
 </ul>
 
 <!-- Tab panes -->
@@ -75,7 +76,7 @@
                 </tbody>
             </table>
             <div class="pagination">
-          <%= will_paginate @order_food %>
+          <%= will_paginate @order_book %>
           </div>
         </div>
   </div>
@@ -113,11 +114,48 @@
                 </tbody>
             </table>
             <div class="pagination">
-          <%= will_paginate @order_food %>
+          <%= will_paginate @order_skill %>
+          </div>
+        </div>
+  </div>
+
+  <div class="tab-pane" id="ride">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th style="width:25%">Date / Time</th>
+                        <th style="width:25%">Name of the connected person</th>
+                        <th style="width:25%">Name of the person</th>
+                        <th style="width:25%">Details</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @order_ride.each do |o| %>
+                     <tr>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
+                      <td><%= o.rider_post_requirement.user.name %></td>
+                      <td><%= o.user.name %></td>
+                      <td>
+                        <% if !o.rider_post_requirement.description.nil? %>
+                          <%= o.rider_post_requirement.description %>
+                        <%else%>
+                          not available
+                        <%end%>
+                      </td>
+                     </tr>
+                    <% end %>            
+                </tbody>
+            </table>
+            <div class="pagination">
+          <%= will_paginate @order_ride %>
           </div>
         </div>
   </div>
 
  
 </div> 
-  </div>			                  
+</div>			                  

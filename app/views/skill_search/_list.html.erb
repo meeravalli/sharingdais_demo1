@@ -46,6 +46,7 @@ $(document).ready(function() {
           <tbody>
             <% @count = 1 %>
             <% @search_results.each do |s| %>
+            <% next if s.user_id == nil %>
             <% 
   @rate_1=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,1,s.id).count()
   @rate_2=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,2,s.id).count()
@@ -160,7 +161,8 @@ $(document).ready(function() {
 
 <div class="srch_res_mob">
   <% @count = 1 %>
-  <% @search_results.each do |s| %>                            
+  <% @search_results.each do |s| %> 
+   <% next if s.user_id == nil %>                          
   <% 
     @rate_1=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,1,s.id).count()
     @rate_2=Rate.where("rated_id=? AND rated_no=? AND skill_post_requirement_id=?",s.user.id,2,s.id).count()

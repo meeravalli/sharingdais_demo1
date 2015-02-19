@@ -1,18 +1,12 @@
-<div class="item">
-  <%=  image_tag "slider3.jpg", :alt => "..." %>
-
-
-
-
-
-
+<div class="item active">
+  <%=  image_tag "Picture1_SD.jpg", :alt => "..." %>
 
 
  <div class="carousel-caption custom_width">
     <div class="search-blk">
       <p style="height:43px" class="head">Food Sharing</p>
-      <p style="height:25px">
-        <i><small style="color:white;">Discover and Share delicious home-cooked food in your neighborhood</small></i>
+      <p style="height:25px;">
+        <small style="color:white;">Discover and Share delicious home-cooked food in your neighborhood</small>
       </p>
       <%= form_tag(food_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
@@ -20,12 +14,14 @@
           <label for=""><span class="m_tag">I am </span>Looking for Food</label>
             <%= radio_button_tag "search[food]", "0", params[:search][:food].to_i == 0, :id => 'search_food_0', :class => "food" %>
 
-          <label for=""><span class="m_tag">I want to </span>Provide Food</label>
+          <label for="" style="font-family:'Helvetica',Sans-serif;"><span class="m_tag">I want to </span>Provide Food</label>
           <%= radio_button_tag "search[food]", "1", params[:search][:food].to_i == 1, :id => 'search_food_1', :class => "food" %>
+          <!--#########bulk###########-->
           <!--<div>
           <label for="">Bulk Deals</label>
           <%#= radio_button_tag "search[food]", "2", params[:search][:food].to_i == 2, :id => 'search_food_2', :class => "food" %>
           </div>-->
+          <!--##bulk##-->
           <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true) %>
       </div>
 
@@ -50,7 +46,7 @@
           </div>
           <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12">
-              <label for="">Locality</label>
+              <label for="" style="font-family:'Arial',Sans-serif;">Locality</label>
             </div>
             <div class="left col-xs-12 ">
                <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
@@ -58,7 +54,7 @@
           </div>
            <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12 ">
-              <label for="" id ="food" >Food type</label>
+              <label for="" id ="food" style="font-family:'Arial',Sans-serif;" >Food type</label>
             </div>
             <div class="left col-xs-12 ">
               <%= collection_select :search, :food_type_id,@food_types, :id, :name, {:selected => params[:search][:food_type_id]},{:class => "form-control"}%>
@@ -112,7 +108,8 @@
 
     </div>
 
-<%end%>  </div>
+<%end%>  
+</div>
 </div>
 
 

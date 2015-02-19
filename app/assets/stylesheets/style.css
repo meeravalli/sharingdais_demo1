@@ -20,7 +20,7 @@ transition: all 0.5s ease; background: #000; border-radius: 0;}
 .btns { text-align: center; margin: 10px 0; }
 .btn:hover { color: #dfdfdf; border: 1px solid #AEAEAE; 
 background: #363636; }
-.head { font-family: 'PT Sans Narrow',sans-serif; text-align: center;
+.head { font-family: 'Helvetica Neue',sans-serif; text-align: center;
     font-size: 23px; padding-bottom: 20px; text-transform: uppercase;}
   body {position: relative;  width:100%; }
 /* COntainer */
@@ -200,7 +200,7 @@ p.light-tit { padding: 10px 0; margin-bottom: 20px; margin-top:7%; color: #000; 
 .how_tabs .tab_list { border:solid 1px #E4E4E4; border-radius:4px 4px 0 0; padding:10px 20px; background:#f2f2f2; display:inline-block; width:auto;}
 
 /*You want to have food CSS*/
-.how_heading { text-align:center; color:#000; font-size:22px; font-weight:bold; margin:10px 0;}
+.how_heading { text-align:center; color:#000; font-size:22px; font-weight:bold; margin:10px 10px;}
 .how_content_food .how_content_heading { font-size:18px; color:#000; text-align:center; margin:0 0 50px 0; color:#004D7F; font-weight: bold;}
 .how_content_food { padding:15px 10px 45px 10px; width:100%; overflow:hidden;}
 .how_content_food .food_step_1, .how_content_food .food_step_2 { font-size:12px; color:#fff; height:220px; border-radius:2px; position:relative; box-shadow:-2px 0 10px #007378;-webkit-box-shadow:-2px 0 10px #007378;-moz-box-shadow:-2px 0 10px #007378;}
@@ -215,7 +215,7 @@ p.light-tit { padding: 10px 0; margin-bottom: 20px; margin-top:7%; color: #000; 
 .how_content_food .arrow { position:absolute; top:33%; right:-20px; z-index:10;}
 
 /*You are the cook CSS*/
-.how_content_cook .how_content_heading { font-size:18px; color:#000; text-align:center; margin:0 0 50px 0; color:#37791F; font-weight: bold;}
+.how_content_cook .how_content_heading { font-size:18px; color:#000; text-align:center; margin:0 0 50px 0; color:#37791F; font-weight: bold; position:relative;}
 .how_content_cook { padding:15px 10px 45px 10px; width:100%; overflow:hidden;}
 .how_content_cook .food_step_1, .how_content_cook .food_step_2 { font-size:12px; color:#fff; height:220px; border-radius:2px; position:relative; box-shadow:-2px 0 10px #54963C;-webkit-box-shadow:-2px 0 10px #54963C;-moz-box-shadow:-2px 0 10px #54963C;}
 .how_content_cook .food_step_1 { background:#77B95F;}

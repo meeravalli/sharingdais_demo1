@@ -1,9 +1,27 @@
 <div class="banner">
   <div id="slider">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000">
+      <!-- Indicators -->
+      <!-- <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol> -->
+      <!-- Wrapper for slides -->
       <div class="carousel-inner">
-        <%= render 'search_form_skill_sharing' %>
+        <div class="item active">
+        	<%= image_tag "Picture2_SD.jpg", :alt => "..." %>
+        </div>
+        <div class="item ">
+        	<%= image_tag "Picture5_SD.jpg", :alt => "..." %>
+        </div>  
+        
+              
       </div>
+       <%= render 'search_form_skill_sharing' %>
+      <!-- Controls -->
+      <a class="" href="#carousel-example-generic" data-slide="prev"> <span class=""></span> </a>
+      <a class="" href="#carousel-example-generic" data-slide="next"> <span class=""></span> </a>
     </div>
     <div class="cboth"></div>
   </div>

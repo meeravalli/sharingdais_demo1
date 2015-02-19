@@ -11,30 +11,56 @@ class Devise::SessionsController < DeviseController
   end
 
   # POST /resource/sign_in
-  def create
-    if !params[:user][:email].blank?
-      email = params[:user][:email]
-      user123 = User.find_by_email(email)
-      if !user123.nil?
-        if user123.status.eql? true
-        self.resource = warden.authenticate!(auth_options) 
-        set_flash_message(:notice, :signed_in) if is_flashing_format?
-        sign_in(resource_name, resource)
-        yield resource if block_given?
-        respond_with resource, location: after_sign_in_path_for(resource)
-        else
-        flash[:alert] =  'Your account is blocked. Please contact admin'
-        redirect_to new_user_session_path
+  def create     
+      if !params[:user][:email].blank?
+        email = params[:user][:email]
+        user123 = User.find_by_email(email)
+        if !user123.nil?
+          if user123.status.eql? true
+          self.resource = warden.authenticate!(auth_options) 
+          set_flash_message(:notice, :signed_in) if is_flashing_format?          
+          sign_in(resource_name, resource)
+          yield resource if block_given?
+            if params[:p_f_hide] == "1"
+              provider_food_login
+              redirect_to profile_home_path(current_user)
+            elsif params[:p_f_hide] == "2"
+              provider_book_login
+              redirect_to profile_home_path(current_user)
+            elsif params[:p_f_hide] == "3"
+              provider_skill_login
+              redirect_to profile_home_path(current_user)
+            #elsif params[:p_f_hide] == "4"
+             # provider_ride_login
+            #  redirect_to profile_home_path(current_user)
+            else
+              respond_with resource, location: after_sign_in_path_for(resource) 
+            end         
+          else
+            flash[:alert] =  'Your account is blocked. Please contact admin'
+            redirect_to new_user_session_path            
+          end
+        else 
+                
+          flash[:alert] = 'Invalid email or password'          
+          if params[:p_f_hide] == "1" || params[:p_f_hide] == "2" || params[:p_f_hide] == "3" || params[:p_f_hide] == "4"
+            redirect_to post_your_ad_login_sharing_index_path
+          else
+            redirect_to new_user_session_path       
+          end
+          
         end
-      else
-        flash[:alert] = 'Invalid email or password'
-        redirect_to new_user_session_path
-      end
-    else
-      flash[:alert] = 'Invalid email or password'
-      redirect_to new_user_session_path
-    end
-end
+      else   
+      
+        flash[:alert] = 'Invalid email or password'               
+        if params[:p_f_hide] == "1" || params[:p_f_hide] == "2" || params[:p_f_hide] == "3" || params[:p_f_hide] == "4"
+          redirect_to post_your_ad_login_sharing_index_path
+        else
+          redirect_to new_user_session_path       
+        end 
+
+      end    
+  end
   
 
   # DELETE /resource/sign_out
@@ -51,6 +77,77 @@ end
       format.any(*navigational_formats) { redirect_to redirect_path }
     end
   end
+
+# Save Ads method
+def provider_food_login
+  @post_requirement = PostRequirement.new(params[:post_requirement])
+    if request.post?
+      if params[:any]
+        @post_requirement.no_of_persons = params[:any]
+        session[:any] = params[:any]
+      end
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+      end
+    end
+end
+
+def provider_book_login
+  @post_requirement = BookPostRequirement.new(params[:book_post_requirement])
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id        
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+        current_user
+      end
+    end
+end
+def provider_skill_login
+    @post_requirement = SkillPostRequirement.new(params[:skill_post_requirement])
+    if request.post?
+      if @post_requirement.valid?
+         @post_requirement.user_id = current_user.id 
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+      end
+    end
+  end
+=begin
+def provider_ride_login
+    @post_requirement = RiderPostRequirement.new(params[:rider_post_requirement])
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id        
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+      end
+    end
+  end
+
+=end  
+# End Save Ads
+
+
+
 
   protected
 

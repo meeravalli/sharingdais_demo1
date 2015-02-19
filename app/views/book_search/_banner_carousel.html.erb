@@ -1,9 +1,12 @@
 <div class="banner">
   <div id="slider">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000">
       <div class="carousel-inner">
-        <%= render 'search_form_book_sharing' %>        
+      	<div class="item active"><%= image_tag "Picture6_SD.jpg", :alt => "..."%></div>
+      	<div class="item"><%= image_tag "3.jpg", :alt => "..."%></div>
+               
       </div>
+      <%= render 'search_form_book_sharing' %> 
     </div>
     <div class="cboth"></div>
   </div>

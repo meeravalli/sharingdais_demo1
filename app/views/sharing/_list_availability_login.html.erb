@@ -1,0 +1,1571 @@
+<style type="text/css">.errmsg{color: red;}</style>
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){
+    $("#foodshare_select_id").val("1");
+    $("#bookshare_select_id ").val('2');
+    $("#skill_share_select_id ").val('3');
+    //$("#rider_share_select_id ").val('4');
+
+    <% if params[:post] == "book" %>
+      $('#booklist_form').show();
+      $('#foodlist_form').hide();
+      $('#skilllist_form').hide();
+      $('#riderlist_form').hide();
+    <% else %>
+      $('#foodlist_form').show();
+      $('#booklist_form').hide();
+      $('#skilllist_form').hide();
+       $('#riderlist_form').hide();      
+    <% end %>
+  $('.services_class').on('change', function() {
+    if( $(this).val() == '1')
+    {
+      $(".error_explanation").html("");
+      $('#booklist_form').hide();
+      $('#foodlist_form').show();
+      $('#skilllist_form').hide();
+      $('#riderlist_form').hide();
+      $("#foodshare_select_id").val("1");
+     }
+     else if( $(this).val() == '2')
+     {
+       $(".error_explanation").html("");
+       $('#booklist_form').show();
+       $('#foodlist_form').hide();
+       $('#skilllist_form').hide();
+       $('#riderlist_form').hide();
+       $("#bookshare_select_id ").val('2');
+    }
+    else if( $(this).val() == '3')
+     {
+       $(".error_explanation").html("");
+       $('#skilllist_form').show();
+       $('#booklist_form').hide();
+       $('#foodlist_form').hide();
+       $('#riderlist_form').hide();
+       $("#skill_share_select_id ").val('3');       
+    }
+    /*
+    else if( $(this).val() == '4')
+     {
+       $(".error_explanation").html("");
+       $('#riderlist_form').show();
+       $('#booklist_form').hide();
+       $('#foodlist_form').hide();
+       $('#skilllist_form').hide();
+       $("#rider_share_select_id ").val('4');
+    }
+    */
+  });
+
+    $("input:checkbox[name=any]").click(function() {
+      if ($("#any").is(":checked")) {
+        $("#post_requirement_no_of_persons").attr('disabled', true);
+        $("#post_requirement_no_of_persons").val('');
+      }
+      else {
+        $("#post_requirement_no_of_persons").attr('disabled', false);
+      }
+    });
+
+    $('#book_post_requirement_dop').datepicker({
+      dateFormat: "yy-mm-dd",
+      autoclose: true
+    });
+
+<% if !session[:any].blank? %>
+      $("#post_requirement_no_of_persons").val('');
+      $("#post_requirement_no_of_persons").attr('disabled', true);
+      $("#any").attr('checked', true);
+<% end %>
+/*
+  if(document.getElementById('rider_post_requirement_city_id').id){
+    value = $.cookie('city_id')
+    if(value){document.getElementById('rider_post_requirement_city_id').value = value}
+ }
+*/
+ if(document.getElementById('skill_post_requirement_city_id').id){
+    value = $.cookie('city_id')
+    if(value){document.getElementById('skill_post_requirement_city_id').value = value}
+ }
+ if(document.getElementById('post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('post_requirement_city_id').value = value}}
+
+  if(document.getElementById('book_post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+     });
+
+function validate_food(){
+  if($(".val_provider_id1").val() == "")
+    {
+      alert( "Please Select provider" );
+      return false;
+    }else if($(".val_food_type_id").val() == "")
+    {
+      alert( "Please Select Food Type" );
+      return false;
+    }else if($(".val_budget1").val() == "")
+    {
+      alert( "Please Enter Charges" );
+      return false;
+    }else if($(".val_details1").val() == "")
+    {
+      alert( "Please Enter Description" );
+      return false;
+    }else{
+      $("#login_signup1").modal("show");
+    }
+}
+function validate_book(){
+  if($(".val_book_name1").val() == "")
+    {
+      alert( "Please Enter Book name" );
+      return false;
+    }else if($(".val_author_name1").val() == "")
+    {
+      alert( "Please Enter Author name" );
+      return false;
+    }else if($(".val_rent1").val() == "")
+    {
+      alert( "Please Enter Rent" );
+      return false;
+    }else if($(".val_description1").val() == "")
+    {
+      alert( "Please Enter Description" );
+      return false;
+    }else{
+      $("#login_signup2").modal("show");
+    }
+}
+function validate_skill(){
+  if($(".val_service_in_one_line1").val() == "")
+    {
+      alert( "Please Enter service in one line" );
+      return false;
+    }else if($(".val_charges1").val() == "")
+    {
+      alert( "Please Enter Charges" );
+      return false;
+    }else if($(".val_sdescription1").val() == "")
+    {
+      alert( "Please Enter Description" );
+      return false;    
+    }else{
+      $("#login_signup3").modal("show");
+    }
+}
+/*
+function validate_rider(){
+  if($(".val_service_in_one_line7").val() == "")
+    {
+      alert( "Please Enter ride in one line" );
+      return false;
+    }else if($(".val_charges7").val() == "")
+    {
+      alert( "Please Enter Charges" );
+      return false;
+    }else if($(".val_sdescription7").val() == "")
+    {
+      alert( "Please Enter Description" );
+      return false;    
+    }else{
+      $("#login_signup7").modal("show");
+    }
+}
+*/
+</script>
+<center><strong>Post your service details here..</strong></center>
+<div class="form_inner_align" id='foodlist_form'>
+
+  <form accept-charset="UTF-8" id="new_user" class="new_user form-horizontal frm1" enctype="multipart/form-data" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+    </div>
+    <div class="form-group" data-remote="true">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <select onchange="get_location(this.value,'locality_id_class')" name="city[id]" id="popup_city" class="form-control get_city">
+          <% City.all.each do |f| %>
+            <option value="<%= f.id %>"><%= f.city_name %></option>
+          <% end %>
+        </select>
+        <script type="text/javascript">
+          $(window).load(function(){   
+            $(".get_city").val($.cookie('city_id'))
+          });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">              
+        <input class="post_requirement_city_id city_id1" id="post_requirement_city_id" name="post_requirement[city_id]" type="hidden">
+        <select class="form-control locality_id_class location_id1" id="locality_id" name="post_requirement[location_id]">
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="">Select Category<i>*</i></label>
+      <div class="">
+        <select class="form-control services_class service_id1" id="foodshare_select_id" name="post_requirement[service_id]">
+          <!--<option value="4">Rider Sharing</option>-->
+          <option value="3">Skill Sharing</option>
+          <option value="2">Book Sharing</option>
+          <option value="1" selected="selected">Food Sharing</option>         
+
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >I am<i>*</i></label>
+      <div class="">
+        <select class="form-control provider_id1 val_provider_id1" id="post_requirement_provider_id" name="post_requirement[provider_id]">
+          <option value="">Select Provider</option>
+          <option value="2">Caterers</option>
+          <option value="3">Chefs</option>
+          <option value="1">Individual Food Provider</option>
+        </select>
+      </div>
+    </div>   
+    <div class="form-group">
+      <label for="inputEmail3" class="">Food Type<i>*</i></label>
+      <div class="">
+        <select class="form-control food_type_id1 val_food_type_id" id="post_requirement_food_type_id" name="post_requirement[food_type_id]">
+          <option value="">Select FoodType</option>
+          <option value="3">Any</option>
+          <option value="2">Non-Vegetarian</option>
+          <option value="1">Vegetarian</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Meal Type</label>
+      <div class="">
+        <select class="form-control" id="post_requirement_meal_type_id" name="post_requirement[meal_type_id]">
+          <option value="">Select MealType</option>
+          <option value="4">Any</option>
+          <option value="3">Dinner</option>
+          <option value="2">Lunch</option>
+          <option value="1">Breakfast</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+     <label for="inputEmail3" class="">Region specific</label>
+      <div class="">
+        <select class="form-control region_id1" id="post_requirement_region_id" name="post_requirement[region_id]">
+          <% Region.all.each do |r| %>
+            <option value="<%= r.id %>"><%= r.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="">Charges (in Rs)<i>*</i></label>
+          <div class="">
+           <input class="form-control quantity budget1 val_budget1" id="post_requirement_budget" name="post_requirement[budget]" required="required" size="30" type="text"><span class="errmsg">
+          </div>
+      </div>          
+    <div class="form-group">
+      <label for="" class=""> <b>Availability</b></label>
+      <div class="">
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[mon]">
+          <input type="checkbox" value="1" name="post_requirement_food[mon]" id="post_requirement_food_mon"> Mon
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[tue]">
+          <input type="checkbox" value="1" name="post_requirement_food[tue]" id="post_requirement_food_tue"> Tue
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[wed]">
+          <input type="checkbox" value="1" name="post_requirement_food[wed]" id="post_requirement_food_wed"> Wed
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[thu]">
+          <input type="checkbox" value="1" name="post_requirement_food[thu]" id="post_requirement_food_thu"> Thu
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[fri]">
+          <input type="checkbox" value="1" name="post_requirement_food[fri]" id="post_requirement_food_fri"> Fri
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[sat]">
+          <input type="checkbox" value="1" name="post_requirement_food[sat]" id="post_requirement_food_sat"> Sat
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="post_requirement_food[sun]">
+          <input type="checkbox" value="1" name="post_requirement_food[sun]" id="post_requirement_food_sun"> Sun
+        </label>
+      </div>
+    </div>    
+    <div class="form-group" id="food_image">
+      <label for="inputEmail3" class="">Food Image</label>
+      <div class="">
+        <span id="food_image_1"></span>
+        <input class="food_img food_image1" id="post_requirement_food_image" name="post_requirement[food_image]" type="file">
+      </div>
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+
+    <div class="form-group">
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description (150 char.)<i>*</i></label>
+      <div class="">
+        <textarea class="form-control details1 val_details1" cols="20" id="post_requirement_details" maxlength="150" name="post_requirement[details]" placeholder="Please describe your service; for eg. timing, expertice &amp; others." rows="5"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group" style ="visibility:hidden;">
+      <label for="" class="">Food Provider</label>
+      <div class="">
+        <input checked="checked" id="post_requirement_seeker_provider_false" name="post_requirement[seeker_provider]" type="radio" value="false">  
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="">
+        <button type="button" class="btn btn-default" onclick="return validate_food();"> Submit</button>
+      </div>
+    </div>
+    <div style="display:none">
+      <input class="p_f_hide" id="p_f_hide" name="p_f_hide" value="1" type="hidden">  
+      <!--<input type="hidden" name="user[email]" id="user_email" class="form-control login_feild email1">-->
+      <input autofocus="autofocus" class="form-control login_feild email1" id="user_email" name="user[email]" placeholder="Enter your Email id" size="30" type="email" value="">
+      <!--<input type="hidden" name="user[password]" id="user_password" class="form-control login_feild password1">-->
+      <input autocomplete="off" class="form-control login_feild password1" id="user_password" name="user[password]" placeholder="Enter your Password" size="30" type="password">
+      <!--<input type="hidden" name="user[password_confirmation]" id="user_password_confirmation" class="login_feild password_confirmation1">-->
+<input autocomplete="off" class="form-control login_feild password_confirmation1" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Enter Confirm Password" size="30" tabindex="3" type="password">
+      <input type="hidden" name="user[name]" id="user_name" class="form-control login_feild name1">
+      <input type="hidden" name="user[phone_no]" id="user_phone_no" class="form-control login_feild phone_no1">
+      <input type="hidden" name="user[address]" id="user_address" class="form-control signup_textarea address1">
+  </div>
+  </form>
+</div>
+<!--####################### Modal ##################-->
+<div class="modal fade" id="login_signup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="loginbox1" style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">             
+      <div class="panel panel-info" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign In</div>
+        </div>    
+        <div style="padding-top:30px" class="panel-body" >
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control emailL" placeholder="Enter your Email id" size="30" type="email" autocomplete="off" onchange="validate11()"><br><h2 id="result11"></h2>                                       
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control passwordL" placeholder="Enter your Password" size="30" type="password" onchange="chr_validate11()"><br><div id="er11"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <a id="sign_inn" href="javascript:void(0)" class="btn btn-success">Login</a>
+            </div>
+            <script type="text/javascript">
+              $(".emailL").keyup(function(){
+                  $(".email1").val($(this).val());
+              });
+              $(".passwordL").keyup(function(){
+                $(".password1").val($(this).val());
+              });
+            
+               $("#sign_inn").click(function(){              
+                     if($(".emailL").val() == ""){
+                    $("#result11").text("Please Enter Email :(");
+                    $("#result11").css("color", "red");
+                 // $("#result11").text("");
+                    }else if($(".passwordL").val() == ""){
+                   $("#er11").text("Please Enter password :(");
+                   $("#er11").css("color", "red");
+                  //$("#er11").text("");
+                     }               
+                    else{                 
+                   $(".frm1").attr('action', '/users/sign_in');                 
+                  $(".frm1").submit();
+                   }
+                  })
+              
+              function chr_validate11(){
+                $("#er11").text("");
+               var pass =$(".passwordL").val();
+               if ( pass.length < 8 )
+                {
+                  $("#er11").text("minimum 8 characters");
+                  $("#er11").css("color", "red");
+                }else{
+                  $("#er11").text("");
+                }
+              }
+            </script>
+            <script type="text/javascript">
+          function validateEmail11(emailL) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailL);
+  }
+  function validate11(){
+  $("#result11").text("");
+  var emailL = $(".emailL").val();
+  if (validateEmail11(emailL)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".emailL").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          $("#result11").text(" This email is not availabile :)");
+          $("#result11").css("color", "red");
+        }else{
+          $("#result11").text($(".emailL").val()+ " This email is exist :(");
+          $("#result11").css("color", "green");
+         // $(".emailL").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result11").text("This is not a valid email :(");
+    $("#result11").css("color", "red");
+    //$(".emailL").val("");
+  }
+  return false;
+}
+</script>
+          </div>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">              
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account! 
+                <a href="javascript:void(0)" onClick="$('#loginbox1').hide(); $('#signupbox1').show()">
+                Sign Up Here</a>
+              </div>
+            </div>
+          </div>    
+        </div>                     
+      </div>  
+    </div>
+
+    <div id="signupbox1" style="display:none; margin-top:50px" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign Up</div>      
+        </div>  
+        <div class="panel-body" >
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control Sname1" placeholder="Enter your Name" size="30" tabindex="1" type="text" autocomplete="off">
+            <br><div id="nam1"></div>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input class="form-control login_feild Semail1" placeholder="Enter Email Id" size="30" tabindex="2" type="email" autocomplete="off" onchange="validate1()">
+            <br><h2 id='result'></h2>                                    
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword1" placeholder="Enter Password" size="30" tabindex="3" type="password" onchange="chr_validate1()">
+            <br><div id="er1"></div>
+          </div>              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword_confirmation1" placeholder="Enter Confirm Password" size="30" tabindex="4" type="password" onchange="pass_validate1()">
+            <br><div id="pass1"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input class="form-control login_feild Sphone_no1" placeholder="Enter your Phone no." size="30" tabindex="5" type="text" autocomplete="off" > 
+            <br><span class="errmsg1" style="color:red"> </span> 
+            <div id="phon1"></div>                                      
+          </div>
+<script type="text/javascript">
+$(".Sphone_no1").keypress(function (e) {
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    $(".errmsg1").html("Numbers Only").show().fadeOut("slow");
+    return false;
+  }
+}); 
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <textarea class="form-control Saddress1" cols="25" placeholder="Enter your Address" rows="3" tabindex="6" autocomplete="off"></textarea>
+            <br><div id="add1"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <button id="s-f-signup1" type="button" class="btn btn-info" tabindex="7"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(".Sname1").keyup(function(){
+              $(".name1").val($(this).val());
+            });
+            $(".Semail1").keyup(function(){
+              $(".email1").val($(this).val());
+            });
+            $(".Spassword1").keyup(function(){
+              $(".password1").val($(this).val());
+            });
+            $(".Spassword_confirmation1").keyup(function(){
+              $(".password_confirmation1").val($(this).val());
+            });
+            $(".Sphone_no1").keyup(function(){
+              $(".phone_no1").val($(this).val());
+            });
+            $(".Saddress1").keyup(function(){
+              $(".address1").val($(this).val());
+            });
+function validateEmail(Semail1) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Semail1);
+}
+function validate1(){
+  $("#result").text("");
+  var Semail1 = $(".Semail1").val();
+  if (validateEmail(Semail1)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".Semail1").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          //$("#result").text(" This email is availabile :)");
+          //$("#result").css("color", "green");
+        }else{
+          $("#result").text($(".Semail1").val()+ " This email is exist :(");
+          $("#result").css("color", "red");
+          $(".Semail1").val("");
+          return false;
+        }
+      }   
+    });
+  } else {
+    $("#result").text("This is not a valid email :(");
+    $("#result").css("color", "red");
+    $(".Semail1").val("");
+     return false;
+  }
+  return false;
+}
+$("#s-f-signup1").click(function(){
+  $("#nam1").text("");
+  $("#er1").text("");
+  $("#phon1").text("");
+  $("#add1").text("");
+  if ($(".Sname1").val() == ""){
+    $("#nam1").text("Please Enter Your Name :(");
+    $("#nam1").css("color", "red");
+    e.preventDefault();
+  }else if($(".Semail1").val() == ""){
+    $("#result").text("Please Enter Email :(");
+    $("#result").css("color", "red");
+  }else if($(".Spassword1").val().length < 8){
+    $("#er1").text("minimum 8 characters");
+    $("#er1").css("color", "red");
+  }else if($(".Spassword1").val() != $(".Spassword_confirmation1").val()){
+    $("#pass1").text("Password not match :(");
+    $("#pass1").css("color", "red");
+  }else if($(".Sphone_no1").val().length!=10){
+    $("#phon1").text("Please enter 10 digits Phone no :(");
+    $("#phon1").css("color", "red");
+  }else if($(".Saddress1").val() == ""){
+    $("#add1").text("please enter address :(");
+    $("#add1").css("color", "red");
+  }else{
+    $(".frm1").attr('action', '/users'); 
+    $(".frm1").submit();
+  }
+})
+          </script>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Already have an account?  
+                <a id="signinlink" href="javascript:void(0)" onclick="$('#signupbox1').hide(); $('#loginbox1').show()">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--################ End Model ##########-->    
+<div class="form_inner_align" id="booklist_form" style="display:none;">
+  <form accept-charset="UTF-8" class="new_user form-horizontal frm2" enctype="multipart/form-data" id="new_user" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <select onchange="get_location(this.value,'locality_id_class')" name="city[id]" id="popup_city" class="form-control get_city">
+          <% City.all.each do |f| %>
+            <option value="<%= f.id %>"><%= f.city_name %></option>
+          <% end %>
+        </select>
+        <script type="text/javascript">
+          $(window).load(function(){   
+            $(".get_city").val($.cookie('city_id'))
+          });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <input type="hidden" name="book_post_requirement[city_id]" id="book_post_requirement_city_id" class="book_post_requirement_city_id" value="4">
+        <select name="book_post_requirement[location_id]" id="locality_id_book" class="form-control locality_id_class">
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="">Select Cateogory<i>*</i></label>
+      <div class="">
+        <select name="book_post_requirement[service_id]" id="bookshare_select_id" class="form-control services_class">
+           <!--<option value="4">Rider Sharing</option>-->
+          <option value="3">Skill Sharing</option>
+          <option value="1">Food Sharing</option>
+          <option selected="selected" value="2">Book Sharing</option>
+        </select>
+      </div>
+    </div>    
+    <div class="form-group">
+      <label for="" class="">Book Name<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" name="book_post_requirement[name]" id="book_post_requirement_name" class="form-control val_book_name1">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="">Author<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" name="book_post_requirement[author]" id="book_post_requirement_author" class="form-control val_author_name1">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail3" class="">Category<i>*</i></label>
+      <div class="">
+        <select required="required" name="book_post_requirement[category_id]" id="book_post_requirement_category_id" class="form-control category_id_class">
+          <% Category.all.each do |c| %>
+            <option value="<%= c.id %>"><%= c.category_name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="" class="">ISBN Number</label>
+      <div class="">
+        <input type="text" size="30" name="book_post_requirement[isbn_number]" id="book_post_requirement_isbn_number" class="form-control">
+      </div>
+    </div>-->
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent / Charges (in Rs)<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" required="required" name="book_post_requirement[rent]" id="book_post_requirement_rent" class="form-control quantity val_rent1"><span class="errmsg">
+      </div>
+    </div>
+
+   
+    <div class="form-group">
+      <div class="" id="book_image">
+        <label for="" class="">Book Image</label>
+        <div class="">
+          <span id="book_image_1"></span>
+          <input type="file" name="book_post_requirement[image]" id="book_post_requirement_image" class="book_img">
+        </div>
+        <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description (150 char.)<i>*</i></label>
+      <div class="">
+      <textarea rows="5" placeholder="Please describe your service; for eg. timing, expertice &amp; others." name="book_post_requirement[description]" maxlength="150" id="book_post_requirement_description" cols="20" class="form-control val_description1"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group"></div>
+    <input id="book_post_requirement_seeker_provider" type="hidden" value="false" name="book_post_requirement[seeker_provider]">
+    <div class="form-group"></div>
+    <div class="form-group"></div>
+    <div class="form-group"></div>
+
+    <div class="form-group">
+      <div class="">
+        <button type="button" class="btn btn-default" onclick="return validate_book();"> Submit</button>
+      </div>
+    </div>
+    <input class="p_f_hide" id="p_f_hide" name="p_f_hide" value="2" type="hidden">  
+    <input type="hidden" name="user[email]" id="user_email" class="form-control login_feild email2">
+    <input type="hidden" name="user[password]" id="user_password" class="form-control login_feild password2">
+    <input type="hidden" name="user[password_confirmation]" id="user_password_confirmation" class="login_feild password_confirmation2">
+    <input type="hidden" name="user[name]" id="user_name" class="form-control login_feild name2">
+    <input type="hidden" name="user[phone_no]" id="user_phone_no" class="form-control login_feild phone_no2">
+    <input type="hidden" name="user[address]" id="user_address" class="form-control signup_textarea address2">
+  </form>
+</div>
+<!--####################### Modal ##################-->
+<div class="modal fade" id="login_signup2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="loginbox2" style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">             
+      <div class="panel panel-info" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign In</div>
+        </div>    
+        <div style="padding-top:30px" class="panel-body" >
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control emailL2" placeholder="Enter your Email id" size="30" type="email" autocomplete="off" onchange="validate22()"> <br><h2 id="result22"></h2>                                      
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control passwordL2" placeholder="Enter your Password" size="30" type="password" onchange="chr_validate22()">
+            <br><div id="er22"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <a id="sign_inn2" href="javascript:void(0)" class="btn btn-success">Login  </a>
+            </div>
+            <script type="text/javascript">
+              $(".emailL2").keyup(function(){
+                  $(".email2").val($(this).val());
+              });
+              $(".passwordL2").keyup(function(){
+                $(".password2").val($(this).val());
+              });
+              
+             
+               $("#sign_inn2").click(function(){              
+                     if($(".emailL2").val() == ""){
+                    $("#result22").text("Please Enter Email :(");
+                    $("#result22").css("color", "red");
+                 // $("#result22").text("");
+                    }else if($(".passwordL2").val() == ""){
+                   $("#er22").text("Please Enter password :(");
+                   $("#er22").css("color", "red");
+                  //$("#er22").text("");
+                     }               
+                    else{                 
+                   $(".frm2").attr('action', '/users/sign_in');                 
+                  $(".frm2").submit();
+                   }
+                  })
+              
+               function chr_validate22(){
+                $("#er22").text("");
+               var pass =$(".passwordL2").val();
+               if ( pass.length < 8 )
+                {
+                  $("#er22").text("minimum 8 characters");
+                  $("#er22").css("color", "red");
+                }else{
+                  $("#er22").text("");
+                }
+              }
+              
+            </script>
+            <script type="text/javascript">
+function validateEmail22(emailL2) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailL2);
+  }
+  function validate22(){
+  $("#result22").text("");
+  var emailL2 = $(".emailL2").val();
+  if (validateEmail22(emailL2)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".emailL2").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          $("#result22").text(" This email is not availabile :)");
+          $("#result22").css("color", "red");
+        }else{
+          $("#result22").text($(".emailL2").val()+ " This email is exist :(");
+          $("#result22").css("color", "green");
+          //$(".emailL2").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result22").text("This is not a valid email :(");
+    $("#result22").css("color", "red");
+   // $(".emailL2").val("");
+  }
+  return false;
+}
+</script>
+          </div>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account! 
+                <a href="javascript:void(0)" onClick="$('#loginbox2').hide(); $('#signupbox2').show()">
+                Sign Up Here</a>
+              </div>
+            </div>
+          </div>    
+        </div>                     
+      </div>  
+    </div>
+
+    <div id="signupbox2" style="display:none; margin-top:50px" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign Up</div>      
+        </div>  
+        <div class="panel-body" >
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control Sname2" placeholder="Enter your Name" size="30" tabindex="1" type="text" autocomplete="off">
+            <br><div id="nam2"></div>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input class="form-control login_feild Semail2" placeholder="Enter Email Id" size="30" tabindex="2" type="email" autocomplete="off" onchange="validate2()">  
+            <br><h2 id='result2'></h2>                                      
+          </div>
+<script type="text/javascript">
+
+  function validateEmail2(Semail2) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Semail2);
+  }
+  function validate2(){
+  $("#result2").text("");
+  var Semail2 = $(".Semail2").val();
+  if (validateEmail2(Semail2)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".Semail2").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          //$("#result").text(" This email is availabile :)");
+          //$("#result").css("color", "green");
+        }else{
+          $("#result2").text($(".Semail2").val()+ " This email is exist :(");
+          $("#result2").css("color", "red");
+          $(".Semail2").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result2").text("This is not a valid email :(");
+    $("#result2").css("color", "red");
+    $(".Semail2").val("");
+  }
+  return false;
+}
+
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword2" placeholder="Enter Password" size="30" tabindex="3" type="password" onchange="chr_validate2()">
+            <br><div id="er2"></div>
+          </div>              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword_confirmation2" placeholder="Enter Confirm Password" size="30" tabindex="4" type="password" onchange="pass_validate2()">
+            <br><div id="pass2"></div>
+          </div>
+          <script type="text/javascript">
+            function chr_validate2(){
+              $("#er2").text("");
+             var pass =$(".Spassword2").val();
+             if ( pass.length < 8 )
+              {
+                $("#er2").text("minimum 8 characters");
+                $("#er2").css("color", "red");
+              }else{
+                $("#er2").text("");
+              }
+            }
+            function pass_validate2(){
+              $("#pass2").text("");
+              if ( $(".Spassword2").val() == $(".Spassword_confirmation2").val() ){
+                
+              }else{
+                $("#pass2").text("Password not match :(");
+                $("#pass2").css("color", "red");
+              }
+             }
+            </script>
+
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input class="form-control login_feild Sphone_no2" placeholder="Enter your Phone no." size="30" tabindex="5" type="text" autocomplete="off">   
+            <br><span class="errmsg2" style="color:red"> </span><div id="phon2"></div>                               
+          </div>
+<script type="text/javascript">
+$(".Sphone_no2").keypress(function (e) {
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    $(".errmsg2").html("Numbers Only").show().fadeOut("slow");
+    return false;
+  }
+}); 
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <textarea class="form-control Saddress2" cols="25" placeholder="Enter your Address" rows="3" tabindex="6" autocomplete="off"></textarea>
+            <br><div id="add2"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <button id="s-f-signup2" type="button" class="btn btn-info" tabindex="7"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(".Sname2").keyup(function(){
+                $(".name2").val($(this).val());
+            });
+            $(".Semail2").keyup(function(){
+              $(".email2").val($(this).val());
+            });
+            $(".Spassword2").keyup(function(){
+              $(".password2").val($(this).val());
+            });
+            $(".Spassword_confirmation2").keyup(function(){
+              $(".password_confirmation2").val($(this).val());
+            });
+            $(".Sphone_no2").keyup(function(){
+              $(".phone_no2").val($(this).val());
+            });
+            $(".Saddress2").keyup(function(){
+              $(".address2").val($(this).val());
+            });
+            //$("#s-f-signup2").click(function(){  
+            //  $(".frm2").attr('action', '/users'); 
+            //  $(".frm2").submit();
+            //})
+$("#s-f-signup2").click(function(){
+
+  $("#nam2").text("");
+  $("#er2").text("");
+  $("#phon2").text("");
+  $("#add2").text("");
+
+  if ($(".Sname2").val() == ""){
+    $("#nam2").text("Please Enter Your Name :(");
+    $("#nam2").css("color", "red");
+  }else if($(".Semail2").val() == ""){
+    $("#result2").text("Please Enter Email :(");
+    $("#result2").css("color", "red");
+  }else if($(".Spassword2").val().length < 8){
+    $("#er2").text("minimum 8 characters");
+    $("#er2").css("color", "red");
+  }else if($(".Spassword2").val() != $(".Spassword_confirmation2").val()){
+    $("#pass2").text("Password not match :(");
+    $("#pass2").css("color", "red");
+  }else if($(".Sphone_no2").val().length != 10){
+    $("#phon2").text("Please enter 10 digits Phone no :(");
+    $("#phon2").css("color", "red");
+  }else if($(".Saddress2").val() == ""){
+    $("#add2").text("please enter address :(");
+    $("#add2").css("color", "red");
+  }else{
+    $(".frm2").attr('action', '/users'); 
+    $(".frm2").submit();
+  }
+})
+          </script>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Already have an account?  
+                <a id="signinlink" href="javascript:void(0)" onclick="$('#signupbox2').hide(); $('#loginbox2').show()">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--################ End Model ##########-->
+<!--####################### Skill Sharing #############################------>
+<div class="form_inner_align" id='skilllist_form'>
+  <form accept-charset="UTF-8" class="new_user form-horizontal frm3" enctype="multipart/form-data" id="new_user" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <select onchange="get_location(this.value,'locality_id_class')" name="city[id]" id="popup_city" class="form-control get_city">
+          <% City.all.each do |f| %>
+            <option value="<%= f.id %>"><%= f.city_name %></option>
+          <% end %>
+        </select>
+        <script type="text/javascript">
+          $(window).load(function(){   
+            $(".get_city").val($.cookie('city_id'))
+          });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <input type="hidden" name="skill_post_requirement[city_id]" id="skill_post_requirement_city_id">
+        <select name="skill_post_requirement[location_id]" id="locality_id" class="form-control locality_id_class">
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select category<i>*</i></label>
+      <div class="">
+        <select name="skill_post_requirement[service_id]" id="skill_share_select_id" class="form-control services_class">
+          <option selected="selected" value="3">Skill Sharing</option>
+          <option value="1">Food Sharing</option>
+          <option value="2">Book Sharing</option>
+          <!--<option value="4">Rider Sharing</option>-->
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="", id ="sub_category_id" >Select Sub-Category<i>*</i></label>
+      <div class="">
+        <select required="required" name="skill_post_requirement[sub_category_id]" id="skill_post_requirement_sub_category_id" class="form-control">
+          <% SubCategory.all.each do |s| %>
+            <option value="<%= s.id %>"><%= s.sub_category_type %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Service in one-line (40 Char.)<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" name="skill_post_requirement[service_in_one_line]" maxlength="40" id="skill_post_requirement_service_in_one_line" class="form-control val_service_in_one_line1">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent / Charges (in Rs)<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" required="required" name="skill_post_requirement[charges]" id="skill_post_requirement_charges" class="form-control quantity val_charges1">
+        <span class="errmsg">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class=""> <b>Availability</b></label>
+      <div class="">
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[mon]">
+          <input type="checkbox" value="1" name="skill_post_requirement[mon]" id="skill_post_requirement_mon"> Mon
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[tue]">
+          <input type="checkbox" value="1" name="skill_post_requirement[tue]" id="skill_post_requirement_tue"> Tue
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[wed]">
+          <input type="checkbox" value="1" name="skill_post_requirement[wed]" id="skill_post_requirement_wed"> Wed
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[thu]">
+          <input type="checkbox" value="1" name="skill_post_requirement[thu]" id="skill_post_requirement_thu"> Thu
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[fri]">
+          <input type="checkbox" value="1" name="skill_post_requirement[fri]" id="skill_post_requirement_fri"> Fri
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[sat]">
+          <input type="checkbox" value="1" name="skill_post_requirement[sat]" id="skill_post_requirement_sat"> Sat
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="skill_post_requirement[sun]">
+          <input type="checkbox" value="1" name="skill_post_requirement[sun]" id="skill_post_requirement_sun"> Sun
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" id="skill_image" class="">Skill Image</label>
+      <div class="">
+        <span id="skill_image_1"></span>
+        <input type="file" name="skill_post_requirement[skill]" id="skill_post_requirement_skill" class="skill_img">
+      </div>      
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+
+    <div class="form-group">
+      <label for="" class=""> <b>Home Service</b></label>
+      <div class="">
+        <label class="btn btn-default">
+          <input type="radio" value="1" name="skill_post_requirement[home_service]" id="skill_post_requirement_home_service_1"> Yes
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" value="0" name="skill_post_requirement[home_service]" id="skill_post_requirement_home_service_0"> No
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Description (150 char.)<i>*</i></label>
+      <div class="">
+        <textarea rows="5" required="required" placeholder="Please describe your service; for eg. timing, expertice &amp; others." name="skill_post_requirement[description]" maxlength="150" id="skill_post_requirement_description" cols="20" class="form-control val_sdescription1"></textarea>
+      </div>
+    </div>
+
+    <input id="skill_post_requirement_seeker_provider" type="hidden" value="false" name="skill_post_requirement[seeker_provider]">
+
+    
+    <div class="form-group"></div>
+    <div class="form-group">
+      <div class="">
+        <button type="button" class="btn btn-default" onclick="return validate_skill();"> Submit</button>
+      </div>
+    </div>
+    <input class="p_f_hide" id="p_f_hide" name="p_f_hide" value="3" type="hidden">  
+    <input type="hidden" name="user[email]" id="user_email" class="form-control login_feild email3">
+    <input type="hidden" name="user[password]" id="user_password" class="form-control login_feild password3">
+    <input type="hidden" name="user[password_confirmation]" id="user_password_confirmation" class="login_feild password_confirmation3">
+    <input type="hidden" name="user[name]" id="user_name" class="form-control login_feild name3">
+    <input type="hidden" name="user[phone_no]" id="user_phone_no" class="form-control login_feild phone_no3">
+    <input type="hidden" name="user[address]" id="user_address" class="form-control signup_textarea address3">
+  </form>
+</div>
+<!--####################### Modal ##################-->
+<div class="modal fade" id="login_signup3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="loginbox3" style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">             
+      <div class="panel panel-info" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign In</div>
+        </div>    
+        <div style="padding-top:30px" class="panel-body" >
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control emailL3" placeholder="Enter your Email id" size="30" type="email" autocomplete="off" onchange="validate33()">
+            <br><h2 id='result33'></h2>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control passwordL3" placeholder="Enter your Password" size="30" type="password" onchange="chr_validate33()">
+            <br><div id="er33"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <a id="sign_inn3" href="javascript:void(0)" class="btn btn-success">Login</a>
+            </div>
+            <script type="text/javascript">
+              $(".emailL3").keyup(function(){
+                  $(".email3").val($(this).val());
+              });
+              $(".passwordL3").keyup(function(){
+                $(".password3").val($(this).val());
+              });
+              
+            
+              $("#sign_inn3").click(function(){              
+                     if($(".emailL3").val() == ""){
+                    $("#result33").text("Please Enter Email :(");
+                    $("#result33").css("color", "red");
+                 // $("#result33").text("");
+                    }else if($(".passwordL3").val() == ""){
+                   $("#er33").text("Please Enter password :(");
+                   $("#er33").css("color", "red");
+                  //$("#er33").text("");
+                     }               
+                    else{                 
+                   $(".frm3").attr('action', '/users/sign_in');                 
+                  $(".frm3").submit();
+                   }
+                  })
+              
+              function chr_validate33(){
+                $("#er33").text("");
+               var pass =$(".passwordL3").val();
+               if ( pass.length < 8 )
+                {
+                  $("#er33").text("minimum 8 characters");
+                  $("#er33").css("color", "red");
+                }else{
+                  $("#er33").text("");
+                }
+              }
+     function validateEmail33(emailL3) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailL3);
+  }
+  function validate33(){
+  $("#result33").text("");
+  var emailL3 = $(".emailL3").val();
+  if (validateEmail33(emailL3)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".emailL3").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          $("#result33").text(" This email is not availabile :)");
+          $("#result33").css("color", "red");
+         
+        } else{
+          $("#result33").text($(".emailL3").val()+ " This email is exist :(");
+          $("#result33").css("color", "green");
+      
+        }
+      }   
+    });
+  } else {
+    $("#result33").text("This is not a valid email :(");
+    $("#result33").css("color", "red");
+   
+  }
+  return false;
+}
+            </script>
+          </div>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account! 
+                <a href="javascript:void(0)" onClick="$('#loginbox3').hide(); $('#signupbox3').show()">
+                Sign Up Here</a>
+              </div>
+            </div>
+          </div>    
+        </div>                     
+      </div>  
+    </div>
+
+    <div id="signupbox3" style="display:none; margin-top:50px" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign Up</div>      
+        </div>  
+        <div class="panel-body" >
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control Sname3" placeholder="Enter your Name" size="30" tabindex="1" type="text" autocomplete="off">
+            <br><div id="nam3"></div>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input class="form-control login_feild Semail3" placeholder="Enter Email Id" size="30" tabindex="2" type="email" autocomplete="off" onchange="validate3()"> 
+            <br><h2 id='result3'></h2>                                       
+          </div>
+<script type="text/javascript">
+
+function validateEmail3(Semail3) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Semail3);
+  }
+  function validate3(){
+  $("#result3").text("");
+  var Semail3 = $(".Semail3").val();
+  if (validateEmail3(Semail3)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".Semail3").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          //$("#result").text(" This email is availabile :)");
+          //$("#result").css("color", "green");
+        }else{
+          $("#result3").text($(".Semail3").val()+ " This email is exist :(");
+          $("#result3").css("color", "red");
+          $(".Semail3").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result3").text("This is not a valid email :(");
+    $("#result3").css("color", "red");
+    $(".Semail3").val("");
+  }
+  return false;
+}
+
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword3" placeholder="Enter Password" size="30" tabindex="3" type="password" onchange="chr_validate3()">
+            <br><div id="er3"></div>
+          </div>              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword_confirmation3" placeholder="Enter Confirm Password" size="30" tabindex="4" type="password" onchange="pass_validate3()">
+            <br><div id="pass3"></div>
+          </div>
+
+          <script type="text/javascript">
+function chr_validate3(){
+  $("#er3").text("");
+ var pass =$(".Spassword3").val();
+ if ( pass.length < 8 )
+  {
+    $("#er3").text("minimum 8 characters");
+    $("#er3").css("color", "red");
+  }else{
+    $("#er3").text("");
+  }
+}
+function pass_validate3(){
+  $("#pass3").text("");
+  if ( $(".Spassword3").val() == $(".Spassword_confirmation3").val() ){
+    
+  }else{
+    $("#pass3").text("Password not match :(");
+    $("#pass3").css("color", "red");
+  }
+ }
+</script>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input class="form-control login_feild Sphone_no3" placeholder="Enter your Phone no." size="30" tabindex="5" type="text" autocomplete="off" onchange="no_validate3()">  
+             <br><span class="errmsg3" style="color:red"> </span> 
+             <div id="phon3"></div>                                      
+          </div>
+
+<script type="text/javascript">
+$(".Sphone_no3").keypress(function (e) {
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    $(".errmsg3").html("Numbers Only").show().fadeOut("slow");
+    return false;
+  }
+});
+ function no_validate3(){
+  var no =$(".Sphone_no3").val();
+  if (no.length!=10)
+  {
+    alert("required 10 digits");
+  }
+ }
+</script>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <textarea class="form-control Saddress3" cols="25" placeholder="Enter your Address" rows="3" tabindex="6" autocomplete="off"></textarea>
+            <br><div id="add3"></div> 
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <button id="s-f-signup3" type="button" class="btn btn-info" tabindex="7"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(".Sname3").keyup(function(){
+                $(".name3").val($(this).val());
+            });
+            $(".Semail3").keyup(function(){
+              $(".email3").val($(this).val());
+            });
+            $(".Spassword3").keyup(function(){
+              $(".password3").val($(this).val());
+            });
+            $(".Spassword_confirmation3").keyup(function(){
+              $(".password_confirmation3").val($(this).val());
+            });
+            $(".Sphone_no3").keyup(function(){
+              $(".phone_no3").val($(this).val());
+            });
+            $(".Saddress3").keyup(function(){
+              $(".address3").val($(this).val());
+            });
+            //$("#s-f-signup3").click(function(){  
+            //  $(".frm3").attr('action', '/users'); 
+            //  $(".frm3").submit();
+            //})
+$("#s-f-signup3").click(function(){
+  $("#nam3").text("");
+  $("#er3").text("");
+  $("#phon3").text("");
+  $("#add3").text("");
+  if ($(".Sname3").val() == ""){
+    $("#nam3").text("Please Enter Your Name :(");
+    $("#nam3").css("color", "red");
+  }else if($(".Semail3").val() == ""){
+    $("#result3").text("Please Enter Email :(");
+    $("#result3").css("color", "red");
+  }else if($(".Spassword3").val().length < 8){
+    $("#er3").text("minimum 8 characters");
+    $("#er3").css("color", "red");
+  }else if($(".Spassword3").val() != $(".Spassword_confirmation3").val()){
+    $("#pass3").text("Password not match :(");
+    $("#pass3").css("color", "red");
+  }else if($(".Sphone_no3").val().length!=10){
+    $("#phon3").text("Please enter 10 digits Phone no :(");
+    $("#phon3").css("color", "red");
+  }else if($(".Saddress3").val() == ""){
+    $("#add3").text("please enter address :(");
+    $("#add3").css("color", "red");
+  }else{
+    $(".frm3").attr('action', '/users'); 
+    $(".frm3").submit();
+  }
+})
+          </script>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Already have an account?  
+                <a id="signinlink" href="javascript:void(0)" onclick="$('#signupbox3').hide(); $('#loginbox3').show()">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--################ End Model ##########-->
+<!--####################### End Skill Sharing #########################------>
+<!--####################### Rider Sharing #############################------>
+
+<!--####################### Modal ##################-->
+
+<!--####################### End rider Sharing  provider#########################------>
+<script type="text/javascript">
+$(document).ready(function () {
+  //called when key is pressed in textbox
+  $(".quantity").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $(".errmsg").html("Numbers Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+});
+
+//########Image thumbnail ############
+
+$(function() {
+    $(".food_img").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#food_image_1").css("background-image", "url("+this.result+")");
+                $("#food_image_1").css("width", "125px");
+                $("#food_image_1").css("height", "125px");
+            }
+        }
+    });
+});
+
+$(function() {
+    $(".skill_img").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#skill_image_1").css("background-image", "url("+this.result+")");
+                $("#skill_image_1").css("width", "125px");
+                $("#skill_image_1").css("height", "125px");
+            }
+        }
+    });
+});
+
+$(function() {
+    $(".book_img").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#book_image_1").css("background-image", "url("+this.result+")");
+                $("#book_image_1").css("width", "125px");
+                $("#book_image_1").css("height", "125px");
+            }
+        }
+    });
+});
+$(function() {
+    $(".ride_img").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#ride_image_1").css("background-image", "url("+this.result+")");
+                $("#ride_image_1").css("width", "125px");
+                $("#ride_image_1").css("height", "125px");
+            }
+        }
+    });
+});
+</script>
+<style>
+#food_image_1 {
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;   
+    background-position: 50% 50%; 
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+    
+}
+
+#skill_image_1 {    
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;    
+    background-position: 50% 50%; 
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+    
+}
+
+#book_image_1 {
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    background-position: 50% 50%; 
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+}
+#ride_image_1 {
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    background-position: 50% 50%; 
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+}
+</style>

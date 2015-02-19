@@ -24,10 +24,18 @@
       function get_location(value, update_field)
 			{
         if($("#post_requirement_city_id").length > 0){
-          document.getElementById('post_requirement_city_id').value = value;
+          //document.getElementById('post_requirement_city_id').value = value;
+          $(".post_requirement_city_id").val(value)
         }
         if($("#book_post_requirement_city_id").length > 0){
-          document.getElementById('book_post_requirement_city_id').value = value;
+          //document.getElementById('book_post_requirement_city_id').value = value;
+          $(".book_post_requirement_city_id").val(value)
+        }
+        if($("#skill_post_requirement_city_id").length > 0){
+          document.getElementById('skill_post_requirement_city_id').value = value;
+        }
+        if($("#post_skill_requirement_city_id").length > 0){
+          document.getElementById('post_skill_requirement_city_id').value = value;
         }
 			$('#myModal').modal('hide')
         if (value !="")
@@ -103,6 +111,26 @@
       .m_tag{display: none;}
     }
   </style>
+  <style >
+    .back-down {
+      position: fixed;
+      bottom: 18%;
+      right: 0%;
+      text-decoration: none;
+      /*color: #F5F4F4;
+      background-color: rgba(88, 154, 185, 0.8);
+      font-size: 10px;
+      padding: 1em;*/      
+    }
+    .back-down:hover {  
+      background-color: rgba(135, 135, 135, 0.50);
+    }
+    @media screen and (max-width:768px) {
+      .footer_sticky_bar{display: none;}
+      .m_near{display: none;}
+      .m_tag{display: none;}
+    }
+  </style>
 
   </head>
   <body>
@@ -170,11 +198,11 @@
         </ul>
     </div>
     <div class="content">
-      <% if !notice.nil? %>
+      <% if !notice.nil? %>      
         <div class="alert alert-success fade in" role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
           <strong><%= notice %></strong>
-        </div>
+        </div>      
       <%end%>
     	<!--<p class="margin_none pos_rel"><%#= notice %></p>-->
 			<p class="margin_none pos_rel"><%= alert %></p>
@@ -184,10 +212,11 @@
 		<%else %>
 		   <% if !notice.nil? %>
         <span class="notice alert alert-success success_mess" style="opacity:0.6;"><p><%= notice %></p></span>
-      <%end%>
+      <%end%>  
+   
+			  <p class="alert alert_mess" style="z-index:-1" ><%= alert %></p>
       
-			<p class="alert alert_mess"><%= alert %></p>
-			<%= yield %>
+   			<%= yield %>
 		<%end%>
 		<% if params[:controller] == 'admins' %>
 			<%= render :partial =>  "layouts/admin_footer" %>
@@ -249,6 +278,13 @@
       });
 </script>
     <a href="#" class="back-to-top"><img src="/assets/backtop.png" style="width: 80%;"></a>
+    <a onclick="scrollWin()" class="back-down"><img src="/assets/backtodown.png" style="width:80%;"></a>
+    <script type="text/javascript">
+     function scrollWin () 
+     {
+        window.scrollBy(0,400);
+     }
+    </script>
     <script>            
       jQuery(document).ready(function() {
         var offset = 220;

@@ -21,13 +21,98 @@ class Devise::RegistrationsController < DeviseController
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        if params[:p_f_hide] == '1'          
+          provider_food_signup
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        elsif params[:p_f_hide] == '2'
+          provider_book_signup    
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        elsif params[:p_f_hide] == '3' 
+          provider_skill_signup
+          respond_with resource, location: after_inactive_sign_up_path_for(resource) 
+        #elsif params[:p_f_hide] == '4' 
+         # provider_ride_signup
+          #respond_with resource, location: after_inactive_sign_up_path_for(resource)  
+        else
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        end
       end
     else
       clean_up_passwords resource
       respond_with resource
     end
   end
+  
+  # resistration with ads
+  def provider_food_signup
+    @post_requirement = PostRequirement.new(params[:post_requirement])
+    if request.post?
+      if params[:any]
+        @post_requirement.no_of_persons = params[:any]
+        session[:any] = params[:any]
+      end
+      if @post_requirement.valid?
+        @post_requirement.user_id = resource.id
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Your post is submitted. Please confirm your account, the link sent to your email id"
+        #redirect_to profile_home_path(current_user)
+      end
+    end
+  end
+
+def provider_book_signup
+  @post_requirement = BookPostRequirement.new(params[:book_post_requirement])
+  if request.post?
+    if @post_requirement.valid?
+      @post_requirement.user_id = resource.id        
+      post_status = true
+    else
+      post_status = false
+    end
+    if @post_requirement.save && post_status
+      flash[:notice] = "Your post is submitted. Please confirm your account, the link sent to your email id"
+      #redirect_to profile_home_path(current_user)
+    end
+  end
+end
+def provider_skill_signup
+  @post_requirement = SkillPostRequirement.new(params[:skill_post_requirement])
+  if request.post?
+    if @post_requirement.valid?
+      @post_requirement.user_id = resource.id       
+      post_status = true
+    else
+      post_status = false
+    end
+    if @post_requirement.save && post_status
+      flash[:notice] = "Your post is submitted. Please confirm your account, the link sent to your email id"
+      #redirect_to profile_home_path(current_user)
+    end
+  end
+end
+=begin
+def provider_ride_signup
+  @post_requirement = RiderPostRequirement.new(params[:rider_post_requirement])
+  if request.post?
+    if @post_requirement.valid?
+      @post_requirement.user_id = resource.id       
+      post_status = true
+    else
+      post_status = false
+    end
+    if @post_requirement.save && post_status
+      flash[:notice] = "Your post is submitted. Please confirm your account, the link sent to your email id"
+      #redirect_to profile_home_path(current_user)
+    end
+  end
+end
+=end
+
+  # End resistration with ads
 
   # GET /resource/edit
   def edit

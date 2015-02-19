@@ -18,11 +18,10 @@ before_filter :authenticate_user!
       provider = User.find(params[:user_id])
       seeker = current_user
       if !params[:post_requirement_id].blank?
-        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver
-      else
-        UserMailer.new_order_for_skill_provider(provider,message.id, seeker).deliver
-      end
-      
+        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+        else
+       UserMailer.new_order_for_skill_provider(provider,message.id, seeker).deliver             
+       end
       contact_details = User.find(params[:user_id])
       UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
     end

@@ -6,18 +6,28 @@
     <li class="">
       <a href="/food_search" title="Discover and Share delicious home-cooked food in your neighborhood">Food Sharing</a>
     </li>
+    <!--<li class="">
+      <a href="/rider_search" title="Discover and share ride to the simple pleasure of a rider & owner nearby you">Rider Sharing</a>
+    </li>-->
     <li class="">
       <a href="/skill_search" title="Teach and Learn skills & experiences nearby you">Skill Sharing</a>
     </li>
-    <li class="">
-      <%= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
-    </li>
-    <li class="">
-      <%= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books or skills? Submit your request here" %>
-    </li>
+    <b><li class="" style="font-family:Helvetica,Sans-Serif;" >
+      <%#= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
+      <span style="background-color: #007a87;">
+      <% if current_user.nil? %>
+        <%= link_to 'SHARE WITH US', post_your_ad_login_sharing_index_path, :title => "Looking for food or books or ride or skills of your choice? Submit your request here" %>       
+      <% else %>
+        <%= link_to 'SHARE WITH US', post_your_ad_sharing_index_path, :title => "Looking for food or books or ride or skills of your choice? Submit your request here" %>
+      <%end%>
+    </span>
+    </li></b>
+    <!--<li class="">
+      <%#= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books or skills? Submit your request here" %>
+    </li>-->
 		<% if current_user.nil? %>
 		<li class="">
-      <%= link_to 'Sign In/Up', new_user_session_path %>
+      <%= link_to 'Sign In/Up', new_user_session_path %>!
     </li>
 		<%end%>
     <% if current_user %>

@@ -98,10 +98,10 @@ class BookSearchController < ApplicationController
         seeker << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
       end
     end
-    @book_search_provider=SkillPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
+    @skill_search_provider=SkillPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
     provider = []
-    if !@book_search_provider.blank?
-      @book_search_provider.each do |loca|
+    if !@skill_search_provider.blank?
+      @skill_search_provider.each do |loca|
         location_dtls=Location.where("id=?",loca.location_id)
         provider << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
       end
@@ -111,6 +111,31 @@ class BookSearchController < ApplicationController
       format.json { render :json => msg }
     end
   end
+  
+=begin
+   def search_top_five_ride
+    @rider_search_seeker=RiderPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'1').group("location_id").order("count(location_id) DESC").limit(5)
+    seeker = []
+    if !@rider_search_seeker.blank?      
+      @rider_search_seeker.each do |loca|
+        location_dtls=Location.where("id=?",loca.location_id)
+        seeker << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
+      end
+    end
+    @rider_search_provider=RiderPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
+    provider = []
+    if !@rider_search_provider.blank?
+      @rider_search_provider.each do |loca|
+        location_dtls=Location.where("id=?",loca.location_id)
+        provider << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
+      end
+    end
+    respond_to do |format|
+      msg = {:seeker => seeker, :provider =>provider }
+      format.json { render :json => msg }
+    end
+  end
+=end
 
   def book_result
     if params[:seeker_provider] == 'true'
@@ -221,4 +246,15 @@ class BookSearchController < ApplicationController
     end
     render :json => {:status => "ok"}
   end
+
+  def check_email
+    puts "===============#{params[:email]}=================="
+    @email=User.where("email=?", params[:email]).count()
+    if @email == 0
+      render :json => { :status => "ok" }
+    else
+      render :json => { :status => "no" }
+    end
+  end
+
 end

@@ -5,14 +5,19 @@
     $("#foodshare_select_id").val("1");
     $("#bookshare_select_id ").val('2');
     $("#skill_share_select_id ").val('3');
+   
+
     <% if params[:post] == "book" %>
-      $('#foodlist_form').hide();
-      $('#booklist_form').show();
+     $('#booklist_form').show();
+      $('#foodlist_form').hide();     
       $('#skilllist_form').hide();
+      
+      
     <% else %>
       $('#foodlist_form').show();
       $('#booklist_form').hide();
       $('#skilllist_form').hide();
+      
     <% end %>
   $('.services_class').on('change', function() {
     if( $(this).val() == '1')
@@ -21,6 +26,7 @@
       $('#booklist_form').hide();
       $('#foodlist_form').show();
       $('#skilllist_form').hide();
+      
       $("#foodshare_select_id").val("1");
      }
      else if( $(this).val() == '2')
@@ -29,6 +35,7 @@
        $('#booklist_form').show();
        $('#foodlist_form').hide();
        $('#skilllist_form').hide();
+      
        $("#bookshare_select_id ").val('2');
     }
     else if( $(this).val() == '3')
@@ -37,8 +44,10 @@
        $('#skilllist_form').show();
        $('#booklist_form').hide();
        $('#foodlist_form').hide();
+      
        $("#skill_share_select_id ").val('3');
     }
+    
   });
 
     $("input:checkbox[name=any]").click(function() {
@@ -61,7 +70,7 @@
       $("#post_requirement_no_of_persons").attr('disabled', true);
       $("#any").attr('checked', true);
 <% end %>
-  
+ 
  if(document.getElementById('skill_post_requirement_city_id').id){
     value = $.cookie('city_id')
     if(value){document.getElementById('skill_post_requirement_city_id').value = value}
@@ -73,20 +82,22 @@
   if(document.getElementById('book_post_requirement_city_id').id){
           value = $.cookie('city_id')
           if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+  
      });
 
 function book_form_validate()
     {
-       if($("#book_name").val() == "")
+       if($(".book_name").val() == "")
        {
          alert( "Please provide book name!" );
          return false;
        }
-       if($("#author_name").val() == "")
+       if($(".author_name").val() == "")
        {
          alert( "Please provide your author name!" );
          return false;
        }
+        
        return( true );
     }
 
@@ -106,7 +117,7 @@ function book_form_validate()
       </div>
     <% end %>
     <div class="form-group">
-      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
       <div class="">
         <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
         <script type="text/javascript">
@@ -118,28 +129,29 @@ function book_form_validate()
       </div>
     </div>
     <div class="form-group">
-      <label for="" class="">Service</label>
+      <label for="" class="">Select Locality<i>*</i></label>
       <div class="">
-        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "1"}, {:class=>'form-control services_class', :id => 'foodshare_select_id'} )%>
+        <%= f.hidden_field :city_id, :class => "post_requirement_city_id" %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} ) %>
       </div>
     </div>
     <div class="form-group">
-      <label for="" class="", id ="provider_id" >I am <i>*</i></label>
+      <label for="" class="">Select Category<i>*</i></label>
       <div class="">
-        <%= f.collection_select(:provider_id, @providers, :id, :provider_type, {:include_blank => 'Select Provider'}, {:class=>'form-control'} )%>
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "1"}, {:class=>'form-control services_class', :id => 'foodshare_select_id'} ) %>
       </div>
     </div>
-   <div class="form-group">
-      <label for="" class="">Locality<i>*</i></label>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >I am<i>*</i></label>
       <div class="">
-        <%= f.hidden_field :city_id, :class => "post_requirement_city_id" %>
-        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
+        <%= f.collection_select(:provider_id, @providers, :id, :provider_type, {:include_blank => 'Select Provider'}, {:class=>'form-control','required'=>'required'} )%>
       </div>
     </div>
+   
     <div class="form-group">
       <label for="inputEmail3" class="">Food Type<i>*</i></label>
       <div class="">
-        <%= f.collection_select(:food_type_id, @food_types, :id, :name, {:include_blank => 'Select FoodType'}, {:class=>'form-control'} )%>
+        <%= f.collection_select(:food_type_id, @food_types, :id, :name, {:include_blank => 'Select FoodType'}, {:class=>'form-control','required'=>'required'} )%>
       </div>
     </div>
     <div class="form-group">
@@ -154,15 +166,15 @@ function book_form_validate()
         <%= f.collection_select(:region_id, @regions, :id, :name, {:include_blank => 'Select Region'}, {:class=>'form-control'})%>
       </div>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="inputEmail3" class="">No. of persons</label>
       <div class="">
-        <%= f.text_field :no_of_persons, :size => 15, :class=>'form-control' %>
-        <%= check_box_tag 'any',-1, false %> Any
+        <%#= f.text_field :no_of_persons, :size => 15, :class=>'form-control' %>
+        <%#= check_box_tag 'any',-1, false %> Any
       </div>
-    </div>
+    </div>-->
     <div class="form-group">
-      <label for="inputEmail3" class="">Budget range  in Rs<i>*</i></label>
+      <label for="inputEmail3" class="">Charges (in Rs)<i>*</i></label>
       <div class="">
         <%= f.text_field :budget, :class=>'form-control quantity', "required"=>"required" %><span class="errmsg">
       </div>
@@ -176,12 +188,11 @@ function book_form_validate()
       </div>
       <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
     </div>
+    
     <div class="form-group">
-    </div>
-    <div class="form-group">
-      <label for="inputEmail3" class="">Details (150 char.)</label>
+      <label for="inputEmail3" class="">Details (150 char.)<i>*</i></label>
       <div class="">
-        <%= f.text_area :details, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others."  %>
+        <%= f.text_area :details, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others.","required"=>"required" %>
       </div>
     </div>
     
@@ -191,13 +202,10 @@ function book_form_validate()
         <%= f.radio_button :seeker_provider, false, :checked => true %> 
       </div>
     </div>
+    <div class="form-group"></div>
     <div class="form-group">
       <div class="">
-        <% if current_user.nil? %>
-          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
-        <%else%>
-          <%= f.submit "Submit", :class=>"btn btn-default"%>
-        <% end %>
+        <%= f.submit "Submit", :class=>"btn btn-default"%>
       </div>
     </div>
   <%end%>
@@ -215,7 +223,7 @@ function book_form_validate()
       </div>
     <% end %>
     <div class="form-group">
-      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
       <div class="">
         <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
         <script type="text/javascript">
@@ -227,44 +235,32 @@ function book_form_validate()
       </div>
     </div>
     <div class="form-group">
-      <label for="" class="">Service</label>
-      <div class="">
-        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "2"}, {:class=>'form-control services_class', :id => 'bookshare_select_id'} )%>
-      </div>
-    </div>
-
-   <div class="form-group">
-      <label for="" class="">Locality<i>*</i></label>
+      <label for="" class="">Select Locality<i>*</i></label>
       <div class="">
         <%= f.hidden_field :city_id, :class => "book_post_requirement_city_id" %>
         <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
       </div>
     </div>
     <div class="form-group">
+      <label for="" class="">Select Category<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "2"}, {:class=>'form-control services_class', :id => 'bookshare_select_id'} )%>
+      </div>
+    </div>
+
+   
+    <div class="form-group">
       <label for="" class="">Book Name<i>*</i></label>
       <div class="">
-        <%= f.text_field :name, :size => 30, :class=>'form-control', :id=>"book_name" %>
+        <%= f.text_field :name, :size => 30, :class=>'form-control book_name' %>
       </div>
     </div>
     <div class="form-group">
       <label for="" class="">Author<i>*</i></label>
       <div class="">
-        <%= f.text_field :author, :size => 30, :class=>'form-control', :id=>"author_name" %>
+        <%= f.text_field :author, :size => 30, :class=>'form-control author_name' %>
       </div>
     </div>
-    <div class="form-group">
-      <label for="" class="">ISBN Number</label>
-      <div class="">
-        <%= f.text_field :isbn_number, :size => 30, :class=>'form-control' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail3" class="">Rent<i>*</i></label>
-      <div class="">
-        <%= f.text_field :rent, :class=>'form-control quantity',"required"=>"required" %><span class="errmsg">
-      </div>
-    </div>
-
     <div class="form-group">
       <!--<label for="inputEmail3" class="">Date of Posting </label>-->
       <label for="inputEmail3" class="">Category<i>*</i></label>
@@ -272,7 +268,23 @@ function book_form_validate()
         <%#= f.text_field :date_of_posting, :class=>'form-control' , :id=>"book_post_requirement_dop"%>
         <%= f.collection_select(:category_id, Category.all, :id, :category_name, {:include_blank => 'Category'}, {:class=>'form-control category_id_class','required'=>'required'} )%>
         <!--<span class="input-group-addon"><i class="glyphicon glyphicon-th" style="color: black;"></i> </span>-->
-      </div><br/>
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="" class="">ISBN Number</label>
+      <div class="">
+        <%#= f.text_field :isbn_number, :size => 30, :class=>'form-control' %>
+      </div>
+    </div>-->
+    <div class="form-group">
+      <label for="inputEmail3" class="">Rent / Charges (in Rs)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :rent, :class=>'form-control quantity',"required"=>"required" %><span class="errmsg">
+      </div>
+    </div>
+
+    
+    <div class="form-group">
       <div class="" id="book_image">
       <label for="" class="">Book Image</label>
       <div class="">
@@ -284,23 +296,19 @@ function book_form_validate()
     </div>
  
     <div class="form-group">
-      <label for="inputEmail3" class="">Description (150 char.)</label>
+      <label for="inputEmail3" class="">Description (150 char.)<i>*</i></label>
       <div class="">
-        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others."  %>
+        <%= f.text_area :description, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please describe your service; for eg. timing, expertice & others.","required"=>"required"  %>
       </div>
     </div>
     <div class="form-group"></div>
-    
+    <div class="form-group"></div>
     <%= f.hidden_field :seeker_provider, value: false %>
     <div class="form-group">
    </div>
     <div class="form-group">
       <div class="">
-        <% if current_user.nil? %>
-          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
-        <%else%>
-          <%= f.submit "Submit", :onclick => "return book_form_validate();", :class=>"btn btn-default"%>
-        <% end %>
+        <%= f.submit "Submit", :onclick => "return book_form_validate();", :class=>"btn btn-default"%>
       </div>
     </div>
   <%end%>
@@ -318,7 +326,7 @@ function book_form_validate()
       </div>
     <% end %>
     <div class="form-group">
-      <label for="" class="", id ="provider_id" >City <i>*</i></label>
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
       <div class="">
         <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
         <script type="text/javascript">
@@ -330,32 +338,33 @@ function book_form_validate()
       </div>
     </div>
     <div class="form-group">
-      <label for="" class="">Service</label>
-      <div class="">
-        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "3"}, {:class=>'form-control services_class', :id => 'skill_share_select_id'} )%>
-      </div>
-    </div>
-   <div class="form-group">
-      <label for="" class="", id ="sub_category_id" >Sub-Category <i>*</i></label>
-      <div class="">
-        <%= f.collection_select(:sub_category_id, SubCategory.all, :id, :sub_category_type, {:include_blank => 'Select Sub_Category'}, {:class=>'form-control','required'=>'required'} )%>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="" class="">Locality<i>*</i></label>
+      <label for="" class="">Select Locality<i>*</i></label>
       <div class="">
         <%= f.hidden_field :city_id %>
         <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
       </div>
     </div>
     <div class="form-group">
-      <label for="inputEmail3" class="">Service in one-line (30 Char.)<i>*</i></label>
+      <label for="" class="">Select Category<i>*</i></label>
       <div class="">
-        <%= f.text_field :service_in_one_line, :maxlength=>"30", :class=>'form-control' %>
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "3"}, {:class=>'form-control services_class', :id => 'skill_share_select_id'} )%>
       </div>
     </div>
    <div class="form-group">
-      <label for="inputEmail3" class="">Charges (in Rs)<i>*</i></label>
+      <label for="" class="", id ="sub_category_id" >Select Sub-Category<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:sub_category_id, SubCategory.all, :id, :sub_category_type, {:include_blank => 'Select Sub_Category'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputEmail3" class="">Service in one-line (40 Char.)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :service_in_one_line, :maxlength=>"40", :class=>'form-control',"required"=>"required" %>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputEmail3" class="">Rent / Charges (in Rs)<i>*</i></label>
       <div class="">
         <%= f.text_field :charges, :class=>'form-control quantity',"required"=>"required" %><span class="errmsg">
       </div>
@@ -386,6 +395,14 @@ function book_form_validate()
       </label>
       </div>
       </div>
+      <div class="form-group">
+      <label for="inputEmail3" id="skill_image" class="">Skill Image</label>
+      <div class="">
+        <span id="skill_image_1"></span>
+        <%= f.file_field :skill, :class => "skill_img" %>
+      </div>      
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+      </div>
     <div class="form-group">
       <label for="" class=""> <b>Home Service</b></label>
       <div class="">
@@ -395,14 +412,9 @@ function book_form_validate()
       <label class="btn btn-default">
         <%= f.radio_button :home_service, "0" %> No
       </label>
-      </div><br/>
-      <label for="inputEmail3" id="skill_image" class="">Skill Image</label>
-      <div class="">
-        <span id="skill_image_1"></span>
-        <%= f.file_field :skill, :class => "skill_img" %>
-      </div>      
-      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
       </div>
+    </div>
+
     <div class="form-group">
       <label for="inputEmail3" class="">Description of Service (150 char.)<i>*</i></label>
       <div class="">
@@ -415,16 +427,14 @@ function book_form_validate()
     </div>
     <div class="form-group">
       <div class="">
-        <% if current_user.nil? %>
-          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
-        <%else%>
-          <%= f.submit "Submit", :class=>"btn btn-default"%>
-        <% end %>
+        <%= f.submit "Submit", :class=>"btn btn-default"%>
       </div>
     </div>
   <%end%>
 </div>
 <!--####################### End Skill Sharing #########################------>
+
+
 <script type="text/javascript">
 $(document).ready(function () {
   //called when key is pressed in textbox
@@ -438,7 +448,7 @@ $(document).ready(function () {
    });
 });
 
-//########Image thumbnail ############
+//########Image thumbnail ############//
 
 $(function() {
     $(".food_img").on("change", function()
@@ -496,6 +506,24 @@ $(function() {
         }
     });
 });
+$(function() {
+    $(".rider_img1").on("change", function()
+    {
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function(){ // set image data as background of div
+                $("#rider_image1").css("background-image", "url("+this.result+")");
+                $("#rider_image1").css("width", "125px");
+                $("#rider_image1").css("height", "125px");
+            }
+        }
+    });
+});
 </script>
 <style>
 #food_image_1 {
@@ -519,6 +547,14 @@ $(function() {
 }
 
 #book_image_1 {
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    background-position: 50% 50%; 
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+}
+#rider_image1 {
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;

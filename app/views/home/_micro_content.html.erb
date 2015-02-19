@@ -1,4 +1,10 @@
 <style type="text/css">
+.image:hover {
+-webkit-transform:scale(1.1); transform:scale(1.1);
+}
+.image {
+-webkit-transition: all 0.7s ease; transition: all 0.7s ease;
+}
 
 #cf 
   {
@@ -59,16 +65,16 @@
 
 
 <div class="content">
-  <h1 class="how_heading">Hot Deals</h1><br><br>
+  <h1 class="how_heading">What is Hot inside?</h1>
   <!--<div calss="container_responsive">-->
   <div class="resize_how_diag">
     <div class="desktop_diag">
       <table>
         <tr>
           <td>
-            <div id="cf">
-              <img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">
-              <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140">
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">-->
+             <a href="/digital_market" target="_blank"> <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140"></a>
             </div>
             <p>
         <a href="/digital_market" class="bix_1" target="_blank"> Guide to Digital Marketing</a>
@@ -82,9 +88,9 @@
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
           <td>
-            <div id="cf">
-              <img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">
-              <img class="top" src="/assets/micro-site/cakemain.jpg" width="180" height="140">
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">-->
+             <a href="/choc_cake" target="_blank"> <img class="top" src="/assets/micro-site/cakemain.jpg" width="180" height="140"></a>
             </div>
             <p>
               <a href="/choc_cake" class="bix_2" target="_blank">Chocolate Cake in 20 min</a>
@@ -98,9 +104,9 @@
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
           <td>
-            <div id="cf">
-              <img class="bottom" src="/assets/micro-site/cook2.JPG" width="180" height="140">
-              <img class="top" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
+            <div class="image">
+             <!-- <img class="bottom" src="/assets/micro-site/cook2.JPG" width="180" height="140"> -->
+             <a href="/home_food" target="_blank"> <img class="top" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140"></a>
             </div>
             <p>
               <a href="/home_food" class="bix_3" target="_blank">Home Cooked Food</a>
@@ -114,12 +120,12 @@
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
           <td>
-            <div id="cf">
-              <img class="bottom"src="/assets/micro-site/hightech_ecommerce.jpg" width="180" height="140">
-              <img class="top" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" width="180" height="140">
+            <div class="image">
+              <!--<img class="bottom"src="/assets/micro-site/hightech_ecommerce.jpg" width="180" height="140">-->
+              <a href="/ecomm_shop" target="_blank"><img class="top" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" width="180" height="140"></a>
             </div>
             <p>
-              <a href="/ecomm_shop" class="bix_4" target="_blank">Booming e-commerce Industry</a>
+              <a href="/ecomm_shop" class="bix_4" target="_blank">Booming e-commerce<br> Industry</a>
 <script type="text/javascript">
   $(".bix_4").click(function () {
     $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_4':"1"}),success: function (data) {}
@@ -130,9 +136,9 @@
             <p><strong>City:</strong> Bangalore</p>
           </td>
           <td>
-            <div id="cf">
-              <img class="bottom" src="/assets/micro-site/marketing.jpg" width="180" height="140">
-              <img class="top" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/marketing.jpg" width="180" height="140">-->
+              <a href="/marketing_stratgy" target="_blank"><img class="top" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140"></a>
             </div>
             <p>
               <a href="/marketing_stratgy" class="bix_5" target="_blank"> Porter's 5 Forces: Marketing Gyan</a>
@@ -155,14 +161,18 @@
       <div class="res_data">
         <div class="data_row">
           <div class="data_col">
+            <div class="image">
             <img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">
+          </div>
             <p>
               <a href="#" data-toggle="modal" data-target="#myModal"> Chocolate Cake in 20 min</a>
             </p>
             <p><strong>City:</strong> Ghaziabad</p> 
           </div>
-          <div class="data_col">
+          <div class="data_col">            
+            <div class="image">
             <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140">
+          </div>
             <p>
               <a href="#" data-toggle="modal" data-target="#myModal"> Guide to Digital Marketing</a>
             </p>
@@ -171,14 +181,18 @@
         </div>
         <div class="data_row">
           <div class="data_col">
+            <div class="image">
             <img class="bottom" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG"width="180" height="140">
+          </div>
             <p>
               <a a href="#" data-toggle="modal" data-target="#myModal"> Booming e-commerce Industry</a>
             </p>
             <p><strong>City:</strong> Bangalore</p> 
           </div>
           <div class="data_col">
+            <div class="image">
             <img class="bottom" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
+          </div>
             <p>
               <a href="#" data-toggle="modal" data-target="#myModal"> Home Cooked food by Mrs. Nigam</a>
             </p>
@@ -186,7 +200,9 @@
           </div>
         </div>
         <div class="data_col">
+          <div class="image">
           <img class="bottom" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
+        </div>
           <p>
             <a href="#" data-toggle="modal" data-target="#myModal"> Porter's 5 Forces: Marketing Gyan</a>
           </p>

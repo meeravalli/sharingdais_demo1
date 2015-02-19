@@ -26,6 +26,7 @@ before_filter :authenticate_user!, :except => [:index]
     @post_requirements = @user.post_requirements.order( 'id DESC' )
     @book_post_requirements = @user.book_post_requirements.order( 'id DESC' )
     @skill_post_requirements = @user.skill_post_requirements.order( 'id DESC' )
+    #@rider_post_requirements = @user.rider_post_requirements.order( 'id DESC' )
     @book_activities = @user.book_activities.order( 'id DESC' )
     @activities = @user.activities.order( 'id DESC' )
     # Order Trace
@@ -81,7 +82,19 @@ before_filter :authenticate_user!, :except => [:index]
     end
     #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
   end
-
+=begin 
+  def rate_me_ride  
+    @find_user=Rate.where("user_id=? AND negotiate_id=? AND service_type=?",params[:user_id],params[:negotiate_id],"Rider Sharing")
+    if !@find_user.empty?     
+      render :json => {:status => "You have already rated this item"}
+    else
+      @rating=Rate.new(:rider_post_requirement_id => params[:rider_post_requirement_id],:negotiate_id => params[:negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Rider Sharing" )
+      @rating.save!
+      render :json => {:status => "Thank you for rating"}
+    end
+    #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
+  end
+=end
   def destroy_order
     order=Negotiate.find(params[:id])
     order.destroy

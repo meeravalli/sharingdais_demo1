@@ -2,8 +2,7 @@ Sharingdasiss::Application.routes.draw do
   devise_for :users
   devise_scope :user do
     get "/admin", :to => "devise/sessions#new"
-    match 'auth/:provider/callback', to: 'devise/omniauth_callbacks#create'
-    
+    match 'auth/:provider/callback', to: 'devise/omniauth_callbacks#create'    
   end
 
   resources :sharing, :only =>[:index] do    
@@ -25,7 +24,14 @@ Sharingdasiss::Application.routes.draw do
     get :edit_skill_list_availability, :on => :member
     delete :skill_destroy_requirement, :on => :member
 
+    #post :post_rider_requirement, :on => :collection
+    #post :rider_list_availability, :on => :collection
+    #get :edit_rider_post_requirement, :on => :member
+    #get :edit_rider_list_availability, :on => :member
+    #delete :rider_destroy_requirement, :on => :member
+
     get :post_your_ad, :on => :collection
+    get :post_your_ad_login, :on => :collection
   end
   
   resources :application do
@@ -69,6 +75,7 @@ Sharingdasiss::Application.routes.draw do
   match '/book_search', :to => 'book_search#index'
   match '/food_search', :to => 'food_search#index'
   match '/skill_search', :to => 'skill_search#index'
+ # match '/rider_search', :to => 'rider_search#index'
 
   match '/home/search', :to => 'home#index'
 
@@ -85,9 +92,11 @@ Sharingdasiss::Application.routes.draw do
   get "post_food_exl" => "admins#post_food_exl"
   get "post_book_exl" => "admins#post_book_exl"
   get "post_skill_exl" => "admins#post_skill_exl"
+  #get "post_ride_exl" => "admins#post_ride_exl"
   get "list_food_exl" => "admins#list_food_exl"
   get "list_book_exl" => "admins#list_book_exl"
   get "list_skill_exl" => "admins#list_skill_exl"
+  #get "list_ride_exl" => "admins#list_ride_exl"
 
   get "post_requirements" => "admins#post_requirements"
   get "list_requirements" => "admins#list_requirements"
@@ -99,26 +108,34 @@ Sharingdasiss::Application.routes.draw do
   delete "destroy_book_post" => "admins#destroy_book_post"
   post "/edit_skill_post" => "admins#edit_skill_post"
   delete "destroy_skill_post" => "admins#destroy_skill_post"
+  #post "/edit_ride_post" => "admins#edit_ride_post"
+  #delete "destroy_ride_post" => "admins#destroy_ride_post"
   
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
   post "search_skill" => "book_search#search_top_five_skill"
+  #post "search_rider" => "book_search#search_top_five_ride"
   post "send_feedback" => "book_search#feedback"
   post "rate_me" => "home#rate_me"
   post "rate_me_book" => "home#rate_me_book"
   post "rate_me_skill" => "home#rate_me_skill"
+  #post "rate_me_ride" => "home#rate_me_ride"
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
   post "save_phone" => "home#save_phone"
   post "save_count" => "book_search#save_count"
+  post "check_email" => "book_search#check_email"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
   get "/skill_result/:id/:seeker_provider/" =>"skill_search#skill_result"
+  #get "/rider_result/:id/:seeker_provider" => "rider_search#rider_result"
   get "offer" => "book_search#offer"
 
   get "skill_search/index"
   get "skill_search/skill_result"
+  #get "rider_search/index"
+  #get "rider_search/rider_result"
   
   get "close_window" => "book_search#close_window"
 
@@ -131,7 +148,8 @@ Sharingdasiss::Application.routes.draw do
   get "safety_guide_book" => "static_pages#safety_guide_book"
   get "safety_guide_skill" => "static_pages#safety_guide_skill"
   get "saftey_guide_food" => "static_pages#saftey_guide_food"
-  
+  #get "safety_guide_ride" => "static_pages#safety_guide_ride" 
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

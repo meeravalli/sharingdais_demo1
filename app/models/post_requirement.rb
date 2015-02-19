@@ -7,7 +7,7 @@ class PostRequirement < ActiveRecord::Base
   # White list attribute - Mass assignment
   attr_accessible :budget, :city_id, :details, :food_type_id, :location_id, :meal_type_id, 
                   :no_of_persons, :provider_id, :region_id, :seeker_provider, :service_id, 
-                  :user_id, :food_image, :latitude, :longitude
+                  :user_id, :food_image, :latitude, :longitude 
  
   # Association
   has_many :orders, :dependent => :destroy

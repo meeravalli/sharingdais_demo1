@@ -1,90 +1,145 @@
+<style type="text/css">
+.image:hover {
+-webkit-transform:scale(1.2); transform:scale(1.2);
+}
+.image {
+-webkit-transition: all 0.7s ease; transition: all 0.7s ease;
+}
+</style>
 <div class="content">
                 <h3 class="how_heading">How it Works?</h3>
                       <!--  <div class="how_tabs"><span class="col-lg-6 tab_list float_none">Sharing</span></div>-->
                     <div class="resize_how_diag">
-                        <div class="desktop_diag">
-                            <div class="how_content_food">
-                            <h2 class="how_content_heading">I am interested in Sharing</h2>
+                        <div class="desktop_diag" >
+                            <div class="how_content_food" style="float:center;">
+                            <h2 class="how_content_heading">I am looking here..</h2>
                             <div class="col-xs-2 food_step_1">
-                                <div class="step_num_blue">1</div><br>
+                                <div class="image">
+                                    <a href="http://sharingdais.com/users/sign_in">
+                                <!--<div class="step_num_blue">1</div><br>-->
                                 <div class="step_icon"><%= image_tag 'login_icon.png' %></div>
                                                             
-                                <p><strong>Sign In / Up first</strong></p>
-                                <div class="arrow"><%= image_tag 'blue_arrow.png' %></div>
-                                                            
+                                <p><strong style="color:white;">Sign In / Up </strong></p>
+                                <!--<div class="arrow"><%#= image_tag 'blue_arrow.png' %></div>-->
+                                 </a>
+                                 </div>                           
                             </div>
                             <div class="col-xs-2 food_step_2">
-                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br><br/>
-                                                            
-                                <p><strong>Select the Category <br>( Book/Food/Skill )</strong></p>
-                                <div class="step_num_light_blue">2</div>
-                                <div class="arrow"><%= image_tag 'light_blue_arrow.png' %></div>
-                                                            
+
+                                <div class="image">
+                                    <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br><br>
+                                <p><strong style="color:white;">Select city & locality </strong></p>    
+                            </div>                                                        
                             </div>
+                            <!--<div class="col-xs-2 food_step_1">
+                                <div class="image">-->                                                           
+                                <!-- <div class="step_num_blue">3</div>-->
+                                <!--<div class="step_icon"><%#= image_tag 'result_icon.png' %></div>
+                                                            
+                                <p><strong>Select the choice & Make the search</strong></p>-->
+                                <!--<div class="arrow"><%#= image_tag 'blue_arrow.png' %></div>-->
+                                 <!--</div>                           
+                            </div>-->
                             <div class="col-xs-2 food_step_1">
-                                <div class="step_num_blue">3</div>
-                                <div class="step_icon"><%= image_tag 'result_icon.png' %></div>
+                              <div class="image">
+                                   
+                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div>
                                                             
-                                <p><strong>Select the choice & Make the search</strong></p>
-                                <div class="arrow"><%= image_tag 'blue_arrow.png' %></div>
-                                                            
+                                <p><strong style="color:white;">Select your choice & search </strong></p>
+                                <!--<div class="step_num_light_blue">2</div>-->
+                               <!-- <div class="arrow"><%#= image_tag 'light_blue_arrow.png' %></div>-->
+                             
                             </div>
+
+                             </div>
                             <div class="col-xs-2 food_step_2">
-                                <div class="step_icon"><%= image_tag 'interact_icon.png' %></div><br>
+                                <div class="image">
+                                <div class="step_icon"><%= image_tag 'interact_icon.png' %></div><br><br>
                                                             
                                 <p><strong>Get the results </strong></p>
-                                <div class="step_num_light_blue">4</div>
-                                <div class="arrow"><%= image_tag 'light_blue_arrow.png' %></div>
-                                                            
+                                <!--<div class="step_num_light_blue">4</div>
+                                <div class="arrow"><%#= image_tag 'light_blue_arrow.png' %></div>-->
+                                 </div>                           
                             </div>
                             <div class="col-xs-2 food_step_1">
-                                <div class="step_num_blue">5</div><br>
+                                <div class="image">  
+                                <!--<div class="step_num_blue">5</div><br>-->
                                 <div class="step_icon"><%= image_tag 'finalize_icon.png' %></div>
                                                             
                                 <p><strong>Press 'Interested' button & get the contact details</strong></p>
-                                <div class="arrow"><%= image_tag 'blue_arrow.png' %></div>
+                                <!--<div class="arrow"><%#= image_tag 'blue_arrow.png' %></div>-->
+                               </div>
                                                             
                             </div>
                             <div class="col-xs-2 food_step_2">
-                                <div class="step_icon"><%= image_tag 'sharing_icon.png' %></div>
+                                <div class="image">  
+                                <div class="step_icon"><%= image_tag 'sharing_icon.png' %></div><br><br>
                                                             
-                                <p><strong>Finalize the deal and make new friend</strong></p>
-                                <div class="step_num_light_blue">6</div>
+                                <p><strong>Finalize the deal. Make new friends</strong></p>
+                                <!--<div class="step_num_light_blue">6</div>-->
+                            </div>
                             </div>
                             </div>
                             <div class="how_content_cook">
-                            <h2 class="how_content_heading">No Results found / Not my choice</h2>
-                            <div class="col-xs-3 food_step_1">
-                                <div class="step_num_blue">1</div>
+                            <h2 class="how_content_heading">Interested in sharing or not happy with results?</h2>
+                            <div class="col-xs-2 food_step_1">
+                                <div class="image">
+                                <a href="http://sharingdais.com/users/sign_in" >
+                                <!--<div class="step_num_blue">1</div>-->
                                 <div class="step_icon"><%= image_tag 'login_icon.png' %></div>
                                                             
-                                <p><strong>Sign In / Up first </strong></p>
-                                <div class="arrow"><%= image_tag 'green_arrow.png' %></div>
+                                <p><strong style="color:white;">Sign In / Up </strong></p>
+                                <!--<div class="arrow"><%#= image_tag 'green_arrow.png' %></div>-->
+                                </a>
+                                </div>                          
+                            </div>                             
+                            <div class="col-xs-2 food_step_2">
+                                <div class="image">
+                              <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br><br>
+                              <p><strong style="color:white;">Select city & locality</strong>
+                              </p>
+                             </div>
+                            </div>
+                            <div class="col-xs-2 food_step_1">
+                                <div class="image">
+                                <a href="http://sharingdais.com/sharing/post_your_ad_login">
+                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div>
+                                                            
+                                <p><strong style="color:white;">Select the form <br>( Post as Provider / Seeker )</strong></p>
+                                <!--<div class="step_num_light_blue">2</div>
+                                <div class="arrow"><%#= image_tag 'light_green_arrow.png' %></div>-->
+                            </a>
+                            </div>
                                                             
                             </div>
-                            <div class="col-xs-3 food_step_2">
-                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br/><br/>
+                           
+                            <div class="col-xs-2 food_step_2">
+                                <div class="image">
+                               <!--<div class="step_num_blue">3</div>-->
+                                <div class="step_icon"><%= image_tag 'result_icon.png' %></div><br><br>
                                                             
-                                <p><strong>Select the form <br>( Post as Provider / Seeker )</strong></p>
-                                <div class="step_num_light_blue">2</div>
-                                <div class="arrow"><%= image_tag 'light_green_arrow.png' %></div>
-                                                            
+                                <p><strong>Fill up the details </strong> </p>
+                                <!--<div class="arrow"><%#= image_tag 'green_arrow.png' %></div>-->
+                                </div>                           
                             </div>
-                            <div class="col-xs-3 food_step_1">
-                                <div class="step_num_blue">3</div>
-                                <div class="step_icon"><%= image_tag 'result_icon.png' %></div>
+                             <div class="col-xs-2 food_step_1">
+                                <div class="image">
+                               <!--<div class="step_num_blue">3</div>-->
+                                <div class="step_icon"><%= image_tag 'interact_icon.png' %></div>
                                                             
-                                <p><strong>Select the service & Fill up the details </strong> </p>
-                                <div class="arrow"><%= image_tag 'green_arrow.png' %></div>
-                                                            
+                                <p><strong>Put pictures & certificates. This builds trust. </strong> </p>
+                                <!--<div class="arrow"><%#= image_tag 'green_arrow.png' %></div>-->
+                                </div>                           
                             </div>
-                            <div class="col-xs-3 food_step_2">
-                                <div class="step_icon"><%= image_tag 'finalize_icon.png' %></div><br/><br>
+                            <div class="col-xs-2 food_step_2">
+                                <div class="image">
+                                <div class="step_icon"><%= image_tag 'finalize_icon.png' %></div><br><br>
                                                             
-                                <p><strong>Press post & your post is Live</strong> </p>
-                                <div class="step_num_light_blue">4</div>
-<!--                                 <div class="arrow"><%#= image_tag 'light_green_arrow.png' %></div>
- -->                                                            
+                                <p><strong>Submit. Your post is Live</strong> </p>
+                                <!--<div class="step_num_light_blue">4</div>-->
+                                <!--<div class="arrow"><%#= image_tag 'light_green_arrow.png' %></div>-->
+                                </div>
+                                                             
                             </div>
                             </div>
                         </div>
@@ -92,89 +147,124 @@
                         <div class="mob_diag">
                             <div class="how_content_food_mobile">
                             <div class="mobile_splitter_diag">
-                            <h2 class="how_content_heading">I am interested in sharing</h2>
+                            <h2 class="how_content_heading">I am looking here..</h2>
                             <div class="col-xs-12 food_step_1 float_none">
-                                <div class="step_num_blue">1</div>
-                                <div class="step_icon"><%= image_tag 'login_icon.png' %></div><br>
-                                                            
-                                <p><strong>Sign In / Up first</p>
-                                <div class="arrow"><%= image_tag 'blue_arrow_mob.png' %></div>
-                                                            
+                               <div class="image">
+                                    <a href="http://www.sharingdais.com/users/sign_in">
+                                  <!--<div class="step_num_blue">1</div>-->
+                                 <div class="step_icon"><%= image_tag 'login_icon.png' %></div>                                                          
+                                 <p><strong style="color:white;">Sign In / Up</strong></p>
+                              
+                                 <!-- <div class="arrow"><%#= image_tag 'blue_arrow_mob.png' %></div>-->
+                                 </a>
+                                </div>
                             </div>
                             <div class="col-xs-12 food_step_2 float_none">
-                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br>
-                                                            
-                                <p>Select the category<br>( Book / Food / Skills )</p>
-                                <div class="step_num_light_blue">2</div>
-                                <div class="arrow"><%= image_tag 'light_blue_arrow_mob.png' %></div>
-                                                            
-                            </div><br>
+                                <div class="image">
+                                    <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br>
+                                    <p><strong>Select city & locality</strong>
+                            </p>
+                           </div>
+                           </div>
                             <div class="col-xs-12 food_step_1 float_none">
-                                <div class="step_num_blue">3</div>
-                                <div class="step_icon"><%= image_tag 'result_icon.png' %></div><br>
-                                                            
-                                <p><strong>Select the choice & make the search</p>
-                                <div class="arrow"><%= image_tag 'blue_arrow_mob.png' %></div>
-                                                            
+                                <div class="image">
+                                   
+                                <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br> 
+                                <p><strong style="color:white;">Select your choice & search</strong></p>
+                                <!--<div class="step_num_light_blue">2</div>
+                                <div class="arrow"><%#= image_tag 'light_blue_arrow_mob.png' %></div>-->
+                                    
+                                </div>                             
                             </div>
+                            <!--<div class="col-xs-12 food_step_1 float_none">-->
+                                <!--<div class="step_num_blue">3</div>-->
+                                <!--<div class="image">
+                                <div class="step_icon"><%#= image_tag 'result_icon.png' %></div><br>       
+                                <p><strong style="color:white;">Select the choice & make the search</strong></p>-->
+                                <!--<div class="arrow"><%#= image_tag 'blue_arrow_mob.png' %></div>-->
+                               <!--</div>                                                            
+                            </div>-->
                             <div class="col-xs-12 food_step_2 float_none">
-                                <div class="step_icon"><%= image_tag 'interact_icon.png' %></div><br><br>
-                                                            
-                                <p><strong>Get the results</p>
-                                <div class="step_num_light_blue">4</div>
-                                <div class="arrow"><%= image_tag 'light_blue_arrow_mob.png' %></div>
-                                                            
+                                <div class="image">
+                                <div class="step_icon"><%= image_tag 'interact_icon.png' %></div><br><br>       
+                                <p><strong style="color:white;">Get the results</strong></p>
+                                <!--<div class="step_num_light_blue">4</div>
+                                <div class="arrow"><%#= image_tag 'light_blue_arrow_mob.png' %></div>-->
                             </div>
+                             </div>
                             <div class="col-xs-12 food_step_1 float_none">
-                                <div class="step_num_blue">5</div>
+                                <!--<div class="step_num_blue">5</div>-->
+                                <div class="image">
                                 <div class="step_icon"><%= image_tag 'finalize_icon.png' %></div>
-                                                            
-                                <p><strong>Press 'Interest' button & get the contact details</p>
-                                <div class="arrow"><%= image_tag 'blue_arrow_mob.png' %></div>
-                                                            
+                                
+                                <p><strong style="color:white;">Press 'Interested' button & get the contact details</strong></p>
+                                <!--<div class="arrow"><%#= image_tag 'blue_arrow_mob.png' %></div>-->
+                            </div>
                             </div>
                             <div class="col-xs-12 food_step_2 float_none">
+                                <div class="image">
                                 <div class="step_icon"><%= image_tag 'sharing_icon.png' %></div>
-                                                            
-                                <p>Finalise the deal & Make new friends</p>
-                                <div class="step_num_light_blue">6</div>
+                                 <p><strong>Finalize the deal. Make new friends</strong></p>
+                                <!--<div class="step_num_light_blue">6</div>-->
+                            </div>
                             </div>
                         </div>
                         </div>
                             <div class="how_content_cook_mobile">
                             <div class="mobile_splitter_diag">
-                                <h2 class="how_content_heading">No Results found / Not my choice</h2>
+                                <h2 class="how_content_heading">Interested in sharing or not happy with results?</h2>
                                 <div class="col-xs-12 food_step_1 float_none">
-                                    <div class="step_num_blue">1</div>
-                                    <div class="step_icon"><%= image_tag 'login_icon.png' %></div><br>
-                                                                
-                                    <p>Sign In / Up first</p>
-                                    <div class="arrow"><%= image_tag 'green_arrow_mob.png' %></div>
-                                                                
+                                    <!--<div class="step_num_blue">1</div>-->
+                                    <div class="image">
+                                        <a href="http://www.sahringdais.com/users/sign_in">
+                                    <div class="step_icon"><%= image_tag 'login_icon.png' %></div><br>                     
+                                    <p style="color:white;"><strong>Sign In / Up </strong></p>
+                                    <!--<div class="arrow"><%#= image_tag 'green_arrow_mob.png' %></div>-->
+                                 </a>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 food_step_2 float_none">
-                                    <div class="step_icon"><%= image_tag 'search_icon.png' %></div>
-                                                                
-                                    <p>Select the form <br>( Post as Provider / Seeker )</p>
-                                    <div class="step_num_light_blue">2</div>
-                                    <div class="arrow"><%= image_tag 'light_green_arrow_mob.png' %></div>
-                                                                
+                                  <div class="image">
+                                     <div class="step_icon"><%= image_tag 'search_icon.png' %></div><br> 
+                                    <p><strong>Select city & locality</strong></p>
+                                  
+                                  </div>
+
                                 </div>
                                 <div class="col-xs-12 food_step_1 float_none">
-                                    <div class="step_num_blue">3</div>
-                                    <div class="step_icon"><%= image_tag 'result_icon.png' %></div>
-                                                                
-                                    <p>Select the service & Fill up the details</p>
-                                    <div class="arrow"><%= image_tag 'green_arrow_mob.png' %></div>
-                                                                
+                                    <div class="image">
+                                     <a href="http://www.sharingdais.com/users/sign_in">   
+                                    <div class="step_icon"><%= image_tag 'search_icon.png' %></div>   
+                                    <p style="color:white;"><strong>Select the form <br>(Post as Provider/ Seeker)
+                                    </strong></p>
+                                    <!--<div class="step_num_light_blue">2</div>
+                                    <div class="arrow"><%#= image_tag 'light_green_arrow_mob.png' %></div>-->
+                                </a>
+                                </div>
                                 </div>
                                 <div class="col-xs-12 food_step_2 float_none">
+                                    <!--<div class="step_num_blue">3</div>-->
+                                    <div class="image">
+                                    <div class="step_icon"><%= image_tag 'result_icon.png' %></div>                                     
+                                    <p><strong>Fill up the details </strong></p>
+                                    <!--<div class="arrow"><%#= image_tag 'green_arrow_mob.png' %></div>-->
+                                    </div>                        
+                                </div>
+                                <div class="col-xs-12 food_step_1 float_none">
+                                    <!--<div class="step_num_blue">3</div>-->
+                                    <div class="image">
+                                    <div class="step_icon"><%= image_tag 'interact_icon.png' %></div>                                     
+                                    <p><strong>Put pictures & certificates. This builds trust. </strong></p>
+                                    <!--<div class="arrow"><%#= image_tag 'green_arrow_mob.png' %></div>-->
+                                    </div>                        
+                                </div>
+                                <div class="col-xs-12 food_step_2 float_none">
+                                    <div class="image">
                                     <div class="step_icon"><%= image_tag 'finalize_icon.png' %></div>
-                                                                
-                                    <p>Press 'Post' & your post is Live</p>
-                                    <div class="step_num_light_blue">4</div>
-                                    <!-- <div class="arrow"><%#= image_tag 'light_green_arrow_mob.png' %></div> -->
-                                                                
+                                    <p><strong>Submit. Your post is Live</strong></p>
+                                    <!--<div class="step_num_light_blue">4</div>
+                                    <div class="arrow"><%#= image_tag 'light_green_arrow_mob.png' %></div> -->
+                                       </div>                         
                                 </div>
                             </div>
                         </div>

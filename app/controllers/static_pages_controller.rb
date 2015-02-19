@@ -35,4 +35,6 @@ class StaticPagesController < ApplicationController
 	def marketing_stratgy
 	  render :layout => false
 	end
+   
+	
 end

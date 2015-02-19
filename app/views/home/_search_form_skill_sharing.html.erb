@@ -1,26 +1,20 @@
- <div class="item active">
-  <%=  image_tag "slider4.jpg", :alt => "..." %>
-
-
-  
+ <div class="item ">
+  <%=  image_tag "Picture5_SD.jpg", :alt => "..." %>  
   <div class="carousel-caption custom_width">
     <div class="search-blk">
       <p class="head" style="height:43px">Skill Sharing</p>
         <p style="height:25px">
-          <i><small style="color:white;">Teach and Learn skills & experiences nearby you</small></i></p>
+          <small style="color:white;">Teach and Learn skills & experiences nearby you</small></p>
 
         <%= form_tag(skill_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
       <div class="check  col-xs-12 col-md-12">
-          <label for="">I Want to Learn</label>
+          <label for="" style="font-family:'Helvetica',Sans-serif;">I Want to Learn</label>
            <%= radio_button_tag "search[skill]", "0", params[:search][:skill].to_i == 0, :id => 'search_skill_0', :class => "skill" %>
 
-          <label for="">I Want to Teach</label>
+          <label for="" style="font-family:'Helvetica',Sans-serif;">I Want to Teach</label>
           <%= radio_button_tag "search[skill]", "1", params[:search][:skill].to_i == 1, :id => 'search_skill_1', :class => "skill" %>
-      </div>
-
-
-      
+      </div>      
       <div class="search">
           
            <div class="cboth"></div>
@@ -28,7 +22,7 @@
           </div>
           <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12">
-              <label for="">Locality</label>
+              <label for="" style="font-family:'Helvetica',Sans-serif;">Locality</label>
             </div>
             <div class="left col-xs-12 ">
               <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city") %>
@@ -36,9 +30,10 @@
             </div>
             
           </div>
+         
            <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12 ">
-              <label class="book-chg" for="">Skill type</label>
+              <label class="book-chg" for="" style="font-family:'Helvetica',Sans-serif;">Skill type</label>
             </div>
             <div class="left col-xs-12 ">
              <%= collection_select :search, :skill_type_id,SubCategory.all, :id, :sub_category_type, {:selected => params[:search][:skill_type_id]},{:class => "form-control"}%>
