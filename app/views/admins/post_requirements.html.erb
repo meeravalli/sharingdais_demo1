@@ -4,8 +4,7 @@
 <ul class="nav nav-tabs" role="tablist" style="float:left">
   <li class="active"><a href="#book" role="tab" data-toggle="tab">Food Post Requirements</a></li>
   <li><a href="#food" role="tab" data-toggle="tab">Book Post Requirements</a></li>
-  <li><a href="#skill" role="tab" data-toggle="tab">skill Post Requirements</a></li>
-  <li><a href="#ride" role="tab" data-toggle="tab">Ride Post Requirements</a></li>
+  <li><a href="#skill" role="tab" data-toggle="tab">skill Post Requirements</a></li>  
 </ul>
 
 <!-- Tab panes -->
@@ -287,89 +286,11 @@ $("#save_s<%= b.id %>_<%= b.user.id %>").click(function () {
         </div>
   </div>
 </div> 
+  <!--######################ride ################-->
+
   
 
-  <div class="tab-pane" id="ride">
-    <div class="display padding_five">
-            <table class="table table-hover">
-                <thead class="heading">
-                    <tr>
-                        <th style="width:15%">User Name</th>
-                        <th style="width:15%">Ride Type</th>
-                        <th style="width:15%">Locality</th>
-                        <th style="width:15%">Rent</th>
-                        <th style="width:25%">Description</th>
-                        <th style="width:15%">Date</th>
-                        <th>Download: <%= link_to "Excel", post_ride_exl_path(format: "xls") %></th>
-                        <th></th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                    <% @ride_orders.each do |b| %>
-                    <tr>
-                        <td>
-                            <% if !b.user.nil? %>
-                                <%= b.user.name %>
-                            <% else %>
-                                Account Deleted
-                            <% end %>
-                        </td>
-                        <td><%= b.ride.ride_type %></td>
-                        <td><%= b.location.location_name %></a></td>
-                        <td><%= b.charges %></td>
-                        <td><%= b.description %></td>
-                        <td><%= b.created_at.strftime("%b %d, %Y") %></td>
-<td>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalr_<%= b.id %>_<%= b.user.id %>">Edit</button>
-<!-- Modal -->
-<div class="modal fade" id="Modalr_<%= b.id %>_<%= b.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= b.user.name %></h4>
-      </div>
-      <div class="modal-body">
-<!--Model Content-->
-    <div class="form-group">
-      <label for="" class="" ,="" id="provider_id">Budget</label>
-      <div class="">
-        <input class="form-control" id="buddr<%= b.id %>_<%= b.user.id %>" size="30" type="text" value="<%= b.charges %>">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail3" class="">Details </label>
-      <div class="">
-        <textarea class="form-control" id="dtlsr<%= b.id %>_<%= b.user.id %>" cols="20" rows="5"><%= b.description %></textarea>
-      </div>
-    </div><br>
-    <button type="button" id="save_r<%= b.id %>_<%= b.user.id %>" class="btn btn-primary">Save</button>
-    <script type="text/javascript">
-$("#save_r<%= b.id %>_<%= b.user.id %>").click(function () {
-  $.ajax({ type: 'POST',url: '/edit_ride_post',data: ({'id':"<%= b.id %>",'budget': $("#buddr<%= b.id %>_<%= b.user.id %>").val(),'details': $("#dtlsr<%= b.id %>_<%= b.user.id %>").val()}),success: function () {location.reload();}
-  });
-});
-    </script>
-<!--End Model Content-->
-      </div>
-    </div>
-  </div>
-</div>
-<!--End Model-->
-                        </td>
-                        <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_ride_post, :id => b.id},
-                            method: :delete, :confirm => "Do you want to delete ?" %></td>
-                    </tr>
-                    <% end %>
-                   
-                    
-                </tbody>
-            </table>
-                <div class="pagination">
-      <%= will_paginate @ride_orders%>
-            </div>
-        </div>
-       </div>
+       <!--ride end-->
     </div> 
   </div>
 </div>             
