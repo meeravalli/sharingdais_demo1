@@ -15,6 +15,7 @@
           <th>Price </th>
           <!--<th>Region Specific </th>-->
           <th>Description</th>
+          
           <th></th>
           <th></th>
         </tr>
@@ -40,6 +41,8 @@
           <td><%= p.sub_category.sub_category_type%></td>
           <td><%= p.charges%></td>
           <td><%= p.description%></td>
+          
+
           <% if p.seeker_provider %>
             <td>
               <%= link_to 'Edit', edit_skill_post_requirement_sharing_path(p)%>
@@ -112,6 +115,8 @@
               <%= p.description%>
             </div>
           </div>
+           
+
           <div class="data_row">
             <div class="data_title"> </div>
             <div class="data_col">

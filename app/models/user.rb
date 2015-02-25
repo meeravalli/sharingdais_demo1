@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :dob, :phone_no, :city_id, :location, :address, :ride_type, :photo, :admin, :status, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :dob, :phone_no, :city_id, :location, :address, :ride_type, :photo, :admin, :status, :provider, :uid, :content
   # attr_accessible :title, :body
   
   has_many :skill_post_requirements, :dependent => :destroy
@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :book_orders_in, :class_name => 'BookOrder', :foreign_key => :provider_id, :dependent => :destroy
   has_many :orders_out, :class_name => 'Order', :foreign_key => :user_id, :dependent => :destroy
   has_many :book_orders_out, :class_name => 'BookOrder', :foreign_key => :user_id, :dependent => :destroy
+  has_many :reviews
+  
   belongs_to :city
   
   has_attached_file :photo, :styles => { :small => "150x150>" },

@@ -1,10 +1,11 @@
 class BookPostRequirement < ActiveRecord::Base
-  	attr_accessible :author, :city_id, :date_of_posting, :description, :isbn_number, :latitude, :location_id, :longitude, :name, :seeker_provider, :service_id, :user_id, :image, :rent, :category_id
+  	attr_accessible :author, :city_id, :date_of_posting, :description, :isbn_number, :latitude, :location_id, :longitude, :name, :seeker_provider, :service_id, :user_id, :image, :rent, :category_id, :content
 
     has_many :book_orders, :dependent => :destroy
     has_many :book_messages, :dependent => :destroy
     has_many :book_activities, :dependent => :destroy
     has_many :book_negotiates, :dependent => :destroy
+    has_many :reviews
     belongs_to :user
     belongs_to :service
     belongs_to :city

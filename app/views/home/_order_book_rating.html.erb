@@ -11,6 +11,7 @@
           <th>Phone No.</th>
           <th>Email Id</th>
           <th>Rate</th>
+          <th>Review</th>
           <th></th>
         </tr>
       </thead>
@@ -78,6 +79,35 @@
           <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="4" src="<%= @srcb4 %>">
           <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="5" src="<%= @srcb5 %>">
         </td>
+        <td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_book_post_<%= f.id %>_<%= f.user.id %>">Review</button></td>
+
+          <div class="modal fade" id="Modals_book_post_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC">
+        <label for="inputEmail3" class=""> Create Review </label>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <%= form_tag "/create_review" do %>
+    <%= hidden_field_tag "book_post_requirement_id", f.book_post_requirement_id %>
+    <%= hidden_field_tag "negotiate_id", f.id %>
+    <div class="form-group">
+      
+      <div class="">
+        <%= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
+      </div>
+    </div>
+  <div><%= submit_tag 'Save', :class => "btn" %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--##########review End Model###########-->
         <script type="text/javascript">
         $(".rate_b<%= f.id %>").click(function () {
           if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
@@ -157,6 +187,35 @@
           <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="4" src="<%= @srcb4 %>">
           <img style="cursor:pointer;width: 10%;" class="rate_b<%= f.id %>" id="5" src="<%= @srcb5 %>">
         </td>
+        <td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_book_post_<%= f.id %>_<%= f.user.id %>">Review</button></td>
+
+          <div class="modal fade" id="Modals_book_post_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC">
+        <label for="inputEmail3" class=""> Create Review </label>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <%= form_tag "/create_review" do %>
+    <%= hidden_field_tag "book_post_requirement_id", f.book_post_requirement_id %>
+    <%= hidden_field_tag "negotiate_id", f.id %>
+    <div class="form-group">
+      
+      <div class="">
+        <%= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
+      </div>
+    </div>
+  <div><%= submit_tag 'Save', :class => "btn" %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--##########review End Model###########-->
         <script type="text/javascript">
         $(".rate_b<%= f.id %>").click(function () {
           if (confirm('Are you sure you want to rate '+$(this).attr("id")+' / 5')) {
@@ -287,6 +346,13 @@
             </script>
           </div>
           <div class="data_row">
+            <div class="data_title">Review</div>
+            <div class="data_col">
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_book_post_mob_<%= f.id %>_<%= f.user.id %>">Review</button>
+            </div>
+            </div>
+
+          <div class="data_row">
             <div class="data_title"></div>
             <div class="data_col">
               <a href="javascript:void(0)" id="delete_bm<%= f.id %>">Cancel</a>
@@ -300,6 +366,35 @@
             </script>
             </div>
           </div>
+          <!--#############modal review######-->
+           <div class="modal fade" id="Modals_book_post_mob_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC">
+        <label for="inputEmail3" class=""> Create Review </label>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <%= form_tag "/create_review" do %>
+    <%= hidden_field_tag "book_post_requirement_id", f.book_post_requirement_id %>
+    <%= hidden_field_tag "negotiate_id", f.id %>
+    <div class="form-group">
+      
+      <div class="">
+        <%= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
+      </div>
+    </div>
+  <div><%= submit_tag 'Save', :class => "btn" %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--##########review End Model###########-->
+
         </div>
       <% else %>
         <% 
@@ -386,6 +481,13 @@
             </script>
           </div>
           <div class="data_row">
+            <div class="data_title">Review</div>
+            <div class="data_col">
+             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_book_post_mob_<%= f.id %>_<%= f.user.id %>">Review</button>
+            </div>
+          </div>
+
+          <div class="data_row">
             <div class="data_title"></div>
             <div class="data_col">
               <a href="javascript:void(0)" id="delete_bm<%= f.id %>">Cancel</a>
@@ -399,6 +501,36 @@
               </script>
             </div>
           </div>
+
+             <!--#############modal review######-->
+           <div class="modal fade" id="Modals_book_post_mob_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC">
+        <label for="inputEmail3" class=""> Create Review </label>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+    <%= form_tag "/create_review" do %>
+    <%= hidden_field_tag "book_post_requirement_id", f.book_post_requirement_id %>
+    <%= hidden_field_tag "negotiate_id", f.id %>
+    <div class="form-group">
+      
+      <div class="">
+        <%= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
+      </div>
+    </div>
+  <div><%= submit_tag 'Save', :class => "btn" %></div>
+<% end -%>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--##########review End Model###########-->
+
         </div>
       <% end %>
       <% @count = @count+1 %>      

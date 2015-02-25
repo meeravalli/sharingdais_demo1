@@ -49,8 +49,7 @@
             <div class="left col-xs-12 ">
               <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city") %>
               <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
-            </div>
-            
+            </div>            
           </div>
            <div class="col-xs-12 col-md-5 padding_none text-left">
             <div class="left col-xs-12 ">

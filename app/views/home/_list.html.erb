@@ -42,7 +42,7 @@ $(document).ready(function() {
       <div class="table-responsive src_res_desktop">
         <table class="table table-hover">
           <thead class="heading">
-            <tr>
+              <tr>
               <th style="width:5%">#</th>
               <th style="width:10%"><center>Food Photo</center></th>
               <th style="width:10%">Locality</th>
@@ -50,8 +50,8 @@ $(document).ready(function() {
               <th style="width:10%">Meal Type</th>
               <th style="width:10%">Region Specific</th>
               <th style="width:10%">Looking from a/am</th>
-              <th style="width:20%">Details</th>
-              <th style="width:10%">Budget</th>
+              <th style="width:15%">Details</th>
+              <th style="width:15%">Budget/<br>Review</th>
               <th style="width:10%">Contact</th>
             </tr>
           </thead>
@@ -125,10 +125,39 @@ $(document).ready(function() {
                 <td><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %></td>
                 <td><%= s.region.nil? ? "Not Applicable" : s.region.name %></td>
                 <td><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %></td>
-				<% @user_email = s.user.email%>
-				<% @user_phone = s.user.phone_no%>
-                <td><%= s.details.blank? ? "Not Provided" : s.details%></td>
-                <td><%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%></td>
+          				<% @user_email = s.user.email%>
+          				<% @user_phone = s.user.phone_no%>
+                <td style=""><%= s.details.blank? ? "Not Provided" : s.details%></td>
+                <td >&nbsp;&nbsp;<%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
+                <button  type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_post_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+                 <!--########################modal for show review##############-->
+                <div class="modal fade" id="Modals_show_post_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                   <div class="modal-content">
+                    <div class="modal-header" style="background:#38ACEC;">
+                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                     <h4 class="modal-title" id="myModalLabel"><b>Show Reviews</b></h4>
+                     </div>
+                     <div class="modal-body">
+                      <!--Model Content-->
+                            <% if s.reviews.size > 0 %>
+                              <% s.reviews.each do |review| %>
+                                <%= review.content %><br />
+                               Reviewed by:
+                                <span style="color :green;"><%= review.user.name if review.user_id %></span><br /><br>
+                              <% end %>
+                            <% else %>
+                              Sorry. No reviews yet
+                            <% end %>
+                      <!--End Model Content-->
+                  </div>
+                  </div>
+                  </div>
+                </div>
+<!--#######################end of model show review########################-->
+                </td>
+
+
                 <% if !current_user %>
 	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.food_type_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
                 <% elsif negotiate(current_user.id, s.id).nil?%>
@@ -272,6 +301,11 @@ $(document).ready(function() {
                                         </div>
                                     </div>
                                     <div class="data_row">
+                                      <div class="data_title">Review</div>
+                                     <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_post_mob_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+                                    </div>
+
+                                    <div class="data_row">
                                     	<div class="data_title">
                                         	Contact
                                         </div>
@@ -286,6 +320,35 @@ $(document).ready(function() {
                 <% end %>
                                         </div>
                                     </div>
+                              <!--modal for review -->
+
+                                    <div class="modal fade" id="Modals_show_post_mob_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog">
+                                       <div class="modal-content">
+                                        <div class="modal-header" style="background:#38ACEC;">
+                                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                          <h4 class="modal-title" id="myModalLabel" align="center"><b>Reviews</b></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                      <!--Model Content-->
+                                            <% if s.reviews.size > 0 %>
+                                              <% s.reviews.each do |review| %>
+                                                <%= review.content %><br />
+                                                Reviewed by:
+                                                <span style="color :green;"><%= review.user.name if review.user_id %></span><br /><br>
+                                              <% end %>
+                                            <% else %>
+                                              Sorry. No reviews yet
+                                            <% end %>
+                                      <!--End Model Content-->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- End Model review-->
+
+
+
                                 </div>
                              
 		  <%end%>

@@ -115,5 +115,37 @@ before_filter :authenticate_user!, :except => [:index]
     end
     render :json => {:status => "ok"}
   end
+ def create_review
+        @review = Review.new(:content => params[:content].to_s)
+    if(params[:book_post_requirement_id])
+    @review.book_post_requirement_id = params[:book_post_requirement_id]
+     @review.negotiate_id = params[:negotiate_id]
+    elsif(params[:skill_post_requirement_id])
+      @review.skill_post_requirement_id = params[:skill_post_requirement_id]
+      @review.negotiate_id = params[:negotiate_id]
+    elsif(params[:post_requirement_id])
+      @review.post_requirement_id = params[:post_requirement_id]
+       @review.negotiate_id = params[:negotiate_id]
+
+    end
+
+        @review.user_id = current_user.id
+        if @review.save
+    redirect_to "/home"
+    end
+  end
+
+  def show_review
+    if(params[:book_post_requirement_id])
+    @reviews = Review.where(:book_post_requirement_id => params[:book_post_requirement_id].to_i)
+    elsif (params[:skill_post_requirement_id])
+      @reviews = Review.where(:skill_post_requirement_id => params[:skill_post_requirement_id].to_i)
+    elsif (params[:post_requirement_id])
+      @reviews = Review.where(:post_requirement_id => params[:post_requirement_id].to_i)
+    end    
+  end
+
+
+
 
 end

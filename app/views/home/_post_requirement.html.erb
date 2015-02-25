@@ -14,7 +14,7 @@
           <th>Meal Type </th>
           <th>Price </th>
           <!--<th>Region Specific </th>-->
-          <th>Description</th>
+          <th>Description</th>         
           <th></th>
           <th></th>
         </tr>
@@ -40,7 +40,8 @@
           <td><%= p.meal_type.nil? ? "N/A" : p.meal_type.name%></td>
           <td><%= p.budget%></td>
           <!--<td><%#= p.region.nil? ? "N/A" : p.region.name%></td>-->
-          <td><%= p.details%></td>
+          <td><%= p.details%></td>         
+        
           <% if p.seeker_provider %>
             <td><%= link_to 'Edit', edit_post_requirement_sharing_path(p)%></td>
           <%else%>
@@ -108,7 +109,9 @@
         <div class="data_row">
           <div class="data_title">Description </div>
           <div class="data_col"><%= p.details%></div>
-        </div>
+          </div>
+     
+        
         <div class="data_row">
           <div class="data_title"></div>
           <div class="data_col">
