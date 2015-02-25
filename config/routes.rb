@@ -68,6 +68,7 @@ Sharingdasiss::Application.routes.draw do
     post :search, :to => 'home#index',:on => :collection
     get :profile, :on => :member
     get :edit_profile, :on => :member
+    get :review, :on => :member
   end
 
   # resources :book_search, :only => [:index]
@@ -144,6 +145,8 @@ Sharingdasiss::Application.routes.draw do
   get "home_food" => "static_pages#home_food"
   get "ecomm_shop" => "static_pages#ecomm_shop"
   get "marketing_stratgy" => "static_pages#marketing_stratgy"
+  post "create_review" => "home#create_review"
+  get "show_reviews" => "home#show_review", :as => :show_reviews
   
   get "safety_guide_book" => "static_pages#safety_guide_book"
   get "safety_guide_skill" => "static_pages#safety_guide_skill"
