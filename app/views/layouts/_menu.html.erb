@@ -16,9 +16,9 @@
       <%#= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
       <span style="background-color: #007a87;">
       <% if current_user.nil? %>
-        <%= link_to 'SHARE WITH US', post_your_ad_login_sharing_index_path, :title => "Looking for food or books or ride or skills of your choice? Submit your request here" %>       
+        <%= link_to 'SHARE WITH US', post_your_ad_login_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>       
       <% else %>
-        <%= link_to 'SHARE WITH US', post_your_ad_sharing_index_path, :title => "Looking for food or books or ride or skills of your choice? Submit your request here" %>
+        <%= link_to 'SHARE WITH US', post_your_ad_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
       <%end%>
     </span>
     </li></b>
