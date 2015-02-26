@@ -11,7 +11,7 @@
           <th>Phone No.</th>
           <th>Email Id</th>          
           <th>Rate</th>
-          <th>Review</th>      
+          <!--<th>Review</th>-->        
           <th></th>
         </tr>
       </thead>
@@ -79,9 +79,9 @@
             <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="4" src="<%= @src4 %>">
             <img style="cursor:pointer;width: 10%;" class="rate_<%= f.id %>" id="5" src="<%= @src5 %>">
           </td>
-          <td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_post_<%= f.id %>_<%= f.user.id %>">Review</button></td>
+          <!--<td> <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modals_post_<%#= f.id %>_<%#= f.user.id %>">Review</button></td>
 
-          <div class="modal fade" id="Modals_post_<%= f.id %>_<%= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal fade" id="Modals_post_<%#= f.id %>_<%#= f.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#38ACEC;">
@@ -89,24 +89,24 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
-      <div class="modal-body">
-<!--############Model Content-->
-    <%= form_tag "/create_review" do %>
-    <%= hidden_field_tag "post_requirement_id", f.post_requirement_id %>
-    <%= hidden_field_tag "negotiate_id", f.id %>
-    <div class="form-group">
+      <div class="modal-body">-->
+<!--Model Content-->
+    <%#= form_tag "/create_review" do %>
+    <%#= hidden_field_tag "post_requirement_id", f.post_requirement_id %>
+    <%#= hidden_field_tag "negotiate_id", f.id %>
+    <!--<div class="form-group">
       
       <div class="">
-        <%= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
+        <%#= text_area_tag :content, "", :class => 'form-control', "maxlength"=>"200", :placeholder => "Please share your experience" %><br/>
       </div>
     </div>
-  <div><%= submit_tag 'Save', :class => "btn" %></div>
-<% end -%>-->
+  <div><%#= submit_tag 'Save', :class => "btn" %></div>
+<%# end -%>-->
 <!--End Model Content-->
-      </div>
+      <!--</div>
     </div>
   </div>
-</div>
+</div>-->
 <!--End Model-->
           <script type="text/javascript">
             $(".rate_<%= f.id %>").click(function () {
