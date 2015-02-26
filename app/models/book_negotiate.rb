@@ -3,5 +3,6 @@ class BookNegotiate < ActiveRecord::Base
   belongs_to :user
   belongs_to :book_post_requirement
   has_many :rates
+  has_many :reviews
   validates_uniqueness_of :book_post_requirement_id, :scope => :user_id
 end

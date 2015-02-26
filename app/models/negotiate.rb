@@ -4,6 +4,7 @@ class Negotiate < ActiveRecord::Base
   belongs_to :post_requirement
   belongs_to :skill_post_requirement 
   has_many :rates
+  has_many :reviews
   
   #validates_uniqueness_of :post_requirement_id,:skill_post_requirement_id, :scope => :user_id
 end

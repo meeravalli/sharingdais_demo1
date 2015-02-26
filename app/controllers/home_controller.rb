@@ -115,7 +115,7 @@ before_filter :authenticate_user!, :except => [:index]
     end
     render :json => {:status => "ok"}
   end
-=begin  
+ 
  def create_review
         @review = Review.new(:content => params[:content].to_s)
     if(params[:book_post_requirement_id])
@@ -145,7 +145,7 @@ before_filter :authenticate_user!, :except => [:index]
       @reviews = Review.where(:post_requirement_id => params[:post_requirement_id].to_i)
     end    
   end
-=end
+
 
 
 
