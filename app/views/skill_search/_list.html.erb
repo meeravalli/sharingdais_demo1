@@ -135,32 +135,32 @@ $(document).ready(function() {
                   </div>
                 </td>
                 <td>
-                   <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_skill_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+                   <!--<button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_skill_reviews_<%#= s.id %>_<%#= s.user.id %>">Show Reviews</button>
                   </td>
-               <div class="modal fade" id="Modals_show_skill_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <div class="modal fade" id="Modals_show_skill_reviews_<%#= s.id %>_<%#= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#38ACEC;">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"><b>Show Reviews</b></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">-->
 <!--Model Content-->
-      <% if s.reviews.size > 0 %>
-        <% s.reviews.each do |review| %>
-          <%= review.content %><br>
-          Reviewed by:
-          <span style="color :green;"><%= review.user.name if review.user_id %></span><br/><br>
-        <% end %>
-      <% else %>
+      <%# if s.reviews.size > 0 %>
+        <%# s.reviews.each do |review| %>
+          <%#= review.content %>
+          <!--Reviewed by:
+          <span style="color :green;"><%#= review.user.name if review.user_id %></span><br/><br>
+        <%# end %>
+      <%# else %>
         Sorry. No reviews yet
-      <% end %>
+      <%# end %>-->
 <!--End Model Content-->
-      </div>
+      <!--</div>
     </div>
   </div>
-</div>
-<!--############End Model#############-->
+</div>-->
+<!--End Model-->
 
 
                 <% @user_email = s.user.email%>
@@ -292,12 +292,12 @@ $(document).ready(function() {
           <% if s.home_service == false %>No <% else %> Yes <%end%>
         </div>
       </div>
-      <div class="data_row">
+      <!--<div class="data_row">
         <div class="data_title">Reviews:</div>
         <div class="data_col">           
-          <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_skill_reviews_mob_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_skill_reviews_mob_<%#= s.id %>_<%#= s.user.id %>">Show Reviews</button>
         </div>
-      </div>
+      </div>-->
 
       <div class="data_row">
         <div class="data_title"></div>
@@ -320,29 +320,29 @@ $(document).ready(function() {
         </div>
       </div>
 <!--############start review modal##########-->
-<div class="modal fade" id="Modals_show_skill_reviews_mob_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="Modals_show_skill_reviews_mob_<%#= s.id %>_<%#= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#38ACEC;">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel"><b>Show Reviews</b></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">-->
 <!--Model Content-->
-      <% if s.reviews.size > 0 %>
-        <%s.reviews.each do |review| %>
-          <%= review.content %><br>
-         Reviewed by:
-           <span style="color :green;"><%= review.user.name if review.user_id %></span><br/><br/>
-        <% end %>
-      <% else %>
+      <%# if s.reviews.size > 0 %>
+        <%#s.reviews.each do |review| %>
+          <%#= review.content %>
+         <!--Reviewed by:
+           <span style="color :green;"><%#= review.user.name if review.user_id %></span><br/><br/>
+        <%# end %>
+      <%# else %>
         Sorry. No reviews yet
-      <% end %>
+      <%# end %>-->
 <!--End Model Content-->
-      </div>
+     <!-- </div>
     </div>
   </div>
-</div>
+</div>-->
 <!--##########End Model#################-->
 
     </div>
