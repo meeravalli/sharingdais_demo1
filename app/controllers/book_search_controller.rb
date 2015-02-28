@@ -34,9 +34,9 @@ class BookSearchController < ApplicationController
         location = Location.where("id = ?",params[:search][:location_id]).last
         city = City.where("id = ?",params[:search][:city_id]).last
         search_area = [city.city_name, location.location_name, "India"].join(", ")
-        @search_results = BookPostRequirement.near("#{search_area}", 10).where(query).paginate(:page => params[:page], :per_page => 25)    
+        @search_results = BookPostRequirement.near("#{search_area}", 10).where(query).paginate(:page => params[:page], :per_page => 15)    
       else
-        @search_results = BookPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
+        @search_results = BookPostRequirement.where(query).paginate(:page => params[:page], :per_page => 15)
       end 
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations

@@ -177,7 +177,7 @@ $(document).ready(function() {
           </tbody>
         </table>
         <div id="">
-            <%#= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+            <%= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
         </div>
       </div>
 			<div class="srch_res_mob">
