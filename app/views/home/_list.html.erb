@@ -129,7 +129,7 @@ $(document).ready(function() {
                   <b>Charges:</b>
                   <%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
                 </td>
-                <td class="col-xs-2">
+                <td>
                 <b>Food Type:</b><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%><br>
                 <b>Meal Type:</b><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %><br>
                 <b>Style:</b><%= s.region.nil? ? "Not Applicable" : s.region.name %><br><br>
