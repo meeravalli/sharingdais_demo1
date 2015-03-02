@@ -42,7 +42,7 @@ $(document).ready(function() {
     <div class="display">
       <div class="table-responsive src_res_desktop">
         <table class="table table-hover">
-          <thead class="heading">
+          <!--<thead class="heading">
               <tr>
               <th style="width:5%">#</th>
               <th style="width:10%"><center>Food Photo</center></th>
@@ -56,11 +56,11 @@ $(document).ready(function() {
               <th style="width:10%">Contact</th>
              
             </tr>
-          </thead>
+          </thead>-->
           <tbody>
             <% @count = 1 %>
             <% @search_results.each do |s| %>
-              <tr>
+              
 <% 
                   @rate_1=rate(s.user.id,1,s.id).count()
                   @rate_2=rate(s.user.id,2,s.id).count()
@@ -104,6 +104,8 @@ $(document).ready(function() {
                     end
                   end
                 %>
+                <tr>
+
                 <td><%= @count %></td>
                 <td>
                   <% if !s.food_image.path.nil? %>
@@ -111,26 +113,38 @@ $(document).ready(function() {
   								<%else%>
 								    <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
                   <%end%>
+                  </td>
+                   <td class="col-xs-2">
+                    <b><%= s.location.location_name %></b><br>
                   <% if s.seeker_provider == false %>
                     <br>
-                    <span style="left: 18%; position: relative;">
+                    <span style="left: 0%; position: relative;">
                       <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
                       <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
                     </span>
-                  <%end%>
+                  <%end%><br><br>
+                  <b>Charges:</b>
+                  <%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
                 </td>
-                <td><%= s.location.location_name %></td>
-                <td><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%></td>
-                <td><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %></td>
-                <td><%= s.region.nil? ? "Not Applicable" : s.region.name %></td>
-                <td><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %></td>
+                <td class="col-xs-2">
+                <b>Food Type:</b><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%><br>
+                <b>Meal Type:</b><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %><br>
+                <b>Style:</b><%= s.region.nil? ? "Not Applicable" : s.region.name %><br><br>
+                <b>Description:</b><%= s.details.blank? ? "Not Provided" : s.details%>
+              </td> 
+
+                <td class="col-xs-2">
+                  <div style="position: relative;">
+                  <b>Provider:</b><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %>
+                </div>
+                </td>
           				<% @user_email = s.user.email%>
           				<% @user_phone = s.user.phone_no%>
-                <td style=""><%= s.details.blank? ? "Not Provided" : s.details%></td>
-                <td >&nbsp; &nbsp; &nbsp;<%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
+                
+                <td>
                <button  type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_post_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button></td>
                  
                 <div class="modal fade" id="Modals_show_post_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -156,7 +170,7 @@ $(document).ready(function() {
                   </div>
                   </div>
                 </div>
-                </td>
+               
 <!--#######################end of model show review########################-->
                 
 
@@ -170,7 +184,6 @@ $(document).ready(function() {
                   <td>Already Negotiated</td>
                 <% end %>
               </tr>
-
               <% @count = @count+1 %>
 			  
             <% end %>
