@@ -16,6 +16,7 @@ layout 'food_search'
       session[:any] = params[:search][:any]
       session[:any1] = params[:search][:any1]
       @search_results = PostRequirement.filter_conditions(params[:search]).paginate(:page => params[:page], :per_page => 15)
+      @page = params[:page] || 1
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
     end

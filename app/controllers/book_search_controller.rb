@@ -40,6 +40,7 @@ class BookSearchController < ApplicationController
       end 
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
+      @page = params[:page] || 1
     end
   end
   # Shahid Code =========================

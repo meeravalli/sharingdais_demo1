@@ -59,7 +59,7 @@ $(document).ready(function() {
           </thead>-->
           <tbody>
             <% @count = 1 %>
-            <% @search_results.each do |s| %>
+            <% @search_results.each_with_index do |s, i| %>
               
 <% 
                   @rate_1=rate(s.user.id,1,s.id).count()
@@ -106,7 +106,7 @@ $(document).ready(function() {
                 %>
                 <tr>
 
-                <td><%= @count %></td>
+                <td><%= (@page.to_i - 1) * 15 + i+1 %></td>
                 <td>
                   <% if !s.food_image.path.nil? %>
                     <%= image_tag s.food_image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;"%>
@@ -130,15 +130,15 @@ $(document).ready(function() {
                   <%= s.budget.blank? ? "Not Provided" : number_with_precision(s.budget, :precision => 2)%>
                 </td>
                 <td>
-                <b>Food Type:</b><%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%><br>
-                <b>Meal Type:</b><%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %><br>
-                <b>Style:</b><%= s.region.nil? ? "Not Applicable" : s.region.name %><br><br>
+                <b>Food Type:</b> <%= s.food_type.nil? ? "Not Applicable" : s.food_type.name%><br>
+                <b>Meal Type:</b> <%= s.meal_type.nil? ? "Not Applicable" : s.meal_type.name %><br>
+                <b>Style:</b> <%= s.region.nil? ? "Not Applicable" : s.region.name %><br><br>
                 <b>Description:</b><%= s.details.blank? ? "Not Provided" : s.details%>
               </td> 
 
                 <td class="col-xs-2">
                   <div style="position: relative;">
-                  <b>Provider:</b><%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %>
+                  <b>Provider:</b> <%= s.provider.nil? ? "Not Applicable" : s.provider.provider_type %>
                 </div>
                 </td>
           				<% @user_email = s.user.email%>

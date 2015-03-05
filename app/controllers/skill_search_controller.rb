@@ -36,6 +36,7 @@ class SkillSearchController < ApplicationController
       #@search_results = SkillPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
+      @page = params[:page] || 1
    end
   end
 

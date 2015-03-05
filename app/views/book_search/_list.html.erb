@@ -121,7 +121,7 @@ $(function(){
           </thead>
           <tbody>
             <% @count = 1 %>
-            <% @search_results.each do |s| %>
+            <% @search_results.each_with_index do |s, i| %>
               <tr>
 <% 
   @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,1,s.id).count()
@@ -167,7 +167,7 @@ $(function(){
     end
   end
 %>
-                <td><%= @count %></td>
+                <td><%= (@page.to_i - 1) * 15 + i+1 %></td>
                 <td>
 								  <% if !s.image.path.nil? %>
                     <%= image_tag s.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
