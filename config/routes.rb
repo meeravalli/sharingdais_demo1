@@ -145,13 +145,25 @@ Sharingdasiss::Application.routes.draw do
   get "home_food" => "static_pages#home_food"
   get "ecomm_shop" => "static_pages#ecomm_shop"
   get "marketing_stratgy" => "static_pages#marketing_stratgy"
+  get "winning_way" => "static_pages#winning_way"
+  get "fifty_shades_grey" => "static_pages#fifty_shades_grey"
+  get "revolution_2020" => "static_pages#revolution_2020"
+  get "gmat_official_edition" => "static_pages#gmat_official_edition"  
+  get "yoga" => "static_pages#yoga"
+  get "photography" => "static_pages#photography"
+  get "bake" => "static_pages#bake"
+  get "khadi_chawal" => "static_pages#khadi_chawal"
+  get "stuffed_parantha" => "static_pages#stuffed_parantha"
+  get "veg_thali" => "static_pages#veg_thali"
+  get "veg_biryani" => "static_pages#veg_biryani"
+
   post "create_review" => "home#create_review"
   get "show_reviews" => "home#show_review", :as => :show_reviews
   
   get "safety_guide_book" => "static_pages#safety_guide_book"
   get "safety_guide_skill" => "static_pages#safety_guide_skill"
   get "saftey_guide_food" => "static_pages#saftey_guide_food"
-  #get "safety_guide_ride" => "static_pages#safety_guide_ride" 
+ 
  
   # The priority is based upon order of creation:
   # first created -> highest priority.

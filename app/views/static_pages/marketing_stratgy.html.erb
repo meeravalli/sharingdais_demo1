@@ -158,66 +158,40 @@
       <%= render :partial =>  "layouts/header" %>
       <%end%>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- #######################################3jessor################################ -->
  <script type="text/javascript" src="/assets/jssor.js"></script>
 <script type="text/javascript" src="/assets/jssor.slider.js"></script>
  <script>
         jssor_slider1_starter = function (containerId) {
             var options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
-                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-                $Loop: 0,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
+                $AutoPlay: true,                                    
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for 
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in 
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when 
+                $Loop: 0,                                       //[Optional] Enable loop(circular) 
 
-                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
-                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
-                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
-                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key
+                $SlideDuration: 500,                                //[Optional] Specifies default 
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset                
                 $SlideSpacing: 5,                           //[Optional] Space between each slide in pixels, default value is 0
-                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
-                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
-                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
-                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to 
+                $ParkingPosition: 0,                                //[Optional] The offset position 
+                $UISearchMode: 1,                                   //[Optional] The way (0 
+                $PlayOrientation: 1,                                //[Optional] Orientation to play 
+                $DragOrientation: 3,                                //[Optional] Orientation to drag 
                 $ThumbnailNavigatorOptions: {
                     $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
                     $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
 
                     $Loop: 2,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
-                    $AutoCenter: 3,                                 //[Optional] Auto center thumbnail items in the thumbnail navigator container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 3
-                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
-                    $SpacingX: 4,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-                    $SpacingY: 4,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
-                    $DisplayPieces: 4,                              //[Optional] Number of pieces to display, default value is 1
+                    $AutoCenter: 3,                                 //[Optional] Auto center 
+                    $Lanes: 1,                                      //[Optional] Specify lanes to 
+                    $SpacingX: 4,                                   //[Optional] Horizontal space 
+                    $SpacingY: 4,                                   //[Optional] Vertical space 
+                    $DisplayPieces: 4,                              //[Optional] Number of pieces to 
                     $ParkingPosition: 0,                            //[Optional] The offset position to park thumbnail
-                    $Orientation: 2,                                //[Optional] Orientation to arrange thumbnails, 1 horizental, 2 vertical, default value is 1
-                    $DisableDrag: false                             //[Optional] Disable drag or not, default value is false
+                    $Orientation: 2,                                //[Optional] Orientation to 
+                    $DisableDrag: false                             //[Optional] Disable drag or 
                 }
             };
             var jssor_slider1 = new $JssorSlider$(containerId, options);
@@ -277,13 +251,16 @@
               <td>
                 <p style="float:right;">
                   <strong>Phone No:</strong>
-                  <span> 7840088216</span>
+                  <span> 7840088215</span>
                 </p>
               </td>
             </tr>
           </table><br>
-        <div id="slider5_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 300px; background: #000; overflow: hidden; ">               
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 300px; overflow: hidden;">            
+  <div class="row">
+  <div class="col-sm-10">
+
+        <div id="slider5_container" style="position: relative; top: 0px; left: 0px; width: 100%; height: 400px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 710px; height: 400px; overflow: hidden;">            
             <div>
                 <img u="image" src="/assets/micro-site/marketingCloud.jpg" style="width:100%; height: ;"/>
                 <div u="thumb">
@@ -309,10 +286,10 @@
                 </div>
             </div>
         </div>                
-        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 200px; height: 300px; left:800px; top:0px;">            
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 75px; height: 400px; left:730px; top:0px;">            
             <div u="slides" style="cursor: move;">
-                <div u="prototype" class="p" style="position: absolute; width: 200px; height: 69px; top: 0; left: 0;">
-                    <thumbnailtemplate style=" width: 120%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                <div u="prototype" class="p" style="position: absolute; width: 100px; height: 100px; top: 0; left: 0;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
                 </div>
             </div>            
         </div>        
@@ -321,36 +298,43 @@
             jssor_slider1_starter('slider5_container');
         </script>
      </div>
-          <div class="details">
-            <p>
-              <strong>Porter's 5 Forces: Marketing Gyan. </strong> 
-            </p> 
+   </div> 
+         <div class="col-sm-2">
+           <div class="details">            
             <div class="social" align="right">          
              <a class="fb-share-button" data-href="http://www.sharingdais.com/marketing_stratgy" data-layout="button">
               </a><br>        
              <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>       
-            </div>
-            <br>
+            </div>           
+           </div>
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <br>
+            <p>
+              <strong>Porter's 5 Forces: Marketing Gyan. </strong> 
+            </p><br>
             <p>
               <strong>About the author:</strong>
                Abhishek is an IT professional based out of Gurgaon. He is an MBA from MDI Gurgaon.
-             </p>           
-            </div>
+             </p><br>
            <div class="location">
-            <strong> Description:</strong>            
+            <strong> Description:</strong>  <br><br>          
             <p align="justify"> The Porter's Five Forces tool is a simple but powerful tool for understanding where power lies in a business situation. This is useful, because it helps you understand both the strength of your current competitive position, and the strength of a position you're considering moving into.With a clear understanding of where power lies, you can take fair advantage of a situation of strength, improve a situation of weakness, and avoid taking wrong steps. Conventionally, the tool is used to identify whether new products, services or businesses have the potential to be profitable. However it can be very illuminating when used to understand the balance of power in other situations. 
            Please download the file from here:<a href="/assets/Marketing.pdf" target="_blank">  "Porter's five forces"</a>
            </p>
-          </div>
+          </div><br>
           <div class="location">
             <strong> Location:</strong> Gurgaon
-          </div>
+          </div><br>
           <div class="avail">
             <strong>Availability:</strong> N/A
-          </div>    
+          </div>  <br>  
           <div class="price">
             <strong>Price:</strong> N/A 
           </div>
+      </div>
+
       </div>
  </div>
 </div> 
@@ -508,22 +492,6 @@
             </style> 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  <% if params[:controller] == 'admins' %>
       <%= render :partial =>  "layouts/admin_footer" %>
     <%else%>

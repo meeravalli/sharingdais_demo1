@@ -164,7 +164,7 @@ class BookSearchController < ApplicationController
 
   def save_count
     @mycounter=Ad.all
-    if params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil?
+    if params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
       if @mycounter.count == 0
         @cnt=Ad.new(:box_1 => params[:box_1])
         @cnt.save
@@ -180,7 +180,7 @@ class BookSearchController < ApplicationController
           @sv.first.save   
         end        
       end
-    elsif params[:box_1].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil?
+    elsif params[:box_1].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
       if @mycounter.count == 0
         @cnt=Ad.new(:box_2 => params[:box_2])
         @cnt.save
@@ -196,7 +196,7 @@ class BookSearchController < ApplicationController
           @sv.first.save
         end       
       end
-    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_4].nil? && params[:box_5].nil?
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
       if @mycounter.count == 0
         @cnt=Ad.new(:box_3 => params[:box_3])
         @cnt.save
@@ -212,7 +212,7 @@ class BookSearchController < ApplicationController
           @sv.first.save 
         end
       end
-    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_5].nil?
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
       if @mycounter.count == 0
         @cnt=Ad.new(:box_4 => params[:box_4])
         @cnt.save
@@ -228,7 +228,7 @@ class BookSearchController < ApplicationController
           @sv.first.save
         end
       end
-    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil?
+    elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
       if @mycounter.count == 0
         @cnt=Ad.new(:box_5 => params[:box_5])
         @cnt.save
@@ -244,6 +244,121 @@ class BookSearchController < ApplicationController
           @sv.first.save
         end
       end
+     elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_6 => params[:box_6])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_6
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_6 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_6 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_7 => params[:box_7])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_7
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_7 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_7 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil? 
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_8 => params[:box_8])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_8
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_8 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_8 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_10].nil? && params[:box_11].nil? && params[:box_12].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_9 => params[:box_9])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_9
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_9 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_9 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_11].nil? && params[:box_12].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_10 => params[:box_10])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_10
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_10 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_10 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_12].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_11 => params[:box_11])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_11
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_11 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_11 = @cnt + 1
+          @sv.first.save
+        end
+      end
+      elsif params[:box_1].nil? && params[:box_2].nil? && params[:box_3].nil? && params[:box_4].nil? && params[:box_5].nil? && params[:box_6].nil? && params[:box_7].nil? && params[:box_8].nil? && params[:box_9].nil? && params[:box_10].nil? && params[:box_11].nil?
+      if @mycounter.count == 0
+        @cnt=Ad.new(:box_12 => params[:box_12])
+        @cnt.save
+      else
+        @cnt=@mycounter.first.box_12
+        if @cnt.nil?
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_12 =1
+          @sv.first.save
+        else
+          @sv=Ad.where("id=?",1)
+          @sv.first.box_12 = @cnt + 1
+          @sv.first.save
+        end
+      end
+
+
     end
     render :json => {:status => "ok"}
   end

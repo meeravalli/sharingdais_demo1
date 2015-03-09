@@ -67,96 +67,117 @@
 <div class="content">
   <h1 class="how_heading">What is Hot inside?</h1>
   <!--<div calss="container_responsive">-->
-  <div class="resize_how_diag">
-    <div class="desktop_diag">
-      <table>
-        <tr>
-          <td>
-            <div class="image">
-              <!--<img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">-->
-             <a href="/digital_market" target="_blank"> <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140"></a>
-            </div>
-            <p>
-        <a href="/digital_market" class="bix_1" target="_blank"> Guide to Digital Marketing</a>
-<script type="text/javascript">
-  $(".bix_1").click(function () {
-    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_1':"1"}),success: function (data) {}
-    });
-  });
-</script>
-            </p>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </td>
-          <td>
-            <div class="image">
-              <!--<img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">-->
-             <a href="/choc_cake" target="_blank"> <img class="top" src="/assets/micro-site/cakemain.jpg" width="180" height="140"></a>
-            </div>
-            <p>
-              <a href="/choc_cake" class="bix_2" target="_blank">Chocolate Cake in 20 min</a>
-<script type="text/javascript">
-  $(".bix_2").click(function () {
-    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_2':"1"}),success: function (data) {}
-    });
-  });
-</script>            
-            </p>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </td>
-          <td>
-            <div class="image">
-             <!-- <img class="bottom" src="/assets/micro-site/cook2.JPG" width="180" height="140"> -->
-             <a href="/home_food" target="_blank"> <img class="top" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140"></a>
-            </div>
-            <p>
-              <a href="/home_food" class="bix_3" target="_blank">Home Cooked Food</a>
-            </p>
-<script type="text/javascript">
-  $(".bix_3").click(function () {
-    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_3':"1"}),success: function (data) {}
-    });
-  });
-</script>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </td>
-          <td>
-            <div class="image">
-              <!--<img class="bottom"src="/assets/micro-site/hightech_ecommerce.jpg" width="180" height="140">-->
-              <a href="/ecomm_shop" target="_blank"><img class="top" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" width="180" height="140"></a>
-            </div>
-            <p>
-              <a href="/ecomm_shop" class="bix_4" target="_blank">Booming e-commerce<br> Industry</a>
-<script type="text/javascript">
-  $(".bix_4").click(function () {
-    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_4':"1"}),success: function (data) {}
-    });
-  });
-</script>
-            </p>
-            <p><strong>City:</strong> Bangalore</p>
-          </td>
-          <td>
-            <div class="image">
-              <!--<img class="bottom" src="/assets/micro-site/marketing.jpg" width="180" height="140">-->
-              <a href="/marketing_stratgy" target="_blank"><img class="top" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140"></a>
-            </div>
-            <p>
-              <a href="/marketing_stratgy" class="bix_5" target="_blank"> Porter's 5 Forces: Marketing Gyan</a>
-<script type="text/javascript">
-  $(".bix_5").click(function () {
-    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_5':"1"}),success: function (data) {}
-    });
-  });
-</script>
-            </p>
-            <p><strong>City:</strong> Gurgaon</p> 
-          </td>
-        </tr>
-      </table>
-    </div>
+  <div class="resize_how_diag"> 
+<div class="banner">
+  <div id="slider">
+    <div id="mycarousel" class="carousel slide" data-ride="carousel" data-interval="6000">      
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">      
+            <div class="item active">              
+              <table>
+                <tr>
+                  <td>
+                  <div class="">              
+                 <a href="/khadi_chawal" target="_blank"> 
+                  <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="265" height="200">
+                 </a>
+                 </div>
+                 </td>
+                 <td>
+                 <div class="">
+                 <a href="/stuffed_parantha" target="_blank">
+                  <img class="top" src="/assets/food_image/aluparatha.jpg" width="265" height="200">
+                 </a>
+                 </div>
+                 </td>
+                 <td>
+                 <div class="">
+                 <a href="/veg_thali" target="_blank"> 
+                 <img class="top" src="/assets/food_image/thali.jpg" width="265" height="200">
+                 </a>
+                 </div>
+                 </td>
+                 <td>
+                 <div class="">
+                 <a href="/veg_biryani" target="_blank">
+                 <img class="top" src="/assets/food_image/thali2.jpg" width="265" height="200">
+                 </a>
+                 </div>
+                 </td>         
+               </tr>
+              </table>
+            </div> 
+            <div class="item">
+              <table>
+                <tr>
+                  <td>              
+                  <a href="/digital_market" target="_blank"> 
+                  <img class="top" src="/assets/micro-site/Pic1.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/bake" target="_blank"> 
+                  <img class="top" src="/assets/skill_image/bak1.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/photography" target="_blank">
+                  <img class="top" src="/assets/skill_image/p1.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/yoga" target="_blank">
+                  <img class="top" src="/assets/skill_image/yoga.jpg" width="265" height="200">
+                  </a>
+                  </td>          
+                </tr>
+              </table> 
+            </div>         
+           <div class="item">
+              <table>
+                <tr>
+                  <td>                                  
+                  <a href="/winning_way" target="_blank"> 
+                  <img class="top" src="/assets/book_image/book1.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/fifty_shades_grey" target="_blank">
+                  <img class="top" src="/assets/book_image/book2.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/revolution_2020" target="_blank"> 
+                  <img class="top" src="/assets/book_image/book3.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                  <td>
+                  <a href="/gmat_official_edition" target="_blank">
+                  <img class="top" src="/assets/book_image/book4.jpg" width="265" height="200">
+                  </a>
+                  </td>
+                </tr>
+              </table>                    
+            </div>          
+                    
+          
+        
+      
   </div>
+<!-- end of the desktpo view -->
+<!-- Controls -->
+      <a class="left carousel-control" href="#mycarousel" data-slide="prev"> <span class="fa fa-arrow-circle-left"></span> </a>
+      <a class="right carousel-control" href="#mycarousel" data-slide="next"> <span class="fa fa-arrow-circle-right"></span> </a>
+        
+  
+
+</div>
+</div>
+</div>
+
+
   <!-- -----------------------Mobile view------------ -->
-  <div class="mob_diag">
+  <!--<div class="mob_diag">
     <div class="srch_res_mob">
       <div class="res_data">
         <div class="data_row">
@@ -210,9 +231,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
   <!-- ---------------------------------mobile view end------------------------------ -->
 </div>
 <!-- ---------------------------------Models------------------------------ -->
-
+</div>
 <%#= render :partial =>  "home/model" %>

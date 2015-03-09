@@ -35,6 +35,45 @@ class StaticPagesController < ApplicationController
 	def marketing_stratgy
 	  render :layout => false
 	end
+   def veg_thali
+   	 render :layout => false
+   end
    
+   def veg_biryani
+   	 render :layout => false
+   end
+   def stuffed_parantha
+   	 render :layout => false
+   end
+   def khadi_chawal
+   	 render :layout => false
+   end
+   def bake
+   	 render :layout => false
+   end
+   def photography
+   	 render :layout => false
+   end
+   def yoga
+   	 render :layout => false
+   end
+   def gmat_official_edition
+   	 render :layout => false
+   end
+   def revolution_2020
+   	 render :layout => false
+   end
+   def winning_way
+   	 render :layout => false
+   end
+   def fifty_shades_grey
+   	 render :layout => false
+   end
+   
+
+
+
+
+
 	
 end

@@ -10,10 +10,10 @@
     <!--<title>Sharingdais an Online Platform for Peer to Peer Sharing</title>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta property="og:image" content="http://www.sharingdais.com/assets/micro-site/Pic1.jpg"/>
+    <meta property="og:image" content="http://www.sharingdais.com/assets/micro-site/marketing.jpg"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="Keywords" content="Peer to Peer Sharing, Person to Person Sharing, Online Sharing, Online advertisements, Sharing Economy, Collaborative Consumption, Free advertisement, Free ads, Share stuff, Share goods and services, Sharing in Delhi, Sharing in Bangalore, Sharing in Bengaluru, Sharing in Ghaziabad, Sharing in Gurgaon, Sharing in Faridabad" />
-    <meta property="og:description" content="Digital Marketing also known as 'Online Marketing' is marketing that makes use of electronic devices to engage with the stakeholders. In this guide, you will learn the difference between push and pull digital marketing, and various digital marketing tactics such as; Search Engine Optimization (SEO), Search Engine Marketing (SEM), Social Media Marketing (SMM) and others. I will also touch upon the Google Adwords and Web Analytics."/>
+    <meta property="og:description" content="The Porter's Five Forces tool is a simple but powerful tool for understanding where power lies in a business situation. This is useful, because it helps you understand both the strength of your current competitive position, and the strength of a position you're considering moving into.With a clear understanding of where power lies, you can take fair advantage of a situation of strength, improve a situation of weakness, and avoid taking wrong steps. Conventionally, the tool is used to identify whether new products, services or businesses have the potential to be profitable."/>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -157,8 +157,247 @@
       <%else%>
       <%= render :partial =>  "layouts/header" %>
       <%end%>
-<style>
-         .jssort11
+
+
+<!-- #######################################3jessor################################ -->
+ <script type="text/javascript" src="/assets/jssor.js"></script>
+<script type="text/javascript" src="/assets/jssor.slider.js"></script>
+ <script>
+        jssor_slider1_starter = function (containerId) {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto 
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for 
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in 
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when 
+                $Loop: 0,                                       //[Optional] Enable loop(circular) 
+                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key
+                $SlideDuration: 500,                                //[Optional] Specifies default 
+                $MinDragOffsetToSlide: 20,                          //[Optional]               
+                $SlideSpacing: 5,                           //[Optional] Space between each slide in 
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to 
+                $ParkingPosition: 0,                                //[Optional] The offset position 
+                $UISearchMode: 1,                                   //[Optional] The way (0 
+                $PlayOrientation: 1,                                //[Optional] Orientation to play 
+                $DragOrientation: 3,                                //[Optional] Orientation to drag 
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create 
+                    $ChanceToShow: 2,                             //[Required] 0 Never, 1 Mouse 
+                    $Loop: 2,                                       //[Optional] Enable loop(circular
+                    $AutoCenter: 3,                                 //[Optional] Auto center 
+                    $Lanes: 1,                                      //[Optional] Specify lanes to 
+                    $SpacingX: 4,                                   //[Optional] Horizontal space 
+                    $SpacingY: 4,                                   //[Optional] Vertical space 
+                    $DisplayPieces: 4,                              //[Optional] Number of pieces to 
+                    $ParkingPosition: 0,                            //[Optional] The offset position 
+                    $Orientation: 2,                                //[Optional] Orientation to 
+                    $DisableDrag: false                             //[Optional] Disable drag or 
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$(containerId, options);
+
+            function ScaleSlider() {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth) {
+                    var sliderWidth = parentWidth;
+                    //keep the slider width no more than 810
+                    sliderWidth = Math.min(sliderWidth, 810);
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            }
+            //responsive code end
+        };
+    </script>
+    <!-- #######################################3jessor################################ -->
+    <% @counter=Ad.all %>
+<div class="content">
+<div class="resize_how_diag">
+<div class="desktop_dialog"><br><br><br>
+
+    <script type="text/javascript">
+        $('.count6').click(function() {
+          $('#output6').html(function(i, val) { return val*1+1 });
+        });
+      </script> 
+      <div style="margin:0 15% 0 15%;">
+      <h1 style="color:#999">Visits: <%= @counter.first.box_6 ? @counter.first.box_6 : 0 %></h1>
+          <table>
+            <tr>
+              <td>
+                <span class="rating">
+                 <input type="radio" class="rating-input"
+                  id="rating-input-5-5" name="rating-input-1">
+                 <label for="rating-input-5-5" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-5-4" name="rating-input-1">
+                 <label for="rating-input-5-4" class="rating-star"></label>
+                  <input type="radio" class="rating-input"
+                  id="rating-input-5-3" name="rating-input-1">
+                  <label for="rating-input-5-3" class="rating-star"></label>
+                   <input type="radio" class="rating-input"
+                   id="rating-input-5-2" name="rating-input-1">
+                 <label for="rating-input-5-2" class="rating-star"></label>
+                 <input type="radio" class="rating-input"
+                  id="rating-input-5-1" name="rating-input-1">
+                 <label for="rating-input-5-1" class="rating-star"></label>
+                 </span>
+              </td>
+              <td>                 
+                   
+            <div class="social" align="right">          
+             <a class="fb-share-button" data-href="http://www.sharingdais.com/fifty_shades_grey" data-layout="button">
+              </a> <br>  
+             <a href="https://twitter.com/share"  data-size="large" class="twitter-share-button" data-count="none">Tweet</a><br> 
+             <input type="button" class="" onclick=
+                    "alert('Contact mobile Number : 7840088215')" 
+                    value="Contact us">  
+            </div>     
+                        
+              </td>
+            </tr>
+          </table>
+       </div><br>
+        <div align="center">  
+        <div id="slider6_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 610px; height: 400px; overflow: hidden;">            
+            <div>
+                <img u="image" src="/assets/book_image/book2.jpg" style="width:100%; height: ;"/>
+                <div u="thumb">
+                 <img class="i" src="/assets/book_image/book2.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/book_image/book2.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/book_image/book2.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/book_image/book2.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/book_image/book2.jpg" />
+                </div>
+            </div>
+            <div>
+                <img u="image" src="/assets/book_image/book2.jpg" />
+                <div u="thumb">
+                 <img class="i" src="/assets/book_image/book2.jpg" />
+                </div>
+            </div>
+        </div>                
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 85px; height: 400px; left:640px; top:0px;">            
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 110px; height: 100px; top: 0; left: 0;">
+                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
+                </div>
+            </div>            
+        </div>        
+        <a style="display: none" href="http://www.jssor.com">javascript</a>       
+        <script>
+            jssor_slider1_starter('slider6_container');
+        </script>
+        </div>       
+        </div> 
+         <div class="" style="margin:0 15% 0 15%;">  <br>      
+            <p>
+              <strong>Book Name: Fifty Shades of Grey </strong> 
+            </p> <br>
+             <p>
+              <strong>Author:</strong> E.L James
+             </p> <br>  
+
+            <strong> About the Book:</strong>           
+            <p align="justify"> Fifty Shades of Grey is a 2011 erotic romance novel by British author. It is the first installment in the Fifty Shades trilogy that traces the deepening relationship between a college graduate, Anastasia Steele, and a young business magnate, Christian Grey. It is notable for its explicitly erotic scenes featuring elements of sexual practices involving bondage/discipline, dominance/submission, and sadism/masochism. The book has topped best-seller lists around the world, including those of the United Kingdom and the United States. 
+           </p>
+           <br>        
+            <strong> Genre:</strong> Erotic Romance
+           <br>          
+            <strong>Provider:</strong> Abhinav
+           <br>      
+            <strong>Place:</strong> South City I, Gurgaon          
+        </div>
+
+
+   </div>
+ </div>
+</div> 
+
+<!-- ############################### social media ############################# -->
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<!-- ############################### social media ############################# -->
+
+<style type="text/css">
+/* Rating System css */
+.rating {
+    float:left;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+.rating > label:active {
+    position:relative;
+    top:1px;
+    left:2px;
+}
+</style>
+
+
+    <!-- Thumbnail Item Skin Begin -->
+           <style>
+                
+                .jssort11
                 {
                   font-family: Arial, Helvetica, sans-serif;
                 }
@@ -239,259 +478,13 @@
                 .jssort11 .p:hover, .jssort11 .phv, .jssort11 .pav:hover
                 {
                   background:#333;
-                }       
-                
-            </style>
-<!-- ################################## jssor ############################# -->
-    
-    <script type="text/javascript" src="/assets/jssor.js"></script>
-    <script type="text/javascript" src="/assets/jssor.slider.js"></script>
-      <script type="text/javascript">
-        jssor_slider1_starter = function (containerId) {
-            var options = {
-                $AutoPlay: true,                                    //[Optional] Whether 
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to 
-                $AutoPlayInterval: 4000,                            //[Optional] Interval (
-                $PauseOnHover: 1,                               //[Optional] Whether to 
-                $Loop: 0,                                       //[Optional] Enable loop(1
-                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard 
-                $SlideDuration: 500,                                //[Optional] 
-                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum 
-                $SlideSpacing: 5,                           //[Optional] Space between 
-                $DisplayPieces: 1,                                  //[Optional] Number of 
-                $ParkingPosition: 0,                                //[Optional] The 
-                $UISearchMode: 1,                                   //[Optional] The way (
-                $PlayOrientation: 1,                                //[Optional] 
-                $DragOrientation: 3,                                //[Optional] 
-                $ThumbnailNavigatorOptions: {
-                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to 
-                    $ChanceToShow: 2,                               //[Required] 0 Never, 
-                    $Loop: 2,                                       //[Optional] Enable 
-                    $AutoCenter: 3,                                 //[Optional] Auto 
-                    $Lanes: 1,                                      //[Optional] Specify 
-                    $SpacingX: 4,                                   //[Optional] 
-                    $SpacingY: 4,                                   //[Optional] Vertical 
-                    $DisplayPieces: 4,                              //[Optional] Number of 
-                    $ParkingPosition: 0,                            //[Optional] The 
-                    $Orientation: 2,                                //[Optional] 
-                    $DisableDrag: false                             //[Optional] Disable 
                 }
-            };
-            var jssor_slider1 = new $JssorSlider$(containerId, options);
-
-            function ScaleSlider() {
-                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-                if (parentWidth) {
-                    var sliderWidth = parentWidth;
-                    //keep the slider width no more than 810
-                    sliderWidth = Math.min(sliderWidth, 810);
-
-                    jssor_slider1.$ScaleWidth(sliderWidth);
-                }
-                else
-                    $Jssor$.$Delay(ScaleSlider, 30);
-            }
-            ScaleSlider();
-            $Jssor$.$AddEvent(window, "load", ScaleSlider);
-            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
-            }
-            //responsive code end
-        };
-    </script>
-    <!-- ##################################### jssor script end #################### -->
-  
-<% @counter=Ad.all %>
-<div class="content">
-  <div class="resize_how_diag">
-    <div class="desktop_dialog"><br><br><br>
-      
-        <script type="text/javascript">
-        $('.count1').click(function() {
-          $('#output1').html(function(i, val) { return val*1+1 });
-        });
-      </script>     
-        <div style="margin:0 15% 0 15%;">
-          <h1 style="color:#999">Visits: <%= @counter.first.box_1 ? @counter.first.box_1 : 0 %></h1>
-          <table>
-            <tr>
-              <td>
-                <span class="rating">
-                 <input type="radio" class="rating-input"
-                  id="rating-input-1-5" name="rating-input-1">
-                 <label for="rating-input-1-5" class="rating-star"></label>
-                  <input type="radio" class="rating-input"
-                  id="rating-input-1-4" name="rating-input-1">
-                 <label for="rating-input-1-4" class="rating-star"></label>
-                  <input type="radio" class="rating-input"
-                  id="rating-input-1-3" name="rating-input-1">
-                  <label for="rating-input-1-3" class="rating-star"></label>
-                   <input type="radio" class="rating-input"
-                   id="rating-input-1-2" name="rating-input-1">
-                 <label for="rating-input-1-2" class="rating-star"></label>
-                 <input type="radio" class="rating-input"
-                  id="rating-input-1-1" name="rating-input-1">
-                 <label for="rating-input-1-1" class="rating-star"></label>
-                </span>
-              </td>           
-              <td>                                   
-            <div class="social" align="right" style="width:px;height:px;">
-            <style type="text/css">
-            .fb-share-button{
-              width: 160px;
-              height: 25px;
-            }
-            </style>             
-              <a class="fb-share-button"   data-href="http://www.sharingdais.com/digital_market" data-layout="button" ></a> 
-              <br>
-             <a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-size="large">Tweet us</a><br>            
-                <input type="button" class="" onclick=
-                    "alert('Contact mobile Number : 7840088215')" 
-                    value="Contact us">
-          </div>
-         </td>
-            </tr>
-          </table><br>
-        </div>
-          
-          <div align="center">
-        <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 610px; height: 400px; overflow: hidden;">            
-            <div>
-                <img u="image" src="/assets/micro-site/Pic1.jpg" />
-                <div u="thumb">
-                    <img class="i" src="/assets/micro-site/Pic1.jpg" /><div class="t"></div>
-                    <div class="c"></div>
-                </div>
-            </div>
-            <div>
-                <img u="image" src="/assets/micro-site/pic3.jpg" />
-                <div u="thumb">
-                    <img class="i" src="/assets/micro-site/pic3.jpg" /><div class="t"></div>
-                    <div class="c"></div>
-                </div>
-            </div>
-            <div>
-                <img u="image" src="/assets/micro-site/Pic 2.jpg" />
-                <div u="thumb">
-                    <img class="i" src="/assets/micro-site/Pic 2.jpg" /><div class="t"></div>
-                    <div class="c"></div>
-                </div>
-            </div>
-            <div>
-                <img u="image" src="/assets/micro-site/digital-marketing.jpeg" />
-                <div u="thumb">
-                    <img class="i" src="/assets/micro-site/digital-marketing.jpeg" /><div class="t"></div>
-                    <div class="c"></div>
-                </div>
-            </div>
-        </div>                
-        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 85px; height: 400px; left:640px; top:0px;">            
-            <div u="slides" style="cursor: move;">
-                <div u="prototype" class="p" style="position: absolute; width: 110px; height: 100px; top: 0; left: 0;">
-                    <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
-                </div>
-            </div>            
-        </div> 
-               
-        <a style="display: none" href="http://www.jssor.com">javascript</a>           
-            <script>
-            jssor_slider1_starter('slider1_container');
-            </script>
-      </div>
-    </div>
-
-           <div align="" style="margin:0 15% 0 15%;">
-           <br>
-          <p>
-              <strong style="float:middle;">Guide to Digital Marketing</strong>
-            </p> <br>
-          
-            <strong> Description:</strong>          
-            <p align="justify"> Digital Marketing also known as "Online Marketing" is marketing that makes use of electronic devices to engage with the stakeholders. In this guide, you will learn the difference between push and pull digital marketing, and various digital marketing tactics such as; Search Engine Optimization (SEO), Search Engine Marketing (SEM), Social Media Marketing (SMM) and others. I will also touch upon the Google Adwords and Web Analytics.The guide is kept short and crisp (5 pages) in presentation format (Free). You can request for presentation by sending a mail at support@sharingdais.com</p>
-         <br>          
-            <strong> Location:</strong> Indirapuram, Ghaziabad
-          <br>          
-            <strong>Availability:</strong> Saturday and Sunday
-            <br> 
-          
-            <strong>Price:</strong> INR 500 for 2 hour session. 
-          
-      <!--</div>-->
-       </div>
-
-      </div>
-  </div>
-</div>  
-
-<!-- ############################### social media ############################# -->
-
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-</script>
-<!-- ############################### social media ############################# -->
-
-<style type="text/css">
-/* Rating System css */
-.rating {
-    float:left;
-}
-.rating:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-    clip:rect(0,0,0,0);
-}
-.rating:not(:checked) > label {
-    float:right;
-    width:1em;
-    padding:0 .1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:200%;
-    line-height:1.2;
-    color:#ddd;
-    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
-}
-.rating:not(:checked) > label:before {
-    content: '★ ';
-}
-.rating > input:checked ~ label {
-    color: #f70;
-    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
-}
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-    color: gold;
-    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
-}
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-    color: #ea0;
-    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
-}
-.rating > label:active {
-    position:relative;
-    top:1px;
-    left:2px;
-}
-</style>
-
-<% if params[:controller] == 'admins' %>
+            </style> 
+ 
+ <% if params[:controller] == 'admins' %>
       <%= render :partial =>  "layouts/admin_footer" %>
     <%else%>
-      <%= render :partial =>  "layouts/footer" %>
+      <%#= render :partial =>  "layouts/footer" %>
       <%end%>
       </div>
     </div>
