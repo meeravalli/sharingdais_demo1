@@ -1,0 +1,16 @@
+<%if params[:paginate] == 'post_requirement'%>
+$('.post_requirement_paginate').html("<%= escape_javascript(render("post_requirement"))%>")
+<%elsif params[:paginate] == 'book_post'%>
+$('.book_post_paginate').html("<%= escape_javascript(render("book_post_requirement"))%>")
+<%elsif params[:paginate] == 'skill_post'%>
+$('.skill_post_paginate').html("<%= escape_javascript(render("skill_post_requirement"))%>")
+<%elsif params[:paginate] == 'order_rating'%>
+$('.order_rating_paginate').html("<%= escape_javascript(render("order_rating"))%>")
+<%elsif params[:paginate] == 'order_book_rating'%>
+$('.order_book_rating_paginate').html("<%= escape_javascript(render("order_book_rating"))%>")
+<%elsif params[:paginate] == 'order_skill_rating'%>
+$('.order_skill_rating_paginate').html("<%= escape_javascript(render("order_skill_rating"))%>")
+<%end%>
+
+
+

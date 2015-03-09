@@ -1,5 +1,5 @@
 <div class="display">
-  <h3 class="prf_title">Rate Your Friends For Book</h3>
+  <h3 class="prf_title">Rate & Review Your Friends for Books</h3>
   <div class="table-responsive src_res_desktop">
     <table class="table table-hover">
       <thead class="heading">
@@ -18,7 +18,7 @@
     <tbody>
     <%if !@negotiatn_book.blank? %>
     <% @count = 1 %>
-    <% @negotiatn_book.each do |f| %> 
+    <% @negotiatn_book.each_with_index do |f, i| %> 
     <% if f.user_id.to_s == current_user.id.to_s %> 
     <% 
           myid=Rate.where("user_id=? AND rated_id=? AND book_post_requirement_id=?",f.user.id, f.book_post_requirement.user.id,f.book_post_requirement.id)
@@ -59,7 +59,7 @@
           end 
           %>     
       <tr>
-        <td><%= @count %></td>
+        <td><%= (@page.to_i - 1) * 10 + i+1 %></td>
         <td>
           <% if f.book_post_requirement.seeker_provider == true %>
             Provider
@@ -239,6 +239,7 @@
     <% end %>
     <% @count = @count+1 %>      
   <% end %>
+  
   <%else%>
     <tr>
       <td colspan="9"><center>You don't have any Order</center></td>
@@ -246,6 +247,12 @@
     <% end %>
     </tbody>  
   </table>
+  <div>
+    <tr><td><%=will_paginate @negotiatn_book%></td></tr>
+  </div>
+  <!--<div id="">
+            <%#= will_paginate @negotiatn_book, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>-->
   </div>
   <!--##################### Mobile ############################-->
   <div class="srch_res_mob">
@@ -545,3 +552,10 @@
   <%end%>
   </div>
 </div>
+<script>
+$(document).ready(function(){
+$(".order_book_rating_paginate .pagination a").on("click", function(){
+  $.get(this.href, { paginate: 'order_book_rating' }, null, 'script');    return false;
+  });
+});
+</script>

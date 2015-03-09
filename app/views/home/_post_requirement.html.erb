@@ -22,9 +22,9 @@
     <tbody>
     <% my_count = 1 %>
     <% if !@post_requirements.empty? %>
-      <% @post_requirements.each do |p| %>
+      <% @post_requirements.each_with_index do |p, i| %>
         <tr>
-          <td><%= my_count %></td>
+          <td><%= (@page.to_i - 1) * 10 + i+1 %></td>
           <td><%= p.city.city_name %></td>
           <td><%= p.location.location_name%></td>
           <td>
@@ -51,14 +51,23 @@
         </tr>
         <% my_count +=1 %>
       <% end %>
+
     <% else%>
       <tr> 
         <td colspan="8" style="text-align:center">You don't have any food requirements</td>
         <td></td>
       </tr>
     <%end%>
+    
     </tbody>  
   </table>
+  <div>
+    
+    <tr><td><%=will_paginate @post_requirements%></td> </tr>
+  </div>
+  <!--<div id="">
+            <%#= will_paginate @post_requirements, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>-->
 </div>
 
 <div class="srch_res_mob">
@@ -140,6 +149,13 @@
   <%end%>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+$(".post_requirement_paginate .pagination a").on("click", function(){
+  $.get(this.href, { paginate: 'post_requirement' }, null, 'script');    return false;
+  });
+});
+</script>
 
 
 

@@ -1,5 +1,5 @@
 <div class="display">
-  <h3 class="prf_title">Rate Your Friends For Food</h3>
+  <h3 class="prf_title">Rate & Review Your Friends for Food</h3>
   <div class="table-responsive src_res_desktop">
     <table class="table table-hover">
       <thead class="heading">
@@ -18,7 +18,7 @@
     <tbody>
       <%if !@negotiatn.blank? %>
       <% @count = 1 %>
-      <% @negotiatn.each do |f| %>
+      <% @negotiatn_order.each_with_index do |f, i| %>
       <% if !f.post_requirement_id.nil? %> 
         <% if f.user_id.to_s == current_user.id.to_s %>  
         <% 
@@ -60,7 +60,7 @@
           end 
           %>     
         <tr>
-          <td><%= @count %></td>
+          <td><%= (@page.to_i - 1) * 10 + i+1 %></td>
           <td>
             <% if f.post_requirement.seeker_provider == true %>
               Provider
@@ -243,6 +243,7 @@
         <% end %><%end%>
              <% @count = @count+1 %>
       <% end %> 
+      
       <%else%>
       <tr>
         <td colspan="8"><center>You don't have any Order</center></td>
@@ -250,6 +251,12 @@
       <% end %>
     </tbody>  
   </table>
+  <div>
+    <tr><td><%#=will_paginate @negotiatn_order%></td></tr>
+  </div>
+ <!--<div id="">
+            <%#= will_paginate @negotiatn, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>-->
 </div>
 <!--########################## Mobile ##############################-->
 <div class="srch_res_mob">

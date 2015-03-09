@@ -21,9 +21,9 @@
       <tbody>
         <% my_count = 1 %>
         <% if @book_post_requirements.present? %>
-        <% @book_post_requirements.each do |p| %>
+         <% @book_post_requirements.each_with_index do |p, i| %>
           <tr>
-            <td><%= my_count %></td>
+          <td><%= (@page.to_i - 1) * 10 + i+1 %></td>
             <!--<%# if !p.image.path.nil? %>
               <td><%#= image_tag p.image.url(:small) %></td>
             <%#else%>
@@ -54,6 +54,8 @@
           </tr>
           <% my_count +=1 %>
         <% end %>
+        
+            
         <% else%>
                 <tr> 
                     <td colspan="9" style="text-align:center">You don't have any book requirements </td>
@@ -61,6 +63,12 @@
                 <%end%>
       </tbody>  
     </table>
+    <div>
+      <tr><td><%=will_paginate @book_post_requirements%></td> </tr>
+    </div>
+    <!--<div id="">
+            <%#= will_paginate @book_post_requirements, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>-->
   </div>
 
   <div class="srch_res_mob">
@@ -165,6 +173,13 @@
              <%end%>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+$(".book_post_paginate .pagination a").on("click", function(){
+  $.get(this.href, { paginate: 'book_post' }, null, 'script');    return false;
+  });
+});
+</script>
 
 
 

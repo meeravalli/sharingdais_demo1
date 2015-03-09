@@ -3,7 +3,7 @@
     <div class="profile-bx ">
       <div class="inner-pro row">
         <div class="col-xs-5 left">
-
+          <%#=@user.inspect%>
           <div class="img">
             <% if !@user.provider.nil? %>
               <img src="<%= @user.photo_file_name %>" class="responsive" style="width:100%; height:100%;">
@@ -61,29 +61,69 @@
               <div><%= @user.phone_no %></div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-5  col-md-3">
-              <p>
-                <span class="fa fa-circle-o"></span>Last visited
-              </p>
-            </div>
-            <div class="col-xs-7">
-              <div><%= @user.last_sign_in_at %></div>
-            </div>
-          </div>
-
         
         </div>
       </div>
     </div>
+    <div class = "order_rating_paginate">
     <%= render 'order_rating' %>
-    <%= render 'order_book_rating' %>
-    <%= render 'order_skill_rating' %>
-    <%#= render 'order_rider_rating' %>
-    <%= render 'post_requirement' %>
-    <%= render 'book_post_requirement' %>
-    <%= render 'skill_post_requirement' %>
-    <%#= render 'rider_post_requirement' %>
+     </div>
 
+     <div class = "order_book_rating_paginate">
+    <%= render 'order_book_rating' %>
+    </div>
+
+<div class = "order_skill_rating_paginate">
+    <%= render 'order_skill_rating' %>
+</div>
+
+<div class = "post_requirement_paginate">
+    <%= render 'post_requirement' %>
+</div>
+
+    <div class = "book_post_paginate">
+      <%= render 'book_post_requirement' %>
+     </div>
+    <div class = "skill_post_paginate">
+    <%= render 'skill_post_requirement' %></div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $(".post_requirement_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'post_requirement' }, null, 'script');
+    return false;
+  });
+  $(".book_post_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'book_post' }, null, 'script');
+    return false;
+  });
+  
+$(".skill_post_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'skill_post' }, null, 'script');
+    return false;
+  });
+
+
+$(".order_rating_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'order_rating' }, null, 'script');
+    return false;
+  });
+
+
+$(".order_book_rating_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'order_book_rating' }, null, 'script');
+    return false;
+  });
+
+
+$(".order_skill_rating_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'order_skill_rating' }, null, 'script');
+    return false;
+  });
+
+
+
+});
+</script>

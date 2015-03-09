@@ -23,15 +23,19 @@ before_filter :authenticate_user!, :except => [:index]
 
   def profile
     @user = current_user
-    @post_requirements = @user.post_requirements.order( 'id DESC' )
-    @book_post_requirements = @user.book_post_requirements.order( 'id DESC' )
-    @skill_post_requirements = @user.skill_post_requirements.order( 'id DESC' )
+    @page = params[:page] || 1
+    @post_requirements = @user.post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
+    @book_post_requirements = @user.book_post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
+    @skill_post_requirements = @user.skill_post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
     #@rider_post_requirements = @user.rider_post_requirements.order( 'id DESC' )
     @book_activities = @user.book_activities.order( 'id DESC' )
     @activities = @user.activities.order( 'id DESC' )
     # Order Trace
+    @negotiatn_order=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
+    @negotiatn_skill=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
     @negotiatn=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
-    @negotiatn_book=BookNegotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
+    @negotiatn_book=BookNegotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
+    
   end
   
   def edit_profile
@@ -54,7 +58,6 @@ before_filter :authenticate_user!, :except => [:index]
       render :json => {:status => "You have already rated this item"}
     else
       @rating=Rate.new(:post_requirement_id => params[:post_requirement_id],:negotiate_id => params[:negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Food Sharing" )
-      @rating.save!
       render :json => {:status => "Thank you for rating"}
     end
     #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
