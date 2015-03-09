@@ -1,5 +1,7 @@
 <%= render 'banner_carousel' %>
 <% if @search_params.nil? %>
+<%= render 'skill_micro' %>
+
   <%= render 'home/content' %>
 <% elsif @search_params == 0%>
   <p class="no_result_style"> No Results are found. Request you to post your requirement, we will try to fulfill it.</p>

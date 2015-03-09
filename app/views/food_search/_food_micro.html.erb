@@ -1,0 +1,191 @@
+<style type="text/css">
+.image:hover {
+-webkit-transform:scale(1.1); transform:scale(1.1);
+}
+.image {
+-webkit-transition: all 0.7s ease; transition: all 0.7s ease;
+}
+
+#cf 
+  {
+    position:;
+    height:140px;
+    width:180px;
+    margin:;
+  }
+#cf img 
+{
+  position:absolute;
+  left:;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+#cf img.top:hover {
+  opacity:0;
+}
+/* Slider css */
+.captionOrange, .captionBlack
+        {
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .captionOrange
+        {
+            background: #EB5100;
+            background-color: rgba(235, 81, 0, 0.6);
+        }
+        .captionBlack
+        {
+          font-size:16px;
+            background: #000;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        a.captionOrange, A.captionOrange:active, A.captionOrange:visited
+        {
+          color: #ffffff;
+          text-decoration: none;
+        }
+        a.captionOrange:hover
+        {
+            color: #eb5100;
+            text-decoration: underline;
+            background-color: #eeeeee;
+            background-color: rgba(238, 238, 238, 0.7);
+        }
+        .bricon
+        {
+            background: url(../img/browser-icons.png);
+        }
+</style>
+
+
+<div class="content">
+  <h1 class="how_heading">What is Hot inside?</h1>
+  <!--<div calss="container_responsive">-->
+  <div class="resize_how_diag">
+    <div class="desktop_diag">
+      <table>
+        <tr>
+          <td>
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">-->
+             <a href="/khadi_chawal" target="_blank"> <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+        <a href="/khadi_chawal" class="bix_9" target="_blank"> Home Style Kadhi-Chawal</a>
+<script type="text/javascript">
+  $(".bix_9").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_9':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Patel Nagar- Delhi</p> 
+          </td>
+          <td>
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">-->
+             <a href="/stuffed_parantha" target="_blank"> <img class="top" src="/assets/food_image/aluparatha.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/stuffed_parantha" class="bix_10" target="_blank"> Stuffed Parantha</a>
+<script type="text/javascript">
+  $(".bix_10").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_10':"1"}),success: function (data) {}
+    });
+  });
+</script>            
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </td>
+          <td>
+            <div class="image">            
+             <a href="/veg_thali" target="_blank"> <img class="top" src="/assets/food_image/thali.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/veg_thali" class="bix_11" target="_blank"> Veg Thali</a>
+            </p>
+<script type="text/javascript">
+  $(".bix_11").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_11':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            <p><strong>City:</strong> Bangalore</p> 
+          </td>
+          <td>
+            <div class="image">
+              
+              <a href="/veg_biryani" target="_blank"><img class="top" src="/assets/food_image/thali2.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/veg_biryani" class="bix_12" target="_blank"> Veg Biryani</a>
+<script type="text/javascript">
+  $(".bix_12").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_12':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p>
+          </td>
+          
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- -----------------------Mobile view------------ -->
+  <div class="mob_diag">
+    <div class="srch_res_mob">
+      <div class="res_data">
+        <div class="data_row">
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/food_image/aluparatha.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Stuffed Parantha</a>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </div>
+          <div class="data_col">            
+            <div class="image">
+            <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Home Style Kadhi-Chawal</a>
+            </p>
+            <p><strong>City:</strong> Patel Nagar- Delhi</p> 
+          </div>
+        </div>
+        <div class="data_row">
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/food_image/thali2.jpg"width="180" height="140">
+          </div>
+            <p>
+              <a a href="#" data-toggle="modal" data-target="#myModal"> Veg Biryani</a>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </div>
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/food_image/thali.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Veg Thali</a>
+            </p>
+            <p><strong>City:</strong>Bangalore</p> 
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- ---------------------------------mobile view end------------------------------ -->
+</div>

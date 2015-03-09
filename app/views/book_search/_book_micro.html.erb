@@ -1,0 +1,192 @@
+<style type="text/css">
+.image:hover {
+-webkit-transform:scale(1.1); transform:scale(1.1);
+}
+.image {
+-webkit-transition: all 0.7s ease; transition: all 0.7s ease;
+}
+
+#cf 
+  {
+    position:;
+    height:140px;
+    width:180px;
+    margin:;
+  }
+#cf img 
+{
+  position:absolute;
+  left:;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+#cf img.top:hover {
+  opacity:0;
+}
+/* Slider css */
+.captionOrange, .captionBlack
+        {
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .captionOrange
+        {
+            background: #EB5100;
+            background-color: rgba(235, 81, 0, 0.6);
+        }
+        .captionBlack
+        {
+          font-size:16px;
+            background: #000;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        a.captionOrange, A.captionOrange:active, A.captionOrange:visited
+        {
+          color: #ffffff;
+          text-decoration: none;
+        }
+        a.captionOrange:hover
+        {
+            color: #eb5100;
+            text-decoration: underline;
+            background-color: #eeeeee;
+            background-color: rgba(238, 238, 238, 0.7);
+        }
+        .bricon
+        {
+            background: url(../img/browser-icons.png);
+        }
+</style>
+
+
+<div class="content">
+  <h1 class="how_heading">What is Hot inside?</h1>
+  <!--<div calss="container_responsive">-->
+  <div class="resize_how_diag">
+    <div class="desktop_diag">
+      <table>
+        <tr>
+          <td>
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">-->
+             <a href="/winning_way" target="_blank"> <img class="top" src="/assets/book_image/book1.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+        <a href="/winning_way" class="bix_5" target="_blank"> The Winning Way</a>
+<script type="text/javascript">
+  $(".bix_5").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_5':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Indirapuram,Ghaziabad</p> 
+          </td>
+          <td>
+            <div class="image">
+              <!--<img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">-->
+             <a href="/fifty_shades_grey" target="_blank"> <img class="top" src="/assets/book_image/book2.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/fifty_shades_grey" class="bix_6" target="_blank">Fifty Shades of Grey</a>
+<script type="text/javascript">
+  $(".bix_6").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_6':"1"}),success: function (data) {}
+    });
+  });
+</script>            
+            </p>
+            <p><strong>City:</strong> South City I, Gurgaon</p> 
+          </td>
+          <td>
+            <div class="image">
+             <!-- <img class="bottom" src="/assets/micro-site/cook2.JPG" width="180" height="140"> -->
+             <a href="/revolution_2020" target="_blank"> <img class="top" src="/assets/book_image/book3.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/revolution_2020" class="bix_7" target="_blank"> Revolution 2020</a>
+            </p>
+<script type="text/javascript">
+  $(".bix_7").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_7':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            <p><strong>City:</strong> Karampura, New Delhi</p> 
+          </td>
+          <td>
+            <div class="image">
+              <!--<img class="bottom"src="/assets/micro-site/hightech_ecommerce.jpg" width="180" height="140">-->
+              <a href="/gmat_official_edition" target="_blank"><img class="top" src="/assets/book_image/book4.jpg" width="230" height="200"></a>
+            </div>
+            <p>
+              <a href="/gmat_official_edition" class="bix_8" target="_blank"> Barron’s GMAT Official Edition</a>
+<script type="text/javascript">
+  $(".bix_8").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_8':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Sec 7, Faridabad</p>
+          </td>
+          
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- -----------------------Mobile view------------ -->
+  <div class="mob_diag">
+    <div class="srch_res_mob">
+      <div class="res_data">
+        <div class="data_row">
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/book_image/book2.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Fifty Shades of Grey</a>
+            </p>
+            <p><strong>City:</strong> South City I, Gurgaon</p> 
+          </div>
+          <div class="data_col">            
+            <div class="image">
+            <img class="top" src="/assets/book_image/book1.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> The Winning Way</a>
+            </p>
+            <p><strong>City:</strong> Indirapuram,<br>Ghaziabad</p> 
+          </div>
+        </div>
+        <div class="data_row">
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/book_image/book4.jpg"width="180" height="140">
+          </div>
+            <p>
+              <a a href="#" data-toggle="modal" data-target="#myModal"> Barron’s GMAT Official Edition</a>
+            </p>
+            <p><strong>City:</strong> Sec 7, Faridabad</p> 
+          </div>
+          <div class="data_col">
+            <div class="image">
+            <img class="bottom" src="/assets/book_image/book3.jpg" width="180" height="140">
+          </div>
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Revolution 2020</a>
+            </p>
+            <p><strong>City:</strong> Karampura, New Delhi</p> 
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- ---------------------------------mobile view end------------------------------ -->
+</div>
