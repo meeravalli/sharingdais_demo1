@@ -254,8 +254,10 @@
               </td>
               <td>
                <div class="social" align="right">          
-                 <a class="fb-share-button" button-size="large" data-href="http://www.sharingdais.com/khadi_chawal"  data-layout="button">
-                 </a><br>        
+                 <!--<a class="fb-share-button" button-size="large" data-href="http://www.sharingdais.com/khadi_chawal"  data-layout="button">
+                 </a>-->
+                 <a class="fb-share-button" data-href="https://www.sharingdais.com/khadi_chawal" data-layout="button"></a>
+                 <br>        
                  <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-size="large" data-count="none">Tweet us</a>    <br>
                  <input type="button" class="" onclick=
                     "alert('Contact mobile Number : 7840088215')" 
@@ -327,7 +329,7 @@
 
 <!-- ############################### social media ############################# -->
 
-<script>
+<!--<script>
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -335,7 +337,15 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-</script>
+</script>-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 <!-- ############################### social media ############################# -->

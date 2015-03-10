@@ -168,8 +168,8 @@
         jssor_slider1_starter = function (containerId) {
             var options = {
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
-                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for 
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in 
                 $PauseOnHover: 1,                               //[Optional] Whether to pause when 
                 $Loop: 0,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
 
@@ -226,12 +226,12 @@
 <div class="desktop_dialog"><br><br><br>
 
     <script type="text/javascript">
-        $('.count3').click(function() {
-          $('#output3').html(function(i, val) { return val*1+1 });
+        $('.count14').click(function() {
+          $('#output14').html(function(i, val) { return val*1+1 });
         });
       </script>  
         <div style="margin:0 15% 0 15%;">
-         <h1 style="color:#999">Visits: <%= @counter.first.box_3 ? @counter.first.box_3 : 0 %></h1>
+         <h1 style="color:#999">Visits: <%= @counter.first.box_14 ? @counter.first.box_14 : 0 %></h1>
           <table>
             <tr>
               <td>
@@ -255,8 +255,10 @@
               </td>
               <td>
                  <div class="social" align="right">          
-                 <a class="fb-share-button" data-href="http://www.sharingdais.com/photography" data-layout="button">
-                 </a><br>      
+                 <!--<a class="fb-share-button" data-href="http://www.sharingdais.com/photography" data-layout="button">
+                 </a>-->
+                 <a class="fb-share-button" data-href="https://www.sharingdais.com/photography" data-layout="button"></a>
+                 <br>      
                  <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-count="none">Tweet</a>   <br>
                  <input type="button" class="" onclick=
                     "alert('Contact mobile Number : 7840088215')" 
@@ -267,7 +269,7 @@
           </table>
         </div><br>
         <div class="" align="center">      
-        <div id="slider3_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
+        <div id="slider14_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 610px; height: 400px; overflow: hidden;">            
             <div>
                 <img u="image" src="/assets/skill_image/p1.jpg" style="width:100%; height: ;"/>
@@ -303,7 +305,7 @@
         </div>        
         <a style="display: none" href="http://www.jssor.com">javascript</a>       
         <script>
-            jssor_slider1_starter('slider3_container');
+            jssor_slider1_starter('slider14_container');
         </script>
         </div>  
         </div>
@@ -331,7 +333,7 @@
 
 <!-- ############################### social media ############################# -->
 
-<script>
+<!--<script>
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -339,7 +341,15 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-</script>
+</script>-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 <!-- ############################### social media ############################# -->

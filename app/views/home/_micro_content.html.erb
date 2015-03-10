@@ -65,12 +65,13 @@
 
 
 <div class="content">
-  <h1 class="how_heading">What is Hot inside?</h1>
+ <h1 class="how_heading">What is Hot inside?</h1>
   <!--<div calss="container_responsive">-->
-  <div class="resize_how_diag"> 
-<div class="banner">
+<div class="resize_how_diag"> 
+ <div class="desktop_diag">
+ <div class="banner">
   <div id="slider">
-    <div id="mycarousel" class="carousel slide" data-ride="carousel" data-interval="6000">      
+    <div id="mycarousel" class="carousel slide" data-ride="carousel" data-interval="5000">      
       <!-- Wrapper for slides -->
       <div class="carousel-inner">      
             <div class="item active">              
@@ -81,6 +82,8 @@
                  <a href="/khadi_chawal" target="_blank"> 
                   <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="265" height="200">
                  </a>
+                 <p><a href="/khadi_chawal" target="_blank">Home Style Kadhi-Chawal</a></p>
+                  <p><strong>City:</strong> Patel Nagar- Delhi</p>
                  </div>
                  </td>
                  <td>
@@ -88,6 +91,8 @@
                  <a href="/stuffed_parantha" target="_blank">
                   <img class="top" src="/assets/food_image/aluparatha.jpg" width="265" height="200">
                  </a>
+                 <p><a href="/stuffed_parantha"  target="_blank"> Stuffed Parantha</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
                  </div>
                  </td>
                  <td>
@@ -95,6 +100,8 @@
                  <a href="/veg_thali" target="_blank"> 
                  <img class="top" src="/assets/food_image/thali.jpg" width="265" height="200">
                  </a>
+                 <p><a href="/veg_thali"  target="_blank"> Veg Thali</a></p>
+                  <p><strong>City:</strong> Bangalore</p>
                  </div>
                  </td>
                  <td>
@@ -102,10 +109,13 @@
                  <a href="/veg_biryani" target="_blank">
                  <img class="top" src="/assets/food_image/thali2.jpg" width="265" height="200">
                  </a>
+                 <p><a href="/veg_biryani"  target="_blank"> Veg Biryani</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
                  </div>
                  </td>         
                </tr>
               </table>
+              <!--<%#= render 'food_search/food_micro'%>-->
             </div> 
             <div class="item">
               <table>
@@ -114,25 +124,35 @@
                   <a href="/digital_market" target="_blank"> 
                   <img class="top" src="/assets/micro-site/Pic1.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/digital_market" class="" target="_blank"> Guide to Digital Marketing</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
                   </td>
                   <td>
                   <a href="/bake" target="_blank"> 
                   <img class="top" src="/assets/skill_image/bak1.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/bake" class="" target="_blank">Learn Baking</a></p>
+                  <p><strong>City:</strong> BTM Layout, Bangalore</p>
                   </td>
                   <td>
                   <a href="/photography" target="_blank">
                   <img class="top" src="/assets/skill_image/p1.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/photography" class="" target="_blank">Photography Skills</a></p>
+                  <p><strong>City:</strong> Vasundhara - Ghaziabad</p>
                   </td>
                   <td>
                   <a href="/yoga" target="_blank">
                   <img class="top" src="/assets/skill_image/yoga.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/yoga" class="" target="_blank"> Yoga</a></p>
+                  <p><strong>City:</strong>  Gurgaon</p>
                   </td>          
                 </tr>
               </table> 
-            </div>         
+              <!--<%#= render 'skill_search/skill_micro'%>--> 
+            </div>  
+             
            <div class="item">
               <table>
                 <tr>
@@ -140,24 +160,33 @@
                   <a href="/winning_way" target="_blank"> 
                   <img class="top" src="/assets/book_image/book1.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/winning_way" class="" target="_blank"> The Winning Way</a></p>
+                  <p><strong>City:</strong> Indirapuram,Ghaziabad</p>
                   </td>
                   <td>
                   <a href="/fifty_shades_grey" target="_blank">
                   <img class="top" src="/assets/book_image/book2.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/fifty_shades_grey" class="" target="_blank">Fifty Shades of Grey</a></p>
+                  <p><strong>City:</strong> South City I, Gurgaon</p>
                   </td>
                   <td>
                   <a href="/revolution_2020" target="_blank"> 
                   <img class="top" src="/assets/book_image/book3.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/revolution_2020" class="" target="_blank"> Revolution 2020</a></p>
+                  <p><strong>City:</strong> Karampura, New Delhi</p>
                   </td>
                   <td>
                   <a href="/gmat_official_edition" target="_blank">
                   <img class="top" src="/assets/book_image/book4.jpg" width="265" height="200">
                   </a>
+                  <p><a href="/gmat_official_edition" class="" target="_blank"> Barron’s GMAT Official Edition</a></p>
+                  <p><strong>City:</strong> Sec 7, Faridabad</p>
                   </td>
                 </tr>
-              </table>                    
+              </table> 
+              <!--<%#= render 'book_search/book_micro'%>-->                    
             </div>          
                     
           
@@ -174,66 +203,146 @@
 </div>
 </div>
 </div>
-
+</div>
+</div>
 
   <!-- -----------------------Mobile view------------ -->
-  <!--<div class="mob_diag">
+  <div class="mob_diag">
     <div class="srch_res_mob">
       <div class="res_data">
         <div class="data_row">
-          <div class="data_col">
-            <div class="image">
-            <img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">
-          </div>
-            <p>
-              <a href="#" data-toggle="modal" data-target="#myModal"> Chocolate Cake in 20 min</a>
-            </p>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </div>
-          <div class="data_col">            
-            <div class="image">
-            <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140">
-          </div>
-            <p>
-              <a href="#" data-toggle="modal" data-target="#myModal"> Guide to Digital Marketing</a>
-            </p>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </div>
+          
+            <table>
+                <tr>
+                  <td>              
+                  <a href="/digital_market" target="_blank"> 
+                  <img class="top" src="/assets/micro-site/Pic1.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/digital_market" class="" target="_blank"> Guide to Digital Marketing</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
+                  </td>
+                  <td>
+                  <a href="/bake" target="_blank"> 
+                  <img class="top" src="/assets/skill_image/bak1.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/bake" class="" target="_blank">Learn Baking</a></p>
+                  <p><strong>City:</strong> BTM, Bangalore</p>
+                  </td>
+                </tr>
+                  </table>
+                  <table>
+                <tr>
+                  <td>
+                  <a href="/photography" target="_blank">
+                  <img class="top" src="/assets/skill_image/p1.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/photography" class="" target="_blank">Photography Skills</a></p>
+                  <p><strong>City:</strong> Vasundhara - Ghaziabad</p>
+                  </td>
+                  <td>
+                  <a href="/yoga" target="_blank">
+                  <img class="top" src="/assets/skill_image/yoga.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/yoga" class="" target="_blank"> Yoga</a></p>
+                  <p><strong>City:</strong>  Gurgaon</p>
+                  </td>          
+                </tr>
+              </table> 
+            
+           </div> 
+           <div class="data_row">
+                     
+           <table>
+                <tr>
+                  <td>                                  
+                  <a href="/winning_way" target="_blank"> 
+                  <img class="top" src="/assets/book_image/book1.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/winning_way" class="" target="_blank"> The Winning Way</a></p>
+                  <p><strong>City:</strong> Indirapuram,<br>Ghaziabad</p>
+                  </td>
+                  <td>
+                  <a href="/fifty_shades_grey" target="_blank">
+                  <img class="top" src="/assets/book_image/book2.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/fifty_shades_grey" class="" target="_blank">Fifty Shades of Grey</a></p>
+                  <p><strong>City:</strong> South City I, Gurgaon</p>
+                  </td>
+                </tr>
+                </table>
+                <table>
+                  <tr>
+                  <td>
+                  <a href="/revolution_2020" target="_blank"> 
+                  <img class="top" src="/assets/book_image/book3.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/revolution_2020" class="" target="_blank"> Revolution 2020</a></p>
+                  <p><strong>City:</strong> Karampura, New Delhi</p>
+                  </td>
+                  <td>
+                  <a href="/gmat_official_edition" target="_blank">
+                  <img class="top" src="/assets/book_image/book4.jpg" width="100" height="70">
+                  </a>
+                  <p><a href="/gmat_official_edition" class="" target="_blank"> Barron’s GMAT Official Edition</a></p>
+                  <p><strong>City:</strong> Sec 7, Faridabad</p>
+                  </td>
+                </tr>
+              </table>  
+        
+        </div> 
+        <div class="data_row">          
+            <table>
+                <tr>
+                  <td>
+                  <div class="">              
+                 <a href="/khadi_chawal" target="_blank"> 
+                  <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="100" height="70">
+                 </a>
+                 <p><a href="/khadi_chawal" target="_blank">Home Style Kadhi-Chawal</a></p>
+                  <p><strong>City:</strong> Patel Nagar- Delhi</p>
+                 </div>
+                 </td>
+                 <td>
+                 <div class="">
+                 <a href="/stuffed_parantha" target="_blank">
+                  <img class="top" src="/assets/food_image/aluparatha.jpg" width="100" height="70">
+                 </a>
+                 <p><a href="/stuffed_parantha"  target="_blank"> Stuffed Parantha</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
+                 </div>
+                 </td>
+               </tr>
+               </table>
+               <table>
+                <tr>
+                 <td>
+                 <div class="">
+                 <a href="/veg_thali" target="_blank"> 
+                 <img class="top" src="/assets/food_image/thali.jpg" width="100" height="70">
+                 </a>
+                 <p><a href="/veg_thali"  target="_blank"> Veg Thali</a></p>
+                  <p><strong>City:</strong> Bangalore</p>
+                 </div>
+                 </td>
+                 <td>
+                 <div class="">
+                 <a href="/veg_biryani" target="_blank">
+                 <img class="top" src="/assets/food_image/thali2.jpg" width="100" height="70">
+                 </a>
+                 <p><a href="/veg_biryani"  target="_blank"> Veg Biryani</a></p>
+                  <p><strong>City:</strong> Ghaziabad</p>
+                 </div>
+                 </td>         
+               </tr>
+              </table>
+          
         </div>
-        <div class="data_row">
-          <div class="data_col">
-            <div class="image">
-            <img class="bottom" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG"width="180" height="140">
-          </div>
-            <p>
-              <a a href="#" data-toggle="modal" data-target="#myModal"> Booming e-commerce Industry</a>
-            </p>
-            <p><strong>City:</strong> Bangalore</p> 
-          </div>
-          <div class="data_col">
-            <div class="image">
-            <img class="bottom" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
-          </div>
-            <p>
-              <a href="#" data-toggle="modal" data-target="#myModal"> Home Cooked food by Mrs. Nigam</a>
-            </p>
-            <p><strong>City:</strong> Ghaziabad</p> 
-          </div>
-        </div>
-        <div class="data_col">
-          <div class="image">
-          <img class="bottom" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
-        </div>
-          <p>
-            <a href="#" data-toggle="modal" data-target="#myModal"> Porter's 5 Forces: Marketing Gyan</a>
-          </p>
-          <p><strong>City:</strong> Gurgaon</p> 
-        </div>
+       
       </div>
     </div>
-  </div>-->
+  </div>
   <!-- ---------------------------------mobile view end------------------------------ -->
 </div>
 <!-- ---------------------------------Models------------------------------ -->
-</div>
+
 <%#= render :partial =>  "home/model" %>
