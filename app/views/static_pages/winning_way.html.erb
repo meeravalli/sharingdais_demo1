@@ -252,7 +252,7 @@
               </td>
               <td>
                  <div class="social" align="right"> 
-                <a class="fb-share-button" data-href="https://www.sharingdais.com/winning_way" data-layout="button"></a>
+                <a class="fb-share-button" data-href="http://www.sharingdais.com/winning_way" data-layout="button"></a>
              <!--<a class="fb-share-button" data-href="http://www.sharingdais.com/winning_way" data-layout="button">              
               </a>-->
 
@@ -260,7 +260,90 @@
              <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-count="none">Tweet</a><br>
               <input type="button" class="" onclick=
                     "alert('Contact mobile Number : 7840088215')" 
-                    value="Contact us">       
+                    value="Contact us">  <br>
+                    <a alt="Share this on Facebook" title="Share this on Facebook" target="entsharewindow" href="http://www.facebook.com/sharer/sharer.php?u=http://www.entrepreneur.com/article/243054" class="entShare sharebar-fb">
+      <div></div>
+    </a>     
+    <style type="text/css">
+
+.sharebar .sharebar-fb::before {
+    content: "";
+}
+.sharebar a::before {
+    color: #fff;
+    content: "";
+    cursor: pointer;
+    display: block;
+    font-family: FontAwesome;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    height: 40px;
+    left: 0;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 42px;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+article .content-main .content-main-body a {
+    color: #2093d2;
+}
+.sharebar .sharebar-fb {
+    background: none repeat scroll 0 0 #3c599f;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+.sharebar a {
+    float: left;
+    height: 40px;
+    margin-bottom: 0;
+    padding: 0 0 0 32px;
+    position: relative;
+    text-decoration: none;
+    width: 90px;
+}
+body a, html a {
+    color: #2093d2;
+}
+body a, html a {
+    color: #2093d2;
+}
+a {
+    color: #252525;
+    outline: 0 none;
+    text-decoration: none;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+*::-moz-selection {
+    background: none repeat scroll 0 0 #2093d2;
+    color: #fff;
+}
+article .content-main .content-main-body {
+    color: #000;
+    font-size: 19px;
+    line-height: 30px;
+}
+body, html {
+    font-family: "proxima-nova",arial,sans-serif;
+    font-size: 100%;
+}
+body, html {
+    font-family: "proxima-nova",arial,sans-serif;
+    font-size: 100%;
+}
+html {
+    color: #000;
+}
+</style>
             </div>
                 
               </td>
@@ -497,7 +580,7 @@
  <% if params[:controller] == 'admins' %>
       <%= render :partial =>  "layouts/admin_footer" %>
     <%else%>
-      <%#= render :partial =>  "layouts/footer" %>
+      <%= render :partial =>  "layouts/footer" %>
       <%end%>
       </div>
     </div>

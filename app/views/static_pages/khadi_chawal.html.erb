@@ -10,11 +10,10 @@
     <!--<title>Sharingdais an Online Platform for Peer to Peer Sharing</title>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta property="og:image" content="http://www.sharingdais.com/assets/food_image/kadi-chawal.jpg"/>
+  <meta property="og:image" content="http://www.sharingdais.com/assets/food_image/kadi-chawal.jpg"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="Keywords" content="Peer to Peer Sharing, Person to Person Sharing, Online Sharing, Online advertisements, Sharing Economy, Collaborative Consumption, Free advertisement, Free ads, Share stuff, Share goods and services, Sharing in Delhi, Sharing in Bangalore, Sharing in Bengaluru, Sharing in Ghaziabad, Sharing in Gurgaon, Sharing in Faridabad" />
-    <meta property="og:description" content="Kadhi chawal ("yogurt curry with rice") is a popular, rice based dish from India. There are several variations of this food that can be found in states such as Uttar Pradesh, Punjab, Rajasthan and Gujarat. The meal consists of besan (gram flour), yogurt and spices.
-            What is better than having ghar style Kadhi-Chawal? Try once."/>
+    <meta property="og:description" content=" Kadhi chawal is a popular, rice based dish from India. There are several variations of this food that can be found in states such as Uttar Pradesh, Punjab, Rajasthan and Gujarat. The meal consists of besan, yogurt and spices. What is better than having ghar style Kadhi-Chawal? Try once." />
     <%= stylesheet_link_tag "application", :media => "all" %>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -254,9 +253,8 @@
               </td>
               <td>
                <div class="social" align="right">          
-                 <!--<a class="fb-share-button" button-size="large" data-href="http://www.sharingdais.com/khadi_chawal"  data-layout="button">
-                 </a>-->
-                 <a class="fb-share-button" data-href="https://www.sharingdais.com/khadi_chawal" data-layout="button"></a>
+                 
+                  <a class="fb-share-button"  data-href="http://www.sharingdais.com/khadi_chawal" data-layout="button" ></a> 
                  <br>        
                  <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-size="large" data-count="none">Tweet us</a>    <br>
                  <input type="button" class="" onclick=
@@ -490,7 +488,7 @@
   <% if params[:controller] == 'admins' %>
       <%= render :partial =>  "layouts/admin_footer" %>
     <%else%>
-      <%#= render :partial =>  "layouts/footer" %>
+      <%= render :partial =>  "layouts/footer" %>
       <%end%>
       </div>
     </div>

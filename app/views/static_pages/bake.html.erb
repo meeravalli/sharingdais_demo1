@@ -252,10 +252,9 @@
                  </span>
               </td>
               <td>
-                <div class="social" align="right">          
-                <!--<a class="fb-share-button" data-href="http://www.sharingdais.com/bake" data-layout="button">
-                </a>-->
-                <a class="fb-share-button" data-href="https://www.sharingdais.com/bake" data-layout="button"></a>
+                <div class="social" align="right">         
+                
+                <a class="fb-share-button" data-href="http://www.sharingdais.com/bake" data-layout="button"></a>
                 <br>       
                 <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-count="none">Tweet</a>  <br> 
                 <input type="button" class="" onclick=
@@ -491,7 +490,7 @@
  <% if params[:controller] == 'admins' %>
       <%= render :partial =>  "layouts/admin_footer" %>
     <%else%>
-      <%#= render :partial =>  "layouts/footer" %>
+      <%= render :partial =>  "layouts/footer" %>
       <%end%>
       </div>
     </div>
