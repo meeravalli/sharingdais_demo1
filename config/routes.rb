@@ -24,14 +24,10 @@ Sharingdasiss::Application.routes.draw do
     get :edit_skill_list_availability, :on => :member
     delete :skill_destroy_requirement, :on => :member
 
-    #post :post_rider_requirement, :on => :collection
-    #post :rider_list_availability, :on => :collection
-    #get :edit_rider_post_requirement, :on => :member
-    #get :edit_rider_list_availability, :on => :member
-    #delete :rider_destroy_requirement, :on => :member
+    
 
-    get :post_your_ad, :on => :collection
-    get :post_your_ad_login, :on => :collection
+    get :shares_with_us, :on => :collection
+    get :share_with_us, :on => :collection
   end
   
   resources :application do
@@ -70,13 +66,17 @@ Sharingdasiss::Application.routes.draw do
     get :edit_profile, :on => :member
     get :review, :on => :member
   end
+  get "/profile/:name" => "home#profile",:as => :prof_home
 
   # resources :book_search, :only => [:index]
-  
+ get "/:city/:location/food_search" => "food_search#index"
+ get "/:city/:location/skill_search" => "skill_search#index"
+ get "/:city/:location/book_search" => "book_search#index"  
   match '/book_search', :to => 'book_search#index'
   match '/food_search', :to => 'food_search#index'
   match '/skill_search', :to => 'skill_search#index'
- # match '/rider_search', :to => 'rider_search#index'
+  #match  '/peer_service', :to => 'peer_service#index' 
+ 
 
   match '/home/search', :to => 'home#index'
 
@@ -93,11 +93,11 @@ Sharingdasiss::Application.routes.draw do
   get "post_food_exl" => "admins#post_food_exl"
   get "post_book_exl" => "admins#post_book_exl"
   get "post_skill_exl" => "admins#post_skill_exl"
-  #get "post_ride_exl" => "admins#post_ride_exl"
+  
   get "list_food_exl" => "admins#list_food_exl"
   get "list_book_exl" => "admins#list_book_exl"
   get "list_skill_exl" => "admins#list_skill_exl"
-  #get "list_ride_exl" => "admins#list_ride_exl"
+  
 
   get "post_requirements" => "admins#post_requirements"
   get "list_requirements" => "admins#list_requirements"
@@ -109,18 +109,17 @@ Sharingdasiss::Application.routes.draw do
   delete "destroy_book_post" => "admins#destroy_book_post"
   post "/edit_skill_post" => "admins#edit_skill_post"
   delete "destroy_skill_post" => "admins#destroy_skill_post"
-  #post "/edit_ride_post" => "admins#edit_ride_post"
-  #delete "destroy_ride_post" => "admins#destroy_ride_post"
+  
   
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
   post "search_skill" => "book_search#search_top_five_skill"
-  #post "search_rider" => "book_search#search_top_five_ride"
+ 
   post "send_feedback" => "book_search#feedback"
   post "rate_me" => "home#rate_me"
   post "rate_me_book" => "home#rate_me_book"
   post "rate_me_skill" => "home#rate_me_skill"
-  #post "rate_me_ride" => "home#rate_me_ride"
+  
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
   post "save_phone" => "home#save_phone"
@@ -130,21 +129,20 @@ Sharingdasiss::Application.routes.draw do
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
   get "/skill_result/:id/:seeker_provider/" =>"skill_search#skill_result"
-  #get "/rider_result/:id/:seeker_provider" => "rider_search#rider_result"
+  
   get "offer" => "book_search#offer"
 
   get "skill_search/index"
   get "skill_search/skill_result"
-  #get "rider_search/index"
-  #get "rider_search/rider_result"
+  
   
   get "close_window" => "book_search#close_window"
 
   get "digital_market" => "static_pages#digital_market"
-  get "choc_cake" => "static_pages#choc_cake"
-  get "home_food" => "static_pages#home_food"
-  get "ecomm_shop" => "static_pages#ecomm_shop"
-  get "marketing_stratgy" => "static_pages#marketing_stratgy"
+  #get "choc_cake" => "static_pages#choc_cake"
+  #get "home_food" => "static_pages#home_food"
+  #get "ecomm_shop" => "static_pages#ecomm_shop"
+  #get "marketing_stratgy" => "static_pages#marketing_stratgy"
   get "winning_way" => "static_pages#winning_way"
   get "fifty_shades_grey" => "static_pages#fifty_shades_grey"
   get "revolution_2020" => "static_pages#revolution_2020"
@@ -156,7 +154,10 @@ Sharingdasiss::Application.routes.draw do
   get "stuffed_parantha" => "static_pages#stuffed_parantha"
   get "veg_thali" => "static_pages#veg_thali"
   get "veg_biryani" => "static_pages#veg_biryani"
-
+  #get "peer_service1" => "static_pages#peer_service1"
+  #get "peer_service2" => "static_pages#peer_service2"
+  #get "peer_service3" => "static_pages#peer_service3"
+  #get "peer_service4" => "static_pages#peer_service4"
   post "create_review" => "home#create_review"
   get "show_reviews" => "home#show_review", :as => :show_reviews
   

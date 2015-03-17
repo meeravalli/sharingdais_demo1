@@ -5,10 +5,10 @@ class PostRequirement < ActiveRecord::Base
   after_validation :geocode, :if => :full_location_address_changed?
 
   # White list attribute - Mass assignment
-  attr_accessible :budget, :city_id, :details, :food_type_id, :location_id, :meal_type_id, 
-                  :no_of_persons, :provider_id, :region_id, :seeker_provider, :service_id, 
+  attr_accessible :budget, :city_id, :details, :food_type_id, :location_id, :meal_type_id,
+                  :no_of_persons, :provider_id, :region_id, :seeker_provider, :service_id,
                   :user_id, :food_image, :latitude, :longitude, :content
- 
+
   # Association
   has_many :orders, :dependent => :destroy
   has_many :messages, :dependent => :destroy
@@ -37,13 +37,13 @@ class PostRequirement < ActiveRecord::Base
   validates_attachment_content_type :food_image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
     def full_location_address
-      [self.location.location_name, self.city.city_name, "India"].compact.join(', ')  
+      [self.location.location_name, self.city.city_name, "India"].compact.join(', ')
     end
 
     def full_location_address_changed?
       self.location.location_name_changed? || self.city.city_name_changed? || "India"
     end
-  
+
   # This method is use to fetch the records from postrequirement based on user inputs
   def self.filter_conditions( options={} )
     food_type_any = FoodType.find_by_name('Any').id
@@ -60,7 +60,7 @@ class PostRequirement < ActiveRecord::Base
     end
 
     if options.has_key?("include_near_by_locations")
-      
+
     else
       unless options[:location_id].blank?
         sql_condition += " and location_id = #{options[:location_id]}"
@@ -103,7 +103,7 @@ class PostRequirement < ActiveRecord::Base
     sql_condition << ")"
 
     symbol =''
-    
+
     case options[:food].to_i
     when 0
       sql_condition += " and (seeker_provider = #{false})"
@@ -134,14 +134,14 @@ class PostRequirement < ActiveRecord::Base
         city = City.where("id = ?",options[:city_id]).last
         search_area = [location.location_name, city.city_name, "India"].join(", ")
         filter_records = PostRequirement.near(search_area, options[:kms].to_i)
-#.where(sql_condition).order(:no_of_persons) 
+#.where(sql_condition).order(:no_of_persons)
         @result_1 = filter_records.where(sql_condition).order(:no_of_persons)
         @result_2 = filter_records.where(sql_condition_1)
-      else 
-        
+      else
+
         @result_1 = self.where(sql_condition).order(:no_of_persons)
         @result_2 = self.where(sql_condition_1)
-      end 
+      end
     end
 
     if options[:no_of_persons].blank? or symbol == '<='
@@ -152,10 +152,68 @@ class PostRequirement < ActiveRecord::Base
         @results = PostRequirement.near(search_area, options[:kms].to_i, :units => :km).where(sql_condition).order(:no_of_persons)
       else
         @results = self.where(sql_condition).order(:no_of_persons)
-      end  
+      end
     else
       @results = @result_1 + @result_2
     end
   end
+
+
+def self.filter_conditions_food(city,location,food_type,food)
+    food_type_any = FoodType.find_by_name('Any').id
+    meal_type_any = MealType.find_by_name('Any').id
+    region_any = Region.find_by_name('Any').id
+    caterer = Provider.find_by_provider_type('caterers').id
+    chef = Provider.find_by_provider_type('chefs').id
+    cit = City.where(:city_name => city).first
+    loc = Location.where(:location_name => location).first
+
+    sql_condition = '1'
+    sql_condition_1 = ''
+    unless city.blank?
+     sql_condition += " and city_id = #{cit.id}"
+    end
+    unless food_type.blank?
+      food_ty = FoodType.where(:name => food_type).first
+      if food_ty.name != 'Any'
+        sql_condition += " and food_type_id in ('#{food_ty.id}', #{food_type_any})"
+      end
+    end
+
+    sql_condition = sql_condition.insert 0,"("
+    sql_condition << ")"
+
+    symbol =''
+
+    case food.to_i
+    when 0
+      sql_condition += " and (seeker_provider = #{false})"
+      symbol = '>='
+    when 1
+      sql_condition += " and (seeker_provider = #{true})"
+      symbol = '<='
+    when 2
+      case options[:identity].to_i
+      when 1,2
+        sql_condition += " and (seeker_provider = #{true})"
+        symbol = '<='
+      when 3,4
+        sql_condition += " and (seeker_provider = #{false})"
+        symbol = '>='
+      else
+      end
+    else
+      sql_condition += " "
+    end
+       location = Location.where("id = ?","#{loc.id}").last
+        city = City.where("id = ?","#{cit.id}").last
+        search_area = [location.location_name, city.city_name, "India"].join(", ")
+        @results = PostRequirement.near(search_area, 10, :units => :km).where(sql_condition).order(:no_of_persons)
+      
+    
+  end
+
+
 end
+
 
