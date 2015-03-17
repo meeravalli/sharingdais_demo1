@@ -16,12 +16,12 @@
   </div>
 </div>
 <script type="text/javascript">
-	$(window).load(function(){
-	$("#popup_city").val(""); 
-	value = $.cookie('city_id')
-	if (value == null){
-	$('#myModal').modal({
-	 backdrop: 'static',
+ $(window).load(function(){
+ $("#popup_city").val(""); 
+ value = $.cookie('city_id')
+ if (value == null){
+ $('#myModal').modal({
+  backdrop: 'static',
     keyboard: true,
     show: true
 })
@@ -38,12 +38,12 @@
           </a>
         </div>
         </div>
-		<div class="left city_select padding_five margin_city col-sm-3">
+  <div class="left city_select padding_five margin_city col-sm-3">
                    <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control", :onchange => "get_location(this.value,'locality_id_class')"} %>
-		</div>
-		  <div class="nav-mob">
-			<span id="mob_menu" class="fa fa-align-justify nav_icon">
-				<ul class="mob_nav">
+  </div>
+    <div class="nav-mob">
+   <span id="mob_menu" class="fa fa-align-justify nav_icon">
+    <ul class="mob_nav">
           <li class="">
             <a href="/book_search">Book Sharing</a>
           </li>
@@ -60,43 +60,42 @@
           <li class="" style="font-family:Helvetica,Sans-Serif; background-color:#007a87;">
             
             <%#= link_to 'Post as Seeker', post_requirement_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
-            <%= link_to 'SHARE WITH US', post_your_ad_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
+            <%= link_to 'SHARE WITH US', shares_with_us_sharing_index_path, :title => "Looking for food or books or skills of your choice? Submit your request here" %>
           </li>
           <!--<li class="">
             <%#= link_to 'Post as Provider', list_availability_sharing_index_path, :title => "Interested in providing food or books or skills? Submit your request here" %>
           </li>-->
-					<% if current_user.nil? %>
-						<li class="">
+     <% if current_user.nil? %>
+      <li class="">
               <a href="/users/sign_in">Sign In/Up</a>
             </li>
-					<%end%>
-					<% if current_user %>
-						<li class="">
-              <%= link_to "Profile",profile_home_path(current_user) %>
+     <%end%>
+     <% if current_user %>
+      <li class="">
+              <%= link_to "Profile",prof_home_path(current_user.name) %>
             </li>
 
 
-						<!--<li class="">
+      <!--<li class="">
               <%#= link_to 'Inbox', messages_path %> <%# if session[:unread_messages] > 0 %> (<%#= session[:unread_messages] %>) <%# end %>
             </li>-->
-						<li class="">
+      <li class="">
               <%= link_to 'Change Password', edit_user_registration_path %>
             </li>
-						<li class="">
+      <li class="">
               <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
             </li>
-						<% if current_user.admin? %>
-							<li class="">
+      <% if current_user.admin? %>
+       <li class="">
                 <%= link_to "Admin Dashboard", admins_path %>
               </li>
-						<%end%>
-					<%end%>
-					</ul>
-					</span>
-			
-				</div>
+      <%end%>
+     <%end%>
+     </ul>
+     </span>
+   
+    </div>
       <%= render :partial =>  "layouts/menu" %>
     </div>
   </div>
 </div>
-

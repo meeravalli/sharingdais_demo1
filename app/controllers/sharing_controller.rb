@@ -1,7 +1,7 @@
 class SharingController < ApplicationController
   #before_filter :authenticate_user!
   #prepend_before_filter :require_no_authentication, only: [ :post_your_ad, :post_requirement, :list_availability ]
-  def post_your_ad
+  def shares_with_us
     post_requirement
     list_availability
   end
