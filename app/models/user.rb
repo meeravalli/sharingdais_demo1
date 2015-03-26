@@ -10,21 +10,27 @@ class User < ActiveRecord::Base
   
   has_many :skill_post_requirements, :dependent => :destroy
   has_many :book_post_requirements, :dependent => :destroy
+  has_many :peer_service_post_requirements, :dependent => :destroy
   has_many :post_requirements, :dependent => :destroy
   has_many :negotiates, :dependent => :destroy
   has_many :book_negotiates, :dependent => :destroy
+  has_many :peer_negotiates, :dependent => :destroy
   has_many :messages_in, :class_name => 'Message', :foreign_key => :posted_to, :dependent => :destroy
   has_many :book_messages_in, :class_name => 'BookMessage', :foreign_key => :posted_to, :dependent => :destroy
+  has_many :peer_messages_in, :class_name => 'PeerMessage', :foreign_key => :posted_to, :dependent => :destroy
   has_many :messages_out, :class_name => 'Message', :foreign_key => :user_id, :dependent => :destroy
   has_many :book_messages_out, :class_name => 'BookMessage', :foreign_key => :user_id, :dependent => :destroy
+  has_many :peer_messages_out, :class_name => 'PeerMessage', :foreign_key => :user_id, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :book_activities, :dependent => :destroy
+  has_many :peer_activities, :dependent => :destroy
   has_many :orders_in, :class_name => 'Order', :foreign_key => :provider_id, :dependent => :destroy
   has_many :book_orders_in, :class_name => 'BookOrder', :foreign_key => :provider_id, :dependent => :destroy
+  has_many :peer_orders_in, :class_name => 'PeerOrder', :foreign_key => :provider_id, :dependent => :destroy
   has_many :orders_out, :class_name => 'Order', :foreign_key => :user_id, :dependent => :destroy
   has_many :book_orders_out, :class_name => 'BookOrder', :foreign_key => :user_id, :dependent => :destroy
-  has_many :reviews
-  
+  has_many :peer_orders_out, :class_name => 'PeerOrder', :foreign_key => :user_id, :dependent => :destroy
+  has_many :reviews  
   belongs_to :city
   
   has_attached_file :photo, :styles => { :small => "150x150>" },

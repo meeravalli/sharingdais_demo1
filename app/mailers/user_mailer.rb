@@ -20,17 +20,7 @@ class UserMailer < ActionMailer::Base
     @message = Message.find(message_id)
     mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
    end
-=begin
-   def new_order_for_ride_provider(provider, message_id, seeker)
-    #@url = "http://www.sharingdais.com/main/messages"
-    @url = "http://www.sharingdais.com/main/home/profile"
-    @login_url = "http://sharingdais.com/users/sign_in"
-    @user = provider
-    @seeker = seeker
-    @message = Message.find(message_id)
-    mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
-   end
-=end
+
    def new_book_order_for_provider(provider, message_id, seeker)
     #@url = "http://www.sharingdais.com/main/messages"
     @url = "http://www.sharingdais.com/main/home/profile"
@@ -38,6 +28,16 @@ class UserMailer < ActionMailer::Base
     @user = provider
     @seeker = seeker
     @message = BookMessage.find(message_id)
+    @location =Location.where("id=?",@message.location_id)
+    mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
+   end
+   def new_peer_order_for_provider(provider, message_id, seeker)
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
+    @login_url = "http://sharingdais.com/users/sign_in"
+    @user = provider
+    @seeker = seeker
+    @message = PeerMessage.find(message_id)
     @location =Location.where("id=?",@message.location_id)
     mail(:to => @user.email, :subject => "Sharingdais.com | New Order" )
    end
@@ -61,6 +61,18 @@ class UserMailer < ActionMailer::Base
     @user = seeker
     @provider = provider
     @message = BookMessage.find(seeker_message_id)
+    p '**************'
+    p @message
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
+ end
+
+ def peer_address_info_seeker(seeker, seeker_message_id, provider)
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
+    @login_url = "http://sharingdais.com/users/sign_in"
+    @user = seeker
+    @provider = provider
+    @message = PeerMessage.find(seeker_message_id)
     p '**************'
     p @message
     mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
@@ -90,6 +102,18 @@ class UserMailer < ActionMailer::Base
     mail(:to => provider.email, :subject => "Sharingdais.com | Contact Information" )
   end
 
+  def peer_address_info_provider(provider, provider_message_id, seeker)
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
+    @login_url = "http://sharingdais.com/users/sign_in"
+    @user = provider
+    @seeker = seeker
+    @message = PeerMessage.find(provider_message_id)
+    p '????????????*********'
+    p @message
+    mail(:to => provider.email, :subject => "Sharingdais.com | Contact Information" )
+  end
+
   def mail_book_contact_info_provider(provider, contact_details, seeker)
     #@url = "http://www.sharingdais.com/main/messages"
     @url = "http://www.sharingdais.com/main/home/profile"
@@ -101,7 +125,17 @@ class UserMailer < ActionMailer::Base
     p @message
     mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
   end
-  
+  def mail_peer_contact_info_provider(provider, contact_details, seeker)
+    #@url = "http://www.sharingdais.com/main/messages"
+    @url = "http://www.sharingdais.com/main/home/profile"
+    @login_url = "http://sharingdais.com/users/sign_in"
+    @user = provider
+    @seeker = seeker
+    @message = contact_details.name
+    p '????????????*********'
+    p @message
+    mail(:to => seeker.email, :subject => "Sharingdais.com | Contact Information" )
+  end
   def mail_contact_info_provider(provider, contact_details, seeker)
     #@url = "http://www.sharingdais.com/main/messages"
     @url = "http://www.sharingdais.com/main/home/profile"
