@@ -26,15 +26,19 @@ before_filter :authenticate_user!, :except => [:index]
     @page = params[:page] || 1
     @post_requirements = @user.post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
     @book_post_requirements = @user.book_post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
+    @peer_service_post_requirements = @user.peer_service_post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
     @skill_post_requirements = @user.skill_post_requirements.order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
-    #@rider_post_requirements = @user.rider_post_requirements.order( 'id DESC' )
+    
     @book_activities = @user.book_activities.order( 'id DESC' )
+    @peer_activities = @user.peer_activities.order( 'id DESC' )
+
     @activities = @user.activities.order( 'id DESC' )
     # Order Trace
     @negotiatn_order=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
     @negotiatn_skill=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
     @negotiatn=Negotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' )
     @negotiatn_book=BookNegotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
+    @negotiatn_peer=PeerNegotiate.where("user_id=? OR nego_id=?",@user,@user).order( 'id DESC' ).paginate(:page => params[:page], :per_page => 10)
     
   end
   
@@ -59,6 +63,7 @@ before_filter :authenticate_user!, :except => [:index]
     else
       @rating=Rate.new(:post_requirement_id => params[:post_requirement_id],:negotiate_id => params[:negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Food Sharing" )
       render :json => {:status => "Thank you for rating"}
+      @rating.save!
     end
     #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
   end
@@ -85,19 +90,18 @@ before_filter :authenticate_user!, :except => [:index]
     end
     #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
   end
-=begin 
-  def rate_me_ride  
-    @find_user=Rate.where("user_id=? AND negotiate_id=? AND service_type=?",params[:user_id],params[:negotiate_id],"Rider Sharing")
-    if !@find_user.empty?     
+ 
+ def rate_me_peer
+    @find_user=Rate.where("user_id=? AND peer_negotiate_id=? AND service_type=?",params[:user_id],params[:peer_negotiate_id],"Peer-to-Peer Service")
+    if !@find_user.empty?    
       render :json => {:status => "You have already rated this item"}
     else
-      @rating=Rate.new(:rider_post_requirement_id => params[:rider_post_requirement_id],:negotiate_id => params[:negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Rider Sharing" )
+      @rating=Rate.new(:peer_service_post_requirement_id => params[:peer_service_post_requirement_id],:peer_negotiate_id => params[:peer_negotiate_id], :user_id =>params[:user_id], :rated_id =>params[:rated_id], :rated_no =>params[:rate_no],:service_type =>"Peer-to-Peer Service" )
       @rating.save!
       render :json => {:status => "Thank you for rating"}
     end
-    #puts "user_id:#{params[:user_id]}=====rated_id:#{params[:rated_id]}=====rate_no:#{params[:rate_no]}========negotiate_id:#{params[:negotiate_id]}"
   end
-=end
+
   def destroy_order
     order=Negotiate.find(params[:id])
     order.destroy
@@ -108,7 +112,11 @@ before_filter :authenticate_user!, :except => [:index]
     order.destroy
     render :json => {:status => "ok"}
   end
-
+   def destroy_peer_order
+    order=PeerNegotiate.find(params[:id])
+    order.destroy
+    render :json => {:status => "ok"}
+  end
   def save_phone
     if current_user.phone_no.nil?
       current_user.phone_no=params[:phone_no]
@@ -124,6 +132,11 @@ before_filter :authenticate_user!, :except => [:index]
     if(params[:book_post_requirement_id])
     @review.book_post_requirement_id = params[:book_post_requirement_id]
      @review.negotiate_id = params[:negotiate_id]
+     elsif(params[:peer_service_post_requirement_id])
+      @review.peer_service_post_requirement_id = params[:peer_service_post_requirement_id]
+      @review.negotiate_id = params[:negotiate_id]   
+
+
     elsif(params[:skill_post_requirement_id])
       @review.skill_post_requirement_id = params[:skill_post_requirement_id]
       @review.negotiate_id = params[:negotiate_id]
@@ -146,8 +159,11 @@ before_filter :authenticate_user!, :except => [:index]
       @reviews = Review.where(:skill_post_requirement_id => params[:skill_post_requirement_id].to_i)
     elsif (params[:post_requirement_id])
       @reviews = Review.where(:post_requirement_id => params[:post_requirement_id].to_i)
+      elsif (params[:peer_service_post_requirement_id])     
+      @reviews = Review.where(:peer_service_post_requirement_id => params[:peer_service_post_requirement_id].to_i)
     end    
   end
+  
 
 
 

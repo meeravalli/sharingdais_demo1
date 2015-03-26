@@ -4,6 +4,8 @@ before_filter :authenticate_user!
   def index
     @messages = current_user.messages_in.where(:trashed => false)
     @book_messages = current_user.book_messages_in.where(:trashed => false)
+    @peer_messages = current_user.peer_messages_in.where(:trashed => false)
+
     session[:message_action] = 'index'
   end
 
@@ -36,22 +38,28 @@ before_filter :authenticate_user!
   def unread
     @unread_messages = current_user.messages_in.where(:read => false, :trashed => false)
     @book_unread_messages = current_user.book_messages_in.where(:read => false, :trashed => false)
+    @peer_unread_messages = current_user.peer_messages_in.where(:read => false, :trashed => false)
     session[:message_action] = 'unread'
   end
 
   def sent
     @sent_messages = current_user.messages_out.where(:trashed => false)
     @book_sent_messages = current_user.book_messages_out.where(:trashed => false)
+     @peer_sent_messages = current_user.peer_messages_out.where(:trashed => false)
     session[:message_action] = 'sent'
   end
 
   def trash
     @messages_1 = current_user.messages_in.where(:trashed => true)
     @book_messages_1 = current_user.book_messages_in.where(:trashed => true)
+    @peer_messages_1 = current_user.peer_messages_in.where(:trashed => true)
     @messages_2 = current_user.messages_out.where(:trashed => true)
     @book_messages_2 = current_user.book_messages_out.where(:trashed => true)
+    @peer_messages_2 = current_user.peer_messages_out.where(:trashed => true)
     @trash_messages = @messages_1 + @messages_2
     @book_trash_messages = @book_messages_1 + @book_messages_2
+    @peer_trash_messages = @peer_messages_1 + @peer_messages_2
+
     session[:message_action] = 'trash'
   end
 

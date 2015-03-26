@@ -30,9 +30,9 @@ class Devise::RegistrationsController < DeviseController
         elsif params[:p_f_hide] == '3' 
           provider_skill_signup
           respond_with resource, location: after_inactive_sign_up_path_for(resource) 
-        #elsif params[:p_f_hide] == '4' 
-         # provider_ride_signup
-          #respond_with resource, location: after_inactive_sign_up_path_for(resource)  
+        elsif params[:p_f_hide] == '4' 
+          provider_peer_signup
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)  
         else
           respond_with resource, location: after_inactive_sign_up_path_for(resource)
         end
@@ -94,9 +94,9 @@ def provider_skill_signup
     end
   end
 end
-=begin
-def provider_ride_signup
-  @post_requirement = RiderPostRequirement.new(params[:rider_post_requirement])
+
+def provider_peer_signup
+  @post_requirement = PeerServicePostRequirement.new(params[:peer_service_post_requirement])
   if request.post?
     if @post_requirement.valid?
       @post_requirement.user_id = resource.id       
@@ -110,7 +110,7 @@ def provider_ride_signup
     end
   end
 end
-=end
+
 
   # End resistration with ads
 

@@ -9,10 +9,10 @@ class RestApiController < ApplicationController
 
   def provider_skill_login
   end
-=begin  
-  def provider_ride_login
+ 
+  def provider_peer_login
   end
-=end
+
   def provider_food_new_user
   end
 
@@ -21,10 +21,10 @@ class RestApiController < ApplicationController
 
   def provider_skill_new_user
   end
-=begin
-  def provider_ride_new_user
+
+  def provider_peer_new_user
   end
-=end
+
  
   def seeker_food_login
   end
@@ -34,10 +34,10 @@ class RestApiController < ApplicationController
 
   def seeker_skill_login
   end
-=begin  
-  def seeker_ride_login
+ 
+  def seeker_peer_login
   end
-=end
+
   def seeker_food_new_user
   end
 
@@ -46,8 +46,8 @@ class RestApiController < ApplicationController
 
   def seeker_skill_new_user
   end
-=begin  
-  def seeker_ride_new_user
+  
+  def seeker_peer_new_user
   end
-=end
+
 end

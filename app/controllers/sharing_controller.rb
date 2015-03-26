@@ -1,5 +1,5 @@
 class SharingController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!,only: [:peer_service_list_availability, :post_peer_service_requirement, :book_list_availability, :post_book_requirement, :post_requirement, :list_availability, :post_skill_requirement, :skill_list_availability]
   #prepend_before_filter :require_no_authentication, only: [ :post_your_ad, :post_requirement, :list_availability ]
   def shares_with_us
     post_requirement
@@ -61,6 +61,23 @@ class SharingController < ApplicationController
       end
     end
   end
+  def post_peer_service_requirement
+    @post_requirement = PeerServicePostRequirement.new(params[:post_peer_service_requirement])
+    puts "#{params[:post_peer_service_requirement]}===================================="
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id        
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+        redirect_to profile_home_path(current_user)
+      end
+    end
+  end
+
 
   def post_skill_requirement
     @post_requirement = SkillPostRequirement.new(params[:post_skill_requirement])
@@ -78,24 +95,7 @@ class SharingController < ApplicationController
       end
     end
   end
-=begin 
-  def post_rider_requirement
-    @post_requirement = RiderPostRequirement.new(params[:post_rider_requirement])
-    puts "#{params[:post_rider_requirement]}===================================="
-    if request.post?
-      if @post_requirement.valid?
-        @post_requirement.user_id = current_user.id        
-        post_status = true
-      else
-        post_status = false
-      end
-      if @post_requirement.save && post_status
-        flash[:notice] = "Successfully posted"
-        redirect_to profile_home_path(current_user)
-      end
-    end
-  end
-=end
+
   def book_list_availability
    @post_requirement = BookPostRequirement.new(params[:book_post_requirement])
     if request.post?
@@ -109,6 +109,21 @@ class SharingController < ApplicationController
         flash[:notice] = "Successfully posted"
         redirect_to profile_home_path(current_user)
       end
+    end
+  end
+  def peer_service_list_availability
+    @post_requirement = PeerServicePostRequirement.new(params[:peer_service_post_requirement])
+    if request.post?
+      if @post_requirement.valid?
+        @post_requirement.user_id = current_user.id
+        post_status = true
+      else
+        post_status = false
+      end
+      if @post_requirement.save && post_status
+        flash[:notice] = "Successfully posted"
+        redirect_to profile_home_path(current_user)
+       end
     end
   end
 
@@ -127,23 +142,7 @@ class SharingController < ApplicationController
       end
     end
   end
-=begin  
-  def rider_list_availability
-    @post_requirement = RiderPostRequirement.new(params[:rider_post_requirement])
-    if request.post?
-      if @post_requirement.valid?
-        @post_requirement.user_id = current_user.id
-        post_status = true
-      else
-        post_status = false
-      end
-      if @post_requirement.save && post_status
-        flash[:notice] = "Successfully posted"
-        redirect_to profile_home_path(current_user)
-      end
-    end
-  end
-=end  
+
   def edit_post_requirement
     @post_requirement = PostRequirement.find(params[:id])
     city = City.find(@post_requirement.city_id)
@@ -155,19 +154,18 @@ class SharingController < ApplicationController
     city = City.find(@book_post_requirement.city_id)
     @locations = city.locations
   end
+  def edit_peer_service_post_requirement
+    @peer_service_post_requirement = PeerServicePostRequirement.find(params[:id])
+    city = City.find(@peer_service_post_requirement.city_id)
+    @locations = city.locations
+  end
 
   def edit_skill_post_requirement
     @skill_post_requirement = SkillPostRequirement.find(params[:id])
     city = City.find(@skill_post_requirement.city_id)
     @locations = city.locations
   end
-=begin  
-  def edit_rider_post_requirement
-    @rider_post_requirement = RiderPostRequirement.find(params[:id])
-    city = City.find(@rider_post_requirement.city_id)
-    @locations = city.locations
-  end
-=end  
+
   def update_post_requirement
     @post_requirement = PostRequirement.find(params[:id])
       if params[:any]
@@ -197,6 +195,15 @@ class SharingController < ApplicationController
         render "edit_book_post_requirement"
         end
   end
+  def update_peer_service_post_requirement
+    @post_requirement = PeerServicePostRequirement.find(params[:id])
+        if @post_requirement.update_attributes(params[:peer_service_post_requirement], :user_id => current_user.id)
+        flash[:notice] = 'Successfully updated'
+        redirect_to profile_home_path(current_user)
+        else
+        render "edit_peer_service_post_requirement"
+        end
+  end
   def update_skill_post_requirement
     @post_requirement = SkillPostRequirement.find(params[:id])
         if @post_requirement.update_attributes(params[:skill_post_requirement], :user_id => current_user.id)
@@ -206,17 +213,7 @@ class SharingController < ApplicationController
         render "edit_skill_post_requirement"
         end
   end
-=begin  
-  def update_rider_post_requirement
-    @post_requirement = RiderPostRequirement.find(params[:id])
-        if @post_requirement.update_attributes(params[:Rider_post_requirement], :user_id => current_user.id)
-        flash[:notice] = 'Successfully updated'
-        redirect_to profile_home_path(current_user)
-        else
-        render "edit_rider_post_requirement"
-        end
-  end
-=end
+
   def edit_list_availability
     @post_requirement = PostRequirement.find(params[:id])
     city = City.find(@post_requirement.city_id)
@@ -228,18 +225,17 @@ class SharingController < ApplicationController
     city = City.find(@book_post_requirement.city_id)
     @locations = city.locations
   end
+  def edit_peer_service_list_availability
+    @peer_service_post_requirement = PeerServicePostRequirement.find(params[:id])
+    city = City.find(@peer_service_post_requirement.city_id)
+    @locations = city.locations
+  end
   def edit_skill_list_availability
     @skill_post_requirement = SkillPostRequirement.find(params[:id])
     city = City.find(@skill_post_requirement.city_id)
     @locations = city.locations
   end 
-=begin 
-  def edit_rider_list_availability
-    @rider_post_requirement = RiderPostRequirement.find(params[:id])
-    city = City.find(@rider_post_requirement.city_id)
-    @locations = city.locations
-  end
-=end 
+
   def update_list_availability
       @post_requirement = PostRequirement.find(params[:id])
       if params[:any]
@@ -269,6 +265,15 @@ class SharingController < ApplicationController
         render "edit_book_list_availability"
         end
     end
+    def update_peer_service_list_availability
+      @peer_service_post_requirement = PeerServicePostRequirement.find(params[:id])
+        if @peer_service_post_requirement.update_attributes(params[:peer_service_post_requirement], :user_id => current_user.id)
+        flash[:notice] = 'Successfully updated'
+        redirect_to profile_home_path(current_user)
+        else
+        render "edit_peer_service_list_availability"
+        end
+    end
     def update_skill_list_availability
       @skill_post_requirement = SkillPostRequirement.find(params[:id])
         if @skill_post_requirement.update_attributes(params[:skill_post_requirement], :user_id => current_user.id)
@@ -278,17 +283,7 @@ class SharingController < ApplicationController
         render "edit_skill_list_availability"
         end
     end
-=begin   
-    def update_rider_list_availability
-      @rider_post_requirement = RiderPostRequirement.find(params[:id])
-        if @rider_post_requirement.update_attributes(params[:rider_post_requirement], :user_id => current_user.id)
-        flash[:notice] = 'Successfully updated'
-        redirect_to profile_home_path(current_user)
-        else
-        render "edit_rider_list_availability"
-        end
-    end
-=end
+
     def destroy_requirement
       post_requirement = PostRequirement.find(params[:id])
       user = User.find(post_requirement.user_id)
@@ -304,6 +299,13 @@ class SharingController < ApplicationController
       flash[:notice] = "Successfully destroyed."
       redirect_to profile_home_path(user)
    end
+   def peer_service_destroy_requirement
+      peer_service_post_requirement = PeerServicePostRequirement.find(params[:id])
+      user = User.find(peer_service_post_requirement.user_id)
+      peer_service_post_requirement.destroy
+      flash[:notice] = "Successfully destroyed."
+      redirect_to profile_home_path(user)
+   end
    def skill_destroy_requirement
       skill_post_requirement = SkillPostRequirement.find(params[:id])
       user = User.find(skill_post_requirement.user_id)
@@ -311,15 +313,7 @@ class SharingController < ApplicationController
       flash[:notice] = "Successfully destroyed."
       redirect_to profile_home_path(user)
    end
-=begin 
-     def rider_destroy_requirement
-      rider_post_requirement = RiderPostRequirement.find(params[:id])
-      user = User.find(rider_post_requirement.user_id)
-      rider_post_requirement.destroy
-      flash[:notice] = "Successfully destroyed."
-      redirect_to profile_home_path(user)
-   end
-=end 
+
   
   
 end

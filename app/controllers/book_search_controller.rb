@@ -143,9 +143,9 @@ class BookSearchController < ApplicationController
     end
   end
   
-=begin
-   def search_top_five_ride
-    @rider_search_seeker=RiderPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'1').group("location_id").order("count(location_id) DESC").limit(5)
+
+   def search_top_five_peer
+    @rider_search_seeker=PeerServicePostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'1').group("location_id").order("count(location_id) DESC").limit(5)
     seeker = []
     if !@rider_search_seeker.blank?      
       @rider_search_seeker.each do |loca|
@@ -153,7 +153,7 @@ class BookSearchController < ApplicationController
         seeker << { location_name: location_dtls.first.location_name, :l_id => loca.location_id, :seeker_provider => loca.seeker_provider }
       end
     end
-    @rider_search_provider=RiderPostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
+    @rider_search_provider=PeerServicePostRequirement.where("city_id=? AND seeker_provider=?",params[:cityid],'0').group("location_id").order("count(location_id) DESC").limit(5)
     provider = []
     if !@rider_search_provider.blank?
       @rider_search_provider.each do |loca|
@@ -166,7 +166,7 @@ class BookSearchController < ApplicationController
       format.json { render :json => msg }
     end
   end
-=end
+
 
   def book_result
     if params[:seeker_provider] == 'true'

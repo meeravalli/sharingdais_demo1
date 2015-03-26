@@ -30,9 +30,9 @@ class Devise::SessionsController < DeviseController
             elsif params[:p_f_hide] == "3"
               provider_skill_login
               redirect_to profile_home_path(current_user)
-            #elsif params[:p_f_hide] == "4"
-             # provider_ride_login
-            #  redirect_to profile_home_path(current_user)
+            elsif params[:p_f_hide] == "4"
+              provider_peer_login
+              redirect_to profile_home_path(current_user)
             else
               respond_with resource, location: after_sign_in_path_for(resource) 
             end         
@@ -44,7 +44,7 @@ class Devise::SessionsController < DeviseController
                 
           flash[:alert] = 'Invalid email or password'          
           if params[:p_f_hide] == "1" || params[:p_f_hide] == "2" || params[:p_f_hide] == "3" || params[:p_f_hide] == "4"
-            redirect_to post_your_ad_login_sharing_index_path
+            redirect_to share_with_us_sharing_index_path
           else
             redirect_to new_user_session_path       
           end
@@ -54,7 +54,7 @@ class Devise::SessionsController < DeviseController
       
         flash[:alert] = 'Invalid email or password'               
         if params[:p_f_hide] == "1" || params[:p_f_hide] == "2" || params[:p_f_hide] == "3" || params[:p_f_hide] == "4"
-          redirect_to post_your_ad_login_sharing_index_path
+          redirect_to share_with_us_sharing_index_path
         else
           redirect_to new_user_session_path       
         end 
@@ -127,9 +127,9 @@ def provider_skill_login
       end
     end
   end
-=begin
-def provider_ride_login
-    @post_requirement = RiderPostRequirement.new(params[:rider_post_requirement])
+
+def provider_peer_login
+    @post_requirement = PeerServicePostRequirement.new(params[:peer_service_post_requirement])
     if request.post?
       if @post_requirement.valid?
         @post_requirement.user_id = current_user.id        
@@ -143,7 +143,7 @@ def provider_ride_login
     end
   end
 
-=end  
+ 
 # End Save Ads
 
 

@@ -11,13 +11,13 @@ before_filter :ensure_admin
     @food_orders = PostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
     @skill_orders = SkillPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
-    #@ride_orders = RiderPostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
+    @peer_orders = PeerServicePostRequirement.where("seeker_provider=?",1).order("created_at DESC").paginate(:page => params[:page])
   end
   def list_requirements
     @food_orders = PostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
     @book_orders = BookPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
     @skill_orders = SkillPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
-    #@ride_orders = RiderPostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
+   @peer_orders = PeerServicePostRequirement.where("seeker_provider=?",0).order("created_at DESC").paginate(:page => params[:page])
 
   end
 
@@ -27,7 +27,7 @@ before_filter :ensure_admin
     #@order_book=BookOrder.where("order_date=?",Date.today).order("created_at DESC").paginate(:page => params[:page])
     @order_book=BookNegotiate.where("book_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
     @order_skill=Negotiate.where("post_requirement_id IS NULL AND skill_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
-   # @order_ride=Negotiate.where("post_requirement_id IS NULL AND Rider_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
+    @order_peer=PeerNegotiate.where("peer_service_post_requirement_id IS NOT NULL").order("created_at DESC").paginate(:page => params[:page])
   end
 
   def exl
@@ -73,21 +73,21 @@ before_filter :ensure_admin
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
   end
-=begin
-  def list_ride_exl
-    @ride_orders = RiderPostRequirement.where("seeker_provider=?",0).order("created_at DESC")
+
+  def list_peer_exl
+    @peer_orders = PeerServicePostRequirement.where("seeker_provider=?",0).order("created_at DESC")
     respond_to do |format|
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
   end
 
-  def post_ride_exl
-    @ride_orders = RiderPostRequirement.where("seeker_provider=?",1).order("created_at DESC")
+  def post_peer_exl
+    @peer_orders = PeerServicePostRequirement.where("seeker_provider=?",1).order("created_at DESC")
     respond_to do |format|
       format.xls #{ send_data @users.to_csv(col_sep: "\t") }
     end
   end
-=end
+
 	def block_unblock
     user = User.find(params[:id])
     if user.status?
@@ -109,8 +109,9 @@ before_filter :ensure_admin
    # @activities_ride = @activities.where("rider_post_requirement_id IS NOT NULL")
     @book_post_requirements = @user.book_post_requirements
     @book_activities = @user.book_activities
+    @peer_activities = @user.peer_activities
     @skill_post_requirements = @user.skill_post_requirements
-   # @rider_post_requirements = @user.rider_post_requirements
+    @peer_service_post_requirements = @user.peer_service_post_requirements
    end
 	
 	def destroy_user
@@ -232,27 +233,31 @@ before_filter :ensure_admin
       redirect_to post_requirements_path
     end
   end
-=begin
-  def edit_ride_post
-    @post=RiderPostRequirement.where("id=?",params[:id])
+
+  def edit_peer_post
+    @post=PeerServicePostRequirement.where("id=?",params[:id]).first
     if !params[:budget].blank?
-      @post.first.charges= params[:budget] 
+      @post.rent= params[:budget] 
     end
     if !params[:details].blank?
-      @post.first.description= params[:details]
+      @post.description= params[:details]
     end
-    if !params[:rider_post_requirement].blank?
-      @post.first.attributes = params[:rider_post_requirement] 
+    if !params[:peer_category_id].blank?
+      @post.category_id= params[:peer_category_id]
     end
-    @post.first.save
+    if !params[:peer_service_post_requirement].blank?
+      @post.attributes = params[:peer_service_post_requirement] 
+    end
+    @post.save
+    #render :json => {:status => "Post Requirement updated successfully"}   
     if params[:seeker_provider] = '0'
       redirect_to list_requirements_path
     else
       redirect_to post_requirements_path
     end
   end
-  def destroy_ride_post
-    user = RiderPostRequirement.find(params[:id])
+  def destroy_peer_post
+    user = PeerServicePostRequirement.find(params[:id])
     user.destroy
     flash[:notice] = "Post successfully deleted"
     if params[:seeker_provider] = '0'
@@ -261,7 +266,7 @@ before_filter :ensure_admin
       redirect_to post_requirements_path
     end
   end
-=end
+
   def user_add_clicks
     @counter=Ad.all
   end

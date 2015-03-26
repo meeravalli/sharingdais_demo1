@@ -83,5 +83,21 @@ class ApplicationController < ActionController::Base
     end
     trending_locations_array.push([params[:city_id],"city_id"])
   end
+
+   def peer_form_json_data(seeker_provider,city_id)
+    location_ids = PeerServicePostRequirement.where("city_id = ? AND seeker_provider = ?",city_id,seeker_provider).group("location_id").count.sort_by {|k,v| v}.reverse[0,5]
+    trending_locations = Hash.new {|h,k| h[k] = {} }
+    trending_locations_array = []
+    location_ids.each do |val|
+      loc = Location.where("id = ?",val[0]).last 
+      trending_locations[val[1]].merge!({loc.id => loc.location_name})   
+    end 
+    trending_locations.values.each do |val|
+      val.sort_by {|_key, value| value}.each do |sval| 
+        trending_locations_array.push(sval)  
+      end 
+    end
+    trending_locations_array.push([params[:city_id],"city_id"])
+  end
   
 end

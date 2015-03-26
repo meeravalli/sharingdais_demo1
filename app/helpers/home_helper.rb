@@ -14,6 +14,9 @@ module HomeHelper
   def negotiate_book(user_id, book_post_requirement_id)
        BookNegotiate.find_by_user_id_and_book_post_requirement_id(user_id, book_post_requirement_id)
   end
+  def negotiate_peer(user_id, peer_service_post_requirement_id)
+       PeerNegotiate.find_by_user_id_and_peer_service_post_requirement_id(user_id, peer_service_post_requirement_id)
+  end
 
   def find_user(id)
      User.find(id)
@@ -29,6 +32,9 @@ module HomeHelper
 
   def rate_book(rated_id, rated_no, book_post_requirement_id)
     Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",rated_id, rated_no, book_post_requirement_id)
+  end
+  def rate_peer(rated_id, rated_no, peer_service_post_requirement_id)
+    Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",rated_id, rated_no, peer_service_post_requirement_id)
   end
 
 end
