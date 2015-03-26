@@ -5,18 +5,18 @@
     $("#foodshare_select_id").val("1");
     $("#bookshare_select_id ").val('2');
     $("#skillshare_select_id ").val('3');
-    
+    $("#peershare_select_id ").val('4');
     <% if params[:post] == "book" %>
       $('#foodshare_form').hide();
       $('#skillshare_form').hide();
       $('#bookshare_form').show();
-    
+      $('#peershare_form').hide();
 
     <% else %>
       $('#foodshare_form').show();
       $('#bookshare_form').hide();
       $('#skillshare_form').hide();
-     
+      $('#peershare_form').hide();
     <% end %>
   $('.services_class').on('change', function() {
     if( $(this).val() == '1')
@@ -24,7 +24,7 @@
        $(".error_explanation").html("");
        $('#bookshare_form').hide();
        $('#skillshare_form').hide();
-       
+       $('#peershare_form').hide();
        $('#foodshare_form').show();
        $("#foodshare_select_id").val("1");
     }
@@ -34,7 +34,7 @@
       $('#bookshare_form').show();
       $('#skillshare_form').hide();
       $('#foodshare_form').hide();
-  
+      $('#peershare_form').hide();
       $("#bookshare_select_id ").val('2');
     }
     else if( $(this).val() == '3')
@@ -42,9 +42,18 @@
       $(".error_explanation").html("");
       $('#bookshare_form').hide();
       $('#skillshare_form').show();
-  
+      $('#peershare_form').hide();
       $('#foodshare_form').hide();
-      $("#bookshare_select_id ").val('3');
+      $("#skillshare_select_id ").val('3');
+    }
+    else if( $(this).val() == '4')
+    {
+      $(".error_explanation").html("");
+      $('#bookshare_form').hide();
+      $('#skillshare_form').hide();
+      $('#peershare_form').show();
+      $('#foodshare_form').hide();
+      $("#peershare_select_id ").val('4');
     }
     
   });    
@@ -93,6 +102,12 @@
           value = $.cookie('city_id')
           if(value){
             document.getElementById('book_post_requirement_city_id').value = value;
+          }
+        }
+         if(document.getElementById('post_peer_service_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){
+            document.getElementById('post_peer_service_requirement_city_id').value = value;
           }
         }
  
@@ -426,6 +441,92 @@ function book_form_validate()
     <%end%>
 </div>
 <!--################## End Skill Sharing #########################-->
+<!--###################Peer Service###############################-->
+
+
+<div class="form_inner_align" id="peershare_form" style="display:block;">
+  <%= form_for :post_peer_service_requirement, :url => post_peer_service_requirement_sharing_index_path, :html => {:class=>"form-horizontal"} do |f|%>
+  <% if @post_requirement.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+        <script type="text/javascript">
+        $(window).load(function(){   
+          //value = $.cookie('city_id')
+          $(".get_city").val($.cookie('city_id'))
+        });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id, :class => "post_peer_service_requirement" %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class="">Select Category<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "4"}, {:class=>'form-control services_class', :id=> 'peershare_select_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="peer_category_id" >Looking for professionals<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:peer_category_id, PeerCategory.all, :id, :peer_category_type, {:include_blank => 'Select Peer_Category'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+        <div class="form-group">
+      <label for="inputEmail3" class="">speciality</label>
+      <div class="">
+        <%= f.text_field :speciality, :maxlength=>"40", :class=>'form-control', :placeholder=>"eg Heart surgeon."  %>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputEmail3" class="">Experience<i>*</i></label>
+      <div class="">
+        <%= f.text_field :exp, :class=>'form-control quantity',"required"=>"required", :placeholder=>"In no.of Years." %><span class="errmsg">
+      </div>
+    </div>
+    
+    
+    <div class="form-group">
+      <label for="inputEmail3" class=""> Mention Details </label>
+      <div class="">
+        <%= f.text_area :additinal_info, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please mention your requirement in detail." %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class=""></label>
+      <div class="">
+        
+      </div>
+    </div>
+    <%= f.hidden_field :seeker_provider, value: true %>
+    <div class="form-group">
+      <div class="">
+        <% if current_user.nil? %>
+          <a href="/users/sign_in" class="btn btn-default">Sign In/Up</a>
+        <%else%>
+          <%= f.submit "Submit", :class=>"btn btn-default"%>
+        <% end %>
+      </div>
+    </div>
+    <%end%>
+</div>
+<!--################## End peer Sharing #########################-->
+
 
 <script type="text/javascript">
 $(document).ready(function () {

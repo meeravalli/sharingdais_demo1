@@ -1,0 +1,85 @@
+<!--<style type="text/css">
+  @media screen and (min-width:1280px) {.custom_width{ width:50%; left: 25%;}.cust_btn{float: right;}}
+</style>-->
+<!--<%#= javascript_include_tag :search %>
+<%# if !params[:search].blank? %>
+  <script>
+    $(document).ready(function(){
+  city_value = <%#= params[:search][:city_id] %>
+     document.getElementById('city_id').value = city_value
+    });
+  </script>
+<%# end %>-->
+
+<div class="item">
+  <%=  image_tag "peer_service1.jpg", :alt => "..." %>  
+<div class="carousel-caption custom_width">
+    <div class="search-blk">
+      <p class="head" style="height:43px">Peer-to-Peer Service</p>
+        <p style="height:25px">
+          <small style="color:white;">Discover individual doctors, lawyers, consultants & other professionals in your neighborhood</small></p>
+
+        <%= form_tag(peer_services_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+      <div class="check  col-xs-12 col-md-12">
+          <label for="" style="font-family:'Helevtica',Sans-serif;">I am looking for service</label>
+           <%= radio_button_tag "search[peer]", "0", params[:search][:peer].to_i == 0, :id => 'search_peer_0', :class => "peer" %>
+
+          <label for="" style="font-family:'Helevtica',Sans-serif;">I want to  provide service</label>
+          <%= radio_button_tag "search[peer]", "1", params[:search][:peer].to_i == 1, :id => 'search_peer_1', :class => "peer" %>
+      </div>
+      <div class="search">
+          
+           <div class="cboth"></div>
+          <div class="row">
+          </div>
+          <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="" style="font-family:'Helevtica',Sans-serif;">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city_1") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>
+            
+          </div>
+           <div class="col-xs-12 col-md-5 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label class="book-chg" for="">Service type</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= collection_select :search, :peer_category_id,PeerCategory.all, :id, :peer_category_type, {:selected => params[:search][:peer_category_id]},{:class => "form-control"}%>
+            </div>
+           </div>
+          
+             <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="left col-xs-12">
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn cust_btn" %>
+            </div>
+          </div>
+    <div class="cboth"></div>
+          <div class="row"></div>
+<div style="col-xs-12 col-md-2 padding_none text-left">
+            <div class="left col-xs-12 margin_topbot m_near">
+              <%= text_field_tag('search[kms]', params[:search][:kms], :hidden => true, :value => 10) %>
+            <!--<label id='nearbylocations' style="cursor:pointer;text-decoration:underline;" > Include nearby Localities</label>-->
+              <%#= select_tag('search[kms]', options_for_select({ "1 km" => "1", "2 km" => "2", "3 km" => "3", "4 km" => "4", "5 km" => "5"}, params[:search][:kms] || "3" ), :style => "background-color:#000;") %><!--|-->
+              <%# locality_text = ( params[:search].empty? || params[:search].has_key?(:include_near_by_locations) ) ?  'Exclude Nearby Localities' : 'Exclude Nearby Localities'  %> 
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %><!--<label id='exclude_near_by_locations' style="cursor:pointer;"><%#= locality_text %></label>-->
+            </div>
+          </div> 
+
+        
+
+
+    </div>
+    <%end%>
+  </div>
+</div>
+
+
+
+
+</div>

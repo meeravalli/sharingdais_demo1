@@ -5,18 +5,18 @@
     $("#foodshare_select_id").val("1");
     $("#bookshare_select_id ").val('2');
     $("#skill_share_select_id ").val('3');
-    //$("#rider_share_select_id ").val('4');
+    $("#peer_share_select_id ").val('4');
 
     <% if params[:post] == "book" %>
       $('#booklist_form').show();
       $('#foodlist_form').hide();
       $('#skilllist_form').hide();
-      $('#riderlist_form').hide();
+      $('#peerlist_form').hide();
     <% else %>
       $('#foodlist_form').show();
       $('#booklist_form').hide();
       $('#skilllist_form').hide();
-       $('#riderlist_form').hide();      
+       $('#peerlist_form').hide();      
     <% end %>
   $('.services_class').on('change', function() {
     if( $(this).val() == '1')
@@ -25,7 +25,7 @@
       $('#booklist_form').hide();
       $('#foodlist_form').show();
       $('#skilllist_form').hide();
-      $('#riderlist_form').hide();
+      $('#peerlist_form').hide();
       $("#foodshare_select_id").val("1");
      }
      else if( $(this).val() == '2')
@@ -34,7 +34,7 @@
        $('#booklist_form').show();
        $('#foodlist_form').hide();
        $('#skilllist_form').hide();
-       $('#riderlist_form').hide();
+       $('#peerlist_form').hide();
        $("#bookshare_select_id ").val('2');
     }
     else if( $(this).val() == '3')
@@ -43,20 +43,20 @@
        $('#skilllist_form').show();
        $('#booklist_form').hide();
        $('#foodlist_form').hide();
-       $('#riderlist_form').hide();
+       $('#peerlist_form').hide();
        $("#skill_share_select_id ").val('3');       
     }
-    /*
+    
     else if( $(this).val() == '4')
      {
        $(".error_explanation").html("");
-       $('#riderlist_form').show();
+       $('#peerlist_form').show();
        $('#booklist_form').hide();
        $('#foodlist_form').hide();
        $('#skilllist_form').hide();
-       $("#rider_share_select_id ").val('4');
+       $("#peer_share_select_id ").val('4');
     }
-    */
+    
   });
 
     $("input:checkbox[name=any]").click(function() {
@@ -79,12 +79,7 @@
       $("#post_requirement_no_of_persons").attr('disabled', true);
       $("#any").attr('checked', true);
 <% end %>
-/*
-  if(document.getElementById('rider_post_requirement_city_id').id){
-    value = $.cookie('city_id')
-    if(value){document.getElementById('rider_post_requirement_city_id').value = value}
- }
-*/
+
  if(document.getElementById('skill_post_requirement_city_id').id){
     value = $.cookie('city_id')
     if(value){document.getElementById('skill_post_requirement_city_id').value = value}
@@ -96,6 +91,10 @@
   if(document.getElementById('book_post_requirement_city_id').id){
           value = $.cookie('city_id')
           if(value){document.getElementById('book_post_requirement_city_id').value = value}}
+            if(document.getElementById('peer_service_post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('peer_service_post_requirement_city_id').value = value}}
+      
      });
 
 function validate_food(){
@@ -157,25 +156,25 @@ function validate_skill(){
       $("#login_signup3").modal("show");
     }
 }
-/*
-function validate_rider(){
-  if($(".val_service_in_one_line7").val() == "")
+
+function validate_peer(){
+  if($(".val_exp7").val() == "")
     {
-      alert( "Please Enter ride in one line" );
+      alert( "Please Enter Experience " );
       return false;
     }else if($(".val_charges7").val() == "")
     {
       alert( "Please Enter Charges" );
       return false;
-    }else if($(".val_sdescription7").val() == "")
+    }else if($(".val_additinal_info7").val() == "")
     {
-      alert( "Please Enter Description" );
+      alert( "Please Enter Additional Info" );
       return false;    
     }else{
       $("#login_signup7").modal("show");
     }
 }
-*/
+
 </script>
 <center><strong>Post your service details here..</strong></center>
 <div class="form_inner_align" id='foodlist_form'>
@@ -213,7 +212,7 @@ function validate_rider(){
       <label for="" class="">Select Category<i>*</i></label>
       <div class="">
         <select class="form-control services_class service_id1" id="foodshare_select_id" name="post_requirement[service_id]">
-          <!--<option value="4">Rider Sharing</option>-->
+          <option value="4">Peer-to-Peer Service</option>
           <option value="3">Skill Sharing</option>
           <option value="2">Book Sharing</option>
           <option value="1" selected="selected">Food Sharing</option>         
@@ -633,7 +632,7 @@ $("#s-f-signup1").click(function(){
       <label for="" class="">Select Cateogory<i>*</i></label>
       <div class="">
         <select name="book_post_requirement[service_id]" id="bookshare_select_id" class="form-control services_class">
-           <!--<option value="4">Rider Sharing</option>-->
+           <option value="4">Peer-to-Peer Service</option>
           <option value="3">Skill Sharing</option>
           <option value="1">Food Sharing</option>
           <option selected="selected" value="2">Book Sharing</option>
@@ -1035,7 +1034,7 @@ $("#s-f-signup2").click(function(){
           <option selected="selected" value="3">Skill Sharing</option>
           <option value="1">Food Sharing</option>
           <option value="2">Book Sharing</option>
-          <!--<option value="4">Rider Sharing</option>-->
+          <option value="4">Peer-to-Peer Service</option>
         </select>
       </div>
     </div>
@@ -1436,11 +1435,449 @@ $("#s-f-signup3").click(function(){
 </div>
 <!--################ End Model ##########-->
 <!--####################### End Skill Sharing #########################------>
-<!--####################### Rider Sharing #############################------>
+<!--####################### Peer Service Sharing #############################------>
+ <!--####################### Peer Service #############################------>
+<div class="form_inner_align" id='peerlist_form'>
+  <form accept-charset="UTF-8" class="new_user form-horizontal frm7" enctype="multipart/form-data" id="new_user" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+    </div>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <select onchange="get_location(this.value,'locality_id_class')" name="city[id]" id="popup_city" class="form-control get_city">
+          <% City.all.each do |f| %>
+            <option value="<%= f.id %>"><%= f.city_name %></option>
+          <% end %>
+        </select>
+        <script type="text/javascript">
+          $(window).load(function(){   
+            $(".get_city").val($.cookie('city_id'))
+          });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <input type="hidden" name="peer_service_post_requirement[city_id]" id="peer_service_post_requirement_city_id">
+        <select name="peer_service_post_requirement[location_id]" id="locality_id" class="form-control locality_id_class">
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select category<i>*</i></label>
+      <div class="">
+        <select name="peer_service_post_requirement[service_id]" id="peer_share_select_id" class="form-control services_class">
+          <option selected="selected" value="3">Skill Sharing</option>
+          <option value="1">Food Sharing</option>
+          <option value="2">Book Sharing</option>
+          <option value="4" selected="selected">Peer-to-Peer Service</option>
+        </select>
+      </div>
+    </div>
 
+    <div class="form-group">
+      <label for="" class="", id ="peer_category_id" >Select Profession<i>*</i></label>
+      <div class="">
+        <select required="required" name="peer_service_post_requirement[peer_category_id]" id="peer_service_post_requirement_peer_category_id" class="form-control">
+          <% PeerCategory.all.each do |s| %>
+            <option value="<%= s.id %>"><%= s.peer_category_type %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+
+    
+
+    <div class="form-group">
+      <label for="inputEmail3" class="">Speciality</label>
+      <div class="">
+        <input type="text" size="30" name="peer_service_post_requirement[speciality]" maxlength="40" id="peer_service_post_requirement_speciality" class="form-control val_speciality7" placeholder="eg. Heart surgeon, criminal lawyer, etc." >
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputEmail3" class="">Experience<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" name="peer_service_post_requirement[exp]" maxlength="40" id="peer_service_post_requirement_exp" class="form-control quantity val_exp7" placeholder="In no. of years" ><span class="errmsg">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Degree / Certificate (if any)</label>
+      <div class="">
+        <input type="text" size="30" name="peer_service_post_requirement[degree]" maxlength="40" id="peer_service_post_requirement_degree" class="form-control val_degree7" placeholder="eg. MBBS,  Gold madalist, etc." >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class=""> Charges / Fee (in Rs)<i>*</i></label>
+      <div class="">
+        <input type="text" size="30" required="required" name="peer_service_post_requirement[charges]" id="peer_service_post_requirement_charges" class="form-control quantity val_charges7" placeholder="no.only ." >
+        <span class="errmsg">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="" class=""> <b>Availability</b></label>
+      <div class="">
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[mon]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[mon]" id="peer_service_post_requirement_mon"> Mon
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[tue]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[tue]" id="peer_service_post_requirement_tue"> Tue
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[wed]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[wed]" id="peer_service_post_requirement_wed"> Wed
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[thu]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[thu]" id="peer_service_post_requirement_thu"> Thu
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[fri]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[fri]" id="peer_service_post_requirement_fri"> Fri
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[sat]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[sat]" id="peer_service_post_requirement_sat"> Sat
+        </label>
+        <label class="btn btn-primary">
+          <input type="hidden" value="0" name="peer_service_post_requirement[sun]">
+          <input type="checkbox" value="1" name="peer_service_post_requirement[sun]" id="peer_service_post_requirement_sun"> Sun
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" id="peer_image" class=""> Image</label>
+      <div class="">
+        <span id="peer_image_1"></span>
+        <input type="file" name="peer_service_post_requirement[peer]" id="peer_service_post_requirement_peer" class="peer_img">
+      </div>      
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+    </div>
+
+    
+    <div class="form-group">
+      <label for="inputEmail3" class="">Additional Info<i>*</i></label>
+      <div class="">
+        <textarea rows="5" required="required" placeholder="Additional Info" name="peer_service_post_requirement[additinal_info]" maxlength="150" id="peer_service_post_requirement_additinal_info" cols="20" class="form-control val_additinal_info7" placeholder="Additional Info." ></textarea>
+      </div>
+    </div>
+
+    <input id="peer_service_post_requirement_seeker_provider" type="hidden" value="false" name="peer_service_post_requirement[seeker_provider]">
+
+    
+    <div class="form-group"></div>
+    <div class="form-group">
+      <div class="">
+        <button type="button" class="btn btn-default" onclick="return validate_peer();"> Submit</button>
+      </div>
+    </div>
+    <input class="p_f_hide" id="p_f_hide" name="p_f_hide" value="4" type="hidden">  
+    <input type="hidden" name="user[email]" id="user_email" class="form-control login_feild email7">
+    <input type="hidden" name="user[password]" id="user_password" class="form-control login_feild password7">
+    <input type="hidden" name="user[password_confirmation]" id="user_password_confirmation" class="login_feild password_confirmation7">
+    <input type="hidden" name="user[name]" id="user_name" class="form-control login_feild name7">
+    <input type="hidden" name="user[phone_no]" id="user_phone_no" class="form-control login_feild phone_no7">
+    <input type="hidden" name="user[address]" id="user_address" class="form-control signup_textarea address7">
+  </form>
+</div>
 <!--####################### Modal ##################-->
+<div class="modal fade" id="login_signup7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="loginbox7" style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">             
+      <div class="panel panel-info" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign In</div>
+        </div>    
+        <div style="padding-top:30px" class="panel-body" >
+          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control emailL7" placeholder="Enter your Email id" size="30" type="email" autocomplete="off" onchange="validate77()">
+            <br><h2 id='result77'></h2>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control passwordL7" placeholder="Enter your Password" size="30" type="password" onchange="chr_validate77()">
+            <br><div id="er77"></div>
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <a id="sign_inn7" href="javascript:void(0)" class="btn btn-success">Login</a>
+            </div>
+            <script type="text/javascript">
+              $(".emailL7").keyup(function(){
+                  $(".email7").val($(this).val());
+              });
+              $(".passwordL7").keyup(function(){
+                $(".password7").val($(this).val());
+              });
+              
+            
+              $("#sign_inn7").click(function(){              
+                     if($(".emailL7").val() == ""){
+                    $("#result77").text("Please Enter Email :(");
+                    $("#result77").css("color", "red");
+                 // $("#result77").text("");
+                    }else if($(".passwordL7").val() == ""){
+                   $("#er77").text("Please Enter password :(");
+                   $("#er77").css("color", "red");
+                  //$("#er77").text("");
+                     }               
+                    else{                 
+                   $(".frm7").attr('action', '/users/sign_in');                 
+                  $(".frm7").submit();
+                   }
+                  })
+              
+              function chr_validate77(){
+                $("#er77").text("");
+               var pass =$(".passwordL7").val();
+               if ( pass.length < 8 )
+                {
+                  $("#er77").text("minimum 8 characters");
+                  $("#er77").css("color", "red");
+                }else{
+                  $("#er77").text("");
+                }
+              }
+     function validateEmail77(emailL7) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailL7);
+  }
+  function validate77(){
+  $("#result77").text("");
+  var emailL7 = $(".emailL7").val();
+  if (validateEmail77(emailL7)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".emailL7").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          $("#result77").text(" This email is not availabile :)");
+          $("#result77").css("color", "red");
+         
+        } else{
+          $("#result77").text($(".emailL7").val()+ " This email is exist :(");
+          $("#result77").css("color", "green");
+      
+        }
+      }   
+    });
+  } else {
+    $("#result77").text("This is not a valid email :(");
+    $("#result77").css("color", "red");
+   
+  }
+  return false;
+}
+            </script>
+          </div>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account! 
+                <a href="javascript:void(0)" onClick="$('#loginbox7').hide(); $('#signupbox7').show()">
+                Sign Up Here</a>
+              </div>
+            </div>
+          </div>    
+        </div>                     
+      </div>  
+    </div>
 
-<!--####################### End rider Sharing  provider#########################------>
+    <div id="signupbox7" style="display:none; margin-top:50px" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign Up</div>      
+        </div>  
+        <div class="panel-body" >
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control Sname7" placeholder="Enter your Name" size="30" tabindex="1" type="text" autocomplete="off">
+            <br><div id="nam7"></div>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input class="form-control login_feild Semail7" placeholder="Enter Email Id" size="30" tabindex="2" type="email" autocomplete="off" onchange="validate7()"> 
+            <br><h2 id='result7'></h2>                                       
+          </div>
+<script type="text/javascript">
+
+function validateEmail7(Semail7) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Semail7);
+  }
+  function validate7(){
+  $("#result7").text("");
+  var Semail7 = $(".Semail7").val();
+  if (validateEmail7(Semail7)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".Semail7").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          //$("#result").text(" This email is availabile :)");
+          //$("#result").css("color", "green");
+        }else{
+          $("#result7").text($(".Semail7").val()+ " This email is exist :(");
+          $("#result7").css("color", "red");
+          $(".Semail7").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result7").text("This is not a valid email :(");
+    $("#result7").css("color", "red");
+    $(".Semail7").val("");
+  }
+  return false;
+}
+
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword7" placeholder="Enter Password" size="30" tabindex="3" type="password" onchange="chr_validate7()">
+            <br><div id="er7"></div>
+          </div>              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword_confirmation7" placeholder="Enter Confirm Password" size="30" tabindex="4" type="password" onchange="pass_validate7()">
+            <br><div id="pass7"></div>
+          </div>
+
+          <script type="text/javascript">
+function chr_validate7(){
+  $("#er7").text("");
+ var pass =$(".Spassword7").val();
+ if ( pass.length < 8 )
+  {
+    $("#er7").text("minimum 8 characters");
+    $("#er7").css("color", "red");
+  }else{
+    $("#er7").text("");
+  }
+}
+function pass_validate7(){
+  $("#pass7").text("");
+  if ( $(".Spassword7").val() == $(".Spassword_confirmation7").val() ){
+    
+  }else{
+    $("#pass7").text("Password not match :(");
+    $("#pass7").css("color", "red");
+  }
+ }
+</script>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input class="form-control login_feild Sphone_no7" placeholder="Enter your Phone no." size="30" tabindex="5" type="text" autocomplete="off" onchange="no_validate7()">  
+             <br><span class="errmsg7" style="color:red"> </span> 
+             <div id="phon7"></div>                                      
+          </div>
+
+<script type="text/javascript">
+$(".Sphone_no7").keypress(function (e) {
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    $(".errmsg7").html("Numbers Only").show().fadeOut("slow");
+    return false;
+  }
+});
+ function no_validate7(){
+  var no =$(".Sphone_no7").val();
+  if (no.length!=10)
+  {
+    alert("required 10 digits");
+  }
+ }
+</script>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+            <textarea class="form-control Saddress7" cols="25" placeholder="Enter your Address" rows="3" tabindex="6" autocomplete="off"></textarea>
+            <br><div id="add7"></div> 
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <button id="s-f-signup7" type="button" class="btn btn-info" tabindex="7"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(".Sname7").keyup(function(){
+                $(".name7").val($(this).val());
+            });
+            $(".Semail7").keyup(function(){
+              $(".email7").val($(this).val());
+            });
+            $(".Spassword7").keyup(function(){
+              $(".password7").val($(this).val());
+            });
+            $(".Spassword_confirmation7").keyup(function(){
+              $(".password_confirmation7").val($(this).val());
+            });
+            $(".Sphone_no7").keyup(function(){
+              $(".phone_no7").val($(this).val());
+            });
+            $(".Saddress7").keyup(function(){
+              $(".address7").val($(this).val());
+            });
+            //$("#s-f-signup7").click(function(){  
+            //  $(".frm7").attr('action', '/users'); 
+            //  $(".frm7").submit();
+            //})
+$("#s-f-signup7").click(function(){
+  $("#nam7").text("");
+  $("#er7").text("");
+  $("#phon7").text("");
+  $("#add7").text("");
+  if ($(".Sname7").val() == ""){
+    $("#nam7").text("Please Enter Your Name :(");
+    $("#nam7").css("color", "red");
+  }else if($(".Semail7").val() == ""){
+    $("#result7").text("Please Enter Email :(");
+    $("#result7").css("color", "red");
+  }else if($(".Spassword7").val().length < 8){
+    $("#er7").text("minimum 8 characters");
+    $("#er7").css("color", "red");
+  }else if($(".Spassword7").val() != $(".Spassword_confirmation7").val()){
+    $("#pass7").text("Password not match :(");
+    $("#pass7").css("color", "red");
+  }else if($(".Sphone_no7").val().length!=10){
+    $("#phon7").text("Please enter 10 digits Phone no :(");
+    $("#phon7").css("color", "red");
+  }else if($(".Saddress7").val() == ""){
+    $("#add7").text("please enter address :(");
+    $("#add7").css("color", "red");
+  }else{
+    $(".frm7").attr('action', '/users'); 
+    $(".frm7").submit();
+  }
+})
+          </script>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Already have an account?  
+                <a id="signinlink" href="javascript:void(0)" onclick="$('#signupbox7').hide(); $('#loginbox7').show()">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--################ End Model ##########-->
+
+<!--####################### End Peer Service  provider#########################------>
+
+
 <script type="text/javascript">
 $(document).ready(function () {
   //called when key is pressed in textbox
@@ -1513,7 +1950,7 @@ $(function() {
     });
 });
 $(function() {
-    $(".ride_img").on("change", function()
+    $(".peer_img").on("change", function()
     {
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
@@ -1523,9 +1960,9 @@ $(function() {
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function(){ // set image data as background of div
-                $("#ride_image_1").css("background-image", "url("+this.result+")");
-                $("#ride_image_1").css("width", "125px");
-                $("#ride_image_1").css("height", "125px");
+                $("#peer_image_1").css("background-image", "url("+this.result+")");
+                $("#peer_image_1").css("width", "125px");
+                $("#peer_image_1").css("height", "125px");
             }
         }
     });
@@ -1560,7 +1997,7 @@ $(function() {
     background-repeat: no-repeat; 
     border-radius: 50%;
 }
-#ride_image_1 {
+#peer_image_1 {
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;

@@ -4,9 +4,9 @@
          <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" style="float:left">
   <li class="active"><a href="#food" role="tab" data-toggle="tab">Food Oders</a></li>
-  <li><a href="#book" role="tab" data-toggle="tab">BooK Orders</a></li>
+  <li><a href="#book" role="tab" data-toggle="tab">Book Orders</a></li>
   <li><a href="#skill" role="tab" data-toggle="tab">Skill Orders</a></li>
-  
+  <li><a href="#peer" role="tab" data-toggle="tab">Peer-to-Peer Service Orders</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -118,7 +118,42 @@
           </div>
         </div>
   </div>
-
+<div class="tab-pane" id="peer">
+    <div class="display padding_five">
+            <table class="table table-hover">
+                <thead class="heading">
+                    <tr>
+                        <th style="width:25%">Date / Time</th>
+                        <th style="width:25%">Name of the connected person</th>
+                        <th style="width:25%">Name of the person</th>
+                        <th style="width:25%">Details</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <% @order_peer.each do |o| %>
+                     <tr>
+                      <td>
+                        <%= o.created_at.strftime("%d %b. %Y") %> : 
+                        <%= o.created_at.strftime("%H:%M") %>
+                      </td>
+                      <td><%= o.peer_service_post_requirement.user.name %></td>
+                      <td><%= o.user.name %></td>
+                      <td>
+                        <% if !o.peer_service_post_requirement.additinal_info.nil? %>
+                          <%= o.peer_service_post_requirement.additinal_info %>
+                        <%else%>
+                          not available
+                        <%end%>
+                      </td>
+                     </tr>
+                    <% end %>            
+                </tbody>
+            </table>
+            <div class="pagination">
+          <%= will_paginate @order_peer %>
+          </div>
+        </div>
+  </div>
   
 
  

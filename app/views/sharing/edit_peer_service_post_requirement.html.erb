@@ -1,0 +1,91 @@
+<%= javascript_include_tag "jquery.cookie.js" %>
+<script>
+  $(document).ready(function(){    
+   
+ if(document.getElementById('peer_service_post_requirement_city_id') !==null){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('peer_service_post_requirement_city_id').value = value}}
+  });
+</script>
+<p class="head light-tit">Edit Peer Service Post as Seeker</p>
+<div class="form_inner_align" id="bookshare_form" style="display:block;">
+<%= form_for @peer_service_post_requirement, :url => { :action => "update_peer_service_post_requirement", :id => @peer_service_post_requirement}, :html => {:class=>"form-horizontal"} do |f|%>
+  <% if @peer_service_post_requirement.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @peer_service_post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+          <%= f.hidden_field :seeker_provider, value: true %>
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id_book'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Select peer Service Type  <i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:peer_category_id, PeerCategory.all, :id, :peer_category_type, {:include_blank => 'Select Peer Service'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Speciality</label>
+      <div class="">
+        <%= f.text_field :speciality, :maxlength=>"30", :class=>'form-control', :placeholder=>"eg. Heart surgeon" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Expeience</label>
+      <div class="">
+        <%= f.text_field :exp,  :class=>'form-control', :placeholder=>"In no.of years" %>
+      </div>
+    </div>
+
+    
+
+     
+    
+<div class="form-group"></div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Details of Service<i>*</i> </label>
+      <div class="">
+        <%= f.text_area :additinal_info, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Please mention your datails in detail"  %>
+      </div>
+    </div>
+    
+   <div class="form-group"></div>
+    <div class="form-group">
+      <div class="">
+        <%= f.submit 'Update', :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+ <script>
+      function get_edit_locations(value, update_field)
+      {
+        if (value !="")
+        {
+          $.ajax({ url : "/application/get_locations", type: "GET", data: { id: value}, dataType: "json",
+            success: function (response) {
+              $("#"+update_field+" option").remove();
+              $.each(response, function(key, value) {
+              $("#"+update_field).append($("<option></option>").attr("value",value.id).text(value.location_name));
+              });
+         }
+          });
+        }
+        else{
+          $("#"+update_field+" option").remove();
+          $("#"+update_field).append($("<option value=''>Locality</option>"));
+        }
+    }
+</script>
+
+
+

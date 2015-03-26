@@ -5,19 +5,20 @@
     $("#foodshare_select_id").val("1");
     $("#bookshare_select_id ").val('2');
     $("#skill_share_select_id ").val('3');
+    $("#peer_share_select_id ").val('4');
    
 
     <% if params[:post] == "book" %>
      $('#booklist_form').show();
       $('#foodlist_form').hide();     
       $('#skilllist_form').hide();
-      
+      $('#peerlist_form').hide();
       
     <% else %>
       $('#foodlist_form').show();
       $('#booklist_form').hide();
       $('#skilllist_form').hide();
-      
+      $('#peerlist_form').hide();
     <% end %>
   $('.services_class').on('change', function() {
     if( $(this).val() == '1')
@@ -26,7 +27,7 @@
       $('#booklist_form').hide();
       $('#foodlist_form').show();
       $('#skilllist_form').hide();
-      
+      $('#peerlist_form').hide();
       $("#foodshare_select_id").val("1");
      }
      else if( $(this).val() == '2')
@@ -35,7 +36,7 @@
        $('#booklist_form').show();
        $('#foodlist_form').hide();
        $('#skilllist_form').hide();
-      
+       $('#peerlist_form').hide();
        $("#bookshare_select_id ").val('2');
     }
     else if( $(this).val() == '3')
@@ -44,8 +45,17 @@
        $('#skilllist_form').show();
        $('#booklist_form').hide();
        $('#foodlist_form').hide();
-      
+       $('#peerlist_form').hide();
        $("#skill_share_select_id ").val('3');
+    }
+    else if( $(this).val() == '4')
+     {
+       $(".error_explanation").html("");
+       $('#skilllist_form').hide();
+       $('#booklist_form').hide();
+       $('#foodlist_form').hide();
+       $('#peerlist_form').show();
+       $("#peer_share_select_id ").val('4');
     }
     
   });
@@ -82,7 +92,9 @@
   if(document.getElementById('book_post_requirement_city_id').id){
           value = $.cookie('city_id')
           if(value){document.getElementById('book_post_requirement_city_id').value = value}}
-  
+  if(document.getElementById('peer_service_post_requirement_city_id').id){
+          value = $.cookie('city_id')
+          if(value){document.getElementById('peer_service_post_requirement_city_id').value = value}}
      });
 
 function book_form_validate()
@@ -432,9 +444,132 @@ function book_form_validate()
     </div>
   <%end%>
 </div>
-<!--####################### End Skill Sharing #########################------>
+<!--####################### End Skill Sharing #########################-->
+<!--############################Peer Service###########################-->
 
+<div class="form_inner_align" id='peerlist_form'>
+  <%= form_for PeerServicePostRequirement.new, :url => peer_service_list_availability_sharing_index_path, :html => {:class=>"form-horizontal "} do |f|%>
+    <% if @post_requirement.errors.any? %>
+    <div class="error_explanation">
+      <ul>
+        <% @post_requirement.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label for="" class="", id ="provider_id" >Select City<i>*</i></label>
+      <div class="">
+        <%= collection_select :city, :id, City.all, :id, :city_name, {:include_blank => 'City'}, {:class => "form-control get_city", :id => "popup_city", :onchange => "get_location(this.value,'locality_id_class')"} %>
+        <script type="text/javascript">
+        $(window).load(function(){   
+          //value = $.cookie('city_id')
+          $(".get_city").val($.cookie('city_id'))
+        });
+        </script>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Locality<i>*</i></label>
+      <div class="">
+        <%= f.hidden_field :city_id %>
+        <%= f.collection_select(:location_id, @locations, :id, :location_name, {:include_blank => 'Locality'}, {:class=>'form-control locality_id_class', :id => 'locality_id'} )%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="">Select Category<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:service_id, @services, :id, :service_type, {selected: "4"}, {:class=>'form-control services_class', :id => 'peer_share_select_id'} )%>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="" class="", id ="peer_category_id" >Select Professional<i>*</i></label>
+      <div class="">
+        <%= f.collection_select(:peer_category_id, PeerCategory.all, :id, :peer_category_type, {:include_blank => 'Select Peer_Category'}, {:class=>'form-control','required'=>'required'} )%>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputEmail3" class="">Speciality</label>
+      <div class="">
+        <%= f.text_field :speciality, :maxlength=>"40", :class=>'form-control', :placeholder=>"Heart surgeon, criminal lawyer etc." %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Experience<i>*</i></label>
+      <div class="">
+        <%= f.text_field :exp, :maxlength=>"40", :class=>'form-control',"required"=>"required", :placeholder=>"In no. of years" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="">Degree / Certification (if any) </label>
+      <div class="">
+        <%= f.text_field :degree, :maxlength=>"40", :class=>'form-control', :placeholder=>"eg. MBBS, Gold Medalist, etc." %>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputEmail3" class=""> Charges/Fee (in Rs)<i>*</i></label>
+      <div class="">
+        <%= f.text_field :charges, :class=>'form-control quantity',"required"=>"required", :placeholder=>"no.s only ." %><span class="errmsg">
+      </div>
+    </div>
+        <div class="form-group">
+      <label for="" class=""> <b>Availability</b></label>
+      <div class="">
+      <label class="btn btn-primary">
+        <%= f.check_box :mon %> Mon
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :tue %> Tue
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :wed %> Wed
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :thu %> Thu
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :fri %> Fri
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sat %> Sat
+      </label>
+      <label class="btn btn-primary">
+        <%= f.check_box :sun %> Sun
+      </label>
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="inputEmail3" id="peer_image" class=""> Image</label>
+      <div class="">
+        <span id="peer_image_1"></span>
+        <%= f.file_field :peer, :class => "peer_img" %>
+      </div>      
+      <span  class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span>
+      </div>    
 
+    <div class="form-group">
+      <label for="inputEmail3" class="">Additional Info</label>
+      <div class="">
+        <%= f.text_area :additinal_info, :class=>'form-control', :rows  => 5, :cols=> 20, :maxlength=>"150", :placeholder=>"Additional Info."  %>
+      </div>
+    </div>
+    
+    <%= f.hidden_field :seeker_provider, value: false %>
+    <div class="form-group">
+    </div>
+    <div class="form-group">
+      <div class="">
+        <%= f.submit "Submit", :class=>"btn btn-default"%>
+      </div>
+    </div>
+  <%end%>
+</div>
+
+<!--##################peer service##############################-->
+
+<!--#############################End Peer Service######################-->
 <script type="text/javascript">
 $(document).ready(function () {
   //called when key is pressed in textbox
@@ -507,7 +642,7 @@ $(function() {
     });
 });
 $(function() {
-    $(".rider_img1").on("change", function()
+    $(".peer_img1").on("change", function()
     {
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
@@ -517,9 +652,9 @@ $(function() {
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function(){ // set image data as background of div
-                $("#rider_image1").css("background-image", "url("+this.result+")");
-                $("#rider_image1").css("width", "125px");
-                $("#rider_image1").css("height", "125px");
+                $("#peer_image1").css("background-image", "url("+this.result+")");
+                $("#peer_image1").css("width", "125px");
+                $("#peer_image1").css("height", "125px");
             }
         }
     });
@@ -554,7 +689,7 @@ $(function() {
     background-repeat: no-repeat; 
     border-radius: 50%;
 }
-#rider_image1 {
+#peer_image1 {
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;

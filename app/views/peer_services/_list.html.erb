@@ -1,0 +1,364 @@
+<script>
+$(document).ready(function() {
+    $("html, body").animate({ scrollTop: 450 }, 1000);
+});
+  function check_user(phone, email, user_id, location_id, peer_service_post_requirement_id, seeker_provider){
+<% if current_user %>
+      var seeker_status = seeker_provider;
+      var current_user_id = "<%= current_user.id %>";
+    var email1 = email;
+    var phone1 = phone;
+      if (current_user_id != user_id){
+        $.ajax({ url : "/peer_messages/create", type: "POST", data: { user_id: user_id, location_id :location_id, peer_service_post_requirement_id : peer_service_post_requirement_id}, dataType: "json"});
+        if(seeker_status == true){
+        var r = confirm("Your contact details will be shared with the service seeker.");
+        if (r == true){ 
+        alert("Please find the contact details of the peer service seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
+        else{
+        var r = confirm("Your contact details will be shared with the service provider.");
+        if (r == true){
+        alert("Please find the contact details of the service provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
+        $("#t_"+peer_service_post_requirement_id).empty();
+        $("#t_"+peer_service_post_requirement_id).html("Already Negotiated");
+        
+      }
+      else{
+        alert("You can't able to negotiate this order");
+      }
+<% else %>
+      alert("You need to sign in or sign up before continuing");
+<% end %>
+  }
+  
+</script>
+<div class="content">
+  <div class="resize">
+    <div class="display ">
+      <div class="table-responsive src_res_desktop">
+        <table class="table table-hover">
+          <tbody>
+            <%#=@search_result.inspect%>
+            <% @count = 1 %>
+            <% @search_results.each_with_index do |s, i| %>
+            <% next if s.user_id == nil %>
+            <% 
+  @rate_1=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,1,s.id).count()
+  @rate_2=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,2,s.id).count()
+  @rate_3=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,3,s.id).count()
+  @rate_4=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,4,s.id).count()
+  @rate_5=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,5,s.id).count()
+
+  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+  if sum == 0
+    @src1 = "/assets/reviews/1str.png"
+    @src2 = "/assets/reviews/1str.png"
+    @src3 = "/assets/reviews/1str.png"
+    @src4 = "/assets/reviews/1str.png"
+    @src5 = "/assets/reviews/1str.png"
+  else
+    avrg = ( sum.to_f / total_no.to_f ).round(1)
+    if avrg >= 1
+      @src1 = "/assets/reviews/2str.png"
+    else
+      @src1 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 1.5
+      @src2 = "/assets/reviews/2str.png"
+    else
+      @src2 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 2.5
+      @src3 = "/assets/reviews/2str.png"
+    else
+      @src3 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 3.5
+      @src4 = "/assets/reviews/2str.png"
+    else
+      @src4 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 4.5
+      @src5 = "/assets/reviews/2str.png"
+    else
+      @src5 = "/assets/reviews/1str.png"
+    end
+  end
+%>
+              <tr>
+                <td><%= (@page.to_i - 1) * 15 + i+1 %></td>
+                <td>
+                  <% if !s.peer.path.nil? %>
+                    <%= image_tag s.peer.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+                  <%else%>
+                    <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+                  <%end%>          
+                </td>
+                <td  class="col-xs-2">
+                  <b><%= s.location.location_name %></b>
+                  <br /> <br />                 
+                  <% if s.seeker_provider == false %>
+                    <span style="left: 0%; position: relative;">
+                      <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                    </span>
+                  <%end%>
+                  <br /> <br />       
+                  <b>Charges:</b> <%= s.charges%>
+                </td>
+                <td>
+                  <b>Profession:</b> <%= s.peer_category.peer_category_type %>
+                  <br /> <br />                  
+                  
+                  <b>Years of Experience:</b> <%= s.exp %><br><br>
+                  <b>Availability:</b>
+                    <% if s.mon == true %>Mon,<% end %>
+                    <% if s.tue == true %>Tue,<% end %>
+                    <% if s.wed == true %>Wed,<% end %>
+                    <% if s.thu == true %>Thu,<% end %>
+                    <% if s.fri == true %>Fri,<% end %>
+                    <% if s.sat == true %>Sat,<% end %>
+                    <% if s.sun == true %>Sun<% end %><br><br>
+                    <b>Specialities:</b> <%= s.speciality %><br><br>
+                     <b>Degree /cerficate:</b> <%= s.degree %><br /> <br />
+                     <b>Addtional Info:</b> <%= s.additinal_info %>
+                </td>
+                
+                <td>
+                   <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_peer_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+                  </td>
+               <div class="modal fade" id="Modals_show_peer_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC;">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><b>Show Reviews</b></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+      <% if s.reviews.size > 0 %>
+        <% s.reviews.each do |review| %>
+          <%= review.content %><br>
+          Reviewed by:
+          <span style="color :green;"><%= review.user.name if review.user_id %></span><br/><br>
+        <% end %>
+      <% else %>
+        Sorry. No reviews yet
+      <% end %>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model-->
+
+
+                <% @user_email = s.user.email%>
+                <% @user_phone = s.user.phone_no%>
+                <% if !current_user %>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_peer(current_user.id, s.id).nil?%>
+
+                  <td id="t_<%= s.id %>">
+                    <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+                  </td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+              </tr>
+              <% @count = @count+1 %>
+            <% end %>
+          </tbody>
+        </table>
+        <div id="">
+            <%= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="srch_res_mob">
+  <% @count = 1 %>
+  <% @search_results.each do |s| %> 
+   <% next if s.user_id == nil %>                          
+  <% 
+    @rate_1=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,1,s.id).count()
+    @rate_2=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,2,s.id).count()
+    @rate_3=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,3,s.id).count()
+    @rate_4=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,4,s.id).count()
+    @rate_5=Rate.where("rated_id=? AND rated_no=? AND peer_service_post_requirement_id=?",s.user.id,5,s.id).count()
+
+    sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+    total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5 
+    if sum == 0
+      @src1 = "/assets/reviews/1str.png"
+      @src2 = "/assets/reviews/1str.png"
+      @src3 = "/assets/reviews/1str.png"
+      @src4 = "/assets/reviews/1str.png"
+      @src5 = "/assets/reviews/1str.png"
+    else
+      avrg = ( sum.to_f / total_no.to_f ).round(1)
+      if avrg >= 1
+        @src1 = "/assets/reviews/2str.png"
+      else
+        @src1 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 1.5
+        @src2 = "/assets/reviews/2str.png"
+      else
+        @src2 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 2.5
+        @src3 = "/assets/reviews/2str.png"
+      else
+        @src3 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 3.5
+        @src4 = "/assets/reviews/2str.png"
+      else
+        @src4 = "/assets/reviews/1str.png"
+      end
+      if avrg >= 4.5
+        @src5 = "/assets/reviews/2str.png"
+      else
+        @src5 = "/assets/reviews/1str.png"
+      end
+    end
+  %>                           
+                              
+                             
+                              
+                              
+    <div class="res_data">
+      <div class="data_row">
+        <div class="data_title">Peer Service Photo</div>
+        <div class="data_col">
+          <% if !s.peer.path.nil? %>
+            <%= image_tag s.peer.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+          <%else%>
+            <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+          <%end%>          
+        </div>
+      </div>
+      <div class="data_row">
+        <div class="data_title">Locality</div>
+        <div class="data_col">
+          <b><%= s.location.location_name %></b>
+          <br /> <br />                 
+          <% if s.seeker_provider == false %>
+            <span style="left: 0%; position: relative;">
+              <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+              <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+            </span>
+          <%end%>
+          <br /> <br />       
+          <b>Charges:</b> <%= s.charges%>
+        </div>
+      </div>
+      <div class="data_row">
+        >
+        <div class="data_col">
+          <b>Peer Service:</b> <%= s.peer_category.peer_category_type %>
+          <br /> <br /> 
+          <b>Years of Experience:</b> <%= s.exp %><br>
+
+          <b>Additional Info:</b> <%= s.additinal_info %>
+          <br /> <br />
+
+          <b>Availability:</b>
+          <% if s.mon == true %>Mon,<% end %>
+          <% if s.tue == true %>Tue,<% end %>
+          <% if s.wed == true %>Wed,<% end %>
+          <% if s.thu == true %>Thu,<% end %>
+          <% if s.fri == true %>Fri,<% end %>
+          <% if s.sat == true %>Sat,<% end %>
+          <% if s.sun == true %>Sun<% end %>
+          <b>Speciality:</b> <%= s.speciality %><br>
+          <b>Degree/ Certificate:</b> <%= s.degree %><br>
+        </div>
+      </div>
+      <!--<div class="data_row">
+        <div class="data_title">Home-Service:</div>
+        <div class="data_col">           
+          <%# if s.home_service == false %>No <%# else %> Yes <%#end%>
+        </div>
+      </div>-->
+      <div class="data_row">
+        <div class="data_title">Reviews:</div>
+        <div class="data_col">           
+          <button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_peer_reviews_mob_<%= s.id %>_<%= s.user.id %>">Show Reviews</button>
+        </div>
+      </div>
+
+      <div class="data_row">
+        <div class="data_title"></div>
+        <div class="data_col">
+          <% @user_email = s.user.email%>
+          <% @user_phone = s.user.phone_no%>
+          
+          <% if !current_user %>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_peer(current_user.id, s.id).nil?%>
+
+                  <td id="t_<%= s.id %>_m">
+                    <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %>
+                  </td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+
+          <% @count = @count+1 %>
+        </div>
+      </div>
+<!--############start review modal##########-->
+<div class="modal fade" id="Modals_show_peer_reviews_mob_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#38ACEC;">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><b>Show Reviews</b></h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+      <% if s.reviews.size > 0 %>
+        <%s.reviews.each do |review| %>
+          <%= review.content %><br>
+         Reviewed by:
+           <span style="color :green;"><%= review.user.name if review.user_id %></span><br/><br/>
+        <% end %>
+      <% else %>
+        Sorry. No reviews yet
+      <% end %>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--##########End Model#################-->
+
+    </div>
+    <%end%>
+
+
+
+
+  </div>
+
+
+
+
+
+</div>

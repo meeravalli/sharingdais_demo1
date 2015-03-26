@@ -1,0 +1,15 @@
+<div class="review">
+<%= form_tag "/create_review" do %>
+<%= hidden_field_tag "book_post_requirement_id", @book_post_requirement_id %>
+<%= hidden_field_tag "peer_service_post_requirement_id", @peer_service_post_requirement_id %>
+<%= hidden_field_tag "post_requirement_id", @post_requirement_id %>
+
+<br><br>
+<div class="" style="color:">
+<%= label_tag :Review %><br/>
+<div >
+<%= text_area_tag :content %><br/>
+</div>
+</div><br>
+<% end %>
+<div>

@@ -223,7 +223,7 @@ function show_trending_localities(){
       });
       }else if($("#service_type").val() == "4"){
       $.ajax({ 
-        url : "/search_rider", 
+        url : "/search_peer", 
         type: "POST", 
         data: { 
           cityid: $("#city_location").val()
@@ -233,13 +233,13 @@ function show_trending_localities(){
         {  
           $("#model_box").hide(); 
           $("#model_box_top_five").show();
-          var row1 = $("<center> Top Localities where Ride Owners are sharing ride </center>");
+          var row1 = $("<center> Top Localities where peer service are provide by providers  </center>");
           $("#seeker_head").append(row1);
-          var row2 = $("<center> Top Localities where Riders are looking for rides </center>");
+          var row2 = $("<center> Top Localities where seeker are looking for peer service </center>");
           $("#provider_head").append(row2);
           if (data.seeker != ""){
             $.each(data.seeker, function( index, value ) {
-              var row = $("<tr><td><a href='/rider_result/"+value.l_id+"/"+value.seeker_provider+"''>" + value.location_name + "</a></td></tr>" );
+              var row = $("<tr><td><a href='/peer_result/"+value.l_id+"/"+value.seeker_provider+"''>" + value.location_name + "</a></td></tr>" );
                $("#seeker").append(row);
             });
           }else{
@@ -248,7 +248,7 @@ function show_trending_localities(){
           }
           if (data.provider != ""){
             $.each(data.provider, function( index, value ) {
-              var row = $("<tr><td><a href='/rider_result/"+value.l_id+"/"+value.seeker_provider+"''>"+ value.location_name + "</a></td></tr>" );
+              var row = $("<tr><td><a href='/peer_result/"+value.l_id+"/"+value.seeker_provider+"''>"+ value.location_name + "</a></td></tr>" );
                $("#provider").append(row);
             });
           }else{

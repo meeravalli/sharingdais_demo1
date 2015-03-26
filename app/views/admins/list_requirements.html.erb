@@ -11,7 +11,9 @@
     <li>
       <a href="#skill" role="tab" data-toggle="tab">Skill List Requirements</a>
     </li>
-     
+     <li>
+      <a href="#peer" role="tab" data-toggle="tab">Peer-to-Peer Service List Requirements</a>
+    </li>
   </ul>
 
 <!-- Tab panes food -->
@@ -319,15 +321,106 @@
           </div>
         </div>
       </div>
+<!--tab for peer service-->
+<div class="tab-pane" id="peer">
+        <div class="display padding_five">
+          <table class="table table-hover">
+            <thead class="heading">
+              <tr>
+                <th style="width:15%">User Name</th>
+                <th style="width:20%">Service</th>
+                <th style="width:15%">Location</th>
+                <th style="width:10%">Charges</th>
+                <th style="width:25%">Additional</th>
+                <th style="width:15%">Date</th>
+                <th></th>
+                <th>Download: <%= link_to "Excel", list_peer_exl_path(format: "xls") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @peer_orders.each do |k| %>
+              <tr>
+                <td>
+                  <% if !k.user.nil? %>
+                    <%= k.user.name %>
+                  <% else %>
+                    Account Deleted
+                  <% end %>
+                </td>
+                <td><%= k.peer_category.peer_category_type %></td>
+                <td><%= k.location.location_name %></a></td>
+                <td><%= k.charges %></td>
+                <td><%= k.additinal_info %></td>
+                <td><%= k.created_at.strftime("%b %d, %Y") %></td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Modalp_<%= k.id %>_<%= k.user.id %>">Edit</button>
+<!--Model book-->
+<div class="modal fade" id="Modalp_<%= k.id %>_<%= k.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= k.user.name %></h4>
+      </div>
+      <div class="modal-body">
+<%= form_tag('/edit_peer_post', multipart: true) do -%>
+<input type="hidden" name="id" value="<%= k.id %>"> 
+<input type="hidden" name="seeker_provider" value="0">
+<div class="form-group">
+<label for="" class="" id="provider_id">Budget</label>
+<div class="">
+<input class="form-control" name="budget" size="30" type="text" value="<%= k.charges %>">
+</div>
+</div>
+<div class="form-group">
+<label for="inputEmail3" class="">Details </label>
+<div class="">
+<textarea class="form-control" name="details" cols="20" rows="5"><%= k.additinal_info %></textarea>
+</div>
+</div><br>
+<div id="food_image" class="form-group">
+<div class="">
+<% if !k.peer.path.nil? %>
+<%= image_tag k.peer.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+<%else%>
+<img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+<%end%>
+</div>
+</div><br>
+<div id="food_image" class="form-group">
+<label class="" for="inputEmail3">Peer Image</label>
+<div class="">
+<input type="file" name="peer_service_post_requirement[peer]" id="peer_service_post_requirement_peer">
+</div>
+<span class="upload_dtest">(only .jpg or .jpeg or .png or .gif file)</span><br><br>
+</div>
+  <div><%= submit_tag 'Save' %></div>
+<% end -%>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model book-->
+                </td>
+                <td><%= link_to (image_tag 'delete_icon.png', :title=>"Delete", :border => 0), {:action => :destroy_peer_post, :id => k.id, :seeker_provider => 0},
+                            method: :delete, :confirm => "Do you want to delete ?" %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div class="pagination">
+            <%= will_paginate @peer_orders%>
+          </div>
+        </div>
+      </div>
+
+<!--end tab for peer service-->
+
+
+
+
       </div>
     </div> 
-</div>
-<!-- ###################Tab panes ride############## -->
+
+
     
-
-<!--##########ride#############-->
-
-    </div>
-  </div> 
-</div>
-

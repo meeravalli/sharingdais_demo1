@@ -73,9 +73,12 @@
     <%= render 'order_book_rating' %>
     </div>
 
-<div class = "order_skill_rating_paginate">
+   <div class = "order_skill_rating_paginate">
     <%= render 'order_skill_rating' %>
-</div>
+   </div>
+   <div class = "order_peer_rating_paginate">
+    <%= render 'order_peer_rating' %>
+   </div>
 
 <div class = "post_requirement_paginate">
     <%= render 'post_requirement' %>
@@ -85,7 +88,11 @@
       <%= render 'book_post_requirement' %>
      </div>
     <div class = "skill_post_paginate">
-    <%= render 'skill_post_requirement' %></div>
+    <%= render 'skill_post_requirement' %>
+    </div>
+   <div class = "peer_service_post_paginate">
+    <%= render 'peer_service_post_requirement' %>
+   </div>
   </div>
 </div>
 
@@ -104,7 +111,10 @@ $(".skill_post_paginate .pagination a").on("click", function(){
     $.get(this.href, { paginate: 'skill_post' }, null, 'script');
     return false;
   });
-
+$(".peer_service_post_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'peer_post' }, null, 'script');
+    return false;
+  });
 
 $(".order_rating_paginate .pagination a").on("click", function(){
     $.get(this.href, { paginate: 'order_rating' }, null, 'script');
@@ -123,7 +133,10 @@ $(".order_skill_rating_paginate .pagination a").on("click", function(){
     return false;
   });
 
-
+$(".order_peer_rating_paginate .pagination a").on("click", function(){
+    $.get(this.href, { paginate: 'order_peer_rating' }, null, 'script');
+    return false;
+  });
 
 });
 </script>
