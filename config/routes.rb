@@ -24,6 +24,13 @@ Sharingdasiss::Application.routes.draw do
     get :edit_skill_list_availability, :on => :member
     delete :skill_destroy_requirement, :on => :member
 
+    post :post_peer_service_requirement, :on => :collection
+    post :peer_service_list_availability, :on => :collection
+    get :edit_peer_service_post_requirement, :on => :member
+    get :edit_peer_service_list_availability, :on => :member
+    
+    delete :peer_service_destroy_requirement, :on => :member
+
     
 
     get :shares_with_us, :on => :collection
@@ -59,6 +66,14 @@ Sharingdasiss::Application.routes.draw do
     get :trash, :on => :collection
     get :agree_share, :on => :collection
   end
+  resources :peer_messages, :only => [:index, :create, :destroy] do
+    get :read, :on => :member
+    get :cancel, :on => :member
+    get :unread, :on => :collection
+    get :sent, :on => :collection
+    get :trash, :on => :collection
+    get :agree_share, :on => :collection
+  end
 
   resources :home, :only =>[:index] do
     post :search, :to => 'home#index',:on => :collection
@@ -72,10 +87,12 @@ Sharingdasiss::Application.routes.draw do
  get "/:city/:location/food_search" => "food_search#index"
  get "/:city/:location/skill_search" => "skill_search#index"
  get "/:city/:location/book_search" => "book_search#index"  
+ get "/:city/:location/peer_services" => "peer_services#index"  
   match '/book_search', :to => 'book_search#index'
   match '/food_search', :to => 'food_search#index'
   match '/skill_search', :to => 'skill_search#index'
-  #match  '/peer_service', :to => 'peer_service#index' 
+  match '/peer_services', :to => 'peer_services#index'
+ 
  
 
   match '/home/search', :to => 'home#index'
@@ -92,11 +109,12 @@ Sharingdasiss::Application.routes.draw do
   get "exl" => "admins#exl"
   get "post_food_exl" => "admins#post_food_exl"
   get "post_book_exl" => "admins#post_book_exl"
-  get "post_skill_exl" => "admins#post_skill_exl"
-  
+  get "post_skill_exl" => "admins#post_skill_exl" 
   get "list_food_exl" => "admins#list_food_exl"
   get "list_book_exl" => "admins#list_book_exl"
   get "list_skill_exl" => "admins#list_skill_exl"
+  get "post_peer_exl" => "admins#post_peer_exl"
+  get "list_peer_exl" => "admins#list_peer_exl"
   
 
   get "post_requirements" => "admins#post_requirements"
@@ -109,19 +127,25 @@ Sharingdasiss::Application.routes.draw do
   delete "destroy_book_post" => "admins#destroy_book_post"
   post "/edit_skill_post" => "admins#edit_skill_post"
   delete "destroy_skill_post" => "admins#destroy_skill_post"
+  post "/edit_peer_post" => "admins#edit_peer_post"
+  delete "destroy_peer_post" => "admins#destroy_peer_post"
+
   
   
   post "search_food" => "book_search#search_top_five_food"
   post "search_book" => "book_search#search_top_five_book"
   post "search_skill" => "book_search#search_top_five_skill"
+  post "search_peer" => "book_search#search_top_five_peer"
  
   post "send_feedback" => "book_search#feedback"
   post "rate_me" => "home#rate_me"
   post "rate_me_book" => "home#rate_me_book"
   post "rate_me_skill" => "home#rate_me_skill"
+  post "rate_me_peer" => "home#rate_me_peer"
   
   post "destroy_order" => "home#destroy_order"
   post "destroy_book_order" => "home#destroy_book_order"
+  post "destroy_peer_order" => "home#destroy_peer_order"
   post "save_phone" => "home#save_phone"
   post "save_count" => "book_search#save_count"
   post "check_email" => "book_search#check_email"
@@ -129,11 +153,14 @@ Sharingdasiss::Application.routes.draw do
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
   get "/skill_result/:id/:seeker_provider/" =>"skill_search#skill_result"
+   get "/peer_result/:id/:seeker_provider/" => "peer_services#peer_result"
   
   get "offer" => "book_search#offer"
 
   get "skill_search/index"
   get "skill_search/skill_result"
+  get "peer_services/index"
+  get "peer_services/peer_result"
   
   
   get "close_window" => "book_search#close_window"
@@ -154,10 +181,10 @@ Sharingdasiss::Application.routes.draw do
   get "stuffed_parantha" => "static_pages#stuffed_parantha"
   get "veg_thali" => "static_pages#veg_thali"
   get "veg_biryani" => "static_pages#veg_biryani"
-  #get "peer_service1" => "static_pages#peer_service1"
-  #get "peer_service2" => "static_pages#peer_service2"
-  #get "peer_service3" => "static_pages#peer_service3"
-  #get "peer_service4" => "static_pages#peer_service4"
+  get "peer_service1" => "static_pages#peer_service1"
+  get "peer_service2" => "static_pages#peer_service2"
+  get "peer_service3" => "static_pages#peer_service3"
+  get "peer_service4" => "static_pages#peer_service4"
   post "create_review" => "home#create_review"
   get "show_reviews" => "home#show_review", :as => :show_reviews
   

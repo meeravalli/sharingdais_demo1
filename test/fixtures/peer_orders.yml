@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  peer_service_post_requirement_id: 1
+  order_date: 2015-03-25
+  user_id: 1
+  provider_id: 1
+
+two:
+  peer_service_post_requirement_id: 1
+  order_date: 2015-03-25
+  user_id: 1
+  provider_id: 1

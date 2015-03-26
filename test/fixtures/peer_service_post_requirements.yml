@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service_id: 1
+  city_id: 1
+  location_id: 1
+  peer_category_id: 1
+  user_id: 1
+  charges: 1.5
+  sun: false
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  latitude: 1.5
+  longitude: 1.5
+  seeker_provider: false
+  speciality: MyText
+  degree: MyString
+  exp: MyString
+  additinal_info: MyText
+  review: MyText
+  peer_updated_at: 2015-03-25 12:35:22
+  peer_file_size: 1
+  peer_content_type: MyString
+  peer_file_name: MyString
+
+two:
+  service_id: 1
+  city_id: 1
+  location_id: 1
+  peer_category_id: 1
+  user_id: 1
+  charges: 1.5
+  sun: false
+  mon: false
+  tue: false
+  wed: false
+  thu: false
+  fri: false
+  sat: false
+  latitude: 1.5
+  longitude: 1.5
+  seeker_provider: false
+  speciality: MyText
+  degree: MyString
+  exp: MyString
+  additinal_info: MyText
+  review: MyText
+  peer_updated_at: 2015-03-25 12:35:22
+  peer_file_size: 1
+  peer_content_type: MyString
+  peer_file_name: MyString
