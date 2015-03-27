@@ -181,10 +181,10 @@ Sharingdasiss::Application.routes.draw do
   get "stuffed_parantha" => "static_pages#stuffed_parantha"
   get "veg_thali" => "static_pages#veg_thali"
   get "veg_biryani" => "static_pages#veg_biryani"
-  get "peer_service1" => "static_pages#peer_service1"
-  get "peer_service2" => "static_pages#peer_service2"
-  get "peer_service3" => "static_pages#peer_service3"
-  get "peer_service4" => "static_pages#peer_service4"
+  get "event_management" => "static_pages#event_management"
+  get "tax_consultant" => "static_pages#tax_consultant"
+  get "doctors_dentists" => "static_pages#doctors_dentists"
+  get "beauty_baby_care" => "static_pages#beauty_baby_care"
   post "create_review" => "home#create_review"
   get "show_reviews" => "home#show_review", :as => :show_reviews
   

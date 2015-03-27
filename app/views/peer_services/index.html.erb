@@ -1,15 +1,15 @@
 <%= render 'banner_carousel' %>
 <% if @search_params.nil? %>
-<%#= render 'peer_micro' %>
+<%= render 'peer_micro' %>
 
   <%= render 'home/content' %>
 <% elsif @search_params == 0%>
   <p class="no_result_style"> No Results are found. Request you to post your requirement, we will try to fulfill it.</p>
   <p class="no_result_post">
 
-  <%= link_to 'Post your requirement if you are looking for service', post_requirement_sharing_index_path, :title => "Looking for home cooked skill? Submit your request here" %>
+  <%= link_to 'Post your requirement if you are looking for service', post_requirement_sharing_index_path, :title => "Looking for home servics? Submit your request here" %>
  
-<%= link_to 'Post your offering if you are willing to provide service', list_availability_sharing_index_path, :title => "Interested in serving skill to people? Submit your request here" %>
+<%= link_to 'Post your offering if you are willing to provide service', list_availability_sharing_index_path, :title => "Interested in service to people? Submit your request here" %>
 
    </p>
    
