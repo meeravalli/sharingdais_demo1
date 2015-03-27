@@ -55,10 +55,18 @@ class StaticPagesController < ApplicationController
    def fifty_shades_grey
    	 render :layout => false
    end
-   
-
-
-
+   def event_management
+       render :layout => false
+   end
+   def tax_consultant
+       render :layout => false
+   end
+   def doctors_dentists
+       render :layout => false
+   end
+   def beauty_baby_care
+       render :layout => false
+   end
 
 
 	
