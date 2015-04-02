@@ -16,8 +16,7 @@ class BookSearchController < ApplicationController
       else
         query += "seeker_provider = 1"
       end
-      p query.inspect
-      p 111111111111111111111111
+      
       if key.present?
       
         category=Category.where("category_name=?",params[:search][:key])
@@ -28,30 +27,34 @@ class BookSearchController < ApplicationController
         end
         query += ' and (lower(name) LIKE "%' + key + '%" or lower(category_id) LIKE "%' + @ke + '%" or lower(author) LIKE "%' + key + '%")'
       end
-      p query.inspect
-      p 222222222222222222222222222222222
+     
       if params[:search].has_key?("include_near_by_locations")
-       # p 111111111111111111111111
+       
         location = Location.where("id = ?",params[:search][:location_id]).last
         city = City.where("id = ?",params[:search][:city_id]).last
         search_area = [city.city_name, location.location_name, "India"].join(", ")
         @search_results = BookPostRequirement.near("#{search_area}", 10).where(query)
       p @search_results.inspect      
       else
-        #p 222222222222222222222
+       
         @search_results = BookPostRequirement.where(query).paginate(:page => params[:page], :per_page => 25)
       end
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
     elsif params[:city].present?
-      p 333333333333333333333333
+    
       key = params[:value].downcase
       # @city = City.where(:id => params[:city]).first
       # @location = Location.where(:id => params[:location]).first
       query = ""
+      if params[:t] == "0"
         query += "seeker_provider = 0"
+      else
+        query += "seeker_provider = 1"
+      end
+        # query += "seeker_provider = 0"
       if key.present?
-        p 33333333333333333333333333
+       
         category=Category.where("category_name=?",params[:key])
         if !category.blank?
           @ke = category.first.id.to_s
@@ -69,7 +72,7 @@ class BookSearchController < ApplicationController
       @search_params = @search_results.count
       @locations = params[:city].blank? ? [] : City.where(:city_name => params[:city]).first.locations
     end
-    redirect_to "/#{@city.city_name}/#{@location.location_name}/book_search?value=#{params[:search][:key]}" unless @city.nil?
+    redirect_to "/#{@city.city_name}/#{@location.location_name}/book_search?value=#{params[:search][:key]}&t=#{params[:search][:book]}" unless @city.nil?
     #end
     @page = params[:page] || 1
   end

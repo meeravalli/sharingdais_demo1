@@ -19,7 +19,7 @@ layout 'food_search'
       @city = City.where(:id => params[:search][:city_id]).first
       @food_type = FoodType.where(:id => params[:search][:food_type_id]).first
       @location = Location.where(:id => params[:search][:location_id]).first
-      @search_results = PostRequirement.filter_conditions(params[:search])#.paginate(:page => params[:page], :per_page => 25)
+      @search_results = PostRequirement.filter_conditions(params[:search])
       @search_params = @search_results.count
       @locations = params[:search][:city_id].blank? ? [] : City.find(params[:search][:city_id]).locations
     elsif params[:city].present?
@@ -42,6 +42,6 @@ layout 'food_search'
     else
       @prm = false
     end
-    @search_results = PostRequirement.where("location_id=? AND seeker_provider=?",params[:id],@prm)
+    @search_results = PostRequirement.where("location_id=? AND seeker_provider=?",params[:id],@prm).paginate(:page => params[:page], :per_page => 5)
   end
 end
