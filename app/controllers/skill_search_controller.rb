@@ -65,7 +65,7 @@ class SkillSearchController < ApplicationController
     else
       @prm = false
     end
-    @search_results = SkillPostRequirement.where("location_id=? and seeker_provider=?",params[:id],@prm).paginate(:page => params[:page], :per_page => 25)
+    @search_results = SkillPostRequirement.where("location_id=? and seeker_provider=?",params[:id],@prm).paginate(:page => params[:page], :per_page => 5)
     puts "====#{@search_results}==================================================="
   end
 end
