@@ -237,13 +237,13 @@ before_filter :ensure_admin
   def edit_peer_post
     @post=PeerServicePostRequirement.where("id=?",params[:id]).first
     if !params[:budget].blank?
-      @post.rent= params[:budget] 
+      @post.charges= params[:budget] 
     end
     if !params[:details].blank?
-      @post.description= params[:details]
+      @post.additinal_info= params[:details]
     end
     if !params[:peer_category_id].blank?
-      @post.category_id= params[:peer_category_id]
+      @post.peer_category_id= params[:peer_category_id]
     end
     if !params[:peer_service_post_requirement].blank?
       @post.attributes = params[:peer_service_post_requirement] 
