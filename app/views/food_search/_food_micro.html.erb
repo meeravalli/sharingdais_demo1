@@ -68,16 +68,17 @@
   <h1 class="how_heading">What is Hot inside?</h1>
   <!--<div calss="container_responsive">-->
   <div class="resize_how_diag">
-    <div class="desktop_diag">
+     <div class="desktop_diag">
       <table>
         <tr>
           <td>
+            <div class="bix_9">
             <div class="image">
-              <!--<img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="180" height="140">-->
+              
              <a href="/khadi_chawal" target="_blank"> <img class="top" src="/assets/food_image/kadi-chawal.jpg" width="230" height="200"></a>
             </div>
             <p>
-        <a href="/khadi_chawal" class="bix_9" target="_blank"> Home Style Kadhi-Chawal</a>
+        <a href="/khadi_chawal"  target="_blank"> Home Style Kadhi-Chawal</a>
 <script type="text/javascript">
   $(".bix_9").click(function () {
     $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_9':"1"}),success: function (data) {}
@@ -85,15 +86,17 @@
   });
 </script>
             </p>
+          </div>
             <p><strong>City:</strong> Patel Nagar- Delhi</p> 
           </td>
           <td>
+            <div class="bix_10" >
             <div class="image">
-              <!--<img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">-->
+              
              <a href="/stuffed_parantha" target="_blank"> <img class="top" src="/assets/food_image/aluparatha.jpg" width="230" height="200"></a>
             </div>
             <p>
-              <a href="/stuffed_parantha" class="bix_10" target="_blank"> Stuffed Parantha</a>
+              <a href="/stuffed_parantha" target="_blank"> Stuffed Parantha</a>
 <script type="text/javascript">
   $(".bix_10").click(function () {
     $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_10':"1"}),success: function (data) {}
@@ -101,14 +104,16 @@
   });
 </script>            
             </p>
+          </div>
             <p><strong>City:</strong> Ghaziabad</p> 
           </td>
           <td>
+            <div class="bix_11" >
             <div class="image">            
              <a href="/veg_thali" target="_blank"> <img class="top" src="/assets/food_image/thali.jpg" width="230" height="200"></a>
             </div>
             <p>
-              <a href="/veg_thali" class="bix_11" target="_blank"> Veg Thali</a>
+              <a href="/veg_thali" target="_blank"> Veg Thali</a>
             </p>
 <script type="text/javascript">
   $(".bix_11").click(function () {
@@ -116,15 +121,17 @@
     });
   });
 </script>
+            </div>
             <p><strong>City:</strong> Bangalore</p> 
           </td>
           <td>
+            <div class="bix_12">
             <div class="image">
               
               <a href="/veg_biryani" target="_blank"><img class="top" src="/assets/food_image/thali2.jpg" width="230" height="200"></a>
             </div>
             <p>
-              <a href="/veg_biryani" class="bix_12" target="_blank"> Veg Biryani</a>
+              <a href="/veg_biryani"  target="_blank"> Veg Biryani</a>
 <script type="text/javascript">
   $(".bix_12").click(function () {
     $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_12':"1"}),success: function (data) {}
@@ -132,12 +139,14 @@
   });
 </script>
             </p>
+          </div>
             <p><strong>City:</strong> Ghaziabad</p>
           </td>
           
         </tr>
       </table>
     </div>
+    
   </div>
   <!-- -----------------------Mobile view------------ -->
   <div class="mob_diag">

@@ -10,10 +10,11 @@
     <!--<title>Sharingdais an Online Platform for Peer to Peer Sharing</title>-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta property="og:image" content="http://www.sharingdais.com/assets/food_image/kadi-chawal.jpg"/>
+    <meta property="og:image" content="http://www.sharingdais.com/assets/food_image/kadi-chawal.jpg"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="Keywords" content="Peer to Peer Sharing, Person to Person Sharing, Online Sharing, Online advertisements, Sharing Economy, Collaborative Consumption, Free advertisement, Free ads, Share stuff, Share goods and services, Sharing in Delhi, Sharing in Bangalore, Sharing in Bengaluru, Sharing in Ghaziabad, Sharing in Gurgaon, Sharing in Faridabad" />
-    <meta property="og:description" content=" Kadhi chawal is a popular, rice based dish from India. There are several variations of this food that can be found in states such as Uttar Pradesh, Punjab, Rajasthan and Gujarat. The meal consists of besan, yogurt and spices. What is better than having ghar style Kadhi-Chawal? Try once." />
+    <meta property="og:description" content="Kadhi chawal ("yogurt curry with rice") is a popular, rice based dish from India. There are several variations of this food that can be found in states such as Uttar Pradesh, Punjab, Rajasthan and Gujarat. The meal consists of besan (gram flour), yogurt and spices.
+            What is better than having ghar style Kadhi-Chawal? Try once."/>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -165,34 +166,34 @@
  <script>
         jssor_slider1_starter = function (containerId) {
             var options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to 
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each 
                 $AutoPlayInterval: 4000,                            //[Optional] Interval (in 
                 $PauseOnHover: 1,                               //[Optional] Whether to pause when 
                 $Loop: 0,                                       //[Optional] Enable loop(circular) of 
 
-                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key) 
+                $SlideDuration: 500,                                //[Optional] Specifies default duration (
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset 
-                $SlideSpacing: 5,                           //[Optional] Space between each slide in pixels, default value is 0
+                $SlideSpacing: 5,                           //[Optional] Space between each slide in pixels, 
                 $DisplayPieces: 1,                                  //[Optional] Number of pieces to 
-                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $ParkingPosition: 0,                                //[Optional] The offset position to park 
                 $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 
                 $PlayOrientation: 1,                                //[Optional] Orientation to play 
                 $DragOrientation: 3,                                //[Optional] Orientation to drag 
                 $ThumbnailNavigatorOptions: {
-                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
-                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail 
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 
 
-                    $Loop: 2,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
-                    $AutoCenter: 3,                                 //[Optional] Auto center thumbnail items in the thumbnail navigator container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 3
-                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
-                    $SpacingX: 4,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-                    $SpacingY: 4,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
-                    $DisplayPieces: 4,                              //[Optional] Number of pieces to display, default value is 1
-                    $ParkingPosition: 0,                            //[Optional] The offset position to park thumbnail
-                    $Orientation: 2,                                //[Optional] Orientation to arrange thumbnails, 1 horizental, 2 vertical, default value is 1
-                    $DisableDrag: false                             //[Optional] Disable drag or not, default value is false
+                    $Loop: 2,                                       //[Optional] Enable loop(circular) of 
+                    $AutoCenter: 3,                                 //[Optional] Auto center thumbnail items 
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange 
+                    $SpacingX: 4,                                   //[Optional] Horizontal space between each 
+                    $SpacingY: 4,                                   //[Optional] Vertical space between each 
+                    $DisplayPieces: 4,                              //[Optional] Number of pieces to display, 
+                    $ParkingPosition: 0,                            //[Optional] The offset position to park 
+                    $Orientation: 2,                                //[Optional] Orientation to arrange 
+                    $DisableDrag: false                             //[Optional] Disable drag or not, default 
                 }
             };
             var jssor_slider1 = new $JssorSlider$(containerId, options);
@@ -202,7 +203,7 @@
                 if (parentWidth) {
                     var sliderWidth = parentWidth;
                     //keep the slider width no more than 810
-                    sliderWidth = Math.min(sliderWidth, 810);
+                    sliderWidth = Math.min(sliderWidth, 340);
 
                     jssor_slider1.$ScaleWidth(sliderWidth);
                 }
@@ -222,17 +223,17 @@
 <div class="content">
 <div class="resize_how_diag">
 <div class="desktop_dialog"><br><br><br>
-
+<div class="container-fluid">
     <script type="text/javascript">
         $('.count9').click(function() {
           $('#output9').html(function(i, val) { return val*1+1 });
         });
       </script> 
-        <div style="margin:0 15% 0 15%;">
+        <div style="margin:0 0% 0 0%;" class="col-md-12 col-xs-12">
           <h1 style="color:#999">Visits: <%= @counter.first.box_9 ? @counter.first.box_9 : 0 %></h1>
           <table>
             <tr>
-              <td>
+              <!--<td>
                 <span class="rating">
                  <input type="radio" class="rating-input"
                   id="rating-input-5-5" name="rating-input-1">
@@ -250,24 +251,15 @@
                   id="rating-input-5-1" name="rating-input-1">
                  <label for="rating-input-5-1" class="rating-star"></label>
                  </span>
-              </td>
-              <td>
-               <div class="social" align="right">          
-                 
-                  <a class="fb-share-button"  data-href="http://www.sharingdais.com/khadi_chawal" data-layout="button" ></a> 
-                 <br>        
-                 <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-size="large" data-count="none">Tweet us</a>    <br>
-                 <input type="button" class="" onclick=
-                    "alert('Contact mobile Number : 7840088215')" 
-                    value="Contact us">    
-                </div>
-              </td>
+              </td>-->
+              
             </tr>
           </table>
-        </div><br>
-        <div class="" align="center">        
-        <div id="slider9_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 610px; height: 400px; overflow: hidden;">            
+        </div><br><br><br>
+        <div class="row" align="">  
+         <div class="col-md-6 col-xs-12"> 
+        <div id="slider9_container" style="position: relative; top: 0px; left: 0px; width: 80%; height: 300px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 310px; height: 300px; overflow: hidden;">            
             <div>
                 <img u="image" src="/assets/food_image/kadi-chawal.jpg" style="width:100%; height: ;"/>
                 <div u="thumb">
@@ -293,9 +285,9 @@
                 </div>
             </div>
         </div>                
-        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 85px; height: 400px; left:640px; top:0px;">            
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 65px; height: 300px; left:315px; top:0px;">            
             <div u="slides" style="cursor: move;">
-                <div u="prototype" class="p" style="position: absolute; width: 110px; height: 100px; top: 0; left: 0;">
+                <div u="prototype" class="p" style="position: absolute; width: 60px; height: 60px; top: 0; left: 0;">
                     <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
                 </div>
             </div>            
@@ -306,9 +298,36 @@
         </script>
         </div>
         </div>
-        <div class=""style="margin:0 15% 0 15%;" ><br>         
-            <p><strong>Home Style Kadhi-Chawal.</strong></p><br>  
-            <strong> Details:</strong> <br>  <br>         
+        
+         <div class="col-md-6 col-xs-12 ">
+         <div>
+          <strong>Name:</strong> 
+          </div><br>
+            <div>
+         <strong>Item:</strong> Home Style Kadhi-Chawal.
+         </div><br>
+          <div>
+         <strong>Phone:</strong> 7840088215
+         </div><br>
+          <div>
+         <strong>Locality:</strong> Patel Nagar and Nearby Areas- Delhi  <br>
+         </div><br>
+          <div>
+         <strong>price:</strong> INR 50<br>
+        </div>
+  </div>
+     </div> <br> 
+               <div class="col-md-12 col-xs-12" align="">          
+                <strong>Share:</strong>
+                 <a class="fb-share-button" data-href="https://www.sharingdais.com/khadi_chawal" data-layout="button"></a>                
+                  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                         
+                 <a href="https://twitter.com/share" data-size="large" class="twitter-share-button" data-size="large" data-count="none">Tweet us</a>  
+                </div>
+              
+            <div class="col-md-12 col-xs-12" >                  
+   
+            <strong> Details:</strong> <br>         
             <p align="justify"> Kadhi chawal ("yogurt curry with rice") is a popular, rice based dish from India. There are several variations of this food that can be found in states such as Uttar Pradesh, Punjab, Rajasthan and Gujarat. The meal consists of besan (gram flour), yogurt and spices.
             What is better than having ghar style Kadhi-Chawal? Try once.
            </p><br>
@@ -316,26 +335,16 @@
           <br>          
             <strong>Style:</strong>  North Indian
             <br>           
-            <strong>Location:</strong> Patel Nagar and Nearby Areas- Delhi 
-          <br>          
-            <strong>Budget:</strong>   INR 50           
+                      
          </div>
-
+   </div> 
   </div>
  </div>
 </div> 
 
 <!-- ############################### social media ############################# -->
 
-<!--<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>-->
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

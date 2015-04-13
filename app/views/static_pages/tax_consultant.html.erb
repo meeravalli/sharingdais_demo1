@@ -173,25 +173,25 @@
                 $ArrowKeyNavigation: true,                    //[Optional] Allows keyboard (arrow key) 
                 $SlideDuration: 500,                                //[Optional] Specifies default 
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset 
-                $SlideSpacing: 5,                           //[Optional] Space between each slide in pixels, default value is 0
+                $SlideSpacing: 5,                           //[Optional] Space between each slide in 
                 $DisplayPieces: 1,                                  //[Optional] Number of pieces to 
                 $ParkingPosition: 0,                                //[Optional] The 
                 $UISearchMode: 1,                                   //[Optional] The way (0 
                 $PlayOrientation: 1,                                //[Optional] Orientation to play 
                 $DragOrientation: 3,                                //[Optional] Orientation to drag 
                 $ThumbnailNavigatorOptions: {
-                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
-                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail 
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 
 
-                    $Loop: 2,                                       //[Optional] Enable loop(circular) of carousel or not, 0: stop, 1: loop, 2 rewind, default value is 1
+                    $Loop: 2,                                       //[Optional] Enable loop(circular) of 
                     $AutoCenter: 3,                                 //[Optional] Auto 
-                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange thumbnails, default value is 1
-                    $SpacingX: 4,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
-                    $SpacingY: 4,                                   //[Optional] Vertical space between each thumbnail in pixel, default value is 0
-                    $DisplayPieces: 4,                              //[Optional] Number of pieces to display, default value is 1
-                    $ParkingPosition: 0,                            //[Optional] The offset position to park thumbnail
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange 
+                    $SpacingX: 4,                                   //[Optional] Horizontal space between 
+                    $SpacingY: 4,                                   //[Optional] Vertical space between 
+                    $DisplayPieces: 4,                              //[Optional] Number of pieces to 
+                    $ParkingPosition: 0,                            //[Optional] The offset position to 
                     $Orientation: 2,                                //[Optional] 
-                    $DisableDrag: false                             //[Optional] Disable drag or not, default value is false
+                    $DisableDrag: false                             //[Optional] Disable drag or not, 
                 }
             };
             var jssor_slider1 = new $JssorSlider$(containerId, options);
@@ -201,7 +201,7 @@
                 if (parentWidth) {
                     var sliderWidth = parentWidth;
                     //keep the slider width no more than 810
-                    sliderWidth = Math.min(sliderWidth, 810);
+                    sliderWidth = Math.min(sliderWidth, 340);
 
                     jssor_slider1.$ScaleWidth(sliderWidth);
                 }
@@ -221,16 +221,17 @@
 <div class="content">
 <div class="resize_how_diag">
 <div class="desktop_dialog"><br><br><br>
+<div class="container-fluid">
     <script type="text/javascript">
         $('.count18').click(function() {
           $('#output18').html(function(i, val) { return val*1+1 });
         });
       </script>
-       <div class="" style="margin:0 15% 0 15%;">
+       <div class="col-md-12" style="" >
         <h1 style="color:#999">Visits: <%= @counter.first.box_18 ? @counter.first.box_18 : 0 %></h1>   
           <table>
             <tr>
-              <td>
+              <!--<td>
                 <span class="rating">
                  <input type="radio" class="rating-input"
                   id="rating-input-5-5" name="rating-input-1">
@@ -248,25 +249,15 @@
                   id="rating-input-5-1" name="rating-input-1">
                  <label for="rating-input-5-1" class="rating-star"></label>
                  </span>
-              </td>
-              <td>
-                <div class="social" align="right">          
-                 
-                  
-                  <a class="fb-share-button" data-href="http://www.sharingdais.com/tax_consultant" data-layout="button"></a>
-                  <br>    
-                 <a href="https://twitter.com/share"  data-size="large" class="twitter-share-button" data-count="none">Tweet</a> <br> 
-                 <input type="button" class="" onclick=
-                    "alert('Contact mobile Number : 7840088215')" 
-                    value="Contact us">        
-                </div>
-              </td>
+              </td>-->
+              
             </tr>
           </table>         
-        </div><br>
-        <div class="" align="center">        
-        <div id="slider18_container" style="position: relative; top: 0px; left: 0px; width: 70%; height: 400px; background: #000; overflow: hidden; ">               
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 610px; height: 400px; overflow: hidden;">            
+        </div><br><br>
+        <div class="row" align=""> 
+        <div class="col-md-6 col-xs-12">       
+        <div id="slider18_container" style="position: relative; top: 0px; left: 0px; width: 80%; height: 300px; background: #000; overflow: hidden; ">               
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 310px; height: 300px; overflow: hidden;">            
             <div>
                 <img u="image" src="/assets/peer_image/tax1.jpg" style="width:100%; height: ;"/>
                 <div u="thumb">
@@ -292,9 +283,9 @@
                 </div>
             </div>
         </div>                
-        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 85px; height: 400px; left:640px; top:0px;">            
+        <div u="thumbnavigator" class="jssort11" style="position: absolute; width: 65px; height: 300px; left:315px; top:0px;">            
             <div u="slides" style="cursor: move;">
-                <div u="prototype" class="p" style="position: absolute; width: 110px; height: 100px; top: 0; left: 0;">
+                <div u="prototype" class="p" style="position: absolute; width: 60px; height: 60px; top: 0; left: 0;">
                     <thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate>
                 </div>
             </div>            
@@ -303,26 +294,47 @@
         <script>
             jssor_slider1_starter('slider18_container');
         </script>
-        </div>                 
-        </div>  
-        <div class="" style="margin:0 15% 0 15%;"><br>
-         <p>
-            <strong>  Consultant- Income Tax & Others </strong> 
-            </p> 
-           <br>
-            <strong> </strong>            
+        </div> 
+        </div>
+        <div class="col-md-6 col-xs-12">
+         <div>
+          <strong>Name:</strong>  
+          </div><br>
+            <div>
+         <strong>Item:</strong> Consultant- Income Tax & Others
+         </div><br>
+          <div>
+         <strong>Phone:</strong> 7840088215
+         </div><br>
+          <div>
+         <strong>Locality:</strong> Gurgaon  <br>
+         </div><br>
+          <div>
+         <strong>Fees:</strong>  Depends on the scope of service  <br>
+        </div>
+        </div>                
+        </div> <br> 
+       
+                <div class="col-md-12 col-xs-12" align="">         
+                  <STRONG>Share: </STRONG>
+                  <a class="fb-share-button" data-href="http://www.sharingdais.com/tax_consultant" data-layout="button"></a>
+                  <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+                 <a href="https://twitter.com/share"  data-size="large" class="twitter-share-button" data-count="none">Tweet</a> <br> 
+                         
+                </div><br><br><br>
+              
+        <div class="col-md-12 col-xs-12" style="">
+        
+            <strong> Description:</strong>            
             <p align="justify">  Tax consultants are financial experts specially trained in tax laws. Based out of Sector 33- Gurgaon, I provide consultancy in filing Tax return, PAN registration, Sales tax return filing, Service return, ESI registration and others. I have a degree in Chartered Accountancy with experience of over 7 years. For charges and others details, please be in touch with me.
            </p>
           <br>          
             <strong> Year of Experience:</strong> 7 
           <br>          
             <strong>Availability:</strong> All days
-            <br>      
-            <strong>Place:</strong> Sec 7, Faridabad <br>
-            <strong>Fees:</strong> Depends on the scope of service   <br>
-            <strong>Location:</strong> Gurgaon
+            
         </div>
-
+   </div>
   </div>
  </div>
 </div> 
@@ -330,15 +342,7 @@
 <!-- ############################### social media ############################# -->
 
 
-<!--<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1571186586438646&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>-->
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
