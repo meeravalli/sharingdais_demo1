@@ -45,6 +45,10 @@ class ApplicationController < ActionController::Base
       food_providers = form_json_data(0,params[:city_id])
       food_seekers = form_json_data(1,params[:city_id])
       render :json => {:providers_loc => food_providers, :seekers_loc => food_seekers}.to_json
+    elsif params[:service_type] == "4"
+      peer_providers = peer_form_json_data(0,params[:city_id])
+      peer_seekers = peer_form_json_data(1,params[:city_id])
+      render :json => {:providers_loc => peer_providers, :seekers_loc => peer_seekers}.to_json  
     else
       book_providers = book_form_json_data(0,params[:city_id])
       book_seekers = book_form_json_data(1,params[:city_id])

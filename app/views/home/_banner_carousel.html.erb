@@ -1,5 +1,27 @@
 <style type="text/css">
 @media screen and (min-width:1280px) {.custom_width{ width:50%; left: 25%;}.cust_btn{float: right;}}
+.banner { position: relative; /*margin:0 0 180px 0;*/}
+
+</style>
+<style type="text/css">
+@media screen and (min-width:1280px) {.custom_width1{ width:70%; left: 15%;}.cust_btn{float: right;}}
+.banner { position: relative; /*margin:0 0 180px 0;*/}
+
+</style>
+<style type="text/css">
+@media screen and (min-width:1280px) {.custom_width2{ width:70%; left: 15%;}.cust_btn{float: right;}}
+.banner { position: relative; /*margin:0 0 180px 0;*/}
+
+</style>
+<style type="text/css">
+@media screen and (min-width:1280px) {.custom_width3{ width:70%; left: 15%;}.cust_btn{float: right;}}
+.banner { position: relative; /*margin:0 0 180px 0;*/}
+
+</style>
+<style type="text/css">
+@media screen and (min-width:1280px) {.custom_width4{ width:70%; left: 15%;}.cust_btn{float: right;}}
+.banner { position: relative; /*margin:0 0 180px 0;*/}
+
 </style>
 <%= javascript_include_tag :search %>
 <% if !params[:search].blank? %>
@@ -38,6 +60,7 @@
   function validateform(){
     $(".search_form_book_city").val($("#city_id").val());
     $(".search_form_skill_city_").val($("#city_id").val());
+    
     city = $("#search_city_id").val();
     no_of_persons = $("#search_no_of_persons").val();
     no_of_guests = $("#search_no_of_guests").val();
@@ -68,15 +91,8 @@
 <div class="banner">
   <div id="slider">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="5000">
-      <!-- Indicators -->
-      <!-- <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol> -->
-      <!-- Wrapper for slides -->
+      
       <div class="carousel-inner">
-        
         <%= render 'search_form_food_sharing' %>         
         <%= render 'search_form_skill_sharing' %>
         <%= render 'search_form_book_sharing' %> 
@@ -97,7 +113,340 @@
                     
                 </div>
             </div>
-       
+<div class="carousel-caption custom_width" id="main_sel" >
+  <P style="font-size:17px;">
+                      &nbsp; &nbsp; &nbsp; Find home-food, books, skills & services in your neighborhood. Stay Connected! 
+                    </P>
+<div class="row">
+  <div class="" style="color:black;">
+            <label for="" class="" style="color:#FF9933;" >Select Your Services here<i>*</i></label><br>
+              <%=select_tag(:select_service,options_for_select([["select Service","0"],["Food Service","1"],["Book Service","2"],["Skill Service","3"],["Peer-to-Peer Service","4"]]))%>
+    </div>
+ </div>
+</div>
+<!--############End Home Page #################-->
+
+<div class="carousel-caption custom_width1" id="food_sel" style="display:none;">
+  <P style="font-size:17px;">
+                      &nbsp; &nbsp; &nbsp; Find  and Share delicious home-cooked food in your neighborhood
+                    </P>
+    <div class="search-blk">
+      
+      <%= form_tag(food_search_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+      <div class="check  col-xs-12 col-md-12">
+          <!--<label for=""><span class="m_tag">I am </span>Looking for Food</label>-->
+            <%#= radio_button_tag "search[food]", "0", params[:search][:food].to_i == 0, :id => 'search_food_0', :class => "food" %>
+        
+          <!--<label for="" style="font-family:'Helvetica',Sans-serif;"><span class="m_tag">I want to </span>Provide Food</label>-->
+          <%#= radio_button_tag "search[food]", "1", params[:search][:food].to_i == 1, :id => 'search_food_1', :class => "food" %>
+         
+          <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true) %>
+      </div>
+   <!--<div class="col-xs-12 col-md-5 padding_none text-left">
+
+            
+
+   </div>-->
+
+      <div class="search">
+         
+              <%= text_field_tag('search[no_of_persons]', params[:search][:no_of_persons], :class => "form-control food-chg", :type=>"hidden") %>             
+
+               <div class="cboth"></div>
+              <div class="row">
+              </div>
+              <div class="left col-xs-12 col-md-3 padding_none text-left">
+                <div class="left col-xs-12">
+             <label for="" class="" style="font-family:'Helvetica',Sans-serif;">Select Category<i>*</i></label>
+             </div>
+            
+            <div class="left col-xs-12 "style="color:black;">
+               <%=select_tag(:select_service_food,options_for_select([["Food Service","1"],["Book Service","2"],["Skill Service","3"],["Peer-to-Peer Service","4"]]),{:class => "form-control"})%>
+           </div>
+           </div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="" style="font-family:'Helvetica',Sans-serif;">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+               <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>
+         </div>
+
+        <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label for="" id ="food" style="font-family:'Arial',Sans-serif;" >Food type</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= collection_select :search, :food_type_id,@food_types, :id, :name, {:selected => params[:search][:food_type_id]},{:class => "form-control"}%>
+            </div>
+        </div>
+          
+       <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            
+              <%= text_field_tag('search[no_of_guests]', params[:search][:no_of_guests], {:class => "form-control", :style => "display:none"}) %>
+              
+          <div class="left col-xs-12">
+               <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn cust_btn" %>
+          </div>
+         
+       </div>
+          <div class="cboth"></div>
+          <div class="row"></div>
+            <div style="col-xs-10 col-md-2 padding_none text-left">
+             <div class="left col-xs-10 margin_topbot m_near">
+              <%= text_field_tag('search[kms]', params[:search][:kms], :hidden => true, :value => 10) %>
+              
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %>
+              
+             </div>
+          </div> 
+    </div>
+
+<%end%>  
+</div>
+</div>
+
+ <!--########End of Food sharing#########-->
+<div class="carousel-caption custom_width2" id="book_sel" style="display:none;">
+  <P style="font-size:17px;">
+                      &nbsp; &nbsp; &nbsp; Find books and Make new friends in your neighborhood 
+                    </P>
+    <div class="search-blk">
+      <!--<p class="head" style="height:43px">Book Sharing</p>
+        <p style="height:25px">
+          <small style="color:white;">Find & Share books in your neighborhood. Make new friends. </small></p>-->
+          
+
+        <%= form_tag(book_search_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+
+
+      <!--<div class="check  col-xs-12 col-md-12">
+           <label for="" style="font-family:'Helvetica',Sans-serif;">I am a Reader</label>
+          <%#= radio_button_tag "search[book]", "0", params[:search][:book].to_i == 0, :id => 'search_book_0', :class => "book", :data => {:book => "Book name / ISBN / Author"} %>
+
+         
+      </div>-->
+     
+ <div class="search">          
+           <div class="cboth"></div>
+          <div class="row"></div>
+           <div class="col-xs-12 col-md-3 padding_none text-left">        
+
+            <div class="left col-xs-12">
+             <label for="" class="">Select Category<i>*</i></label>
+            </div>
+            <div class="left col-xs-12  "style="color:black;">
+              <%=select_tag(:select_service_book,options_for_select([["Book Service","2"],["Food Service","1"],["Skill Service","3"],["Peer-to-Peer Service","4"]]),{:class => "form-control"})%>
+                   
+
+            </div>
+
+     </div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="" style="font-family:'Helvetica',Sans-serif;">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>            
+          </div>
+           <div class="col-xs-12 col-md-4 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label for="" class="book-chg" style="font-family:'Helvetica',Sans-serif;">Book name / Category / Author</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= text_field_tag('search[key]', params[:search][:key], :class => "form-control book-chg", :placeholder => "Book name / Category / Author") %>
+            </div>
+           </div>
+          
+          <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+              </div>
+            <div class="left col-xs-12">
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn", :id => "search_form_book_sharing_button" %>
+            </div>
+          </div>
+              <div class="cboth"></div>
+              <div class="row"></div>
+
+
+          
+           <div style="col-xs-12 col-md-2 padding_none text-left">
+             <div class="left col-xs-12 margin_topbot m_near">
+              <%= text_field_tag('search[kms]', params[:search][:kms], :hidden => true, :value => 10) %>
+             
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %>
+             </div>
+            
+          </div> 
+  </div>
+<%end%> 
+</div>
+</div>
+<!--###############End of Book Sharing##################-->
+<div id="main_sel">
+<div class="carousel-caption custom_width3" id="skill_sel" style="display:none;"><P style="font-size:17px;">
+                      &nbsp; &nbsp; &nbsp; Find dance, music, yoga and other teachers in your neighborhood.
+                    </P>
+    
+    <div class="search-blk">
+      <!--<p class="head" style="height:43px">Skill Sharing</p>
+        <p style="height:25px">
+          <small style="color:white;">Find dance, music, yoga and other tutors in your neighborhood</small></p>-->
+          
+
+        <%= form_tag(skill_search_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+      <!--<div class="check  col-xs-12 col-md-12">
+          <label for="" style="font-family:'Helvetica',Sans-serif;">I Want to Learn</label>
+           <%#= radio_button_tag "search[skill]", "0", params[:search][:skill].to_i == 0, :id => 'search_skill_0', :class => "skill" %>
+
+          <label for="" style="font-family:'Helvetica',Sans-serif;">I Want to Teach</label>
+          <%#= radio_button_tag "search[skill]", "1", params[:search][:skill].to_i == 1, :id => 'search_skill_1', :class => "skill" %>
+      </div>-->
+           
+      <div class="search">
+          
+           <div class="cboth"></div>
+          <div class="row">
+          </div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+             <label for="" class="">Select Category<i>*</i></label>
+            </div>
+            <div class="left col-xs-12 "style="color:black;">
+               <%=select_tag(:select_service_skill,options_for_select([["Skill Service","3"],["Food Service","1"],["Book Service","2"],["Peer-to-Peer Service","4"]]),{:class => "form-control"})%>
+                   
+
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="" style="font-family:'Helvetica',Sans-serif;">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>
+            
+          </div>
+         
+           <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label class="book-chg" for="" style="font-family:'Helvetica',Sans-serif;">Skill type</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= collection_select :search, :skill_type_id,SubCategory.all, :id, :sub_category_type, {:selected => params[:search][:skill_type_id]},{:class => "form-control"}%>
+            </div>
+           </div>
+          
+             <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="left col-xs-12">
+              <%= submit_tag "Search", :onclick => "return validateform();", :class => "btn cust_btn" %>
+            </div>
+          </div>
+          <div class="cboth"></div>
+          <div class="row"></div>
+<div style="col-xs-12 col-md-2 padding_none text-left">
+            <div class="left col-xs-12 margin_topbot m_near">
+              <%= text_field_tag('search[kms]', params[:search][:kms], :hidden => true, :value => 10) %>
+             <!--<label id='nearbylocations' style="cursor:pointer;text-decoration:underline;" > Include nearby Localities</label>-->
+              <%#= select_tag('search[kms]', options_for_select({ "1 km" => "1", "2 km" => "2", "3 km" => "3", "4 km" => "4", "5 km" => "5"}, params[:search][:kms] || "3" ), :style => "background-color:#000;") %><!-- | -->
+              <%# locality_text = ( params[:search].empty? || params[:search].has_key?(:include_near_by_locations) ) ?  'Exclude Nearby Localities' : 'Exclude Nearby Localities'  %> 
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %><!--<label id='exclude_near_by_locations' style="cursor:pointer;"><%#= locality_text %></label>-->
+            </div>
+          </div> 
+</div>
+    <%end%>
+  </div>
+</div>
+</div>
+<!--##########################End of Skill Sharing########################-->
+<div id="main_sel">
+<div class="carousel-caption custom_width4" id="peer_sel" style="display:none;">
+    
+  <div class="search-blk">
+      <%= form_tag(peer_services_path, :method=>"post") do %>
+        <% params[:search]||= {} %>
+
+
+   <P style="font-size:17px;">
+                      &nbsp; &nbsp; &nbsp; Find individual doctors, lawyers, consultants & other professionals in your neighborhood 
+                    </P>
+      
+
+
+      
+      <div class="search">          
+           <div class="cboth"></div>
+          <div class="row"></div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+             <label for="" class="">Select Category<i>*</i></label>
+            </div>
+            <div class="col-md-12 "style="color:black;">
+             <%=select_tag(:select_service_peer,options_for_select([["Peer-to-Peer Service","4"],["Food Service","1"],["Book Service","2"],["Skill Service","3"]]),{:class => "form-control"})%>
+
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12">
+              <label for="" style="font-family:'Helvetica',Sans-serif;">Locality</label>
+            </div>
+            <div class="left col-xs-12 ">
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city_1") %>
+              <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
+            </div>            
+          </div>
+           <div class="col-xs-12 col-md-3 padding_none text-left">
+            <div class="left col-xs-12 ">
+              <label for="" class="peer-chg" for="">Service Type</label>
+            </div>
+            <div class="left col-xs-12 ">
+             <%= collection_select :search, :peer_category_id,PeerCategory.all, :id, :peer_category_type, {:selected => params[:search][:peer_category_id]},{:class => "form-control"}%>
+            </div>
+           </div>
+          
+             <div class="col-xs-12 col-md-2 padding_none text-left">
+              <div class="left col-xs-12">&nbsp;
+            </div>
+            <div class="left col-xs-12">
+              <%= submit_tag "Search", :class => "btn cust_btn" %>
+            </div>
+          </div>
+          <div class="cboth"></div>
+          <div class="row"></div>
+
+
+          
+           <div style="col-xs-12 col-md-2 padding_none text-left">
+             <div class="left col-xs-12 margin_topbot m_near">
+              <%= text_field_tag('search[kms]', params[:search][:kms], :hidden => true, :value => 10) %>
+              
+              <%= check_box_tag 'search[include_near_by_locations]',true, true, style: "display:none;" %>
+             </div>
+            
+          </div> 
+    </div>
+<%end%> 
+</div>
+</div>
+</div>
+
+        
+</div>
+
+
 
     <div class="cboth"></div>
   </div>
@@ -126,3 +475,77 @@ position: absolute;
 
 }
 </style>
+
+</div>
+
+<script>
+$("#select_service,#select_service_food,#select_service_book,#select_service_skill,#select_service_peer").change(function()
+{
+ var x = $(this).val();
+if(x == "1")
+{
+  $('#select_service_food').val('1');
+  $('#main_sel').hide();
+  $('#food_sel').show();
+  $('#book_sel').hide();
+  $('#skill_sel').hide();
+  $('#peer_sel').hide();
+  
+}
+else if(x == "2")
+{
+
+  $('#select_service_book').val('2');
+  $('#main_sel').hide();
+  $('#food_sel').hide();
+  $('#book_sel').show();
+  $('#skill_sel').hide();
+  $('#peer_sel').hide();
+}
+else if(x == "3")
+{
+  
+  $('#select_service_skill').val('3');
+  $('#main_sel').hide();
+  $('#food_sel').hide();
+  $('#book_sel').hide();
+  $('#skill_sel').show();
+  $('#peer_sel').hide();
+}
+else if(x == "4")
+{
+  $('#select_service_peer').val('4');
+  $('#main_sel').hide();
+  $('#food_sel').hide();
+  $('#book_sel').hide();
+  $('#skill_sel').hide();
+  $('#peer_sel').show();
+}
+
+});
+</script>
+<style type="text/css">     
+   #select_service{
+ width: 235px ;
+ height: 36px ;
+ }
+/*#select_service_food{
+ width: 220px !important;
+ height: 38px !important;
+}*/
+/*#select_service_book{
+ width: 220px !important;
+ height: 38px !important;
+}*/
+/*#select_service_skill{
+ width: 220px !important;
+ height: 38px !important;
+}*/
+/*#select_service_peer{
+ width: 220px !important;
+ height: 38px !important;
+}*/
+</style>
+
+
+

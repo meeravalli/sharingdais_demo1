@@ -1,12 +1,18 @@
-<!--<div style="position:absolute;width: 100%;">
- <img src="assets/ad/left/banner120x600_2.gif" style="float:right;margin: 28px 6px 0 0px;">
- <img src="assets/ad/right/ad_skyscraper_120x600.jpg" style="float:left;margin: 30px 0 0 5px;">
-</div>-->
 <script>
 $(document).ready(function() {
     $("html, body").animate({ scrollTop: 450 }, 1000);
-});
-  function check_user(phone, email, user_id, location_id, book_post_requirement_id, seeker_provider){
+    });
+
+function check_post_user(phone,email,clicked_id){
+  
+    $('#prov_phone').val(phone);
+    //alert(56);
+    $('#prov_email').val(email);
+   $("#book_inter").val(clicked_id);
+   //alert("You need to sign in or sign up before continuing");
+   $("#login_signup1").modal("show");
+  }
+   function check_user(phone, email, user_id, location_id, book_post_requirement_id, seeker_provider){
 <% if current_user %>
       var seeker_status = seeker_provider;
       var current_user_id = "<%= current_user.id %>";
@@ -26,16 +32,17 @@ $(document).ready(function() {
 				if (r == true){
 				alert("Please find the contact details of the book provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
 				}
-				else {return;}
+				//else {return;}
 				}
-        $("#t_"+book_post_requirement_id).empty();
-        $("#t_"+book_post_requirement_id).html("Already Negotiated");
+        //$("#t_"+book_post_requirement_id).empty();
+        //$("#t_"+book_post_requirement_id).html("Already Negotiated");
       }
       else{
         alert("You can't able to negotiate this order");
       }
 <% else %>
-      alert("You need to sign in or sign up before continuing");
+      //alert("You need to sign in or sign up before continuing");
+      $("#login_signup1").modal("show");
 <% end %>
   }
 // Ad Js
@@ -220,13 +227,21 @@ $(function(){
 
                 <% @user_email = s.user.email%>
                 <% @user_phone = s.user.phone_no%>
+
+                
                 <% if !current_user %>
-	                  <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
-                <% elsif negotiate_book(current_user.id, s.id).nil?%>
+	                  
+
+                      <td>
+<span id="<%=s.id%>" onClick="check_post_user('<%=@user_phone%>','<%=@user_email%>','<%=s.id%>')"  style="color:#428bca;cursor:pointer;">Interested</span>
+
+
+                      <%#= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else negotiate_book(current_user.id, s.id).nil?%>
 					<td id="t_<%= s.id %>">
 					  <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
-                <% else %>
-                  <td>Already Negotiated</td>
+                <%# else %>
+                  <!--<td>Already Negotiated</td>-->
                 <% end %>
               </tr>
               <% @count = @count+1 %>
@@ -370,8 +385,24 @@ $(function(){
                                         	Contact
                                         </div>
 																				<div class="data_col" id="t_<%= s.id %>">
-                                        <% if !current_user %>
+                                          <% if !current_user %>
+
+                                          <input type="hidden" name="prov_phone" id="prov_phone" class="form-control login_feild phone_no2">
+     <input type="hidden" name="prov_email" id="prov_email" class="form-control login_feild phone_no2">
+
+
+
+                                         <form accept-charset="UTF-8" class="new_user form-horizontal frm2" enctype="multipart/form-data" id="new_user" method="post">
+    <div style="margin:0;padding:0;display:inline">
+      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+    </div>
                     <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                    <input type="hidden" name="phone_no" id="phone_no" class="form-control login_feild phone_no2">
+     <input type="hidden" name="book_inter" id="book_inter" class="form-control login_feild">
+
+     
+  </form>
                 <% elsif negotiate_book(current_user.id, s.id).nil?%>
           <td id="t_<%= s.id %>">
             <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
@@ -415,3 +446,324 @@ $(function(){
     </div>
   </div>
 </div>
+<!--####################### Modal ##################-->
+
+<div class="modal fade" id="login_signup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div id="loginbox2" style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">             
+      <div class="panel panel-info" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Phone No.</div>
+        </div>
+       
+
+
+        <div style="padding-top:30px" class="panel-body" >
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control phone_number" placeholder="Enter your Phone no" size="30" type="" autocomplete="off" onchange="validate22()"> <br><h2 id="result22"></h2>                                      
+          </div>
+          
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <a id="sign_inn2" href="javascript:void(0)" class="btn btn-success">Submit  </a>
+            </div>
+
+            <script type="text/javascript">
+              $(".emailL2").keyup(function(){
+                  $(".email2").val($(this).val());
+              });
+              $(".passwordL2").keyup(function(){
+                $(".password2").val($(this).val());
+              });
+              
+             
+               $("#sign_inn2").click(function(){              
+                     if($(".emailL2").val() == ""){
+                    $("#result22").text("Please Enter Email :(");
+                    $("#result22").css("color", "red");
+                 // $("#result22").text("");
+                    }else if($(".passwordL2").val() == ""){
+                   $("#er22").text("Please Enter password :(");
+                   $("#er22").css("color", "red");
+                  //$("#er22").text("");
+                     }               
+                    else{ 
+                      var ph = "phone_no=" + $('.phone_number').val();
+                       var post_id = $("#book_inter").val();
+                       var  x = "book_inter=" + post_id;
+                       var email1 = $('#prov_email').val();
+                       var phone1 = $('#prov_phone').val();
+                        alert("Please find the contact details of the book Provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+                       //return false;
+                       $.ajax({ 
+      type: 'POST',
+      url: '/user_book_negotiate',
+      data: ({'phone_no':$(".phone_number").val(),'book_inter':$("#book_inter").val()}),
+
+      success: function (data) {
+        if ( data.status == 'ok'){
+          alert("Thank you for interest , Your contact details will be shared and if you want more services make search here..");
+          $('#login_signup1').modal('hide');         
+        }else{
+          alert("you cannot negotiate");
+        }
+      }   
+    });
+                   //$(".frm2").attr('action', '/user_book_negotiate' + "?" + x+"&" + ph);          
+                    //$(".frm2").submit();
+                   }
+                  })
+              
+               function chr_validate22(){
+                $("#er22").text("");
+               var pass =$(".passwordL2").val();
+               if ( pass.length < 8 )
+                {
+                  $("#er22").text("minimum 8 characters");
+                  $("#er22").css("color", "red");
+                }else{
+                  $("#er22").text("");
+                }
+              }
+              
+            </script>
+            <script type="text/javascript">
+function validateEmail22(emailL2) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(emailL2);
+  }
+  function validate22(){
+  $("#result22").text("");
+  var emailL2 = $(".phone_number").val();
+  // if (validateEmail22(emailL2)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_phoneno',
+      data: ({'phoneno':$(".phone_number").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          $("#result22").text(" This Phone no is availabile :)");
+          $("#result22").css("color", "green");
+        }else{
+          $("#result22").text($(".phone_number").val()+ " This phoneno is not exist :(");
+          $("#result22").css("color", "red");
+        $(".phone_number").val("");
+        }
+      }   
+    });
+  // } else {
+  //   $("#result22").text("This is not a valid email :(");
+  //   $("#result22").css("color", "red");
+  //  // $(".emailL2").val("");
+  // }
+  return false;
+}
+</script>
+          </div>
+           
+       <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Don't have an account! 
+                <a href="javascript:void(0)" onClick="$('#loginbox2').hide(); $('#signupbox2').show()">
+                Sign Up Here</a>
+              </div>
+            </div>
+          </div>    
+        </div>                     
+      </div>  
+    </div>
+
+    <div id="signupbox2" style="display:none; margin-top:50px" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <div class="panel-title">Sign Up</div>      
+        </div>  
+        <div class="panel-body" >
+           <form accept-charset="UTF-8" class="new_user form-horizontal frm3" enctype="multipart/form-data" id="new_user" method="post">
+<!--     <div style="margin:0;padding:0;display:inline">
+ -->      <input type="hidden" value="✓" name="utf8">
+      <input type="hidden" value="xvsr4Sdx/BirfABZMOwq8WHtULjvHoNHCGcFnRcyFPU=" name="authenticity_token">
+      <input class="user_inter_book" id="user_inter_book" name="user_inter_book" value="2" type="hidden">  
+    <input type="hidden" name="user[email]" id="user_email" class="form-control login_feild email2">
+    <input type="hidden" name="user[password]" id="user_password" class="form-control login_feild password2">
+    <input type="hidden" name="user[password_confirmation]" id="user_password_confirmation" class="login_feild password_confirmation2">
+    <input type="hidden" name="user[name]" id="user_name" class="form-control login_feild name2">
+    <input type="hidden" name="user[phone_no]" id="user_phone_no" class="form-control login_feild phone_no2">
+    <input type="hidden" name="user[address]" id="user_address" class="form-control signup_textarea address2">
+  </form>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input autofocus="autofocus" class="form-control Sname2" placeholder="Enter your Name" size="30" tabindex="1" type="text" autocomplete="off">
+            <br><div id="nam2"></div>                                        
+          </div>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input class="form-control login_feild Semail2" placeholder="Enter Email Id" size="30" tabindex="2" type="email" autocomplete="off" onchange="validate2()">  
+            <br><h2 id='result2'></h2>                                      
+          </div>
+<script type="text/javascript">
+
+  function validateEmail2(Semail2) {   
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(Semail2);
+  }
+  function validate2(){
+  $("#result2").text("");
+  var Semail2 = $(".Semail2").val();
+  if (validateEmail2(Semail2)) {    
+    $.ajax({ 
+      type: 'POST',
+      url: '/check_email',
+      data: ({'email':$(".Semail2").val()}),
+      success: function (data) {
+        if ( data.status == 'ok'){
+          //$("#result").text(" This email is availabile :)");
+          //$("#result").css("color", "green");
+        }else{
+          $("#result2").text($(".Semail2").val()+ " This email is exist :(");
+          $("#result2").css("color", "red");
+          $(".Semail2").val("");
+        }
+      }   
+    });
+  } else {
+    $("#result2").text("This is not a valid email :(");
+    $("#result2").css("color", "red");
+    $(".Semail2").val("");
+  }
+  return false;
+}
+
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword2" placeholder="Enter Password" size="30" tabindex="3" type="password" onchange="chr_validate2()">
+            <br><div id="er2"></div>
+          </div>              
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input autocomplete="off" class="form-control Spassword_confirmation2" placeholder="Enter Confirm Password" size="30" tabindex="4" type="password" onchange="pass_validate2()">
+            <br><div id="pass2"></div>
+          </div>
+          <script type="text/javascript">
+            function chr_validate2(){
+              $("#er2").text("");
+             var pass =$(".Spassword2").val();
+             if ( pass.length < 8 )
+              {
+                $("#er2").text("minimum 8 characters");
+                $("#er2").css("color", "red");
+              }else{
+                $("#er2").text("");
+              }
+            }
+            function pass_validate2(){
+              $("#pass2").text("");
+              if ( $(".Spassword2").val() == $(".Spassword_confirmation2").val() ){
+                
+              }else{
+                $("#pass2").text("Password not match :(");
+                $("#pass2").css("color", "red");
+              }
+             }
+            </script>
+
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input class="form-control login_feild Sphone_no2" placeholder="Enter your Phone no." size="30" tabindex="5" type="text" autocomplete="off">   
+            <br><span class="errmsg2" style="color:red"> </span><div id="phon2"></div>                               
+          </div>
+<script type="text/javascript">
+$(".Sphone_no2").keypress(function (e) {
+  if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+    $(".errmsg2").html("Numbers Only").show().fadeOut("slow");
+    return false;
+  }
+}); 
+</script>
+          <div style="margin-bottom: 25px" class="input-group">
+            <div class="col-sm-12 controls">
+              <button id="s-f-signup2" type="button" class="btn btn-info" tabindex="7"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(".Sname2").keyup(function(){
+                $(".name2").val($(this).val());
+            });
+            $(".Semail2").keyup(function(){
+              $(".email2").val($(this).val());
+            });
+            $(".Spassword2").keyup(function(){
+              $(".password2").val($(this).val());
+            });
+            $(".Spassword_confirmation2").keyup(function(){
+              $(".password_confirmation2").val($(this).val());
+            });
+            $(".Sphone_no2").keyup(function(){
+              $(".phone_no2").val($(this).val());
+            });
+            // $(".Saddress2").keyup(function(){
+            //   $(".address2").val($(this).val());
+            // });
+            //$("#s-f-signup2").click(function(){  
+            //  $(".frm2").attr('action', '/users'); 
+            //  $(".frm2").submit();
+            //})
+$("#s-f-signup2").click(function(){
+
+  $("#nam2").text("");
+  $("#er2").text("");
+  $("#phon2").text("");
+  $("#add2").text("");
+
+  if ($(".Sname2").val() == ""){
+    $("#nam2").text("Please Enter Your Name :(");
+    $("#nam2").css("color", "red");
+  }else if($(".Semail2").val() == ""){
+    $("#result2").text("Please Enter Email :(");
+    $("#result2").css("color", "red");
+  }else if($(".Spassword2").val().length < 8){
+    $("#er2").text("minimum 8 characters");
+    $("#er2").css("color", "red");
+  }else if($(".Spassword2").val() != $(".Spassword_confirmation2").val()){
+    $("#pass2").text("Password not match :(");
+    $("#pass2").css("color", "red");
+  }else if($(".Sphone_no2").val().length != 10){
+    $("#phon2").text("Please enter 10 digits Phone no :(");
+    $("#phon2").css("color", "red");
+  }else if($(".Saddress2").val() == ""){
+    $("#add2").text("please enter address :(");
+    $("#add2").css("color", "red");
+  }else{
+
+  var post_id = $("#book_inter").val();
+  var  x = "book_inter=" + post_id;
+ 
+  alert(post_id);
+   
+  $(".frm3").attr('action', '/users'+ "?" + x); 
+  $(".frm3").submit();
+  }
+})
+          </script>
+          <div style="margin-bottom: 25px; width:100%" class="input-group">
+            <div class="col-sm-12 controls">
+              <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" > Already have an account! Enter your phone no.  
+                <a id="signinlink" href="javascript:void(0)" onclick="$('#signupbox2').hide(); $('#loginbox2').show()">Phone No.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  
+
+
+

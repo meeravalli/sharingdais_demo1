@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 include ActionView::Helpers::NumberHelper
-before_filter :authenticate_user!, :except => [:index]
+before_filter :authenticate_user!, :except => [:index,:user_negotiate, :user_book_negotiate, :user_skill_negotiate, :user_peer_negotiate]
   def index
     @search_params = nil
     if params[:search]
@@ -165,7 +165,40 @@ before_filter :authenticate_user!, :except => [:index]
   end
   
 
-
-
+def user_negotiate
+ user = User.where(:phone_no => params[:phone_no]).first
+  unless user.nil?
+   neg = Negotiate.user_negotiate_interst(params[:food_inter],user)
+    render :json => {:status => "ok"} if neg == true
+    render :json => {:status => "failed"} if neg == false
+  end
+ #redirect_to "/food_search"
+end
+def user_skill_negotiate
+ user = User.where(:phone_no => params[:phone_no]).first
+  unless user.nil?
+   neg = Negotiate.user_skill_negotiate_interst(params[:skill_inter],user)
+   render :json => {:status => "ok"} if neg == true
+    render :json => {:status => "failed"} if neg == false
+  end
+ 
+end
+def user_book_negotiate
+ user = User.where(:phone_no => params[:phone_no]).first
+  unless user.nil?
+   neg = BookNegotiate.user_negotiate_interst(params[:book_inter],user)
+ render :json => {:status => "ok"} if neg == true
+ render :json => {:status => "failed"} if neg == false
+end
+end
+def user_peer_negotiate
+ user = User.where(:phone_no => params[:phone_no]).first
+  unless user.nil?
+   neg = PeerNegotiate.user_negotiate_interst(params[:peer_inter],user)
+    render :json => {:status => "ok"} if neg == true
+    render :json => {:status => "failed"} if neg == false
+  end
+ 
+end
 
 end

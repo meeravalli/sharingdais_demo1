@@ -35,8 +35,10 @@ Sharingdasiss::Application.configure do
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => 'http:/localhost:3000',
-  :user_name => 'sharingdais1@gmail.com',
-  :password => '134sharingdais1',
+  #:user_name => 'sharingdais1@gmail.com',
+  #:password => '134sharingdais1',
+  :user_name => 'sharingdaispro@gmail.com',
+  :password => 'sharingdais1234',
   :authentication => 'plain',
   :enable_starttls_auto => true }  
 

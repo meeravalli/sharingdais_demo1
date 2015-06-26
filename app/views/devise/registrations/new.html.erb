@@ -55,3 +55,14 @@ top: 0px;
 </div>
 </div>
 		
+<script type="text/javascript">
+$('.login_button').click(function() {
+	// body...
+	var ad = $('#user_address').val();
+	if(ad.length == 0)
+	{
+		alert("Address cannot be empty");
+		return false;
+	}
+})
+</script>

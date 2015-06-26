@@ -2,6 +2,9 @@
 	@media screen and (max-width:360px) {#feedback{display: none;}}
 </style>
 <style type="text/css">
+@media screen and (max-width: 360px){#socialsider{display: none;}}
+</style>
+<style type="text/css">
 #feedback{
 	position: fixed;
 	top:30%;
@@ -28,7 +31,7 @@
 	font-size:14px;
 }
 #feedback a{
-	background:url("/assets/feedback-buttons.png")  no-repeat center left transparent;
+	background:url("/assets/feedback.gif")  no-repeat center left transparent;
 	display: block;
 	width:25px;
 	height:85px;
@@ -196,7 +199,7 @@
 <div class="loader ajax_load"><img style="width:100px;" src="/assets/ajax-loader.gif"></div>
 <div id="feedback">
 	<form>
-		<h2>We like to Listen from You!</h2>
+		<h2>Post Your Requirement!</h2>
 		<img class="img_cls" src="/assets/close.png">
 		<div class="form-group"><label>Name: </label><input class="form-control" id="name" type="text" placeholder="Name" /><br>
 			<span id="name_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Name</span>
@@ -209,14 +212,15 @@
 			<span id="phon_errore" style="color:rgb(240, 78, 78);display:none">Please Enter Phone no</span>
 			<span id="phon_errore_m" style="color:rgb(240, 78, 78);display:none">Please Enter valid Phone no</span>
 		</div>
-		<div class="form-group"><label>Message: </label><textarea id="message" maxlength="150" placeholder="Max Character Limit 150."></textarea><br>
+		<div class="form-group"><label>Message: </label><textarea id="message" maxlength="300" placeholder="Max Character Limit 300."></textarea><br>
 			<span id="message_errore" style="color:rgb(240, 78, 78);float:right;display:none">Please Enter Message</span>
 		</div>
 		<div class="form-group"><input type="button" id="send" value="Send" class="btn btn-warning"/></div>
 	</form><br>
-	<a href="javascript:void(0)" class="pull_feedback " title="Click to leave feedback">Feedback</a>
+	<a href="javascript:void(0)" class="pull_feedback " title="Click to leave feedback">Post Your Requirement</a>
 </div>
 <!------------------------------------------------------>
+<div id="socialsider" >
 <div class="socialsider socialsider_right_top socialsider_fixed socialsider_bgdark_white socialsider_colorize socialsider_radius socialsider_spacer socialsider_opacity">
 			<ul>
 				<li>
@@ -229,7 +233,8 @@
 					<a onclick="google('https://plus.google.com/share')" data-socialsider="google" href="javascript:void(0)" title="Google"></a>
 				</li>
 			</ul>
-		</div>
+</div>
+</div>
 		<input type="hidden" name="commentlink" id="commentlink" value="Online Platform for Peer to Peer Sharing" />
 		<input type="hidden" name="sayfb" id="sayfb" value="Sharingdais.com is an Online Platform for Peer to Peer Sharing. Now, you can Teach or Learn skills/experiences via Skill Sharing, Give or Take books via Book Sharing and Find or Share home-cooked meal via Food Sharing, in your locality. No new buying! Save money and Make money." />
 		<input type="hidden" name="urllink" id="urllink" value="http://www.sharingdais.com/" />

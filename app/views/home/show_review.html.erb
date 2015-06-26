@@ -1,0 +1,17 @@
+<div class="review">
+ <div class="content">
+  <div class="resize">
+   
+    <div class="display">
+      
+      <div class="table-responsive src_res_desktop">
+       <% @reviews.each do |review| %>
+        <%= review.content %><br />
+        <th>Written by:</th>  
+        <%= review.user.name if review.user_id %><br />
+        <% end %>        
+      </div>
+    </div>
+</div>
+  </div>
+</div>

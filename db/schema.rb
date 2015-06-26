@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141114094855) do
+ActiveRecord::Schema.define(:version => 20150325150437) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(:version => 20141114094855) do
     t.string   "ip"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "box_11"
+    t.integer  "box_12"
+    t.integer  "box_13"
+    t.integer  "box_14"
+    t.integer  "box_15"
+    t.integer  "box_16"
+    t.integer  "box_17"
+    t.integer  "box_18"
+    t.integer  "box_19"
+    t.integer  "box_20"
   end
 
   create_table "book_activities", :force => true do |t|
@@ -186,6 +196,93 @@ ActiveRecord::Schema.define(:version => 20141114094855) do
     t.integer "skill_post_requirement_id"
   end
 
+  create_table "peer_activities", :force => true do |t|
+    t.integer  "peer_service_post_requirement_id"
+    t.integer  "contact_id"
+    t.integer  "peer_order_id"
+    t.integer  "user_id"
+    t.boolean  "seeked_shared"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "peer_categories", :force => true do |t|
+    t.string   "peer_category_type"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "peer_messages", :force => true do |t|
+    t.boolean  "accepted"
+    t.integer  "user_id"
+    t.integer  "posted_to"
+    t.text     "content"
+    t.boolean  "read"
+    t.string   "subject"
+    t.integer  "peer_service_post_requirement_id"
+    t.integer  "peer_order_id"
+    t.integer  "location_id"
+    t.boolean  "trashed"
+    t.boolean  "order_status"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "peer_negotiates", :force => true do |t|
+    t.integer  "peer_service_post_requirement_id"
+    t.integer  "user_id"
+    t.integer  "nego_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "peer_order_cancels", :force => true do |t|
+    t.integer  "peer_order_id"
+    t.date     "cancel_date"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "peer_orders", :force => true do |t|
+    t.integer  "peer_service_post_requirement_id"
+    t.date     "order_date"
+    t.integer  "user_id"
+    t.integer  "provider_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "peer_service_post_requirements", :force => true do |t|
+    t.integer  "service_id"
+    t.integer  "city_id"
+    t.integer  "location_id"
+    t.integer  "peer_category_id"
+    t.integer  "user_id"
+    t.float    "charges"
+    t.boolean  "sun"
+    t.boolean  "mon"
+    t.boolean  "tue"
+    t.boolean  "wed"
+    t.boolean  "thu"
+    t.boolean  "fri"
+    t.boolean  "sat"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "seeker_provider"
+    t.text     "speciality"
+    t.string   "degree"
+    t.string   "exp"
+    t.text     "additinal_info"
+    t.text     "review"
+    t.datetime "peer_updated_at"
+    t.integer  "peer_file_size"
+    t.string   "peer_content_type"
+    t.string   "peer_file_name"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.binary   "peer"
+  end
+
   create_table "post_requirements", :force => true do |t|
     t.integer  "service_id"
     t.integer  "provider_id"
@@ -207,6 +304,7 @@ ActiveRecord::Schema.define(:version => 20141114094855) do
     t.string   "food_image_content_type"
     t.integer  "food_image_file_size"
     t.datetime "food_image_updated_at"
+    t.boolean  "is_active",                                             :default => true
   end
 
   create_table "providers", :force => true do |t|
@@ -224,9 +322,11 @@ ActiveRecord::Schema.define(:version => 20141114094855) do
     t.integer  "book_post_requirement_id"
     t.integer  "rated_no"
     t.string   "service_type"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "skill_post_requirement_id"
+    t.integer  "peer_service_post_requirement_id"
+    t.integer  "peer_negotiate_id"
   end
 
   add_index "rates", ["book_negotiate_id"], :name => "index_rates_on_book_negotiate_id"
@@ -239,6 +339,20 @@ ActiveRecord::Schema.define(:version => 20141114094855) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "reviews", :force => true do |t|
+    t.text     "content"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "user_id"
+    t.integer  "negotiate_id"
+    t.integer  "book_negotiate_id"
+    t.integer  "book_post_requirement_id"
+    t.integer  "post_requirement_id"
+    t.integer  "skill_post_requirement_id"
+    t.integer  "peer_service_post_requirement_id"
+    t.integer  "peer_negotiate_id"
   end
 
   create_table "services", :force => true do |t|

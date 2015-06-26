@@ -16,10 +16,11 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th style="width:25%">Date / Time</th>
-                        <th style="width:25%">Name of the connected person</th>
-                        <th style="width:25%">Name of the person</th>
-                        <th style="width:25%">Details</th>                        
+                        <th style="width:20%">Date / Time</th>
+                        <th style="width:20%">Name of the connected person</th>
+                        <th style="width:20%">Name of the person</th>
+                        <th style="width:20%">Phone No.</th> 
+                        <th style="width:20%">Details</th>                       
                     </tr>
                  </thead>
                  <tbody>
@@ -30,7 +31,8 @@
                         <%= o.created_at.strftime("%H:%M") %>
                       </td>
                       <td><%= o.post_requirement.user.name %></td>
-                      <td><%= o.user.name %>                      </td>
+                      <td><%= o.user.name %>           </td>
+                       <td><%= o.user.phone_no%></td>
                       <td><%= o.post_requirement.details %></td>
                      </tr>
 					          <% end %>            
@@ -49,10 +51,11 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th style="width:25%">Date / Time</th>
-                        <th style="width:25%">Name of the connected person</th>
-                        <th style="width:25%">Name of the person</th>
-                        <th style="width:25%">Details</th>
+                        <th style="width:20%">Date / Time</th>
+                        <th style="width:20%">Name of the connected person</th>
+                        <th style="width:20%">Name of the person</th>
+                        <th style="width:20%">Phone No.</th>
+                        <th style="width:20%">Details</th> 
                     </tr>
                  </thead>
                  <tbody>
@@ -64,6 +67,7 @@
                         </td>
                       <td><%= o.book_post_requirement.user.name %></td>
                       <td><%= o.user.name %></td>
+                       <td><%= o.user.phone_no%></td>
                       <td>
                         <% if !o.book_post_requirement.description.nil? %>
                           <%= o.book_post_requirement.description %>
@@ -87,10 +91,12 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th style="width:25%">Date / Time</th>
-                        <th style="width:25%">Name of the connected person</th>
-                        <th style="width:25%">Name of the person</th>
-                        <th style="width:25%">Details</th>
+                        <th style="width:20%">Date / Time</th>
+                        <th style="width:20%">Name of the connected person</th>
+                        <th style="width:20%">Name of the person</th>
+                         <th style="width:20%">Phone No.</th> 
+                        <th style="width:20%">Details</th>
+                        > 
                     </tr>
                  </thead>
                  <tbody>
@@ -102,6 +108,7 @@
                       </td>
                       <td><%= o.skill_post_requirement.user.name %></td>
                       <td><%= o.user.name %></td>
+                      <td><%= o.user.phone_no%></td>
                       <td>
                         <% if !o.skill_post_requirement.description.nil? %>
                           <%= o.skill_post_requirement.description %>
@@ -123,10 +130,12 @@
             <table class="table table-hover">
                 <thead class="heading">
                     <tr>
-                        <th style="width:25%">Date / Time</th>
-                        <th style="width:25%">Name of the connected person</th>
-                        <th style="width:25%">Name of the person</th>
-                        <th style="width:25%">Details</th>
+                        <th style="width:20%">Date / Time</th>
+                        <th style="width:20%">Name of the connected person</th>
+                        <th style="width:20%">Name of the person</th>
+                        <th style="width:20%">Phone No.</th> 
+                        <th style="width:20%">Details</th>
+                       
                     </tr>
                  </thead>
                  <tbody>
@@ -138,6 +147,7 @@
                       </td>
                       <td><%= o.peer_service_post_requirement.user.name %></td>
                       <td><%= o.user.name %></td>
+                       <td><%= o.user.phone_no %></td>
                       <td>
                         <% if !o.peer_service_post_requirement.additinal_info.nil? %>
                           <%= o.peer_service_post_requirement.additinal_info %>
@@ -145,6 +155,7 @@
                           not available
                         <%end%>
                       </td>
+
                      </tr>
                     <% end %>            
                 </tbody>

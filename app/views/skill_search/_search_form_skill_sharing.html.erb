@@ -15,19 +15,19 @@
   <%#=  image_tag "slider4.jpg", :alt => "..." %>  
 <div class="carousel-caption custom_width">
     <div class="search-blk">
-      <p class="head" style="height:43px">Skill Sharing</p>
+      <!--<p class="head" style="height:43px">Skill Sharing</p>-->
         <p style="height:25px">
           <small style="color:white;">Find dance, music, yoga and other tutors in your neighborhood</small></p>
 
         <%= form_tag(skill_search_path, :method=>"post") do %>
         <% params[:search]||= {} %>
-      <div class="check  col-xs-12 col-md-12">
+      <!--<div class="check  col-xs-12 col-md-12">
           <label for="" style="font-family:'Helevtica',Sans-serif;">I Want to Learn</label>
-           <%= radio_button_tag "search[skill]", "0", params[:search][:skill].to_i == 0, :id => 'search_skill_0', :class => "skill" %>
+           <%#= radio_button_tag "search[skill]", "0", params[:search][:skill].to_i == 0, :id => 'search_skill_0', :class => "skill" %>
 
-          <label for="" style="font-family:'Helevtica',Sans-serif;">I Want to Teach</label>
-          <%= radio_button_tag "search[skill]", "1", params[:search][:skill].to_i == 1, :id => 'search_skill_1', :class => "skill" %>
-      </div>
+         <label for="" style="font-family:'Helevtica',Sans-serif;">I Want to Teach</label>
+          <%#= radio_button_tag "search[skill]", "1", params[:search][:skill].to_i == 1, :id => 'search_skill_1', :class => "skill" %>
+      </div>-->
       <div class="search">
           
            <div class="cboth"></div>

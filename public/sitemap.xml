@@ -13,19 +13,28 @@
   <loc>http://www.sharingdais.com/book_search</loc>
 </url>
 <url>
+<loc>http://www.sharingdais.com/City/Locality/book_search?value=</loc>
+</url>
+<url>
   <loc>http://www.sharingdais.com/food_search</loc>
+</url>
+<url>
+ <loc>http://www.sharingdais.com/City/Locality/food_search?key=Any&t=0</loc>
 </url>
 <url>
   <loc>http://www.sharingdais.com/skill_search</loc>
 </url>
 <url>
-  <loc>http://www.sharingdais.com/main/sharing/post_your_ad</loc>
+ <loc>http://www.sharingdais.com/City/Locality/skill_search?key=1&skill=0</loc>
+</url>
+<url>
+  <loc>http://www.sharingdais.com/main/sharing/shares_with_us</loc>
 </url>
 <url>
   <loc>http://www.sharingdais.com/users/sign_in</loc>
 </url>
 <url>
-  <loc>http://www.sharingdais.com/main/sharing/post_your_ad_login</loc>
+  <loc>http://www.sharingdais.com/main/sharing/share_with_us</loc>
 </url>
 <url>
   <loc>http://www.sharingdais.com/main/users/sign_in</loc>

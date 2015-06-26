@@ -11,11 +11,12 @@ class BookSearchController < ApplicationController
       @city = City.where(:id => city).first
       @location = Location.where(:id => location).first
       query = ""
-      if params[:search][:book] == "0"
-        query += "seeker_provider = 0"
-      else
-        query += "seeker_provider = 1"
-      end
+      # if params[:search][:book] == "0"
+      #   query += "seeker_provider = 0"
+      # else
+      #    query += "seeker_provider = 1"
+      # end
+       query += "seeker_provider = 0"
       
       if key.present?
       
@@ -72,7 +73,7 @@ class BookSearchController < ApplicationController
       @search_params = @search_results.count
       @locations = params[:city].blank? ? [] : City.where(:city_name => params[:city]).first.locations
     end
-    redirect_to "/#{@city.city_name}/#{@location.location_name}/book_search?value=#{params[:search][:key]}&t=#{params[:search][:book]}" unless @city.nil?
+    redirect_to "/#{@city.city_name}/#{@location.location_name}/book_search?value=#{params[:search][:key]}&t=0" unless @city.nil?
     #end
     @page = params[:page] || 1
   end
@@ -529,6 +530,20 @@ class BookSearchController < ApplicationController
     if @email == 0
       render :json => { :status => "ok" }
     else
+      render :json => { :status => "no" }
+    end
+  end
+
+
+
+  def check_phoneno
+    puts "===============#{params[:phoneno]}=================="
+    @phone_no=User.where("phone_no=?", params[:phoneno]).first
+    unless @phone_no.nil?
+      p 11111111111111111111111111
+      render :json => { :status => "ok" }
+    else
+      p 222222222222222222222222222222
       render :json => { :status => "no" }
     end
   end

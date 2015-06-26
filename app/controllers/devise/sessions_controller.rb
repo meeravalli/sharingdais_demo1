@@ -33,6 +33,23 @@ class Devise::SessionsController < DeviseController
             elsif params[:p_f_hide] == "4"
               provider_peer_login
               redirect_to profile_home_path(current_user)
+            elsif params[:food_intersted].present?
+              user_food_intersted_without_login(params[:food_intersted])
+              #redirect_to profile_home_path(current_user)
+              redirect_to "/food_search"
+            elsif params[:book_intersted].present?
+              user_book_intersted_without_login(params[:book_intersted])
+              #redirect_to profile_home_path(current_user)
+              redirect_to "/book_search"
+            elsif params[:skill_intersted].present?
+              user_skill_intersted_without_login(params[:skill_intersted])
+              #redirect_to profile_home_path(current_user)
+              redirect_to "/skill_search"
+            elsif params[:peer_intersted].present?
+              user_peer_intersted_without_login(params[:peer_intersted])
+              #redirect_to profile_home_path(current_user)
+              redirect_to "/peer_services"
+
             else
               respond_with resource, location: after_sign_in_path_for(resource) 
             end         
@@ -96,6 +113,126 @@ def provider_food_login
         flash[:notice] = "Successfully posted"
       end
     end
+end
+
+#user without login food intersted
+def user_food_intersted_without_login(post_id)
+@post_requirement = PostRequirement.find(post_id)
+food_type = FoodType.find(@post_requirement.food_type_id).name
+ location = Location.find(@post_requirement.location_id).location_name
+ if current_user.id != @post_requirement.user_id
+    @negotiate = Negotiate.create(:post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+    if @negotiate
+      message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :post_requirement_id => @post_requirement.id,:food => food_type, :location => location, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+      contact_details = User.find(@post_requirement.user_id)
+      UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
+end
+def user_book_intersted_without_login(post_id)
+  @post_requirement = BookPostRequirement.find(post_id)
+location = Location.find(@post_requirement.location_id).location_name
+if current_user.id != @post_requirement.user_id
+    @negotiate = BookNegotiate.create(:book_post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+
+    if @negotiate
+      message = BookMessage.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :book_post_requirement_id => @post_requirement.id, :location => location, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+      #UserMailer.new_book_order_for_provider(provider,message.id, seeker).deliver
+      
+      contact_details = User.find(@post_requirement_id.user_id)
+      #UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
+end
+def user_skill_intersted_without_login(post_id)
+@post_requirement = SkillPostRequirement.find(post_id)
+ location = Location.find(@post_requirement.location_id).location_name
+ if current_user.id != @post_requirement.user_id
+    @negotiate = Negotiate.create(:skill_post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+    if @negotiate
+      message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :skill_post_requirement_id => @post_requirement.id, :location => location, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+      contact_details = User.find(@post_requirement.user_id)
+      UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
+end
+def user_food_intersted_without_login(post_id)
+@post_requirement = PostRequirement.find(post_id)
+food_type = FoodType.find(@post_requirement.food_type_id).name
+ location = Location.find(@post_requirement.location_id).location_name
+ if current_user.id != @post_requirement.user_id
+    @negotiate = Negotiate.create(:post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+    if @negotiate
+      message = Message.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :post_requirement_id => @post_requirement.id,:food => food_type, :location => location, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+        UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+      contact_details = User.find(@post_requirement.user_id)
+      UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
+end
+def user_book_intersted_without_login(post_id)
+  @post_requirement = BookPostRequirement.find(post_id)
+if current_user.id != @post_requirement.user_id
+    @negotiate = BookNegotiate.create(:book_post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+
+    if @negotiate
+      message = BookMessage.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :book_post_requirement_id => @post_requirement.id, :location_id => @post_requirement.location_id, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+      #UserMailer.new_book_order_for_provider(provider,message.id, seeker).deliver
+      
+      contact_details = User.find(@post_requirement.user_id)
+      #UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
+end
+def user_peer_intersted_without_login(post_id)
+@post_requirement = PeerServicePostRequirement.find(post_id)
+ if current_user.id != @post_requirement.user_id
+    @negotiate = PeerNegotiate.create(:peer_service_post_requirement_id => @post_requirement.id, :user_id => current_user.id, :nego_id => @post_requirement.user_id).valid?
+    if @negotiate
+      message = PeerMessage.create(:subject => "New Order", :content => "You have received a new order from #{current_user.name}. Please confirm the order", :user_id => current_user.id, :posted_to => @post_requirement.user_id, :peer_service_post_requirement_id => @post_requirement.id, :location_id => @post_requirement.location_id, :read => false, :order_status => true)
+      provider = User.find(@post_requirement.user_id)
+      seeker = current_user
+        #UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+      contact_details = User.find(@post_requirement.user_id)
+      #UserMailer.mail_contact_info_provider(provider,contact_details,seeker).deliver
+    end
+    flash[:notice] = "Thank you for interest , Your contact details will be shared and if you want more services make search here.."
+    #render :json => @negotiate.to_json
+  else
+  flash[:alert] = "you cannot negotiate"
+  end
 end
 
 def provider_book_login

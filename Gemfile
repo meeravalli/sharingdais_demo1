@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby '1.9.3'
 
@@ -11,7 +11,7 @@ gem 'mysql2'
 gem 'omniauth-facebook'
 gem 'certified'
 gem "omniauth-google-oauth2"
-gem 'therubyracer'
+gem 'therubyracer', :platforms => :ruby
 #gem 'railroad', '~> 0.5.0'
 gem 'devise'
 gem 'railroady', '~> 1.1.1'
@@ -19,6 +19,7 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'progressbar','~>0.21.0'
 gem 'paperclip', '~> 4.1.1'
+#gem "paperclip", "~> 2.3"
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'thin'

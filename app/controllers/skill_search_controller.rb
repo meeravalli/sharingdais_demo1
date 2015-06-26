@@ -11,11 +11,12 @@ class SkillSearchController < ApplicationController
       @location = Location.where(:id => params[:search][:location_id]).first
       city = params[:search][:city_id]
       query = ""
-      if params[:search][:skill] == "0"
-        query += "seeker_provider = 0"
-      else
-        query += "seeker_provider = 1"
-      end
+      # if params[:search][:skill] == "0"
+      #   query += "seeker_provider = 0"
+      # else
+      #   #query += "seeker_provider = 1"
+      # end
+      query += "seeker_provider = 0"
       if params[:search][:skill_type_id] != '1'
         if key.present?
             query += " and sub_category_id = #{key}"
@@ -55,7 +56,7 @@ class SkillSearchController < ApplicationController
         @page = params[:params] || 1 
         
     end
-        redirect_to "/#{@city.city_name}/#{@location.location_name}/skill_search?key=#{params[:search][:skill_type_id]}&skill=#{params[:search][:skill]}" unless @city.nil?
+        redirect_to "/#{@city.city_name}/#{@location.location_name}/skill_search?key=#{params[:search][:skill_type_id]}&skill=0" unless @city.nil?
        
   end
 

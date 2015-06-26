@@ -11,13 +11,37 @@ class Devise::RegistrationsController < DeviseController
   # POST /resource
   def create
     build_resource(sign_up_params)
+    resource.skip_confirmation! if params[:user_inter_food] == '1'
+    resource.skip_confirmation! if params[:user_inter_book] == '2'
+    resource.skip_confirmation! if params[:user_inter_peer] == '3'
+    resource.skip_confirmation! if params[:user_inter_skill] == '4'
+      
 
     if resource.save
       yield resource if block_given?
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
+        set_flash_message :notice, :food_inter if is_flashing_format? and params[:user_inter_food] == '1'
+        set_flash_message :notice, :book_inter if is_flashing_format? and params[:user_inter_book] == '2'
+        set_flash_message :notice, :peer_inter if is_flashing_format? and params[:user_inter_peer] == '3'
+        set_flash_message :notice, :skill_inter if is_flashing_format? and params[:user_inter_skill] == '4'
+      if params[:user_inter_food] == '1'
+        Negotiate.user_negotiate_interst(params[:food_inter],resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      elsif  params[:user_inter_book] == '2'
+        BookNegotiate.user_negotiate_interst(params[:book_inter],resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      elsif  params[:user_inter_peer] == '3'
+        PeerNegotiate.user_negotiate_interst(params[:peer_inter],resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+         elsif  params[:user_inter_skill] == '4'
+        Negotiate.user_negotiate_interst(params[:skill_inter],resource)
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          
+        else
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
+      end
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
@@ -32,8 +56,8 @@ class Devise::RegistrationsController < DeviseController
           respond_with resource, location: after_inactive_sign_up_path_for(resource) 
         elsif params[:p_f_hide] == '4' 
           provider_peer_signup
-          respond_with resource, location: after_inactive_sign_up_path_for(resource)  
-        else
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          else
           respond_with resource, location: after_inactive_sign_up_path_for(resource)
         end
       end
@@ -202,7 +226,18 @@ end
   # this method in your own RegistrationsController.
   def after_update_path_for(resource)
     signed_in_root_path(resource)
+
+  end 
+  def food_inter_path_for(resource)
+      #redirect_to
+       profile_home_path(resource)
+    #signed_in_root_path(resource)
   end
+
+
+
+
+
 
   # Authenticates the current scope and gets the current resource from the session.
   def authenticate_scope!

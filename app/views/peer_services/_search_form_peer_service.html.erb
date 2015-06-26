@@ -5,15 +5,17 @@
 <% if !params[:search].blank? %>
   <script>
     $(document).ready(function(){
+     
   city_value = <%= params[:search][:city_id] %>
      document.getElementById('city_id').value = city_value
     });
   </script>
-<% end %>
+  <% end %>
+
 
 <div class="item ">
-  <%#=  image_tag "peerservice1.jpg", :alt => "..." %>  
-<div class="carousel-caption custom_width">
+  <%=  image_tag "peerservice1.jpg", :alt => "..." %>  
+  <div class="carousel-caption custom_width">
     <div class="search-blk">
       <p class="head" style="height:43px">Peer-to-Peer Service</p>
         <p style="height:25px">
@@ -21,13 +23,13 @@
 
         <%= form_tag(peer_services_path, :method=>"post") do %>
         <% params[:search]||= {} %>
-      <div class="check  col-xs-12 col-md-12">
+      <!--<div class="check  col-xs-12 col-md-12">
           <label for="" style="font-family:'Helevtica',Sans-serif;">I am looking for service</label>
-           <%= radio_button_tag "search[peer]", "0", params[:search][:peer].to_i == 0, :id => 'search_peer_0', :class => "peer" %>
+           <%#= radio_button_tag "search[peer]", "0", params[:search][:peer].to_i == 0, :id => 'search_peer_0', :class => "peer" %>
 
           <label for="" style="font-family:'Helevtica',Sans-serif;">I want to  provide service</label>
-          <%= radio_button_tag "search[peer]", "1", params[:search][:peer].to_i == 1, :id => 'search_peer_1', :class => "peer" %>
-      </div>
+          <%#= radio_button_tag "search[peer]", "1", params[:search][:peer].to_i == 1, :id => 'search_peer_1', :class => "peer" %>
+      </div>-->
       <div class="search">
           
            <div class="cboth"></div>
@@ -38,7 +40,7 @@
               <label for="" style="font-family:'Helevtica',Sans-serif;">Locality</label>
             </div>
             <div class="left col-xs-12 ">
-              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_book_city_1") %>
+              <%= text_field_tag('search[city_id]', params[:search][:city_id], :hidden => true, class: "search_form_peer_city_1") %>
               <%= collection_select :search, :location_id,@locations, :id, :location_name, {:include_blank => 'Locality', :selected => params[:search][:location_id]},{:class => "form-control locality_id_class", :id => 'locality_id'} %>
             </div>
             
@@ -78,8 +80,6 @@
     <%end%>
   </div>
 </div>
-
-
 
 
 </div>

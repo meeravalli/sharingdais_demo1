@@ -4,5 +4,33 @@ class BookNegotiate < ActiveRecord::Base
   belongs_to :book_post_requirement
   has_many :rates
   has_many :reviews
-  validates_uniqueness_of :book_post_requirement_id, :scope => :user_id
+  #validates_uniqueness_of :book_post_requirement_id, :scope => :user_id
+
+def self.user_negotiate_interst(post_id,user)
+	post_req = BookPostRequirement.find(post_id)
+	#food_type = FoodType.find(post_req.food_type_id).name
+	
+	 location = Location.find(post_req.location_id).location_name
+	if user.id != post_req.user_id
+	    negotiate = BookNegotiate.create(:book_post_requirement_id => post_id, :user_id => user.id, :nego_id => post_req.user_id).valid?
+	    if negotiate
+	      message = BookMessage.create(:subject => "New Order", :content => "You have received a new order from #{user.name}. Please confirm the order", :user_id => user.id, :posted_to => post_req.user_id, :book_post_requirement_id => post_id, :location_id => location, :read => false, :order_status => true)
+	      provider = User.find(post_req.user_id)
+	      seeker = user
+	      #UserMailer.new_order_for_provider(provider,message.id, seeker).deliver             
+	      #UserMailer.mail_contact_info_provider(provider,provider,seeker).deliver
+	    end
+	    output = true
+	else
+	   output = false
+	end
+  return output
+
+end
+
+
+
+
+
+
 end

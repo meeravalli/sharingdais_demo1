@@ -13,11 +13,12 @@ layout 'peer_service'
      @city = City.find(ci.city.id)
      params[:search][:city_id] = ci.city.id
      query = ""
-      if params[:search][:peer] == "0"
-       query += "seeker_provider = 0"
-      else
-       query += "seeker_provider = 1"
-      end
+      # if params[:search][:peer] == "0"
+      #  query += "seeker_provider = 0"
+      # else
+      #  query += "seeker_provider = 1"
+      # end
+      query += "seeker_provider = 0"
       if params[:search][:peer_category_id] != '1'
         if key.present?
             query += " and peer_category_id = #{key}"
@@ -72,7 +73,7 @@ layout 'peer_service'
       @page = params[:page] || 1
   
       end
-    redirect_to "/#{city.city_name}/#{location.location_name}/peer_services?key=#{params[:search][:peer_category_id]}&peer=#{params[:search][:peer]}" unless @city.nil?
+    redirect_to "/#{city.city_name}/#{location.location_name}/peer_services?key=#{params[:search][:peer_category_id]}&peer=0" unless @city.nil?
   end
 
   def peer_result

@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
    :url => "/system/:attachment/:id_partition/:style/:basename.:extension"
   validates_attachment_content_type :photo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  validates :name, :address, presence: true
+  validates :name,  presence: true
 
   validates :phone_no,:presence => true,
                  :numericality => true,

@@ -32,7 +32,7 @@ layout 'food_search'
 
 
     end
-    redirect_to "/#{@city.city_name}/#{@location.location_name}/food_search?key=#{@food_type.name}&t=#{params[:search][:food]}" unless @city.nil?
+    redirect_to "/#{@city.city_name}/#{@location.location_name}/food_search?key=#{@food_type.name}&t=#{params[:search][:food]}&s=#{params[:select_service]}" unless @city.nil?
     
   end
 

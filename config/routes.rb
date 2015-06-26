@@ -82,6 +82,10 @@ Sharingdasiss::Application.routes.draw do
     get :review, :on => :member
   end
   get "/profile/:name" => "home#profile",:as => :prof_home
+  post "/user_negotiate" => "home#user_negotiate"
+  post "/user_skill_negotiate" => "home#user_skill_negotiate"
+  post "/user_book_negotiate" => "home#user_book_negotiate"
+   post "/user_peer_negotiate" => "home#user_peer_negotiate"
 
   # resources :book_search, :only => [:index]
  get "/:city/:location/food_search" => "food_search#index"
@@ -96,6 +100,9 @@ Sharingdasiss::Application.routes.draw do
  
 
   match '/home/search', :to => 'home#index'
+
+
+  post "/home/food_search_home" => "home#food_search_home",:as => :home_food
 
   
   match "aboutus" => "static_pages#aboutus"
@@ -149,6 +156,7 @@ Sharingdasiss::Application.routes.draw do
   post "save_phone" => "home#save_phone"
   post "save_count" => "book_search#save_count"
   post "check_email" => "book_search#check_email"
+  post "check_phoneno" => "book_search#check_phoneno"
 
   get "/food_result/:id/:seeker_provider/" => "food_search#food_result"
   get "/book_result/:id/:seeker_provider/" => "book_search#book_result"
